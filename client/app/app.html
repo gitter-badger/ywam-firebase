@@ -1,0 +1,20 @@
+<!-- Place all UI elements intended to be present across all routes in this file -->
+<div class="app" >
+ 
+ <div layout="row" style="height:100%" >
+     <div style="height:100%; z-index:3 " md-whiteframe="4" class="no-print">
+    <sidenav ></sidenav>
+     </div>
+
+
+    <!--Main Content Area-->
+    <div layout="column" flex  style="height:100%; " >            
+      <header class="no-print"></header>
+        <md-content flex style="height:100%; overflow:scroll;"  id="scroll-container-1"> 
+            <div ui-view ></div>
+        </md-content> 
+   
+    </div>    
+ </div>
+
+</div>

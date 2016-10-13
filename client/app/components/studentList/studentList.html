@@ -1,0 +1,89 @@
+<div layout="row" layout-wrap >
+
+<div flex  flex-offset-gt-md="10" flex-gt-md="80">
+
+<md-card >
+
+<div layout="row">
+<div>
+
+<md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length">
+  <div class="md-toolbar-tools">
+    <span>Students</span>
+
+
+
+
+
+ <!--<md-menu>
+      <div aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+      <span  ng-repeat="(key,item) in $ctrl.appStatuses" ng-show="$ctrl.display.status[key]"> {{item}}<br></span>
+      Status:
+      </div>
+      <md-menu-content >
+        <md-menu-item  ng-repeat="(key,item) in $ctrl.statuses">
+        <md-switch  ng-model="item.active"> {{item.text}}</md-switch>
+        </md-menu-item>
+      </md-menu-content>
+  </md-menu>-->
+
+
+  </div>
+</md-toolbar>
+</div>
+
+<span flex></span> 
+
+<div  style="padding:20px">
+<div ng-repeat="(key,item) in $ctrl.statuses" ng-hide="key == 11 || key  == 10 || key == 13  || key == 30">
+
+  <a  style="margin:0; cursor:pointer " ng-click="item.active = !item.active "  > {{item.active? 'hide':'show' }} {{item.text}} </a>
+
+</div>
+</div>
+</div>
+
+<md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.selected.length" >
+ 
+  <div class="md-toolbar-tools" layout="row">
+    <div>{{$ctrl.selected.length}} student{{$ctrl.selected.length > 1 ? 's':''}}  selected</div>
+    
+
+
+
+  </div>
+</md-toolbar>
+<!--{{$ctrl.apps}}-->
+  <md-table-container>
+  <table md-table md-row-select multiple ng-model="$ctrl.selected"  md-progress="$ctrl.loading_promise">
+    <thead md-head md-order="$ctrl.query.order">
+       <tr md-row>
+      <!-- when the user clicks this cell, the myOrder variable will get the value 'nameToLower' -->
+      <th md-column md-order-by="user.first_name">First Name</th>
+      <th md-column md-order-by="user.last_name">Last</th>
+      <!-- the variable myOrder will not be changed when this cell is clicked -->
+      <th md-column md-order-by="meta.status">Status</th>
+       </tr>
+    </thead>
+
+    <tbody md-body>
+      <!-- we can let ng-repeat sort the columns for us -->
+      <tr  md-row md-select="app" md-select-id="app.id" ng-repeat="app in $ctrl.apps | orderBy: $ctrl.query.order | filter:$ctrl.filterList "
+          ui-sref="school.application({app_id: app.id})" style="cursor:pointer">
+        <td md-cell>{{app.user.first_name}} </td> 
+        <td md-cell>{{app.user.last_name}}</td> 
+
+        <td md-cell> <app-status data="app"></app-status></td>
+ 
+      </tr>
+    </tbody>
+  </table>
+</md-table-container>
+
+
+</md-card>
+
+
+</div>
+</div>
+

@@ -1,0 +1,167 @@
+path / {read(){ false}
+        write(){false}
+        }
+
+//All language phrases TODO change write level to isStaff()
+path /phrases { read() { true }  write() { canEditPhrases() } }
+path /languages { read() { auth != null }   }
+ 
+
+
+path /schools/{id} { read() { isStaff() } }
+path /schools/{id}/staff { write() { isSchoolAdmin(id) } }
+path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
+
+path /prayers { read() { isStaff() },
+                write() { isStaff() }  }
+
+path /search { read() { isStaff() },
+               write() { isStaff()} }
+
+//schools public data
+path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
+
+
+path /applications/{id} is Application {  read() {    checkAppAccess(id)  }}
+path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
+                                write() {auth.uid == newData.child('user_id').val()}
+                                }
+path /applications/{id}/meta  { read() {  isStaff() }  
+                                // write() {auth.uid == newData.child('user_id').val()}
+                                }                                
+path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
+                                 write() {auth.uid == data.parent().child('for').child('user_id').val()} }
+
+path /applications/{id}/admin_notes {read() {   isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
+                                   write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } }
+
+path /applications/{id}/log { read() {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
+                              write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } }
+
+
+
+type Application {}
+
+
+
+
+
+// Profiles Node
+path /profiles {read() {isStaff() }}
+path /profiles/{id} is Profile { read() { auth.uid == id }  
+                                 write() {auth.uid == id }}                                 
+
+type Profile {
+    com: Object
+    health: Object | Null
+    passport: Object | Null
+    oldID: String | Null
+    modified: Number | Null
+
+}
+path /profiles/{id}/com is ProfileCom { read() {isStaff() }}
+
+type ProfileCom {
+    avatar_1080: String | Null
+    dob: String | Null
+    dts: Object | Null
+    education: String | Null
+    emergency_contact: Object | Null
+    first_name : String | Null
+    gender: String | Null
+    home_phone: String | Null
+    languages: Object | Null
+    last_name : String | Null
+    marital_status: String | Null
+    mobile_phone: String | Null
+    occupations: String | Null
+    postal: Object | Null
+    skype: String | Null
+    ywam_experience: String | Null
+
+
+  //  modified: CurrentTimestamp
+}
+
+
+path /locations_public { read() { true} }
+path /locations/{id} is Location { read() { isStaff() }
+                                   write() { isStaff() }}
+
+
+type Location {
+    id: String,
+    name: String,
+ //   validate() { this.modified == now }
+    
+}
+
+
+path /paypal_transactions/{location_id} { read() { canAccessPaypalTransactions(location_id) }
+                                          write() { canAccessPaypalTransactions(location_id) }
+                                          }
+
+
+
+
+// Access Controll Function 
+
+
+//is this uid of the current logged in user?
+isCurrentUser(uid) { auth != null && auth.uid == uid } 
+
+//
+belongsToUser() { auth != null && auth.uid == data.child('user_id').val()  }
+
+// is this user a in the current_staff_index at the location they claim to be at?
+isStaff() {  
+  root.profiles[auth.uid].com.current_location_id != null &&
+
+  root.locations[ root.profiles[auth.uid].com.current_location_id   ]
+      .current_staff_index[ auth.uid ] != null 
+  }
+
+//Can this user access Staff Applications at this location? 
+isStaffAppAdmin(location_id) { root.locations[location_id].perms['access_staff_apps'][auth.uid] }
+
+// Is this user a school admin of this school?
+isSchoolAdmin(school_id) { root.schools[school_id].admin[auth.uid] != null }
+
+// Is this user a school staff of this school?
+isSchoolStaff(school_id) { root.schools[school_id].staff[auth.uid] != null }
+
+
+checkAppAccess(appID){ 
+root.applications[appID].child('for').child('staff_location_id').val() != null
+&& isStaffAppAdmin(root.applications[appID].child('for').child('staff_location_id').val()) 
+||
+isSchoolAdmin(  root.applications[appID].child('for').child('school_id').val()) 
+
+
+
+
+
+}
+
+canAccessPaypalTransactions(location_id){root.locations[location_id].perms['access_paypal_transactions'][auth.uid] != null}
+
+//Can Edit Translation phrases
+canEditPhrases(){
+   root.profiles[auth.uid].com.current_location_id != null && // check for location
+   root.locations[ root.profiles[auth.uid].com.current_location_id  ] // use location
+        .perms['access_paypal_transactions'][auth.uid] != null
+  }
+
+
+type CurrentTimestamp extends Number {
+  validate() { this == now }
+}
+
+type InitialTimestamp extends Number {
+  validate() { initial(this, now) }
+}
+
+// Returns true if the value is intialized to init, or if it retains it's prior
+// value, otherwise.
+initial(value, init) { value == (prior(value) == null ? init : prior(value)) }
+

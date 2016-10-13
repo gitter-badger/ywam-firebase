@@ -1,0 +1,241 @@
+
+
+  <style>
+    .cropArea {
+      background: #E4E4E4;
+      /*overflow: hidden;*/
+      width:500px;
+      height:300px;
+    }
+
+
+  </style>
+
+
+
+<div layout="row">
+<div  flex-offset-gt-md="20" flex-gt-md="60" flex layout="column">
+
+<md-card>
+<md-card-content >
+
+<h1 class="md-title">School Info (Public)</h1>
+
+<md-switch ng-model="public.online"> Online for applications</md-switch>
+
+
+<div layout="row">
+<md-input-container flex>
+<label>School Name</label>
+<input ng-model="public.name">
+</md-input-container>
+
+<md-input-container flex>
+<label>School Acronym</label>
+<!--<md-select ng-model="$ctrl.school.acronym">
+<md-option  ng-repeat="acr in $ctrl.acronyms" value="{{acr}}">{{acr}} </md-option>
+</md-select>-->
+
+<input  ng-model="public.acronym"> 
+</md-input-container>
+</div>
+
+<!--<md-input-container flex>
+<label>School Location </label>
+<md-select ng-model="public.location_id">
+<md-option  ng-repeat="loc in $ctrl.locations" value="{{loc.id}}">{{loc.name}} </md-option>
+</md-select>
+</md-input-container>-->
+
+<div layout="row">
+<md-input-container flex>
+<label>School Website (full url) </label>
+<input ng-model="public.website">
+</md-input-container>
+<md-input-container flex>
+<label>School Email </label>
+<input ng-model="public.email">
+</md-input-container>
+</div>
+
+
+</md-card-content>
+</md-card>
+
+<md-card>
+<md-card-content >
+<h1 class="md-title">School Dates</h1>
+
+<div layout="row">
+<span flex></span>
+<md-input-container flex>  
+ <label> School Start Date:</label>
+ <datepicker  date-format=" yyyy-MM-dd ">
+  <input ng-model="public.start_date" type="text"/>
+</datepicker>
+</md-input-container>
+
+<md-input-container flex>  
+<label> School End Date: </label>
+ <datepicker date-format=" yyyy-MM-dd ">
+<input ng-model="public.end_date"  type="text">
+ </datepicker>
+</md-input-container>
+
+</div>
+
+<div layout="row" layout-align="center center">
+  <md-checkbox flex ng-model="public.mini_outreach" ng-change="$ctrl.toggle_mini_outreach()">Mini Outreach?</md-checkbox>
+
+<md-input-container flex>
+<label> Mini Outreach Start Date:</label>
+<datepicker date-format=" yyyy-MM-dd ">
+<input ng-model="public.mini_outreach_start_date"  type="text" ng-disabled="!public.mini_outreach">
+</datepicker>
+</md-input-container>
+
+<md-input-container flex>
+  <label>Mini Outreach End Date:</label>
+<datepicker date-format=" yyyy-MM-dd ">
+<input ng-model="public.mini_outreach_end_date"  type="text" ng-disabled="!public.mini_outreach">
+</datepicker>
+</md-input-container>
+
+</div>
+
+
+<div layout="row" layout-align="center center">
+  <md-checkbox flex ng-model="public.outreach" ng-change="$ctrl.toggle_outreach()">Outreach?</md-checkbox>
+
+<md-input-container flex >
+  <label> Outreach Start Date:</label>
+  <datepicker date-format=" yyyy-MM-dd ">
+<input ng-model="public.outreach_start_date"  type="text" ng-disabled="!public.outreach">
+  </datepicker>
+</md-input-container>
+
+<md-input-container flex>
+  <label>Outreach End Date:</label>
+  <datepicker date-format=" yyyy-MM-dd ">
+<input ng-model="public.outreach_end_date"  type="text" ng-disabled="!public.outreach">
+  </datepicker>
+</md-input-container>
+
+</div>
+
+
+
+
+
+</md-card-content>
+</md-card>
+
+
+<md-card>
+<md-card-content>
+<h1 class="md-title">School Costs</h1>
+
+<div layout="row">
+<md-input-container flex>
+<label>Currency </label>
+<md-select ng-model="public.currency">
+<md-option  ng-repeat="item in $ctrl.currencies" value="{{item}}">{{item}} </md-option>
+</md-select>
+</md-input-container>
+
+<div flex>
+<md-input-container flex>
+<label>Application Fee </label>
+<input ng-model="public.app_fee">
+</md-input-container>
+
+<md-input-container flex>
+<label>School Fee </label>
+<input ng-model="public.school_fee">
+</md-input-container>
+
+<md-input-container flex>
+<label>Mini Outreach Fee </label>
+<input ng-model="public.mini_outreach_fee" ng-disabled="!public.mini_outreach">
+</md-input-container>
+
+<md-input-container flex>
+<label>Outreach Fee </label>
+<input ng-model="public.outreach_fee" ng-disabled="!public.outreach">
+</md-input-container>
+</div>
+</div>
+</md-card-content>
+</md-card>
+
+<md-card>
+      <md-progress-linear md-mode="determinate" value="{{$ctrl.upload_progress}}"></md-progress-linear>
+
+	<md-card-content layout="row">	
+	<div flex-gt-md>
+	<h1 class="md-title">School Banner<br>
+	<small> 16:9 aspect ratio</small> </h1>
+
+	<input id="fileInput" name="file" type="file" class="ng-hide" multiple>
+
+	 <md-button class="md-raised md-primary">
+	        <label for="fileInput">Choose File</label>  
+	 </md-button>
+	 <input type="file" id="fileInput" class="ng-hide" />
+	  <md-button ng-click="$ctrl.savePhoto()" >Upload</md-button>
+	 </div>
+	 <div flex-gt-md="50">
+
+	  <div  class="cropArea">
+	   <img-crop 
+        image="$ctrl.myImage" 
+        result-blob="$ctrl.myCroppedImage"
+        result-image=""
+        area-min-size="200"
+        result-image-quality="1"
+        result-image-size="{w:1600,h:900}"
+        result-image-format="image/jpeg"
+        area-type="rectangle"
+        aspect-ratio="1.77"></img-crop>
+	  </div>
+	</div>
+	</md-card-content>
+</md-card>
+
+
+
+
+<!-- Preview of what is seen on apply site -->
+<div flex style="max-width:380px; margin:0 auto; border:solid gray 1px; padding:40px" >
+<i>Preview of what is seen on registration site:</i>
+<md-card >
+	           <div style="max-height:300px; overflow:hidden" >
+	            <img ng-src="{{public.banner_lg}}" >
+	       		</div>
+	            
+	            <md-card-content>
+	            <div class="md-caption"> {{public.is_secondary  ? 'Secondary School': 'Discipleship Training School' }}</div>
+	           	<div class="md-title" style="margin-bottom:5px">
+	 			{{public.name}}</div>
+	 			
+				
+	 			<div class="md-body-1" style="margin-bottom:5px" >
+	 			{{public.description}}
+	 			
+	 			</div>
+	 			<md-divider style="margin-bottom:10px"></md-divider>
+	 			<div class="md-subhead">
+				{{public.start_date | date }} - {{public.end_date | date }}</div>
+				<div class="md-subhead">
+				{{public.public_fee}}  {{public.location}} 
+				</div>
+	 			</md-card-content>
+	 			<md-button class="md-primary" style="margin-top:-5px" href="{{public.start_app_link}}">Register now ></md-button>
+</md-card>
+
+</div>
+
+
+
+
+  </div>  </div>

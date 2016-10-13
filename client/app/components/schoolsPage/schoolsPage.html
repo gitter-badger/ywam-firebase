@@ -1,0 +1,181 @@
+
+
+<style type="text/css">
+	.status-bar div{
+		height: 20px;
+		float: left;
+		margin: 0px;
+		position: relative;
+	}
+	.status-bar{
+		/*float: left;*/
+		max-width:100%;
+		height:40px;
+	}
+
+	
+	.row-hover:hover{
+ 		background-color: #f5f5f5;
+ 		
+	}
+
+.row-hover:hover .warning{
+	opacity: 1;
+	box-shadow: 5px 5px 5px #888888;
+	z-index: 2;
+	transition: box-shadow .4s cubic-bezier(.25,.8,.25,1),background-color .4s cubic-bezier(.25,.8,.25,1);
+}
+.warning{
+	opacity: 0.15;
+
+	
+}
+
+
+
+</style>
+
+<div layout="row" layout-align="center center">
+<div  flex-gt-sm="65">
+
+<md-card>
+
+<div layout="row" layout-wrap style="padding:10px" >
+
+          		
+	<md-input-container class="md-accent no-md-error" style="margin:0;" md-no-float>
+      <input ng-model="$ctrl.search.$" placeholder="Search">
+    </md-input-container>
+<span flex></span>
+    <!--<md-select class="md-accent" ng-model="$ctrl.search.location_id" placeholder="Location" style="margin:0;">
+      	<md-option value="">All Locations</md-option> 
+        <md-option ng-repeat="loc in $ctrl.locations" value="{{loc.id}}">{{loc.name}}</md-option> 
+    </md-select>-->
+	
+	<!--<md-menu>
+      <md-button aria-label="Change Location"  ng-click="$mdOpenMenu()">
+	{{$ctrl.location.name}}  <i class="fa fa-angle-down"> </i> 
+	  </md-button>
+      <md-menu-content >
+        <md-menu-item ng-repeat="item in $ctrl.locations ">
+          <md-button ng-click="$ctrl.changeLocation(item.id)">	{{item.name}} 
+          </md-button>
+        </md-menu-item>
+      </md-menu-content>
+    </md-menu>-->
+
+</div>	
+
+
+<md-divider></md-divider>
+<div ng-repeat="sch in $ctrl.schools | orderBy: 'start_date' : true | filter: $ctrl.search "   >
+
+<div layout="row"  layout-align="space-between center"  class="row-hover"  style="cursor: pointer;"  ui-sref="school.studentPhotos({school_id:sch.id})">		
+<div style="width:106px;  height:60px; overflow:hidden; margin-right:20px ">
+ <img ng-src="{{sch.public.banner_lg}}" style="height:initial !important " > 
+</div>
+<div flex="80" flex-gt-sm="50" >
+		
+		<span  class="md-title"  >  {{sch.public.name}}</span><br>
+		<!--<span class="md-caption">{{sch.public.location}}</span>-->
+	</div>
+
+	<div flex="60" flex-gt-sm="30" class="md-subhead" style="padding-top:8px; "  >
+	<!-- if start is in future -->
+	<span ng-if="sch.public.start_date > $ctrl.now" style="background-color:#FFE082;padding:2px" > Starts 
+	<span am-time-ago="sch.public.start_date"></span>
+	</span>
+
+	<!-- If currently running  -->
+	<span ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now " style="background-color:#A5D6A7;padding:2px" > Running <span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
+
+
+	<div class="md-caption" > {{ sch.public.start_date | date :'MMM d'}}<span ng-hide="(sch.public.start_date | amDifference : null : 'days' )  < 300 && (sch.public.start_date | amDifference : null : 'days') > -300  ">, {{ sch.public.start_date | date :'yyyy'  }}</span>
+	 
+	 - {{sch.public.end_date | date :'MMM d'}}<span ng-hide="(sch.public.end_date | amDifference : null : 'days' )  < 300 && (sch.public.end_date | amDifference : null : 'days') > -300  ">, {{ sch.public.end_date | date :'yyyy'  }}</span></div>
+
+
+	</div>
+
+
+
+<div flex="30"  hide-xs >
+	<div class="status-bar" style="width:{{sch.count.total}}px; ">	
+	 
+	
+		<div style="width:{{ (sch.count.started*100) / sch.count.total }}%; background-color:#3F51B5;" ></div>
+		<div style="width:{{ ((sch.count.cancelled*1 + sch.count.denied*1) *100) / sch.count.total}}%; background-color:#607D8B" ></div>
+		<div style="width:{{ ((sch.count.submited*1 + sch.count.process*1) *100) / sch.count.total}}%; background-color:#FFC107;" > 
+		<div style="top:10px; " > 
+		
+		<div ng-if="sch.count.submited>0" style="hieght:20px; background-color: #FFC107;" class="warning"> &nbsp;{{sch.count.submited}}&nbsp;New!&nbsp; </div>
+		<div ng-if="sch.count.process>0" style="hieght:20px;background-color: #FFC107; " class="warning"> &nbsp;{{sch.process_count}}&nbsp;Waiting!&nbsp; </div>
+		
+		</div>
+		</div>
+		<div style="width:{{ ((sch.count.accepted*1 + sch.count.arrived*1) *100) / sch.count.total}}%; background-color:#4CAF50" ></div>
+	</div>	
+ 
+								
+</div>
+
+
+
+
+<div  flex="20" flex-order="2" flex-order-gt-sm="4"  flex-gt-sm="10"  style="text-align:right">
+			<md-menu>
+           
+            <md-button ng-click="$mdOpenMenu($event)" style="min-width:20px">
+			 <md-tooltip >
+          	View counts
+        	</md-tooltip>
+			<span class="md-title">{{sch.count.accepted*1 + sch.count.arrived*1}}</span>
+			</md-button>
+            <md-menu-content>
+		
+				<md-menu-item>
+				{{sch.count.started}} Started
+				</md-menu-item>
+				<md-menu-item>
+				{{sch.count.cancelled}} Cancelled
+				</md-menu-item>
+				<md-menu-item>
+				{{sch.count.denied}} Denied
+				</md-menu-item>
+				<md-menu-item>
+				{{sch.count.submited}} Submited
+				</md-menu-item>
+				<md-menu-item>{{sch.count.process}} In Review
+				</md-menu-item>
+				<md-menu-item>{{sch.count.accepted}} Accepted
+				</md-menu-item>
+				<md-menu-item>{{sch.count.arrived*1}} Arrived
+				</md-menu-item>
+				
+	
+            </md-menu-content>
+			</md-menu>
+</div>
+
+
+</div>
+
+
+<md-divider></md-divider>
+</div>
+</md-card>
+
+
+					
+
+<md-card>
+<md-card-content>
+<i>
+  Let this system never replace personal relationship, but rather serve as a way from which to relate with accuracy. -Tim
+  </i>
+  </md-card-content>
+ </md-card>
+
+
+ </div>
+ </div>

@@ -1,0 +1,24 @@
+
+<div layout="column">
+        <md-button class="btn-google" ng-click="$ctrl.login('google')" > Sign in with Google</md-button> 
+        <md-button class="btn-facebook" ng-click="$ctrl.login('facebook')" > Sign in with Facebook</md-button> 
+       
+       <div style="text-align:center;" class="md-caption"> or</div>
+       <form ng-submit="$ctrl.emailPassLogin()" layout="column">
+       <md-input-container class="no-md-error login-inputs" md-no-float >
+        <input placeholder="email" ng-model="$ctrl.email">
+       </md-input-container>
+       <md-input-container  class="no-md-error login-inputs" md-no-float >
+        <input placeholder="password" type="password" ng-model="$ctrl.password">
+       </md-input-container>
+       <!--<div layout="row">
+               <span flex></span>-->
+                <!--<md-button>Sign up</md-button>-->
+                <md-button type="submit" class="md-primary md-raised">login</md-button>
+       <!--</div>-->
+       </form>
+        <div style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="forgotPassword">
+         Forgot Password
+        </div>
+
+</div>

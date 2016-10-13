@@ -1,0 +1,81 @@
+
+
+
+<!-- Jesus thank you for the ability to communicate. I pray that this news_item window can be a platform on which the whole staff body can be united. 
+	I pray that this will be a source of insperation, and encouragement. Holy Spirit may you release words of life through this window. I pray that such joy and love will be seen here. 
+	Father may this serve as a way to keep us all on the same page. Thank you for the way this site has progressed over the years, may this be something useful, in Jesus name. Amen!	 -->
+	
+<!-- 	<div style="display:inline-block; width: 30%; margin-left: 150px"  >
+	Current Topic: 
+	<form  ng-submit="changeTopic()">
+	<input  class="form-control" type="text" ng-model="topic.topic"   /></form>
+	Set by {{topic.user_name}} on {{topic.modifed | date }}
+	
+	</div> -->
+	 	
+
+ 
+ <div class="grid prayerWall"  >
+
+  
+  <div class="grid-item"  
+   style="margin: 1.5em 1em; font-family: 'Asap', sans-serif; font-style: italic; color:rgba(0,0,0,0.9);  " 
+
+    ng-class="{'sticky-note-small': $ctrl.new_prayer.length < 75,
+  				  'sticky-note': $ctrl.new_prayer.length > 74 && $ctrl.new_prayer.length < 330,
+  				  'small-paper': $ctrl.new_prayer.length > 330 
+  				  
+  				   }"   >
+		
+		<md-input-container>
+		<textarea style="line-height:initial;" ng-model="$ctrl.new_prayer"> </textarea>
+		</md-input-container>
+		
+		<md-button style="position:absolute; bottom:0px;  font-style: normal;" ng-click="$ctrl.postPrayer()">Post New</md-button>
+		
+	
+	
+  </div>
+
+
+<!--on-finish-render="ngRepeatFinished"-->
+  <div class="grid-item" ng-repeat="prayer in $ctrl.prayers | orderBy:'-date'" 
+   style="margin: 1.5em 1em; font-family: 'Asap', sans-serif; font-style: italic; color:rgba(0,0,0,0.9);  " 
+
+    ng-class="{'sticky-note-small': prayer.text.length <= 90,
+  				  'sticky-note': prayer.text.length > 90 && prayer.text.length <= 350,
+  				  'small-paper': prayer.text.length > 350 && prayer.text.length <= 640,
+  				  'big-paper':prayer.text.length > 640,
+  				  'tilt':prayer.text.length < 330 }"   >
+		
+		{{prayer.text}}
+		<!--{{prayer.text.length}}-->
+		
+
+		<a ng-click="$ctrl.amen(prayer)" style="cursor:pointer">  Amen {{prayer.amen_count > 0? 'x '+ prayer.amen_count:''}} </a>
+
+		<span class="note-signature">
+			
+         <div style="margin-left: 5px">  
+		{{prayer.user.first_name}} {{prayer.user.last_name}}
+		</div>  
+		</span>
+		<span class="note-info">
+			 
+				{{prayer.date | date :'shortDate'}}
+				
+			    <span ng-show="prayer.user_id == $ctrl.user_id" 
+					  ng-click="$ctrl.deletePrayer(prayer.id)"
+					  style="cursor:pointer;">	
+				<i class="fa fa-trash"></i>
+				</span>
+			    
+			    
+		</span>
+		
+	
+	
+  </div>	
+
+
+</div>

@@ -1,0 +1,128 @@
+<style>
+
+.table tr{
+  border-bottom:solid gray 1px;
+}
+
+.edit:focus{
+     border: 2px solid #1caff6;
+      box-shadow: 0 0 20px #92e2ff;
+      outline:none;
+      
+
+
+}
+.edit {
+  min-height:80px;
+   border-radius: 10px;
+    padding: 20px;
+     font-size: large;
+      box-sizing: border-box;
+}
+
+.tranto{
+ box-shadow: inset 0 2px 5px rgba(0,0,0,0.05); 
+ border: 2px solid #e9e9e9;  
+}
+.tranfrom {
+     border: none;
+        box-shadow: 0 0 8px rgba(0,0,0,0.12);
+}
+
+code {
+
+  background-color:#eff0f1;
+  padding:5px;
+  color:black;
+}
+
+</style>
+
+<div layout="row" layout-align="center">
+
+<md-card flex-gt-md="75" flex>
+<md-card-content>
+<div layout="row">
+ <div flex style=" padding: 7px;">  
+Context: {{$ctrl.phrases.meta}}
+ </div> 
+ <div flex="10"> </div>
+ <div flex>
+    <label>Language: </label>
+        <md-select ng-model="$ctrl.lang" style="display:inline-block; margin:0px;  vertical-align: baseline;">
+        <md-option value="de">Deutsch</md-option>
+        <md-option value="es">Español</md-option>
+        </md-select> 
+ <br> <br> <br>
+ </div>
+</div>
+
+<div layout="row">
+  <div flex>
+    <div>
+        <div  class="tranfrom edit"
+              contenteditable
+               id="tranfrom"
+              ng-change="$ctrl.saveEnglish()"
+              ng-model="$ctrl.phrases.en[$ctrl.index]">
+       
+        </div>
+    </div>  
+</div>
+<div flex="10" style=" display: flex;
+                    justify-content: center; 
+                    align-items: center; font-size: 200%;"> 
+  > 
+  </div>
+<div flex >
+
+
+
+ <div >
+<div  class="tranto edit"
+      id="tranto"
+      contenteditable
+      ng-model="$ctrl.phrases[$ctrl.lang][$ctrl.index]"
+     ></div>
+ </div>
+</div>
+</div>
+
+<div layout="row">
+  <md-button class="" ng-click="$ctrl.newPhrase()">New Phrase</md-button>
+  <span style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code ></span>
+  <!--<input ng-model="$ctrl.new" />-->
+  <span flex></span>
+<md-button class="md-primary md-raised " ng-click="$ctrl.next()">Next</md-button>
+</div>
+
+<br>
+<br>
+
+
+
+<table style="width:100%" class="table">
+  <th>Key</th>
+  <th>English Phrase</th>
+  <th >
+
+      {{$ctrl.lang}}
+  
+</th>
+<tr ng-repeat="(key, value) in $ctrl.phrases['en']"  >
+  <td>{{key}}</td>
+<td><a href="" ng-click="$ctrl.index = key"> {{value}}</a></td>
+<td>  
+  
+  {{$ctrl.phrases[$ctrl.lang][key]}}
+  <!--<input ng-model="$ctrl.section[$ctrl.lang][key]" ng-blur="$ctrl.updateTranslation(key)" style="width:90%" > -->
+ </td>
+</tr>
+
+</table>
+</md-card-content>
+</md-card>
+
+</div>
+
+

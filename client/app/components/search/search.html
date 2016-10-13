@@ -1,0 +1,33 @@
+
+
+<div layout="row" layout-align="center">
+<md-card  flex-gt-md="60" flex>
+
+<md-card-content>
+<md-input-container>
+<label>Search</label>
+<input ng-model="$ctrl.site.searchString" ng-change="$ctrl.goSearch()">
+</md-input-container>
+
+ <md-list>   
+ <md-list-item ng-repeat="item in $ctrl.results.hits.hits"  > 
+
+
+ <div flex="50" ui-sref="profile({user_id:item._id})" style="cursor:pointer">
+ <img height="35px" ng-src="{{item._source.avatar_200}}" > 
+
+{{item._source.first_name}} {{item._source.last_name}}
+</div>
+<div flex="50">
+<div ng-repeat="app in item.applications | orderBy:'type_text'" ><a href="{{API_URL}}/applications/view/{{app.id}}" > {{app.type_text}}</a></div>
+</div>
+<md-divider flex="100"></md-divider>
+  </md-list-item>
+</md-list>
+<md-progress-circular ng-if="$ctrl.data.searching && $ctrl.data.searchString.length>0 " md-mode="indeterminate"  ></md-progress-circular>
+
+</md-card-content>
+
+
+</md-card>
+</div>

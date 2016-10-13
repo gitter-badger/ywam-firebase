@@ -1,0 +1,15 @@
+
+<div layout="row" layout-align="center"> 
+
+<md-card flex="75">
+<md-card-content>
+<div ng-repeat="(key,item) in $ctrl.perms">
+  <b>{{key}} :</b> 
+  
+  <div ng-repeat="user in item">{{user.first_name}}  </div>
+
+</div>
+</md-card-content>
+<md-card>
+
+</div>

@@ -1,0 +1,267 @@
+<div layout="row" layout-wrap style=" height: 100%;">
+<div flex-gt-md="15"  class="no-print"  >
+
+<div  du-scroll-container="scroll-container-1" du-spy-context class="page-index " style="position:fixed; padding:15px; "  hide-xs hide-sm hide-md >
+
+<!--<a ui-sref="school.studentList({schoolId: $ctrl.app.school_id})">< back </a><br>-->
+<br>
+<a du-smooth-scroll="top" du-scrollspy  offset="50"  >Top </a><br>
+<a du-smooth-scroll="adminNote" du-scrollspy  offset="50"  >Admin Notes </a><br>
+<!--<a du-smooth-scroll="transport"  du-smooth-scroll du-scrollspy  offset="50" >Travel Info </a><br>-->
+<!--<a du-smooth-scroll="visa"  du-smooth-scroll du-scrollspy  offset="50" >Visa </a><br>-->
+<a du-smooth-scroll="contact"  du-smooth-scroll du-scrollspy  offset="50" >Contact </a><br>
+<a du-smooth-scroll="questions" du-smooth-scroll du-scrollspy  offset="50" >Questions </a><br>
+<a du-smooth-scroll="reference1"  du-smooth-scroll du-scrollspy  offset="50" >Reference 1 </a><br>
+<a du-smooth-scroll="reference2"  du-smooth-scroll du-scrollspy  offset="50" >Reference 2 </a><br>
+
+</div>
+</div>
+
+<div flex="100" flex-gt-md="70" style=" height: 100%;" >
+
+<section id="top">
+<!-- <md-subheader  flex-offset-gt-md="15" flex-gt-md="70">Top</md-subheader> -->
+<md-card>
+<md-card-content layout="row">
+<div flex>
+
+<h1 class="md-display-1">{{$ctrl.user.com.first_name}} {{$ctrl.user.com.last_name}}<br>
+<small class="md-subhead">{{$ctrl.user.passport.first_name | uppercase}} {{$ctrl.user.passport.middle_name | uppercase}} {{$ctrl.user.passport.last_name | uppercase}}
+</small>
+</h1>
+
+
+{{$ctrl.user.com.nationality}}<br>
+ {{$ctrl.user.com.gender}} {{$ctrl.calculateAge($ctrl.user.com.dob)}} <span style=" text-transform: capitalize;">{{$ctrl.user.com.marital_status}}<span><br>
+{{$ctrl.user.com.dob | date}}  <br>
+<div ng-repeat="lang in $ctrl.languages">{{lang.text}}
+  <span style="color:gray">
+  <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>
+  {{lang.prof}}% </span>
+     </div>
+
+
+
+<br>
+<md-divider></md-divider>
+<app-status data="$ctrl.app" date="true"></app-status>
+<ref-status data="ref"  ng-repeat="ref in $ctrl.references"></ref-status><br>
+
+visa status<br>
+<md-checkbox >PostCard Sent(not working yet)</md-checkbox>
+
+
+</div>
+<div flex >
+<div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
+<img style="width:100%" align="right" ng-src="{{$ctrl.user.com.avatar_1080}}" ><br>
+<a href="" class="no-print"
+ ui-sref="app.user.com.profile.change_photo({userId:$ctrl.user.com.id})">change photo</a>
+</div>
+</div>
+
+</md-card-content>
+</md-card>
+
+</section>
+
+
+<!--Admin Notes Section-->
+<md-card id="adminNote">
+<md-card-content>
+
+
+<div ng-repeat="(key,note) in $ctrl.app.admin_notes " > 
+<div  style="color:grey; float:right; " >- {{note.user_id}} {{note.Author.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
+<i class="fa fa-times no-print" ng-click="$ctrl.deleteAdminNote(key)"></i>  </div>  
+{{note.text}} 
+
+<md-divider> </md-divider>
+</div>
+<form ng-submit="$ctrl.addAdminNote()" layout="row" class="no-print">
+<md-input-container md-no-float flex class="no-md-error" style="margin:0px">
+<input  ng-model="$ctrl.new_admin_note" placeholder="New admin note..." autocomplete="off">
+</md-input-container>
+<md-button  class="md-primary " style=" padding:0px" type="submit">add</md-button>
+</form>
+</md-card-content>
+</md-card>
+<!--End of Admin Notes Section-->
+
+<!--
+<section id="transport">
+<md-card>
+<md-card-content class="in_dev">
+<h4 class="md-title" > Travel Info</h4>
+
+<md-button aria-label="Add Travel" class="pull-right md-fab md-mini" 
+    ng-click="$ctrl.travelEditDialog({user_id: $ctrl.user.com.id})"
+
+><i class="fa-plus fa"></i> </md-button>
+
+<div ng-repeat="t in $ctrl.transports" layout="row" align="space-between center">
+<div flex="25" class="md-headline" style="text-align:right; padding:20px;">{{t.type == 'arr'?'Arrival':'Departure'}}  </div>	
+
+<div flex><b>{{t.station_name}}</b><br>
+{{t.time.format("MMM DD  h:mmA") }}<br>
+ride requested: {{t.ride_requested}}<br>
+flight: {{t.flight_num}}<br>
+notes: {{t.user_note}} <br>
+{{t.staff_note}}
+
+</div>
+
+</div>
+</md-card-content>
+</md-card>
+</section>-->
+<!--
+<section id="visa">
+<md-card>
+<md-card-content class="in_dev">
+<h4 class="md-title" > Visa Info</h4>
+
+{{$ctrl.visas|json}}
+
+</md-card-content>
+</md-card>
+</section>-->
+
+<!--<md-card>
+<md-card-content class="in_dev">
+
+
+Invoices and base account statement. 
+
+</md-card-content>
+</md-card>-->
+
+
+<md-card>
+<md-card-content>
+<section id="contact">
+<div layout="row" layout-xs="column" >
+<div flex>
+<b>Contact:</b> <br>
+Email: {{$ctrl.user.com.email}}<br>
+Skype: {{$ctrl.user.com.skype}}<br>
+Home Phone: {{$ctrl.user.com.home_phone}}<br>
+Mobile: {{$ctrl.user.com.mobile_phone}}<br>
+
+Address: {{$ctrl.user.com.postal.address}}<br>
+City: {{$ctrl.user.com.postal.city}}<br>
+State: {{$ctrl.user.com.postal.state}}<br>
+Zip: {{$ctrl.user.com.postal.zip}}<br>
+Nation: {{$ctrl.user.com.postal.nation_id}}
+
+</div>
+<div flex style="background-color: rgba(255,0,0,0.1)">
+<b>Emergency Contact:</b><br>
+{{$ctrl.user.com.emergency_contact.name}} ({{$ctrl.user.com.emergency_contact.relation}})<br>
+Email: {{$ctrl.user.com.emergency_contact.email}}<br>
+Skype: {{$ctrl.user.com.emergency_contact.skype}}<br>
+Phone: {{$ctrl.user.com.emergency_contact.phone}}<br>
+Phone2: {{$ctrl.user.com.emergency_contact.phone2}}<br>
+
+
+Address: {{$ctrl.user.com.emergency_contact.address}}<br>
+City: {{$ctrl.user.com.emergency_contact.city}}<br>
+State: {{$ctrl.user.com.emergency_contact.state}}<br>
+Zip: {{$ctrl.user.com.emergency_contact.zip}}<br>
+Nation: {{$ctrl.user.com.emergency_contact.nation_id}}
+ 
+</div>
+</section>
+</md-card-content>
+</md-card>
+
+<section id="questions">
+<md-card>
+<md-card-content class="in_dev">
+<h4 class="md-subhead" >
+Why do you want to attend </h4>
+<span class="md-body-1">{{$ctrl.app.why_school}}</span>
+
+<h4 class="md-title">
+How would you describe your relationship with your family? 
+Do they support you in your desire to come to YWAM?</h4>
+<span class="md-body-1">{{$ctrl.app.family}}</span>
+
+
+</md-card-content>
+</md-card>
+</section>
+
+
+
+<section id="reference{{r.ref_num}}" ng-repeat="r in $ctrl.references" >
+<md-card class="in_dev">
+
+  <md-toolbar class="md-menu-toolbar">
+    <div layout="row">
+      <md-toolbar-filler layout layout-align="center center">
+        <md-icon class="fa fa-comment"></md-icon>
+      </md-toolbar-filler>
+      <div>
+        <h2 class="md-toolbar-tools">Reference {{r.ref_num}}</h2>
+        <md-menu-bar>
+          
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Edit
+            </button>
+            <md-menu-content>
+              <md-menu-item class="md-indent">
+                <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
+                  Find and replace...
+                  <!-- <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> -->
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+         
+        </md-menu-bar>
+      </div>
+    </div>
+  </md-toolbar>
+
+
+
+<md-card-content>
+<h4 class="md-title">
+How well does reference know Applicant?:</h4>
+<span class="md-body-1">{{r.how_well}}</span>
+
+<h4 class="md-title">
+How would you describe your relationship with your family? 
+Do they support you in your desire to come to YWAM?</h4>
+<span class="md-body-1">{{app.app.family}}</span>
+
+
+</md-card-content>
+</md-card>
+</section>
+
+<md-card>
+<div ng-repeat="item in $ctrl.history">
+  
+  {{item}}
+  </div>  
+  
+  
+</md-card>
+
+<div class="no-print">
+<pre> Application:
+{{$ctrl.app |json}}
+ </pre>
+
+<pre> User:
+{{$ctrl.user |json}}
+ </pre>
+</div>
+
+</div>
+</div>
+
+

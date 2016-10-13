@@ -1,0 +1,96 @@
+<div layout="row" layout-align="center">
+  
+
+<md-card  flex="100" flex-gt-md="70">
+<md-card-content>
+
+<div  layout="row" >  
+<div flex>
+
+<h1 class="md-display-1">{{$ctrl.profile.com.first_name}} {{$ctrl.profile.com.last_name}}<br>
+<small class="md-subhead">{{$ctrl.profile.passport.first_name | uppercase}} {{$ctrl.profile.passport.middle_name | uppercase}} {{$ctrl.profile.passport.last_name | uppercase}}
+</small>
+</h1>
+
+
+{{$ctrl.profile.com.nationality}}<br>
+ {{$ctrl.profile.com.gender}} {{$ctrl.calculateAge($ctrl.profile.com.dob)}} <span style=" text-transform: capitalize;">{{$ctrl.profile.com.marital_status}}<span><br>
+{{$ctrl.profile.com.dob | date}}  <br>
+<div ng-repeat="lang in $ctrl.languages">{{lang.text}}
+  <span style="color:gray">
+  <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>
+  {{lang.prof}}% </span>
+     </div>
+
+
+
+<br>
+<md-divider></md-divider>
+</div>
+
+<div flex >
+<div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
+<img style="width:100%" align="right" ng-src="{{$ctrl.profile.com.avatar_1080}}" ><br>
+<a href="" class="no-print"
+ ui-sref="app.user.com.profile.change_photo({userId:$ctrl.profile.com.id})">change photo</a>
+</div>
+</div>
+
+</div>
+
+<div>
+
+  <br>
+<div layout="row" layout-xs="column" >
+<div flex>
+<b>Contact:</b> <br>
+Email: {{$ctrl.profile.com.email}}<br>
+Skype: {{$ctrl.profile.com.skype}}<br>
+Home Phone: {{$ctrl.profile.com.home_phone}}<br>
+Mobile: {{$ctrl.profile.com.mobile_phone}}<br>
+
+Address: {{$ctrl.profile.com.postal.address}}<br>
+City: {{$ctrl.profile.com.postal.city}}<br>
+State: {{$ctrl.profile.com.postal.state}}<br>
+Zip: {{$ctrl.profile.com.postal.zip}}<br>
+Nation: {{$ctrl.profile.com.postal.nation_id}}
+
+</div>
+<div flex style="background-color: rgba(255,0,0,0.1)">
+<b>Emergency Contact:</b><br>
+{{$ctrl.profile.com.emergency_contact.name}} ({{$ctrl.profile.com.emergency_contact.relation}})<br>
+Email: {{$ctrl.profile.com.emergency_contact.email}}<br>
+Skype: {{$ctrl.profile.com.emergency_contact.skype}}<br>
+Phone: {{$ctrl.profile.com.emergency_contact.phone}}<br>
+Phone2: {{$ctrl.profile.com.emergency_contact.phone2}}<br>
+
+
+Address: {{$ctrl.profile.com.emergency_contact.address}}<br>
+City: {{$ctrl.profile.com.emergency_contact.city}}<br>
+State: {{$ctrl.profile.com.emergency_contact.state}}<br>
+Zip: {{$ctrl.profile.com.emergency_contact.zip}}<br>
+Nation: {{$ctrl.profile.com.emergency_contact.nation_id}}
+ 
+</div>
+</div>
+<div> 
+Applications:
+<div ng-repeat="(key,app) in $ctrl.profile.app_index" >
+  <div ng-if="app.for.school_id" ui-sref="school.application({school_id: app.for.school_id, app_id:key})">
+    School : {{app.for.school_id}} status: {{app.status}}
+</div>
+<div ng-if="app.for.staff_location_id" ui-sref="staff.application({app_id:key})">
+    Staff @ : {{app.for.staff_location_id}} status: {{app.status}}
+</div>
+
+ </div>
+
+</div>
+
+
+
+</md-card-content>
+</md-card>
+
+
+</div>

@@ -1,0 +1,52 @@
+ <md-toolbar  md-whiteframe="1" >
+ <div class="md-toolbar-tools">
+        <md-buttion ng-click="$ctrl.openLeftMenu()"
+                    class="md-icon-button md-primary"
+                    hide-gt-sm >  
+                      <i class="fa fa-bars"></i>
+        </md-buttion>
+
+     
+        <!--<h1 translate>HEADLINE</h1>-->
+        <span flex></span>
+    
+        <!--<md-select ng-model="$ctrl.langKey" 
+                   md-on-close="$ctrl.changeLanguage()"
+                   aria-label="Change Language" >
+          <md-option value="de">Deutsch</md-option>
+          <md-option value="en"> English</md-option>
+          <md-option value="es" > Español</md-option>
+        </md-select>-->
+
+
+  <!--If not logged in show login button-->
+    <md-menu ng-hide="$ctrl.firebaseUser" > 
+      <!--<md-menu>-->
+    <md-button  class="md-raised"  ng-click="$mdOpenMenu($event)">Sign In</md-button>
+  <md-menu-content  md-offset="20 0" width="4" md-position-mode="target-right target" style="padding:20px">
+<login-buttons></login-buttons>
+   </md-menu-content>  
+
+
+    </md-menu>
+
+<!--if logged in show avatar and menu with logout button-->
+    <md-menu ng-show="$ctrl.firebaseUser"  md-offset="40 0"  >
+     <div  ng-click="$mdOpenMenu($event)" style="height:48px">
+      
+      <img  alt=" "
+           style="border-radius: 50%; height:100%"
+           ng-src="{{$ctrl.user.com.avatar_200}}">
+      </div>     
+      <md-menu-content  width="3" >
+          <md-menu-item><md-button ui-sref="profile({user_id:$ctrl.user.id })"> Your Profile </md-button> </md-menu-item>
+         <md-menu-item><md-button ng-click="$ctrl.logout()">Sign Out</md-button></md-menu-item>
+      </md-menu-content>  
+
+    </md-menu>
+
+  </div>
+ </md-toolbar>
+ <div ng-hide="$ctrl.presence.$value">
+     <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+ </div>

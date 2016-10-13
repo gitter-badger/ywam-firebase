@@ -1,0 +1,93 @@
+.prayerWall{
+
+}
+
+.sticky-note-small{
+	text-decoration: none; 
+	color: #000; background: #ffc; 
+	display: block; 
+	height: 7.5em; 
+	width: 10.5em; 
+	padding: 0.5em !important ;
+	box-shadow: 3px 3px 7px rgba(33,33,33,.5); 
+	position: relative;
+	}
+
+	.sticky-note{
+	text-decoration: none; color: #000; background: #ffc; display: block; height: 17em; width: 17em; padding: 1em !important ;
+				box-shadow: 3px 3px 7px rgba(33,33,33,.5); position: relative;
+	}
+	.sticky-note:nth-child(7n) {
+		 background: #cfc;
+	}
+	.sticky-note:nth-child(9n) {
+		 background: #ccf;
+	}
+	.sticky-note:nth-child(8n) {
+		 background: #fcc;
+	}
+	
+
+	.small-paper{
+	text-decoration: none; color: #000; background: #FFFFFF; display: block; max-width: 36em ; min-height: 5em ;padding: 2em !important ;
+				box-shadow: 4px 4px 7px rgba(33,33,33,.5);position: relative; 
+	}
+
+	.big-paper{
+	text-decoration: none; color: #000; background: #FFFFFF; display: block; max-width:56em ; padding: 2em !important ;
+				box-shadow: 4px 4px 7px rgba(33,33,33,.5);position: relative;
+	}
+	
+	.note-info{
+		color: gray; 
+		 font-size: 90%;
+/*		display:inline-block;*/
+/*		vertical-align: bottom;*/
+		position: absolute;
+		bottom: 3px;
+		right:3px;
+		text-align: right;
+/*		border: 1px solid red;*/
+	}
+	.note-signature{
+		color: gray;  
+ 		font-size: 90%	;
+		position: absolute;
+		bottom: 3px;
+		left:3px;
+/*		border: 1px solid red;*/
+	}
+	.tilt:nth-child(even)  {
+		-webkit-transform: rotate(3deg);
+		position: relative;
+		top:5px;
+	}
+
+	.tilt:nth-child(2n) {
+		-webkit-transform: rotate(-2deg);
+		position: relative;
+		top:-10px;
+	}
+	.tilt:nth-child(3n)  {
+		-webkit-transform: rotate(-4deg);
+		position: relative;
+		top:-5px;
+	}
+	.tilt:nth-child(4n) {
+		-webkit-transform: rotate(5deg);
+		position: relative;
+		top:-10px;
+	}
+	.small-photo-circle{
+	width:30px; 
+	height: 30px; 
+/*	text-align: center;*/
+    overflow: hidden;
+	border-radius: 30px;
+/*	border: 1px solid #cccccc;*/
+    box-shadow:  0 2px 2px rgba(0, 0, 0, 0.075);
+    display:inline-block;
+    position: absolute;
+    bottom: 0px;
+    margin: 0px !important;
+	}

@@ -1,0 +1,89 @@
+
+
+<style type="text/css">
+	.ellipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+.photo{
+/*width:120px; */
+/*height:300px; */
+float:left;
+/*margin:5px;*/
+}
+</style>
+
+
+
+<div layout="row" layout-wrap layout-align="center">
+
+<div flex="75">
+<md-input-container style="margin-top:35px;  vertical-align:middle"> 
+<input ng-model="$ctrl.search" placeholder="filter">
+</md-input-container>
+
+
+<div style="display:inline-block; width:200px; margin-top:22px; vertical-align:middle">    
+
+<md-slider flex min="100" max="200" ng-model="$ctrl.photo_size" aria-label="photo size" >
+
+</div>
+
+<!--
+ <md-menu>
+      <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
+        <i md-menu-origin class="fa fa-print"></i>
+      </md-button>
+      <md-menu-content width="4">
+        <md-menu-item>
+          <md-button ng-click="print('letter')" >
+         Print Selected Photos (Letter) 
+          </md-button>
+        </md-menu-item>
+         <md-menu-item>
+          <md-button  ng-click="print('A4')">
+         Print Selected Photos (A4) 
+          </md-button>
+        </md-menu-item>
+         <md-menu-item>
+          <md-button  ng-click="print('A3')">
+         Print Selected Photos (A3) 
+          </md-button>
+        </md-menu-item>
+
+      </md-menu-content>
+    </md-menu>-->
+
+
+<div  >
+
+
+<div ng-repeat="staff in $ctrl.staff | filter:$ctrl.search" class="photo" ui-sref="profile({user_id:staff.id})"  style="cursor: pointer;">
+
+<md-card  style="width:{{$ctrl.photo_size}}px;" >  
+<div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
+
+<img ng-src="{{staff.avatar_200}}" width="100%" >
+
+</div>
+
+
+<div style="padding:5px">
+<div class="ellipsis md-body-2">{{staff.first_name }}</div>
+<div class="ellipsis md-body-2">{{staff.last_name}}</div>
+
+<!--<div class="ellipsis md-caption" >{{staff}}</div>-->
+</div>
+</md-card>
+
+
+</div>
+
+
+</div>
+</div>
+
+</div>

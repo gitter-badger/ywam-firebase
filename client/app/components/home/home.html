@@ -1,0 +1,78 @@
+
+<div layout="row" layout-align="center" >
+  <div flex-gt-sm="70" >
+    <md-card >
+      <md-card-content>
+    <h1  class="md-headline">Welcome to the (new) Staff App!</h1>
+
+
+<p style="color:red; border: red solid 2px; padding:20px; font-size:120%">
+    NOTICE:<br>
+This site is in READ only mode, and runs on a COPY of the actual database, this means that changes made here will be overwritted with the next copy!<br>
+With the exception of new features like the Translations.<br>
+
+</p>
+<br>
+
+<!--<div style=" background: linear-gradient(169deg,#0c63aa 40%,#7ac4fa 100%); margin:-16px; padding:20px">-->
+<div layout-gt-sm="row" layout-align="space-around center">
+<img height="60px" src="https://firebase.google.com/_static/4f9fa138ab/images/firebase/lockup.png">
+<span>+</span> 
+<img  height="60px" src="https://angularjs.org/img/AngularJS-large.png">
+</div>
+
+<br>
+
+<p class="md-body-1" >
+For this version of the staff app, I am using a completely new backend database called Firebase which has many benefits. 
+Mainly that it is very fast, and enables realtime data to all connected devices, no more refreshing to see the latest information! 
+This means that I have to migrate all data from the old SQL database to this new one, all data that you see on this site is just a copy of the SQL database that login.mission-live.com is working from. 
+Once this site it built up enough that all essential tasks can be accomplished here, then the database this site is connected to will become the main one. We will make one final copy from the SQL database and discontinue the old site or configure it to also use only the new database.  
+<br><br>
+At first this site will have to be very very very simple, just the basics. I would rather have a few site features working fully, than to have many features that are half working.  
+<br><br>
+Tim Scholten - tim.scholten@ywamsarasota.com
+
+
+</p>
+<br>
+
+<table class="ftable"   >
+<thead>
+  <tr>
+    <th>Feature</th><th>Status</th>
+  </tr>
+</thead>
+<tr><td ui-sref="schools"> List of Schools</td><td class="works">Works!</td></tr>
+<tr><td ui-sref="school.studentList({school_id:42})"> Student List</td><td>In Progress</td></tr>
+<tr><td ui-sref="school.application({school_id:86,app_id:'mB9H1NoELsUq37yZ78nhidDeaDc2_school_86'})"> Student Application View</td><td>In Progress</td></tr>
+<tr><td ui-sref="school.staff({school_id:42})"> School Staff List</td><td>In Progress</td></tr>
+<tr><td ui-sref="school.settings({school_id:42})"> School Settings</td><td class="works">Works!</td></tr>
+<tr><td ui-sref="translation">Translation</td><td class="works">Works!</td></tr>
+<tr><td>Google Sign in</td><td class="works">Works </td></tr>
+<tr><td>Facebook Sign in</td><td class="works">Works </td></tr>
+<tr><td>Email/pass Sign in</td><td class="works">Works! </td></tr>
+<tr><td>Search</td><td>In Progress</td></tr>
+<tr><td>Staff:Current</td><td>In Progress</td></tr>
+<tr><td>Staff:Alumni</td><td>Planned</td></tr>
+<tr><td>Staff:Applications</td><td>Planned</td></tr>
+
+</table>  
+
+<br>
+Few Goals:
+<ul>
+  <li>it loads fast!</li>
+  <li>make it look good on mobile</li>
+  <li>build it in a way that it works for any ywam base</li>
+</ul>
+<br>
+
+</p>  
+<!--</div>-->
+   <!--<iframe width="560" height="315" src="https://www.youtube.com/embed/U5aeM5dvUpA" frameborder="0" allowfullscreen></iframe>-->
+
+      </md-card-content>
+    </md-card>
+  </div>
+</div >
