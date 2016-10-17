@@ -21,6 +21,8 @@ class PrayerWallController {
              }) 
 
               Ref.on('value',(snap)=>{$timeout(runMasson, 500)}) 
+          
+
       //  ctrl.prayers = $firebaseArray(Ref);
        ctrl.postPrayer = postPrayer
        ctrl.deletePrayer = deletePrayer
@@ -43,9 +45,13 @@ class PrayerWallController {
          Ref.child(prayer.id).child('amens').child(ctrl.user_id).set(true)
        }
 
-       function deletePrayer(prayer_id){
+       function deletePrayer(prayer){
 
-         Ref.child(prayer_id).remove()
+        var index = ctrl.prayers.indexOf(prayer)
+         ctrl.prayers.splice(index,1)
+         Ref.child(prayer.id).remove()
+
+
        } 
 
         function runMasson(){

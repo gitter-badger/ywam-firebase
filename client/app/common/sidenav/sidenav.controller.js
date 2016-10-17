@@ -63,9 +63,9 @@ class SidenavController {
     // state: 'app.groups',
     // fa_icon:'fa fa-users'}, 
 
-    {title: 'Accounting',
-    state: 'accounting',
-    fa_icon:'fa fa-eur'},
+    // {title: 'Accounting',
+    // state: 'accounting',
+    // fa_icon:'fa fa-eur'},
 
     
     // {title: 'Nations',
@@ -80,9 +80,9 @@ class SidenavController {
     // state: 'app.dashboard',
     // fa_icon:'icon-feed'},
     
-    // {title: 'Prayer Wall',
-    // state: 'app.prayer',
-    // fa_icon:'fa fa-bolt'}, 
+    {title: 'Prayer Wall',
+    state: 'prayer',
+    fa_icon:'fa fa-bolt'}, 
 
     
 

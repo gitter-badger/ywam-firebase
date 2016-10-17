@@ -21,7 +21,7 @@
   <div class="grid-item"  
    style="margin: 1.5em 1em; font-family: 'Asap', sans-serif; font-style: italic; color:rgba(0,0,0,0.9);  " 
 
-    ng-class="{'sticky-note-small': $ctrl.new_prayer.length < 75,
+    ng-class="{'sticky-note-small': !$ctrl.new_prayer || $ctrl.new_prayer.length < 75,
   				  'sticky-note': $ctrl.new_prayer.length > 74 && $ctrl.new_prayer.length < 330,
   				  'small-paper': $ctrl.new_prayer.length > 330 
   				  
@@ -65,7 +65,7 @@
 				{{prayer.date | date :'shortDate'}}
 				
 			    <span ng-show="prayer.user_id == $ctrl.user_id" 
-					  ng-click="$ctrl.deletePrayer(prayer.id)"
+					  ng-click="$ctrl.deletePrayer(prayer)"
 					  style="cursor:pointer;">	
 				<i class="fa fa-trash"></i>
 				</span>

@@ -26,6 +26,9 @@ path /applications/{id} is Application {  read() {    checkAppAccess(id)  }}
 path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
                                 write() {auth.uid == newData.child('user_id').val()}
                                 }
+path /applications/{id}/requests  {  
+                                  write() {auth.uid == data.parent().child('for').child('user_id').val()}
+                                }                                
 path /applications/{id}/meta  { read() {  isStaff() }  
                                 // write() {auth.uid == newData.child('user_id').val()}
                                 }                                

@@ -2,16 +2,15 @@
 <md-menu class="app-status-menu">
 <div class="app-status-{{$ctrl.data.meta.status}} app-status-box"  ng-click="$mdOpenMenu()"> 
     
-<!--<span ng-if="$ctrl.data.status <8">Started <span am-time-ago="$ctrl.data.created"></span></span>
-<span ng-if="$ctrl.data.status == 8">Cancelled <span am-time-ago="$ctrl.data.cancled_date"></span></span>
-<span ng-if="$ctrl.data.status == 10">Submitted <span am-time-ago="$ctrl.data.submit_date"></span></span>
-<span ng-if="$ctrl.data.status == 11">In Review <span am-time-ago="$ctrl.data.in_review_date"></span></span>
-<span ng-if="$ctrl.data.status == 12">Denied</span>
-<span ng-if="$ctrl.data.status == 13">Accepted <span am-time-ago="$ctrl.data.accepted_date"></span></span>
-<span ng-if="$ctrl.data.status == 30">Arrived <span am-time-ago="$ctrl.data.arrived_date"></span></span>
-<span ng-if="$ctrl.data.status == 70">{{$ctrl.data.retired_date}}</span>-->
+<span ng-if="$ctrl.data.meta.status < 8 ">Started </span>
+<span ng-if="$ctrl.data.meta.status == 8">Cancelled </span>
+<span ng-if="$ctrl.data.meta.status == 10">Submitted </span>
+<span ng-if="$ctrl.data.meta.status == 11">In Review </span>
+<span ng-if="$ctrl.data.meta.status == 12">Denied</span>
+<span ng-if="$ctrl.data.meta.status == 13">Accepted </span>
+<span ng-if="$ctrl.data.meta.status == 30">Arrived </span>
+<span ng-if="$ctrl.data.meta.status == 70">Alumni</span>
 
-{{$ctrl.data.meta.statuses[$ctrl.data.meta.status].text}}
 <span ng-if="$ctrl.date" am-time-ago="$ctrl.data.meta.statuses[$ctrl.data.meta.status].date"></span>
 
 

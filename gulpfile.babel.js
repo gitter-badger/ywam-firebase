@@ -12,7 +12,7 @@ import lodash   from 'lodash';
 import gutil    from 'gulp-util';
 import serve    from 'browser-sync';
 import del      from 'del';
-import ghPages  from 'gulp-gh-pages';
+import ghPages  from 'gulp-gh-pages-cname';
 
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
@@ -74,7 +74,8 @@ gulp.task('deploy', [], () => {
 
   const config = require('../ywam-staff-webapp-config.js');
    return gulp.src('./dist/**/*')
-    .pipe(ghPages(config.ghPages));
+       .pipe(ghPages({cname:'staff.ywamsarasota.com'}))
+       .pipe(ghPages(config.ghPages))
 });
 
 
