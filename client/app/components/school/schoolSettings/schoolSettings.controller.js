@@ -45,8 +45,8 @@ class SchoolSettingsController {
       ctrl.upload_progress = 15
 
         // Create a root reference
-      var storageRef = firebase.storage().ref('/schools/'+school_id);
-      var banner_ref =   firebase.database().ref('/schools/' +school_id ).child('public/banner_lg');
+      var storageRef = firebase.storage().ref('/schools_public/'+school_id);
+      var banner_ref =   firebase.database().ref('/schools/' +school_id ).child('public/banner_1080');
 
       var file =  ctrl.myCroppedImage
       // console.log(file)

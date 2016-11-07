@@ -30,7 +30,7 @@ path /applications/{id}/requests  {
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
                                 }                                
 path /applications/{id}/meta  { read() {  isStaff() }  
-                                // write() {auth.uid == newData.child('user_id').val()}
+                                write() { isStaffAppAdmin()}
                                 }                                
 path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
                                  write() {auth.uid == data.parent().child('for').child('user_id').val()} }
@@ -66,9 +66,13 @@ path /profiles/{id}/com is ProfileCom { read() {isStaff() }}
 
 type ProfileCom {
     avatar_1080: String | Null
+    avatar_200: String | Null
+    avatar_640: String | Null
+    current_location_id: String | Null
     dob: String | Null
     dts: Object | Null
     education: String | Null
+    email: String | Null
     emergency_contact: Object | Null
     first_name : String | Null
     gender: String | Null
@@ -125,7 +129,11 @@ isStaff() {
   }
 
 //Can this user access Staff Applications at this location? 
-isStaffAppAdmin(location_id) { root.locations[location_id].perms['access_staff_apps'][auth.uid] }
+isStaffAppAdmin() { 
+  root.profiles[auth.uid].com.current_location_id != null &&
+
+  root.locations[ root.profiles[auth.uid].com.current_location_id ]
+      .perms['access_staff_apps'][ auth.uid ] != null }
 
 // Is this user a school admin of this school?
 isSchoolAdmin(school_id) { root.schools[school_id].admin[auth.uid] != null }
@@ -136,7 +144,7 @@ isSchoolStaff(school_id) { root.schools[school_id].staff[auth.uid] != null }
 
 checkAppAccess(appID){ 
 root.applications[appID].child('for').child('staff_location_id').val() != null
-&& isStaffAppAdmin(root.applications[appID].child('for').child('staff_location_id').val()) 
+&& isStaffAppAdmin() 
 ||
 isSchoolAdmin(  root.applications[appID].child('for').child('school_id').val()) 
 
@@ -152,7 +160,7 @@ canAccessPaypalTransactions(location_id){root.locations[location_id].perms['acce
 canEditPhrases(){
    root.profiles[auth.uid].com.current_location_id != null && // check for location
    root.locations[ root.profiles[auth.uid].com.current_location_id  ] // use location
-        .perms['access_paypal_transactions'][auth.uid] != null
+        .perms['access_translation'][auth.uid] != null
   }
 
 

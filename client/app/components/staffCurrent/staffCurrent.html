@@ -20,13 +20,13 @@ float:left;
 
 <div layout="row" layout-wrap layout-align="center">
 
-<div flex="75">
-<md-input-container style="margin-top:35px;  vertical-align:middle"> 
+<div flex-gt-xs="75" flex>
+<md-input-container class="no-print" style="margin-top:35px;  vertical-align:middle"> 
 <input ng-model="$ctrl.search" placeholder="filter">
 </md-input-container>
 
 
-<div style="display:inline-block; width:200px; margin-top:22px; vertical-align:middle">    
+<div   class="no-print" style="display:inline-block; width:200px; margin-top:22px; vertical-align:middle">    
 
 <md-slider flex min="100" max="200" ng-model="$ctrl.photo_size" aria-label="photo size" >
 

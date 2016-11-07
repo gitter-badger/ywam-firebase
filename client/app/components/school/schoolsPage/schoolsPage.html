@@ -36,7 +36,7 @@
 </style>
 
 <div layout="row" layout-align="center center">
-<div  flex-gt-sm="65">
+<div flex-gt-md="65"  flex-gt-sm="75"  flex-gt-xs="90" flex>
 
 <md-card>
 
@@ -70,37 +70,51 @@
 <md-divider></md-divider>
 <div ng-repeat="sch in $ctrl.schools | orderBy: 'start_date' : true | filter: $ctrl.search "   >
 
-<div layout="row"  layout-align="space-between center"  class="row-hover"  style="cursor: pointer;"  ui-sref="school.studentPhotos({school_id:sch.id})">		
-<div style="width:106px;  height:60px; overflow:hidden; margin-right:20px ">
- <img ng-src="{{sch.public.banner_lg}}" style="height:initial !important " > 
+<div layout="row" layout-wrap  layout-align="space-between center"  class="row-hover"  
+     style="cursor: pointer;"  
+	 ui-sref="school.studentPhotos({school_id:sch.id})">		
+<div ng-if="!$ctrl.$mdMedia('xs')" 
+	 style="width:106px;  max-height:50px; overflow:hidden; "
+	 flex-order="1">
+ <img ng-src="{{sch.public.banner_200}}" style="height:initial !important " > 
 </div>
-<div flex="80" flex-gt-sm="50" >
-		
-		<span  class="md-title"  >  {{sch.public.name}}</span><br>
-		<!--<span class="md-caption">{{sch.public.location}}</span>-->
-	</div>
+<div flex flex-order="2"  style="margin-left:10px; margin-top:3px; " >
+	<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>
+</div>
 
-	<div flex="60" flex-gt-sm="30" class="md-subhead" style="padding-top:8px; "  >
+	<div flex="100" 
+		 flex-gt-xs="25"  
+		 layout="row"
+		 layout-wrap
+		 flex-order-gt-xs="3" flex-order="5"
+		 style="font-size:100%; margin-left:10px" >
+	
+
+	<span flex-gt-xs="100" flex="60" class="md-caption" > {{ sch.public.start_date | date :'MMM d yyyy'}}
+	 
+	 - {{sch.public.end_date | date :'MMM d yyyy'}}</span>
+	
 	<!-- if start is in future -->
-	<span ng-if="sch.public.start_date > $ctrl.now" style="background-color:#FFE082;padding:2px" > Starts 
+	<span flex ng-if="sch.public.start_date > $ctrl.now" 
+		  style="background-color:#FFE082;padding:2px;" 
+		  class="md-caption"> Starts 
 	<span am-time-ago="sch.public.start_date"></span>
 	</span>
 
 	<!-- If currently running  -->
-	<span ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now " style="background-color:#A5D6A7;padding:2px" > Running <span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
+	<span flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now " 
+		  style="background-color:#A5D6A7;padding:2px; "
+		  class="md-caption" > Running 
+		  <span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
 
-
-	<div class="md-caption" > {{ sch.public.start_date | date :'MMM d'}}<span ng-hide="(sch.public.start_date | amDifference : null : 'days' )  < 300 && (sch.public.start_date | amDifference : null : 'days') > -300  ">, {{ sch.public.start_date | date :'yyyy'  }}</span>
-	 
-	 - {{sch.public.end_date | date :'MMM d'}}<span ng-hide="(sch.public.end_date | amDifference : null : 'days' )  < 300 && (sch.public.end_date | amDifference : null : 'days') > -300  ">, {{ sch.public.end_date | date :'yyyy'  }}</span></div>
 
 
 	</div>
 
 
-
-<div flex="30"  hide-xs >
-	<div class="status-bar" style="width:{{sch.count.total}}px; ">	
+<!--
+<div flex="10"  hide-xs   flex-order-gt-xs="4">
+	<div class="status-bar" style="width:{{sch.count.total}}px;  font-size:100%">	
 	 
 	
 		<div style="width:{{ (sch.count.started*100) / sch.count.total }}%; background-color:#3F51B5;" ></div>
@@ -117,19 +131,19 @@
 	</div>	
  
 								
-</div>
+</div>-->
 
 
 
 
-<div  flex="20" flex-order="2" flex-order-gt-sm="4"  flex-gt-sm="10"  style="text-align:right">
-			<md-menu>
+<div   style="text-align:right ; " flex-order="3"  flex-order-gt-xs="5" flex="10">
+			<md-menu style="padding:0px">
            
-            <md-button ng-click="$mdOpenMenu($event)" style="min-width:20px">
+            <md-button ng-click="$mdOpenMenu($event)" style="min-width:20px;  margin:0px; min-height: 20px; line-height: 20px; ">
 			 <md-tooltip >
           	View counts
         	</md-tooltip>
-			<span class="md-title">{{sch.count.accepted*1 + sch.count.arrived*1}}</span>
+			<span class="">{{sch.count.accepted*1 + sch.count.arrived*1}}</span>
 			</md-button>
             <md-menu-content>
 		

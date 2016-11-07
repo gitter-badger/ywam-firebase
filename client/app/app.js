@@ -93,7 +93,7 @@ angular.module('app', [
   })
 
 
-.run(["$transitions", "Auth" ,"$rootScope", function($transitions, Auth, $rootScope) {
+.run(["$transitions", "Auth" ,"$rootScope","$state", function($transitions, Auth, $rootScope,$state) {
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
@@ -106,6 +106,15 @@ $transitions.onStart({
         }
   
 
+    },
+    from:function(state){
+        //set previous state
+        //console.log(state.name)
+        $state.previous = {name : $state.current.name, 
+                          params: $state.params
+                        }
+     
+       // console.log($state.previous.name)
     }
 })
 }])

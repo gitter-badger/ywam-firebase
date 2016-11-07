@@ -1,4 +1,5 @@
 class AppStatusController {
+
   constructor() {
       var ctrl = this;
 
@@ -8,8 +9,8 @@ class AppStatusController {
 
           function changeStatus(status_num){
 
-
             console.log(ctrl.data)
+           firebase.database().ref('applications').child(ctrl.data.$id).child('meta/status').set(status_num);
 
           }
 

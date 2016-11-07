@@ -1,64 +1,87 @@
 class StaffAppsController {
    /* @ngInject */
-  constructor(Site, $firebaseArray, $timeout,$filter) {
+  constructor(Site, $firebaseArray, $timeout,$filter, $firebaseObject) {
     var ctrl = this;
-        ctrl.staff = []
+        ctrl.apps = []
+        ctrl.selected = [];
+        ctrl.filterList = filterList;
+        ctrl.query = {
+                      order: ['meta.status','user.first_name'],
+                      limit: 5,
+                      page: 1
+                    };
+      
+        var accepted_only = false
 
-    var Ref = firebase.database().ref('locations/'+Site.location_id).child('staff_app_index')
+    var appIndexRef = firebase.database().ref('/locations/'+Site.location_id +'/staff_app_index')
+          appIndexRef.on('value', function(indexSnap){
 
-        Ref.on('child_added', function(snap) {
-          console.log(snap.key)
-          //look up user from app 
-              firebase.database().ref('/applications/'+ snap.key +'/for/user_id' ).on('value',
-              function(appSnap){
+            indexSnap.forEach(function(appSnap){
+                if(!accepted_only || appSnap.val() >= 13 ){
+                  var data = {id: appSnap.key }
+                  var index =  ctrl.apps.push(data)
+                      index--
+                    // console.log(index)
+                    getAppFor(index)
+                    getAppMeta(index)
 
-                      var user_id = appSnap.val()
-                          console.log('UserID: ',user_id)
-
-                          firebase.database().ref('/profiles/'+ user_id +'/com' )
-                                         .on('value',function(snapshot) { 
-                                            
-                                            if(snapshot.val() != null){
-                                            
-                                            //  var item =  $filter('filter')(ctrl.staff, {id: snapshot.key}, true);
-                                            // var index = ctrl.staff.indexOf(item[0])
-                                         
-
-                                          $timeout(function() {  
-                                            var data = snapshot.val()
-                                                data.id = snapshot.key;
-                                          //  if(index >-1)    
-                                          //  ctrl.staff[index] =data;
-                                          //  else
-                                           ctrl.staff.push(data);
-                                            // trigger $digest/$apply so Angular syncs the DOM
-                                           
-                                            });
-                                            }
-                                         },function(error){console.error(error)})  
-
-
-
-
-
-              }
-              )
-                 
-                                                     
-                },function(error){console.error(error)});
-
-
-ctrl.photo_size = 150;
-ctrl.print = print;
-
-  function print(size) {
+                }//end if accepted only 
+            })//end foreach appindex  
+          })//end on value 
+       
+      var appsRef  = firebase.database().ref('/applications')
+         
+      function getAppFor(index){
+              var appId=  ctrl.apps[index].id
+            //  console.log('looking up app/for node : '+ appId)
+              
+              firebase.database().ref('/applications').child(appId).child('for').on('value', function(appForSnap) {
+                          ctrl.apps[index].for = appForSnap.val()
+                          getProfileCom(appForSnap.val().user_id,index)
+                } )//end on value
             
-                myWindow = window.open(Site.api + '/staff/print_photos/'+size+'/'+ Site.location.id,
-                       "_blank");
-                myWindow.focus();
+      }     
 
-            
-        }
+      function getAppMeta(index){
+               var appId =  ctrl.apps[index].id
+                //  console.log('looking up app/meta node : '+ appId)
+            var appMeta  =    firebase.database().ref('/applications').child(appId).child('meta')//.on('value', function(appMetaSnap) {
+                      ctrl.apps[index].meta = $firebaseObject(appMeta)
+                    //  console.log( ctrl.apps[index].meta)
+                 //   })
+      }
+
+      function getProfileCom(user_id, index){
+                   var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
+                       ctrl.apps[index].user = $firebaseObject(userRef)
+                                                // .on('value',function(snapshot) { 
+                                                //   ctrl.apps[index].user  = snapshot.val()
+                                                //    $timeout(function() {  });
+                                                // })
+      }
+
+    
+        ctrl.statuses = {1 : {text: 'started'}, 
+                      8 : {text: 'cancelled'},
+                      10: {text:'submitted'},
+                      11: {text:'in review'},
+                      12: {text:'denied'},
+                      13: {text:'accepted'},
+                      30: {text:'arrived'},
+                      70: {text:'alumni'}
+                    };
+     ctrl.statuses[10].active = true;
+     ctrl.statuses[11].active = true;
+     ctrl.statuses[13].active = true;
+     ctrl.statuses[30].active = false;
+     ctrl.statuses[70].active = false;
+      function filterList(item){
+          var show = false;
+         if(ctrl.statuses[item.meta.status] && ctrl.statuses[item.meta.status].active)
+           show =  true;
+          return show;
+        };
+   
 
 }
 }

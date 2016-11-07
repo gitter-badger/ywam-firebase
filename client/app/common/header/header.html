@@ -21,7 +21,6 @@
 
   <!--If not logged in show login button-->
     <md-menu ng-hide="$ctrl.firebaseUser" > 
-      <!--<md-menu>-->
     <md-button  class="md-raised"  ng-click="$mdOpenMenu($event)">Sign In</md-button>
   <md-menu-content  md-offset="20 0" width="4" md-position-mode="target-right target" style="padding:20px">
 <login-buttons></login-buttons>

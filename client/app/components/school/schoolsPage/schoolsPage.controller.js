@@ -1,6 +1,6 @@
 class SchoolsPageController {
      /* @ngInject */
-  constructor( $timeout,$firebaseArray,moment,Site, $filter) {
+  constructor( $timeout,$firebaseArray,moment,Site, $filter,$mdMedia) {
 
 
     var ref = firebase.database().ref('/locations').child(Site.location_id).child('schools_index');
@@ -8,6 +8,7 @@ class SchoolsPageController {
       var ctrl = this
           //ctrl.schools = []// $firebaseArray(ref);
           ctrl.now = moment().format("YYYY-MM-DD");
+          ctrl.$mdMedia = $mdMedia
       
        ref.on('value', function(snapshot) {
             ctrl.schools = []

@@ -7,3 +7,7 @@ node_modules
 dist/
 
 .vscode/settings.json
+
+.publish/
+
+.publish2/

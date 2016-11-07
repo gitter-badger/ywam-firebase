@@ -31,8 +31,9 @@
 <div flex >
 <div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
 <img style="width:100%" align="right" ng-src="{{$ctrl.profile.com.avatar_1080}}" ><br>
+
 <a href="" class="no-print"
- ui-sref="app.user.com.profile.change_photo({userId:$ctrl.profile.com.id})">change photo</a>
+ ui-sref="userPhotoUpload({user_id:$ctrl.profile.$id })">change photo</a>
 </div>
 </div>
 
