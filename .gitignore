@@ -4,7 +4,7 @@
 node_modules/
 .settings
 *.log
-dist/
+
 .vscode/settings.json
 .publish/
 .publish2/
