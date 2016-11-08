@@ -75,16 +75,17 @@ gulp.task('git', [], () => {
   const config = require('../ywam-staff-webapp-config.js');
        gulp.src('./dist/**/*')
        .pipe(ghPages({cname:'staff.ywamsarasota.com'}))
-       gulp.src('./dist/**/*')
-       .pipe(ghPages(config.ghPages))
+      
+      //  gulp.src('./dist/**/*')
+      //  .pipe(ghPages(config.ghPages))
 
-       gulp.src('./dist/**/*')
-       .pipe(ghPages({
-              remoteUrl: "git@github.com:timtimmytime/staff.ywamherrnhut.com",
-              branch :"master",
-              cname:'staff.ywamherrnhut.com',
-              cacheDir: ".publish3"
-       }))
+      //  gulp.src('./dist/**/*')
+      //  .pipe(ghPages({
+      //         remoteUrl: "git@github.com:timtimmytime/staff.ywamherrnhut.com",
+      //         branch :"master",
+      //         cname:'staff.ywamherrnhut.com',
+      //         cacheDir: ".publish3"
+      //  }))
 
       
 });

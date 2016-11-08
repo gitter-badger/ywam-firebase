@@ -1,13 +1,11 @@
 .DS_Store
 .tmp
 .git
-node_modules
+node_modules/
 .settings
 *.log
 dist/
-
 .vscode/settings.json
-
 .publish/
-
 .publish2/
+
