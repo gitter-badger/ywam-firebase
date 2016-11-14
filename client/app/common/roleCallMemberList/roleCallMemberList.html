@@ -1,0 +1,17 @@
+
+<style>
+  .here {
+    background-color:green
+  }
+</style>
+
+
+<div ng-repeat="item in $ctrl.members | orderBy: ['-present']" 
+  ng-class="{here:item.present}"
+>
+
+  {{item.name}}
+
+  <md-button ng-click="$ctrl.setHere(item.$id)">Here</md-button> 
+    <md-button>Not Here</md-button> 
+</div>

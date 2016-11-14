@@ -47,22 +47,6 @@
       <input ng-model="$ctrl.search.$" placeholder="Search">
     </md-input-container>
 <span flex></span>
-    <!--<md-select class="md-accent" ng-model="$ctrl.search.location_id" placeholder="Location" style="margin:0;">
-      	<md-option value="">All Locations</md-option> 
-        <md-option ng-repeat="loc in $ctrl.locations" value="{{loc.id}}">{{loc.name}}</md-option> 
-    </md-select>-->
-	
-	<!--<md-menu>
-      <md-button aria-label="Change Location"  ng-click="$mdOpenMenu()">
-	{{$ctrl.location.name}}  <i class="fa fa-angle-down"> </i> 
-	  </md-button>
-      <md-menu-content >
-        <md-menu-item ng-repeat="item in $ctrl.locations ">
-          <md-button ng-click="$ctrl.changeLocation(item.id)">	{{item.name}} 
-          </md-button>
-        </md-menu-item>
-      </md-menu-content>
-    </md-menu>-->
 
 </div>	
 
@@ -74,9 +58,10 @@
      style="cursor: pointer;"  
 	 ui-sref="school.studentPhotos({school_id:sch.id})">		
 <div ng-if="!$ctrl.$mdMedia('xs')" 
-	 style="width:106px;  max-height:50px; overflow:hidden; "
 	 flex-order="1">
- <img ng-src="{{sch.public.banner_200}}" style="height:initial !important " > 
+	 <div  style="width:106px;  max-height:50px; overflow:hidden; ">
+	<img ng-src="{{sch.public.banner_200}}" style="width:100%" > 
+	</div>
 </div>
 <div flex flex-order="2"  style="margin-left:10px; margin-top:3px; " >
 	<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>

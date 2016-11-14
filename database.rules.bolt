@@ -92,6 +92,8 @@ type ProfileCom {
 
 
 path /locations_public { read() { true} }
+path /locations_public/{id}/notices { write() {canEditLocationNotices(id) } }
+path /locations_public/{id}/nations { write() {canEditLocationVisaReq(id) } }
 path /locations/{id} is Location { read() { isStaff() }
                                    write() { isStaff() }}
 
@@ -108,7 +110,8 @@ path /paypal_transactions/{location_id} { read() { canAccessPaypalTransactions(l
                                           write() { canAccessPaypalTransactions(location_id) }
                                           }
 
-
+path /role_calls/{id} { read() { isStaff() },
+                         write() { isStaff() } }
 
 
 // Access Controll Function 
@@ -148,13 +151,15 @@ root.applications[appID].child('for').child('staff_location_id').val() != null
 ||
 isSchoolAdmin(  root.applications[appID].child('for').child('school_id').val()) 
 
-
-
-
-
 }
 
-canAccessPaypalTransactions(location_id){root.locations[location_id].perms['access_paypal_transactions'][auth.uid] != null}
+canAccessPaypalTransactions(location_id){
+    root.locations[location_id].perms['access_paypal_transactions'][auth.uid] != null}
+canEditLocationNotices(location_id){
+    root.locations[location_id].perms['can_edit_location_notices'][auth.uid] != null}
+canEditLocationVisaReq(location_id){
+    root.locations[location_id].perms['can_edit_location_visa_requirements'][auth.uid] != null}
+
 
 //Can Edit Translation phrases
 canEditPhrases(){
@@ -162,6 +167,9 @@ canEditPhrases(){
    root.locations[ root.profiles[auth.uid].com.current_location_id  ] // use location
         .perms['access_translation'][auth.uid] != null
   }
+
+
+
 
 
 type CurrentTimestamp extends Number {

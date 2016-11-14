@@ -31,9 +31,9 @@ class SidenavController {
     },
     
 
-    // {title: 'Base Info',
-    // state: 'app.base',
-    // fa_icon:'fa fa-home'},
+    {title: 'Base Info',
+    state: 'base',
+    fa_icon:'fa fa-home'},
    
     //sub_nav:[
               // {title: 'Rides',

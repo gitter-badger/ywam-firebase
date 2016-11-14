@@ -1,0 +1,58 @@
+
+
+
+
+<div layout="row" layout-align="center">
+
+<div  flex flex-gt-md="60">
+<md-card>
+  <md-card-content>
+<i class="fa fa-info fa-3x" aria-hidden="true"></i> Location specific notices..<br>
+ Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_notices"</a>
+</md-card-content>
+</md-card>
+
+
+<md-card>
+  <md-card-content>
+    <span class="md-caption">(Displayed on application when nationality is selected)</span>
+<md-input-container class="md-block">
+  <label>
+Need Invitation Letter (EN)
+  </label>
+<textarea ng-model="notices.EN.need_invitation"></textarea>
+</md-input-container>
+<md-input-container class="md-block">
+  <label>
+Need Invitation Letter (DE)
+  </label>
+<textarea ng-model="notices.DE.need_invitation"></textarea>
+</md-input-container>
+
+</md-card-content>
+</md-card>
+
+<md-card>
+<md-card-content>
+<span class="md-caption">(Displayed on application when nationality is selected)</span>
+
+<md-input-container class="md-block">
+  <label>
+Need Entry Visa (EN)
+  </label>
+<textarea ng-model="notices.EN.need_entry_visa"></textarea>
+</md-input-container>
+<md-input-container class="md-block">
+  <label>
+Need Entry Visa (DE)
+  </label>
+<textarea ng-model="notices.DE.need_entry_visa"></textarea>
+</md-input-container>
+
+  </md-card-content>
+</md-card>
+
+
+
+</div>
+</div>

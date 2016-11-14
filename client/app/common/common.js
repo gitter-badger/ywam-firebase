@@ -14,7 +14,8 @@ import LoginDialog from './loginDialog/loginDialog';
 import appStatus from './appStatus/appStatus';
 
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
-
+import roleCallsList from './roleCallsList/roleCallsList';
+import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 
 let commonModule = angular.module('app.common', [
   // Navbar,
@@ -30,7 +31,9 @@ let commonModule = angular.module('app.common', [
   LoginDialog,
 
   appStatus,
-  userPhotoUpload
+  userPhotoUpload,
+  roleCallsList,
+  roleCallMemberList
 
 ])
   

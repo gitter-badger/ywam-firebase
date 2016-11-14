@@ -10,6 +10,8 @@ import StudentList from './school/studentList/studentList';
 import StudentPhotos from './school/studentPhotos/studentPhotos';
 import SchoolSettings from './school/schoolSettings/schoolSettings';
 import SchoolStaff from './school/schoolStaff/schoolStaff';
+import schoolRoleCalls from './school/schoolRoleCalls/schoolRoleCalls';
+
 
 import accounting from './accounting/accounting';
 
@@ -19,7 +21,11 @@ import staffAlumni from './staffAlumni/staffAlumni';
 import staffApps from './staffApps/staffApps';
 
 import siteSettings from './siteSettings/siteSettings';
-import permissions from './permissions/permissions';
+
+import base from './base/base';
+import baseNotices from './baseNotices/baseNotices';
+import basePermissions from './basePermissions/basePermissions';
+import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
 
 import Search from './search/search';
 import profile from './profile/profile';
@@ -39,6 +45,9 @@ let componentModule = angular.module('app.components', [
   StudentPhotos,
   SchoolSettings,
   SchoolStaff,
+  schoolRoleCalls,
+
+
   Search,
   ApplicationView,
   forgotPassword,
@@ -50,7 +59,13 @@ let componentModule = angular.module('app.components', [
   staffApps,
 
   siteSettings,
-  permissions,
+
+
+  base,
+  baseNotices,
+  basePermissions,
+  baseVisaRequirements,
+
   profile
 
 ])

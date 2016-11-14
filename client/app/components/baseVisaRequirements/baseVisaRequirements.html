@@ -1,0 +1,30 @@
+<div layout="row" layout-align="center">
+
+<div  flex flex-gt-md="75">
+<md-card>
+  <md-card-content>
+     Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_visa_requirements"</a>
+
+   <div layout="row"> 
+   <div flex> Nations:</div>
+   <div flex> need_invitation</div>
+   <div flex> need_entry_visa</div>
+   <div flex> need_visa_extention</div>
+   <div flex> can_not_process_visa</div>
+
+</div>
+<div ng-repeat="item in $ctrl.nations_index"  class="row-hover" >
+
+<div  layout="row" >
+<div flex>{{item.$value}} </div>
+<div flex><md-checkbox ng-model="nations[item.$id].need_invitation"  aria-label="need_invitation"></md-checkbox>  </div>
+<div flex><md-checkbox ng-model="nations[item.$id].need_entry_visa"  aria-label="need_entry_visa"></md-checkbox>  </div>
+<div flex><md-checkbox ng-model="nations[item.$id].need_visa_extention"  aria-label="need_visa_extention"></md-checkbox>  </div>
+<div flex><md-checkbox ng-model="nations[item.$id].can_not_process_visa"  aria-label="can_not_process_visa"></md-checkbox>  </div>
+
+</div>
+
+</div>
+  </md-card-content>
+</md-card>
+</div>
