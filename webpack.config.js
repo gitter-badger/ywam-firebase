@@ -54,6 +54,7 @@ module.exports = {
             { from: 'client/favicon', to:'' },
              { from: 'client/sounds', to:'sounds' },
               { from: 'client/logos', to:'logos' },
+               { from: 'client/.nojekyll', to:'' },
             // { from: 'client/square_space_scripts', to:'square_space_scripts' },
             // { from: 'node_modules/angular-material/angular-material.min.css', to:'css' },
             // { from: 'node_modules/font-awesome/css/font-awesome.min.css', to:'css' }

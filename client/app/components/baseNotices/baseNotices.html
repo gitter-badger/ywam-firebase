@@ -5,10 +5,13 @@
 <div layout="row" layout-align="center">
 
 <div  flex flex-gt-md="60">
+
 <md-card>
   <md-card-content>
 <i class="fa fa-info fa-3x" aria-hidden="true"></i> Location specific notices..<br>
  Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_notices"</a>
+<br>last update: <span am-time-ago="$ctrl.notices.lastSave" ></span> by: {{$ctrl.lastSaveUser.first_name}} {{$ctrl.lastSaveUser.last_name | limitTo:1}}.
+
 </md-card-content>
 </md-card>
 
@@ -20,13 +23,13 @@
   <label>
 Need Invitation Letter (EN)
   </label>
-<textarea ng-model="notices.EN.need_invitation"></textarea>
+<textarea ng-model="$ctrl.notices.EN.need_invitation" ng-change="$ctrl.save()"></textarea>
 </md-input-container>
 <md-input-container class="md-block">
   <label>
 Need Invitation Letter (DE)
   </label>
-<textarea ng-model="notices.DE.need_invitation"></textarea>
+<textarea ng-model="$ctrl.notices.DE.need_invitation" ng-change="$ctrl.save()"></textarea>
 </md-input-container>
 
 </md-card-content>
@@ -40,19 +43,59 @@ Need Invitation Letter (DE)
   <label>
 Need Entry Visa (EN)
   </label>
-<textarea ng-model="notices.EN.need_entry_visa"></textarea>
+<textarea ng-model="$ctrl.notices.EN.need_entry_visa" ng-change="$ctrl.save()"></textarea>
 </md-input-container>
 <md-input-container class="md-block">
   <label>
 Need Entry Visa (DE)
   </label>
-<textarea ng-model="notices.DE.need_entry_visa"></textarea>
+<textarea ng-model="$ctrl.notices.DE.need_entry_visa" ng-change="$ctrl.save()"></textarea>
 </md-input-container>
 
   </md-card-content>
 </md-card>
 
 
+<md-card>
+<md-card-content>
+<span class="md-caption">(Displayed on application when nationality is selected)</span>
+
+<md-input-container class="md-block">
+  <label>
+Need Visa Extention (EN)
+  </label>
+<textarea ng-model="$ctrl.notices.EN.need_visa_extention" ng-change="$ctrl.save()"></textarea>
+</md-input-container>
+<md-input-container class="md-block">
+  <label>
+Need Visa Extention (DE)
+  </label>
+<textarea ng-model="$ctrl.notices.DE.need_visa_extention" ng-change="$ctrl.save()" ></textarea>
+</md-input-container>
+
+  </md-card-content>
+</md-card>
+
+
+<md-card>
+<md-card-content>
+<span class="md-caption">(Displayed on application when nationality is selected)</span>
+
+<md-input-container class="md-block">
+  <label>
+Can Not Process Visa (EN)
+  </label>
+<textarea ng-model="$ctrl.notices.EN.can_not_process_visa" ng-change="$ctrl.save()"></textarea>
+</md-input-container>
+<md-input-container class="md-block">
+  <label>
+Can Not Process Visa (DE)
+  </label>
+<textarea ng-model="$ctrl.notices.DE.can_not_process_visa" ng-change="$ctrl.save()"></textarea>
+</md-input-container>
+
+  </md-card-content>
+</md-card>
 
 </div>
 </div>

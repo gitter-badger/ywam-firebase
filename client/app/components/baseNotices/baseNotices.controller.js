@@ -1,11 +1,30 @@
 class BaseNoticesController {
     /* @ngInject */
-  constructor(Site, $firebaseObject,$scope) {
+  constructor(Site, $firebaseObject,$scope, $timeout, Auth) {
     var ctrl = this
 
     var location_notices_ref = firebase.database().ref('locations_public').child(Site.location_id).child('notices')
     
-        $firebaseObject(location_notices_ref).$bindTo($scope, "notices");
+        ctrl.notices =  $firebaseObject(location_notices_ref)//.$bindTo($scope, "notices");
+       location_notices_ref.on('value', function(snap){
+         var ref = firebase.database().ref('profiles').child(snap.val().lastSaveBy).child('com')
+             ctrl.lastSaveUser = $firebaseObject(ref);
+       })
+       
+
+         // calling $save() on the synchronized object syncs all data back to our database
+    ctrl.save = function() {
+       ctrl.notices.$save().then(function() {
+         location_notices_ref.child('lastSave').set( firebase.database.ServerValue.TIMESTAMP )
+         location_notices_ref.child('lastSaveBy').set( Auth.$getAuth().uid )
+        
+      }).catch(function(error) {
+       // alert('Error!');
+      });
+    };
+
+
+    
 
    }
 }

@@ -23,6 +23,7 @@ import staffApps from './staffApps/staffApps';
 import siteSettings from './siteSettings/siteSettings';
 
 import base from './base/base';
+import baseInfo from './baseInfo/baseInfo';
 import baseNotices from './baseNotices/baseNotices';
 import basePermissions from './basePermissions/basePermissions';
 import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
@@ -62,6 +63,7 @@ let componentModule = angular.module('app.components', [
 
 
   base,
+  baseInfo,
   baseNotices,
   basePermissions,
   baseVisaRequirements,

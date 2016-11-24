@@ -32,7 +32,7 @@ class SidenavController {
     
 
     {title: 'Base Info',
-    state: 'base',
+    state: 'base.info',
     fa_icon:'fa fa-home'},
    
     //sub_nav:[
