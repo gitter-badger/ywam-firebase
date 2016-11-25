@@ -21,13 +21,15 @@ class PrayerWallController {
              }) 
 
               Ref.on('value',(snap)=>{$timeout(runMasson, 500)}) 
-          
+      var locationsRef =   firebase.database().ref('locations_public')
+        ctrl.locations = $firebaseObject(locationsRef) 
 
       //  ctrl.prayers = $firebaseArray(Ref);
+
        ctrl.postPrayer = postPrayer
        ctrl.deletePrayer = deletePrayer
        ctrl.amen = amen
-       ctrl.user_id =Site.user.id;
+       ctrl.user_id  =Site.user.id;
 
        function postPrayer(){
         

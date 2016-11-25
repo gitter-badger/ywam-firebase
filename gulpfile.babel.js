@@ -74,13 +74,13 @@ gulp.task('git', [], () => {
 
   const config = require('../ywam-staff-webapp-config.js');
       
-        gulp.src('./dist/**/*')
+        gulp.src(['./dist/**/*','./dist/.nojekyll'])
        .pipe(ghPages(config.ghPages[0]))
 
-       gulp.src('./dist/**/*')
+       gulp.src(['./dist/**/*','./dist/.nojekyll'])
        .pipe(ghPages(config.ghPages[1]))
       
-        gulp.src('./dist/**/*')
+        gulp.src(['./dist/**/*','./dist/.nojekyll'])
        .pipe(ghPages(config.ghPages[2]))
 
 
@@ -105,7 +105,7 @@ gulp.task('serve', () => {
   var compiler = webpack(config);
 
   serve({
-    port: process.env.PORT || 3000,
+    port: process.env.PORT || 3002,
     open: false,
     server: {baseDir: root},
     middleware: [

@@ -57,9 +57,9 @@ Context: {{$ctrl.phrases.meta}}
  </div>
 </div>
 
-<div layout="row">
+<div layout="row" ng-show="$ctrl.index">
   <div flex>
-    <div>
+    <div >
         <div  class="tranfrom edit"
               contenteditable
                id="tranfrom"
@@ -78,7 +78,7 @@ Context: {{$ctrl.phrases.meta}}
 
 
 
- <div >
+ <div>
 <div  class="tranto edit"
       id="tranto"
       contenteditable
@@ -90,10 +90,10 @@ Context: {{$ctrl.phrases.meta}}
 
 <div layout="row">
   <md-button class="" ng-click="$ctrl.newPhrase()">New Phrase</md-button>
-  <span style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code ></span>
+  <span ng-show="$ctrl.index" style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code ></span>
   <!--<input ng-model="$ctrl.new" />-->
   <span flex></span>
-<md-button class="md-primary md-raised " ng-click="$ctrl.next()">Next</md-button>
+<md-button class="md-primary md-raised " ng-click="$ctrl.next()" ng-show="$ctrl.index">Next</md-button>
 </div>
 
 <br>
