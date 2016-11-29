@@ -5,13 +5,19 @@ class StaffAppsController {
         ctrl.apps = []
         ctrl.selected = [];
         ctrl.filterList = filterList;
+        ctrl.transferSelected = transferSelected
+        
+        //get list of locations for the transfer to action
+        var ref =   firebase.database().ref('locations_public')
+        ctrl.locations = $firebaseArray(ref) 
+
         ctrl.query = {
                       order: ['meta.status','user.first_name'],
                       limit: 5,
                       page: 1
                     };
       
-        var accepted_only = false
+    var accepted_only = false
 
     var appIndexRef = firebase.database().ref('/locations/'+Site.location_id +'/staff_app_index')
           appIndexRef.on('value', function(indexSnap){
@@ -75,6 +81,8 @@ class StaffAppsController {
      ctrl.statuses[13].active = true;
      ctrl.statuses[30].active = false;
      ctrl.statuses[70].active = false;
+
+
       function filterList(item){
           var show = false;
          if(ctrl.statuses[item.meta.status] && ctrl.statuses[item.meta.status].active)
@@ -82,6 +90,34 @@ class StaffAppsController {
           return show;
         };
    
+
+      function transferSelected(location_id){
+
+        console.log('transfer to location '+ location_id);
+        
+        ctrl.selected.forEach(function(item){
+          console.log(item.id)
+
+// firebase.database().ref('/applications').child(item.id).child('for').child('staff_location_id').set(location_id)
+            
+            var data = {staff_location_id:location_id}
+          //  appsRef.child(item.id).child('for').child('staff_location_id').set(location_id)
+          //   .catch(function(error){
+          //     console.log(error)
+          //   })
+
+               appsRef.child(item.id).child('for').update(data)
+            .catch(function(error){
+              console.log(error)
+            })
+         
+        })
+        
+
+
+
+
+      }
 
 }
 }

@@ -1,6 +1,6 @@
 class SidenavController {
   /* @ngInject */
-  constructor($state,$mdMedia,$mdSidenav, Site) {
+  constructor($state,$mdMedia,$mdSidenav, Site,$rootScope,$filter ) {
    
    
    var ctrl = this;
@@ -16,7 +16,7 @@ class SidenavController {
 
     
 
-
+    
 
     //define navigation menu
    ctrl.nav = [
@@ -112,7 +112,15 @@ class SidenavController {
     fa_icon:'fa fa-language'}, 
 
 ]
-
+  $rootScope.$on('$viewContentLoaded',function(){
+         ctrl.current = $state.current.name
+      
+         var nav =  $filter('filter')(ctrl.nav, {state: ctrl.current}, true);
+         var index = ctrl.nav.indexOf(nav[0])
+      if(ctrl.nav[index])
+       ctrl.nav[index].active = true
+       console.log(ctrl.nav[index])
+      })
 
 //little function to do the navigation from sidebar clicks, it will take care of closing the sidebar on mobile.
     function sideBarNav(navItem){

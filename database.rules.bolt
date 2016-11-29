@@ -4,13 +4,19 @@ path / {read(){ false}
 
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
+
+//list of languages at this path
 path /languages { read() { auth != null }   }
  
 
-
+//Schools
 path /schools/{id} { read() { isStaff() } }
 path /schools/{id}/staff { write() { isSchoolAdmin(id) } }
 path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
+
+//schools public data
+path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
+
 
 path /prayers { read() { isStaff() },
                 write() { isStaff() }  }
@@ -18,19 +24,20 @@ path /prayers { read() { isStaff() },
 path /search { read() { isStaff() },
                write() { isStaff()} }
 
-//schools public data
-path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
 
+//Applications
+path /applications/{id} is Application {  read() {    checkAppAccess(id)  }
+                                           write() {    checkAppAccess(id)  }  }
 
-path /applications/{id} is Application {  read() {    checkAppAccess(id)  }}
-path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
-                                write() {auth.uid == newData.child('user_id').val()}
-                                }
+// path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
+//                                 write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
+//                                 }
+                                
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
                                 }                                
 path /applications/{id}/meta  { read() {  isStaff() }  
-                                write() { isStaffAppAdmin()}
+                                write() {  checkAppAccess(id) }
                                 }                                
 path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
                                  write() {auth.uid == data.parent().child('for').child('user_id').val()} }
@@ -127,16 +134,14 @@ belongsToUser() { auth != null && auth.uid == data.child('user_id').val()  }
 isStaff() {  
   root.profiles[auth.uid].com.current_location_id != null &&
 
-  root.locations[ root.profiles[auth.uid].com.current_location_id   ]
+  root.locations[ root.profiles[auth.uid].com.current_location_id + ''  ]
       .current_staff_index[ auth.uid ] != null 
   }
 
 //Can this user access Staff Applications at this location? 
-isStaffAppAdmin() { 
-  root.profiles[auth.uid].com.current_location_id != null &&
-
-  root.locations[ root.profiles[auth.uid].com.current_location_id ]
-      .perms['access_staff_apps'][ auth.uid ] != null }
+isStaffAppAdmin(location_id) {  
+    prior(root.locations[location_id].perms.access_staff_apps[ auth.uid ] ) != null 
+        }
 
 // Is this user a school admin of this school?
 isSchoolAdmin(school_id) { root.schools[school_id].admin[auth.uid] != null }
@@ -146,11 +151,12 @@ isSchoolStaff(school_id) { root.schools[school_id].staff[auth.uid] != null }
 
 
 checkAppAccess(appID){ 
-root.applications[appID].child('for').child('staff_location_id').val() != null
-&& isStaffAppAdmin() 
+//checking if the app is for staff at a location and if this user is isStaffAppAdmin()
+// to make sure it is a string adding this:  + '' 
+isStaffAppAdmin( root.applications[appID].for.staff_location_id + '' )
+ //or we check if they are a school admin
 ||
-isSchoolAdmin(  root.applications[appID].child('for').child('school_id').val()) 
-
+isSchoolAdmin(  root.applications[appID].for.school_id + '' ) 
 }
 
 canAccessPaypalTransactions(location_id){
@@ -164,7 +170,7 @@ canEditLocationVisaReq(location_id){
 //Can Edit Translation phrases
 canEditPhrases(){
    root.profiles[auth.uid].com.current_location_id != null && // check for location
-   root.locations[ root.profiles[auth.uid].com.current_location_id  ] // use location
+   root.locations[ root.profiles[auth.uid].com.current_location_id + ''  ] // use location
         .perms['access_translation'][auth.uid] != null
   }
 

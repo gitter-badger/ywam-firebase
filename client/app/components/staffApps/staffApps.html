@@ -2,15 +2,28 @@
 
 <div flex  flex-offset-gt-md="10" flex-gt-md="80">
 
+
+<md-card ng-show="$ctrl.selected.length">
+  <md-card-content>
+    Actions for selected:<br>
+    <div ng-repeat="loc in $ctrl.locations">
+        <a ng-click="$ctrl.transferSelected(loc.id)"> transfer to {{loc.name}}</a>
+    </div>
+
+  </md-card-content>
+</md-card>
+
+
 <md-card >
 
 <div layout="row">
 <div>
 
-<md-toolbar class="md-table-toolbar md-default" ng-hide="$ctrl.selected.length">
+<md-toolbar class="md-table-toolbar md-default" >
   <div class="md-toolbar-tools">
-    <span>Staff</span>
-
+   
+    <span ng-hide="$ctrl.selected.length"> Staff</span>
+    <span ng-show="$ctrl.selected.length">{{$ctrl.selected.length}} Staff{{$ctrl.selected.length > 1 ? 's':''}}  selected</span>
 
 
 
@@ -40,19 +53,9 @@
   <a  style="margin:0; cursor:pointer " ng-click="item.active = !item.active "  > {{item.active? 'hide':'show' }} {{item.text}} </a>
 
 </div>
+
 </div>
 </div>
-
-<md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.selected.length" >
- 
-  <div class="md-toolbar-tools" layout="row">
-    <div>{{$ctrl.selected.length}} staff{{$ctrl.selected.length > 1 ? 's':''}}  selected</div>
-    
-
-
-
-  </div>
-</md-toolbar>
 <!--{{$ctrl.apps}}-->
   <md-table-container>
   <table md-table md-row-select multiple ng-model="$ctrl.selected"  md-progress="$ctrl.loading_promise">
@@ -82,6 +85,9 @@
 
 
 </md-card>
+
+
+
 
 
 </div>
