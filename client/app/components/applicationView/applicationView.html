@@ -70,20 +70,8 @@ visa status<br>
 <md-card id="adminNote">
 <md-card-content>
 
+<app-admin-notes app-id="$ctrl.app_id"></app-admin-notes>
 
-<div ng-repeat="(key,note) in $ctrl.app.admin_notes " > 
-<div  style="color:grey; float:right; " >- {{note.user_id}} {{note.Author.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
-<i class="fa fa-times no-print" ng-click="$ctrl.deleteAdminNote(key)"></i>  </div>  
-{{note.text}} 
-
-<md-divider> </md-divider>
-</div>
-<form ng-submit="$ctrl.addAdminNote()" layout="row" class="no-print">
-<md-input-container md-no-float flex class="no-md-error" style="margin:0px">
-<input  ng-model="$ctrl.new_admin_note" placeholder="New admin note..." autocomplete="off">
-</md-input-container>
-<md-button  class="md-primary " style=" padding:0px" type="submit">add</md-button>
-</form>
 </md-card-content>
 </md-card>
 <!--End of Admin Notes Section-->

@@ -3,13 +3,10 @@ class ApplicationViewController {
   constructor($stateParams, $firebaseObject,$timeout, $document,Auth) {
    var ctrl = this;
        ctrl.calculateAge = calculateAge
-       ctrl.addAdminNote = addAdminNote
-       ctrl.deleteAdminNote = deleteAdminNote
        ctrl.languages = {}
-      
-
-    var app_id = $stateParams.app_id;
-    var appRef = firebase.database().ref('applications').child(app_id)
+       ctrl.app_id = $stateParams.app_id;
+  
+    var appRef = firebase.database().ref('applications').child(ctrl.app_id)
     ctrl.app = $firebaseObject(appRef);
 
     appRef.on('value',function(snap){
@@ -44,20 +41,6 @@ class ApplicationViewController {
             return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
    
-function addAdminNote(){
-    var user_id = Auth.$getAuth().uid;
-    var adminNote ={ text: ctrl.new_admin_note,
-                     time: firebase.database.ServerValue.TIMESTAMP,
-                     user_id: user_id,
-                    }
-    var newKey=  appRef.child('admin_notes').push(adminNote)//push(adminNote);
-        ctrl.new_admin_note = '';
-}
-
-function deleteAdminNote(id){
-  console.log(id)
-   appRef.child('admin_notes').child(id).remove();
-}
 
 
   }
