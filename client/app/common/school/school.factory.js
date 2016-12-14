@@ -1,10 +1,11 @@
 /* @ngInject */
-let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray) {
+let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment) {
   const school = {
     apps : {},
-    staff:{}
+    staff:{},
+    stats: {started_week:[]}
   };
-
+  const stats = {started_week:[]}
 let getApps = (school_id, accepted_only ) => {
         console.log('calling getApps for '+school_id)
      
@@ -13,16 +14,24 @@ let getApps = (school_id, accepted_only ) => {
       var appIndexRef = firebase.database().ref('/schools/'+school_id +'/app_index')
           appIndexRef.on('value', function(indexSnap){
 
+ //console.log(indexSnap.numChildren())
+             
             indexSnap.forEach(function(appSnap){
-                if(!accepted_only || appSnap.val() >= 13 ){
+                  
+               if(!accepted_only || appSnap.val() >= 13 ){
                   var data = {id: appSnap.key }
                   var index =  school.apps.push(data)
                       index--
-                    // console.log(index)
+                  
                     getAppFor(index)
                     getAppMeta(index)
 
-                }//end if accepted only 
+                    // if(index ==  indexSnap.numChildren()){
+                    //   console.log('this is the last ')
+
+                    // }
+
+               }//end if accepted only 
             })//end foreach appindex  
           })//end on value 
        
@@ -33,8 +42,12 @@ let getApps = (school_id, accepted_only ) => {
             //  console.log('looking up app/for node : '+ appId)
               
               firebase.database().ref('/applications').child(appId).child('for').on('value', function(appForSnap) {
-                          school.apps[index].for = appForSnap.val()
-                          getProfileCom(appForSnap.val().user_id,index)
+                        if(appForSnap.val()){
+                         school.apps[index].for = appForSnap.val()
+                         getProfileCom(appForSnap.val().user_id,index)
+                        }else{
+                          console.error('no Application actually found for this index')
+                        }
                 } )//end on value
             
       }     
@@ -43,9 +56,17 @@ let getApps = (school_id, accepted_only ) => {
                var appId =  school.apps[index].id
                 //  console.log('looking up app/meta node : '+ appId)
             var appMeta  =    firebase.database().ref('/applications').child(appId).child('meta')//.on('value', function(appMetaSnap) {
-                      school.apps[index].meta = $firebaseObject(appMeta)
-                    //  console.log( school.apps[index].meta)
-                 //   })
+                 school.apps[index].meta = $firebaseObject(appMeta)
+              //   appMeta.once('value', appMetaSnap =>{
+                 
+              //    if(appMetaSnap.val()){
+              //     school.apps[index].meta = appMetaSnap.val()
+
+              //  }
+
+
+              //   })     
+                     
       }
 
       function getProfileCom(user_id, index){

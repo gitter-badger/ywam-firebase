@@ -2,6 +2,10 @@ path / {read(){ false}
         write(){false}
         }
 
+path /locations_private {read(){ false}
+                         write(){false}
+                         }        
+
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
 
@@ -29,13 +33,24 @@ path /search { read() { isStaff() },
 path /applications/{id} is Application {  read() {    checkAppAccess(id)  }
                                            write() {    checkAppAccess(id)  }  }
 
-// path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
-//                                 write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
-//                                 }
+path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
+                                write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
+                                }
                                 
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
-                                }                                
+                                }   
+path /applications/{id}/reference1/user  {  
+                                  write() {auth.uid == root.applications[id].for.user_id}
+                                  read() {auth.uid == root.applications[id].for.user_id}
+                                }  
+// path /applications/{id}/reference1/name  {  
+//                                   write() {auth.uid == root.applications[id].for.user_id}
+//                                 }                                      
+// path /applications/{id}/reference1/relation  {  
+//                                   write() {auth.uid == root.applications[id].for.user_id}
+//                                 }  
+
 path /applications/{id}/meta  { read() {  isStaff() }  
                                 write() {  checkAppAccess(id) }
                                 }                                
@@ -153,6 +168,7 @@ isSchoolStaff(school_id) { root.schools[school_id].staff[auth.uid] != null }
 checkAppAccess(appID){ 
 //checking if the app is for staff at a location and if this user is isStaffAppAdmin()
 // to make sure it is a string adding this:  + '' 
+root.applications[appID].for.staff_location_id != null &&
 isStaffAppAdmin( root.applications[appID].for.staff_location_id + '' )
  //or we check if they are a school admin
 ||

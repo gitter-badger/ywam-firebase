@@ -1,0 +1,32 @@
+<div layout="row" layout-xs="column" >
+<div flex>
+<b>Contact:</b> <br>
+Email: {{$ctrl.user.com.email}}<br>
+Skype: {{$ctrl.user.com.skype}}<br>
+Home Phone: {{$ctrl.user.com.home_phone}}<br>
+Mobile: {{$ctrl.user.com.mobile_phone}}<br>
+
+Address: {{$ctrl.user.postal.address}}<br>
+City: {{$ctrl.user.postal.city}}<br>
+State: {{$ctrl.user.postal.state}}<br>
+Zip: {{$ctrl.user.postal.zip}}<br>
+Nation: {{$ctrl.user.postal.nation_id}}
+
+</div>
+<div flex style="background-color: rgba(255,0,0,0.1)">
+<b>Emergency Contact:</b><br>
+{{$ctrl.user.emergency_contact.name}} ({{$ctrl.user.emergency_contact.relation}})<br>
+Email: {{$ctrl.user.emergency_contact.email}}<br>
+Skype: {{$ctrl.user.emergency_contact.skype}}<br>
+Phone: {{$ctrl.user.emergency_contact.phone}}<br>
+Phone2: {{$ctrl.user.emergency_contact.phone2}}<br>
+
+
+Address: {{$ctrl.user.emergency_contact.address}}<br>
+City: {{$ctrl.user.emergency_contact.city}}<br>
+State: {{$ctrl.user.emergency_contact.state}}<br>
+Zip: {{$ctrl.user.emergency_contact.zip}}<br>
+Nation: {{$ctrl.user.emergency_contact.nation_id}}
+ 
+</div>
+</div>

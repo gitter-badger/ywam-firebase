@@ -12,6 +12,10 @@ require('angular-material/angular-material.css');
 import DataTable from 'angular-material-data-table';
 require('angular-material-data-table/dist/md-data-table.css')
 
+
+import 'chart.js'
+import 'angular-chart.js'
+
 //Font Awsome
 // require('font-awesome/css/font-awesome.css');
 require("font-awesome-webpack");
@@ -48,6 +52,7 @@ angular.module('app', [
     DataTable,
     'pascalprecht.translate',//ngTranslate
     'firebase',
+     'chart.js',
     Common,
     Components
   ])

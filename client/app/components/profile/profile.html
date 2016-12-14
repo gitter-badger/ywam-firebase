@@ -40,39 +40,7 @@
 </div>
 
 <div>
-
-  <br>
-<div layout="row" layout-xs="column" >
-<div flex>
-<b>Contact:</b> <br>
-Email: {{$ctrl.profile.com.email}}<br>
-Skype: {{$ctrl.profile.com.skype}}<br>
-Home Phone: {{$ctrl.profile.com.home_phone}}<br>
-Mobile: {{$ctrl.profile.com.mobile_phone}}<br>
-
-Address: {{$ctrl.profile.com.postal.address}}<br>
-City: {{$ctrl.profile.com.postal.city}}<br>
-State: {{$ctrl.profile.com.postal.state}}<br>
-Zip: {{$ctrl.profile.com.postal.zip}}<br>
-Nation: {{$ctrl.profile.com.postal.nation_id}}
-
-</div>
-<div flex style="background-color: rgba(255,0,0,0.1)">
-<b>Emergency Contact:</b><br>
-{{$ctrl.profile.com.emergency_contact.name}} ({{$ctrl.profile.com.emergency_contact.relation}})<br>
-Email: {{$ctrl.profile.com.emergency_contact.email}}<br>
-Skype: {{$ctrl.profile.com.emergency_contact.skype}}<br>
-Phone: {{$ctrl.profile.com.emergency_contact.phone}}<br>
-Phone2: {{$ctrl.profile.com.emergency_contact.phone2}}<br>
-
-
-Address: {{$ctrl.profile.com.emergency_contact.address}}<br>
-City: {{$ctrl.profile.com.emergency_contact.city}}<br>
-State: {{$ctrl.profile.com.emergency_contact.state}}<br>
-Zip: {{$ctrl.profile.com.emergency_contact.zip}}<br>
-Nation: {{$ctrl.profile.com.emergency_contact.nation_id}}
- 
-</div>
+<contact-info user-id="$ctrl.profile.$id" ng-if="$ctrl.profile.$id"></contact-info>
 </div>
 <div> 
 Applications:

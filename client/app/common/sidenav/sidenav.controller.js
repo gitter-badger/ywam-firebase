@@ -119,7 +119,7 @@ class SidenavController {
          var index = ctrl.nav.indexOf(nav[0])
       if(ctrl.nav[index])
        ctrl.nav[index].active = true
-       console.log(ctrl.nav[index])
+       //console.log(ctrl.nav[index])
       })
 
 //little function to do the navigation from sidebar clicks, it will take care of closing the sidebar on mobile.

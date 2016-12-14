@@ -11,9 +11,10 @@ class SchoolsPageController {
           ctrl.$mdMedia = $mdMedia
       
        ref.on('value', function(snapshot) {
+            console.log('got school index')
             ctrl.schools = []
             angular.forEach(snapshot.val(), function(value, key){
-              
+                console.log('looking up'+ key)
               firebase.database().ref('/schools/'+key )
                   .on('value',function(snapshot) {
 
@@ -37,7 +38,8 @@ class SchoolsPageController {
                               //  console.log(ctrl.schools)
                     });//end on value
             });//end for each
-      });// end on value
+      },function(error){console.error(error)}
+      );// end on value
           
   }
 }

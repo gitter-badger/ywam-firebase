@@ -1,0 +1,57 @@
+
+  <md-toolbar class="md-menu-toolbar">
+    <div layout="row">
+      <md-toolbar-filler layout layout-align="center center">
+        <md-icon class="fa fa-comment"></md-icon>
+      </md-toolbar-filler>
+      <div>
+        <h2 class="md-toolbar-tools">Reference {{r.ref_num}}</h2>
+        <md-menu-bar>
+          
+          <md-menu>
+            <button ng-click="$mdOpenMenu()">
+              Edit
+            </button>
+            <md-menu-content>
+              <md-menu-item class="md-indent">
+                <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
+                  Find and replace...
+                  <!-- <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> -->
+                </md-button>
+              </md-menu-item>
+            </md-menu-content>
+          </md-menu>
+         
+        </md-menu-bar>
+      </div>
+    </div>
+  </md-toolbar>
+
+
+
+<p>
+  <span class="question">How well does reference know Applicant?:</span><br>
+  {{$ctrl.data.form.how_well}}</p>
+
+<p><span class="question">Does Reference think applicant is Christian?:</span><br>
+{{$ctrl.data.form.christian}}</p>
+
+<p><span class="question">Family Relations:</span><br>
+{{$ctrl.data.form.family}}</p>
+
+<p><span class="question">Response to conflict?:</span><br>
+{{$ctrl.data.form.conflict}}</p>
+
+<p><span class="question">Involvement with Church:</span><br>
+{{$ctrl.data.form.church_life}}</p>
+
+<p><span class="question">Weaknesses:</span><br>
+{{$ctrl.data.form.weakness}}</p>
+
+<p><span class="question">Strengths:</span><br>
+{{$ctrl.data.form.strengths}}</p>
+
+<p ng-if="$ctrl.data.form.other"><span class="question">Other Notes:</span><br>
+{{$ctrl.data.form.other}}</p>
+
+ 

@@ -7,6 +7,7 @@ class TranslateSectionController {
        
         ctrl.next = next;
         ctrl.saveEnglish =saveEnglish
+        ctrl.saveToLanguage = saveToLanguage
         ctrl.newPhrase = newPhrase
 
 
@@ -52,31 +53,38 @@ class TranslateSectionController {
 
         }
 
+        function saveToLanguage(){
+
+                var translation =  ctrl.phrases[ctrl.lang][ctrl.index]
+                            translation = htmlToPlaintext(translation)
+                        console.log(translation);
+
+                        console.log('Section: '+ ctrl.section+' Language: '+ctrl.lang + ' Key: '+ctrl.index)
+
+                        if(translation){
+                        firebase.database().ref('/phrases/').child(ctrl.section).child(ctrl.lang).child(ctrl.index).set(translation);
+                        } else{
+                            console.log('removing empty phrase'+ ctrl.index)
+                            firebase.database().ref('/phrases/').child(ctrl.section).child(ctrl.lang).child(ctrl.index).remove();
+                        }
+        }    
+
+
+
         function htmlToPlaintext(text) {
         return text ? String(text).replace(/<[^>]+>/gm, '') : '';
         }
 
         function  next() {
             
-    
+            saveToLanguage()
          
             var loc = ctrl.keys.indexOf(ctrl.index);
 
            var next_index =  ctrl.keys[loc+1]
             console.log(next_index)
 
-           var translation =  ctrl.phrases[ctrl.lang][ctrl.index]
-               translation = htmlToPlaintext(translation)
-           console.log(translation);
-
-           console.log('Section: '+ ctrl.section+' Language: '+ctrl.lang + ' Key: '+ctrl.index)
-
-           if(translation){
-           firebase.database().ref('/phrases/').child(ctrl.section).child(ctrl.lang).child(ctrl.index).set(translation);
-           } else{
-             console.log('removing empty phrase'+ ctrl.index)
-            firebase.database().ref('/phrases/').child(ctrl.section).child(ctrl.lang).child(ctrl.index).remove();
-           }
+         
          
            ctrl.index = next_index
 

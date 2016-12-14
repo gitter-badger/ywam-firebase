@@ -42,6 +42,7 @@ code {
 
 <md-card flex-gt-md="75" flex>
 <md-card-content>
+   Permission needed to change things here: <a ui-sref="base.permissions">"access_translation"</a>
 <div layout="row">
  <div flex style=" padding: 7px;">  
 Context: {{$ctrl.phrases.meta}}
@@ -82,6 +83,7 @@ Context: {{$ctrl.phrases.meta}}
 <div  class="tranto edit"
       id="tranto"
       contenteditable
+     ng-change="$ctrl.saveToLanguage()"
       ng-model="$ctrl.phrases[$ctrl.lang][$ctrl.index]"
      ></div>
  </div>
@@ -90,12 +92,14 @@ Context: {{$ctrl.phrases.meta}}
 
 <div layout="row">
   <md-button class="" ng-click="$ctrl.newPhrase()">New Phrase</md-button>
-  <span ng-show="$ctrl.index" style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code ></span>
+  <span ng-show="$ctrl.index" style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code > <br><a ng-click="$ctrl.alternitive = !$ctrl.alternitive">alternitive</a> </span>
   <!--<input ng-model="$ctrl.new" />-->
   <span flex></span>
 <md-button class="md-primary md-raised " ng-click="$ctrl.next()" ng-show="$ctrl.index">Next</md-button>
 </div>
-
+<div ng-show="$ctrl.alternitive"  style="padding:15px; color:gray">
+<code >&#60;span translate="{{ $ctrl.index }}">{{$ctrl.phrases.en[$ctrl.index]}}&#60;/span>   </code >
+</div>  
 <br>
 <br>
 

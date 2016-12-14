@@ -1,8 +1,8 @@
 
 
-<div ng-repeat="(key,note) in $ctrl.notes " > 
+<div ng-repeat="note in $ctrl.notes " > 
 <div  style="color:grey; float:right; " >- {{note.user.first_name}} {{note.user.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
-<i class="fa fa-times no-print" ng-click="$ctrl.deleteAdminNote(key)"></i>  </div>  
+<i class="fa fa-times no-print" ng-click="$ctrl.deleteAdminNote(note.$id)"></i>  </div>  
 {{note.text}} 
 
 <md-divider> </md-divider>

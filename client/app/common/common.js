@@ -13,6 +13,9 @@ import LoginDialog from './loginDialog/loginDialog';
 
 import appStatus from './appStatus/appStatus';
 import appAdminNotes from './appAdminNotes/appAdminNotes';
+import referenceDisplay from './referenceDisplay/referenceDisplay';
+
+import contactInfo from './contactInfo/contactInfo';
 
 
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
@@ -34,6 +37,8 @@ let commonModule = angular.module('app.common', [
 
   appStatus,
   appAdminNotes,
+  contactInfo,
+  referenceDisplay,
 
   userPhotoUpload,
   roleCallsList,
