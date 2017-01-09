@@ -21,16 +21,22 @@ class SchoolsPageController {
                     var school =  $filter('filter')(ctrl.schools, {id: key}, true);
                     var index = ctrl.schools.indexOf(school[0])
                         //since a school could update value at any time..we make sure to add it to the already existing school in array instead of pushing a new one in. 
+                       
 
                                 // trigger $digest/$apply so Angular syncs the DOM
                               $timeout(function() {
                                 if( snapshot.val() != null )  {
                                    var data = snapshot.val();
                                       data.id = key;
+
+                                      
+
                                        if(index >-1){
                                         ctrl.schools[index] = data 
                                        }else
                                       ctrl.schools.push(data );
+
+                                      getLeaders(index,data) 
                                     }
                                // else { delete ctrl.schools[key] }
                                 });
@@ -40,7 +46,16 @@ class SchoolsPageController {
             });//end for each
       },function(error){console.error(error)}
       );// end on value
-          
+
+
+function getLeaders(index,school){
+
+  console.log(school.leaders)
+//ctrl.schools[index].
+
+}
+
+
   }
 }
 

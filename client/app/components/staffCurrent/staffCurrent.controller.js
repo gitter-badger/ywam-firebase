@@ -1,8 +1,9 @@
 class StaffCurrentController {
    /* @ngInject */
-  constructor(Site, $firebaseArray, $timeout,$filter) {
+  constructor(Site, $firebaseArray, $timeout,$filter,$mdMedia) {
     var ctrl = this;
         ctrl.staff = []
+        ctrl.getAvatar = getAvatar
 
     var Ref = firebase.database().ref('locations/'+Site.location_id).child('current_staff_index')
 
@@ -16,21 +17,16 @@ class StaffCurrentController {
                                          .on('value',function(snapshot) { 
                                             
                                             if(snapshot.val() != null){
-                                            
-                                            //  var item =  $filter('filter')(ctrl.staff, {id: snapshot.key}, true);
-                                            // var index = ctrl.staff.indexOf(item[0])
-                                         
 
-                                          $timeout(function() {  
+
+                                         
                                             var data = snapshot.val()
                                                 data.id = user_id;
-                                          //  if(index >-1)    
-                                          //  ctrl.staff[index] =data;
-                                          //  else
-                                           ctrl.staff.push(data);
-                                            // trigger $digest/$apply so Angular syncs the DOM
+
+                                           var index =  ctrl.staff.push(data);
+                                           getAvatar(index)
                                            
-                                            });
+                                           
                                             }
                                          },function(error){console.error(error)})  
 
@@ -39,7 +35,10 @@ class StaffCurrentController {
                 },function(error){console.error(error)});
 
 
-  ctrl.photo_size = 150;
+        ctrl.photo_size = 150;
+        if($mdMedia('xs'))
+        ctrl.photo_size = 90;
+
 ctrl.print = print;
 
   function print(size) {
@@ -50,6 +49,22 @@ ctrl.print = print;
 
             
         }
+    function getAvatar(index){
+      //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
+          //this can be changed till then:
+        var index = index - 1
+          // console.log(ctrl.staff[index])
+            var av =   ctrl.staff[index].avatar_200
+
+              
+              firebase.storage().refFromURL(av)
+              .getDownloadURL().then(function(url){
+               $timeout(function(){})
+               ctrl.staff[index].avatar =  url 
+                }).catch(function(error){console.log('not valid file')})
+          
+    }
+
 
 }
 }

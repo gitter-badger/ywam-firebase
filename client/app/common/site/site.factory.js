@@ -3,7 +3,9 @@
 let SiteFactory = function (Auth, $timeout, $firebaseObject) {
 
   const site = { location_id: null,
-                 user: {}
+                 location : {} ,
+                 user: {},
+               
 
                 };
 
@@ -15,7 +17,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject) {
              var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/com' )
                site.user.com = $firebaseObject(Ref);
                site.user.id = firebaseUser.uid;
-               console.log('we have changed user'+firebaseUser.uid )
+               console.log('we have changed user '+firebaseUser.uid )
             //  $timeout(function(){            })
            }   
           });         
@@ -23,18 +25,11 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject) {
 
         var connectedRef = firebase.database().ref(".info/connected");
              site.presence = $firebaseObject(connectedRef)
-             
-              // connectedRef.on("value", function(snap) {
-              //   console.log(snap.val())
-              //   if (snap.val() === true) {
-              //     site.presence = "connected";
-                   
-              //   } else {
-              //     site.presence ="not connected";
-                 
-              //   }
-              //    $timeout(function(){            })
-              // });
+
+   
+  
+
+
 
 
   return site

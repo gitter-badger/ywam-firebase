@@ -72,9 +72,9 @@ class SidenavController {
     // state: 'app.nations',
     // fa_icon:'icon-globe'},
 
-    // {title: 'Projects',
-    // state: 'app.projects',
-    // fa_icon:'fa fa-star-o'},
+    {title: 'Projects',
+    state: 'projects',
+    fa_icon:'fa fa-star-o'},
 
     //   {title: 'Updates',
     // state: 'app.dashboard',

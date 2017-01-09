@@ -1,6 +1,6 @@
 <md-nav-bar md-selected-nav-item="$ctrl.current" nav-bar-aria-label="navigation links" class="no-print">
    
-      <md-nav-item  md-nav-sref="settings.permissions" name="settings.permissions">Permissions</md-nav-item>
+      <!--<md-nav-item  md-nav-sref="settings.permissions" name="settings.permissions">Permissions</md-nav-item>-->
       <!--<md-nav-item  md-nav-sref="staff.alumni" name="staff.alumni">Alumni Staff</md-nav-item>
       <md-nav-item  md-nav-sref="staff.apps" name="staff.apps">Staff Applications</md-nav-item>-->
 
@@ -27,6 +27,19 @@ Current location:
 <input  ng-model="$ctrl.location_id" ng-change="$ctrl.changeLoc()">
 
 </md-card>
+
+
+<md-card>
+<md-card-content>
+
+<site-task-list></site-task-list>
+
+</md-card-content>
+</md-card>      
+
+
+
+
 
 
 </ui-view>

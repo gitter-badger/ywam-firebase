@@ -94,9 +94,11 @@ angular.module('app', [
 
 
   })
-  .run((Site)=>{ //Find location from host names
+  .run((Site,$firebaseObject)=>{ //Find location from host names
      "ngInject";
             Site.location_id  =  Domains[location.hostname]
+        var Ref = firebase.database().ref('locations_public/'+Site.location_id)
+            Site.location = $firebaseObject(Ref)
         if(!Site.location_id)
         console.warn('No location matching domain '+ location.hostname)
   })

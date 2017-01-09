@@ -1,12 +1,13 @@
 class SchoolSettingsController {
   /* @ngInject */
-  constructor(School, $stateParams, $scope , $timeout) {
+  constructor(School, $stateParams, $scope , $timeout, Site) {
     var ctrl = this;
         ctrl.savePhoto = savePhoto
         ctrl.toggle_mini_outreach  = toggle_mini_outreach
         ctrl.toggle_outreach  = toggle_outreach
         ctrl.myImage= '';//$firebaseObject(avatar_ref)
         ctrl.myCroppedImage='';
+        ctrl.location = Site.location
        
 
     var school_id = $stateParams.school_id
@@ -42,7 +43,7 @@ class SchoolSettingsController {
 
         function savePhoto(){
     
-      ctrl.upload_progress = 15
+     ctrl.upload_progress = 1
 
         // Create a root reference
       var storageRef = firebase.storage().ref('/schools_public/'+school_id);

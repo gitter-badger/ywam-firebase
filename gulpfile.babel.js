@@ -105,7 +105,7 @@ gulp.task('serve', () => {
   var compiler = webpack(config);
 
   serve({
-    port: process.env.PORT || 3002,
+    port: process.env.PORT || 3020,
     open: false,
     server: {baseDir: root},
     middleware: [

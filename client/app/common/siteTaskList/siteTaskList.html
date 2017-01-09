@@ -1,0 +1,34 @@
+
+
+
+<div layout="row">
+<div flex> reference</div>
+<div flex> function</div>
+<div flex="10">Status</div>
+<div flex="15">Time</div>
+</div>
+
+<div  ng-repeat="item in $ctrl.tasks | orderBy: 'status'">
+<div layout="row">  
+  <div flex>{{item.reference}}</div>
+   <div flex>{{item.function}}</div>
+    <div flex="10">
+      {{item.status ==0 ? 'pending':'' }}
+      {{item.status ==1 ? 'working':'' }}
+      {{item.status ==2 ? 'completed':'' }}</div>
+     <div flex="15">
+       <span ng-if="!item.completed_time">
+      created {{item.created_time}}
+       </span>
+      <span ng-if="item.completed_time">
+     
+      {{item.completed_time | amDifference : item.created_time : 'seconds': true }} seconds
+
+      </span>
+
+       </div>
+</div>
+<span style="color:red">
+{{item.error}}
+</span>
+</div>

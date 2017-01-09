@@ -32,6 +32,8 @@ class RoleCallsListController {
                   firebase.database().ref('applications').child(snap.key).child('for/user_id')
                   .once('value',function(snap){
                     var user_id = snap.val()
+                    console.log(user_id)
+                    if(user_id){
                      firebase.database().ref('profiles').child(user_id).child('com').once('value', function(snap){
                      //add user to members list for RoleCall 
                      var user = snap.val()
@@ -40,6 +42,7 @@ class RoleCallsListController {
                 
 
                      })
+                    }//end if
                    
               
                 })

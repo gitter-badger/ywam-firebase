@@ -21,6 +21,8 @@ path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
 //schools public data
 path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
 
+path /system/tasks { read() { isStaff() }
+                    index() = ["ref_fun","status"]}
 
 path /prayers { read() { isStaff() },
                 write() { isStaff() }  }
@@ -80,8 +82,12 @@ type Profile {
     com: Object
     health: Object | Null
     passport: Object | Null
+    postal: Object | Null
     oldID: String | Null
     modified: Number | Null
+    emergency_contact: Object | Null
+    basic: Object | Null
+    avatars: Object | Null
 
 }
 path /profiles/{id}/com is ProfileCom { read() {isStaff() }}
@@ -90,21 +96,19 @@ type ProfileCom {
     avatar_1080: String | Null
     avatar_200: String | Null
     avatar_640: String | Null
+    current_avatar_id : String | Null
     current_location_id: String | Null
     dob: String | Null
     dts: Object | Null
     education: String | Null
     email: String | Null
-    emergency_contact: Object | Null
     first_name : String | Null
     gender: String | Null
     home_phone: String | Null
-    languages: Object | Null
     last_name : String | Null
     marital_status: String | Null
     mobile_phone: String | Null
     occupations: String | Null
-    postal: Object | Null
     skype: String | Null
     ywam_experience: String | Null
 

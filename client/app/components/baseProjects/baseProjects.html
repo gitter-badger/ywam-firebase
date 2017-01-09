@@ -1,0 +1,38 @@
+
+<div layout="row" layout-align="center"> 
+
+<md-card flex="75">
+<md-card-content>
+Base Projects:
+
+<div ng-repeat="(key,item) in $ctrl.projects">
+  <h1>{{item.name}} :</h1> 
+  <div>
+    <b layout="row">
+      <div flex >Task </div>
+      <div flex> Cost</div>
+      <div flex> Fund</div>
+      <div flex> Approved by</div>
+      <div flex> Status</div>
+      </b>
+      <md-divider></md-divider>
+
+  <div ng-repeat="task in item.tasks" >
+    <div layout="row">
+    <div flex>{{task.name}}</div>
+    <div flex>{{task.cost}}</div>
+    <div flex> {{$ctrl.funds[task.fund_id].name}}</div>
+    <div flex> </div>
+    <div flex> Status</div>
+    </div>
+<md-divider></md-divider>
+
+  </div>
+  </div>
+  
+  
+</div>
+</md-card-content>
+<md-card>
+
+</div>

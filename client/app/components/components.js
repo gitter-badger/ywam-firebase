@@ -27,6 +27,8 @@ import baseInfo from './baseInfo/baseInfo';
 import baseNotices from './baseNotices/baseNotices';
 import basePermissions from './basePermissions/basePermissions';
 import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
+import baseProjects from './baseProjects/baseProjects';
+
 
 import Search from './search/search';
 import profile from './profile/profile';
@@ -66,6 +68,7 @@ let componentModule = angular.module('app.components', [
   baseInfo,
   baseNotices,
   basePermissions,
+  baseProjects,
   baseVisaRequirements,
 
   profile

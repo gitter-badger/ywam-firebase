@@ -22,7 +22,7 @@ float:left;
 
 <div flex-gt-xs="75">
 
-<div layout="row" layout-align="center center" >  
+<div layout="row" layout-align="center center" hide-xs >  
 <md-input-container > 
 <input ng-model="$ctrl.search" placeholder="filter">
 </md-input-container>
@@ -34,7 +34,7 @@ float:left;
 
 </div>
 
-<div hide-xs>
+<div >
 
 <canvas  class="chart chart-line"  style="height:75px"
   chart-data="$ctrl.data" chart-labels="$ctrl.labels" 

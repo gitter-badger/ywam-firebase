@@ -17,6 +17,7 @@ import referenceDisplay from './referenceDisplay/referenceDisplay';
 
 import contactInfo from './contactInfo/contactInfo';
 
+import siteTaskList from './siteTaskList/siteTaskList';
 
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
 import roleCallsList from './roleCallsList/roleCallsList';
@@ -39,6 +40,8 @@ let commonModule = angular.module('app.common', [
   appAdminNotes,
   contactInfo,
   referenceDisplay,
+
+  siteTaskList,
 
   userPhotoUpload,
   roleCallsList,
