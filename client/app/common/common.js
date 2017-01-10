@@ -22,6 +22,7 @@ import siteTaskList from './siteTaskList/siteTaskList';
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
 import roleCallsList from './roleCallsList/roleCallsList';
 import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
+import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 
 let commonModule = angular.module('app.common', [
   // Navbar,
@@ -45,7 +46,10 @@ let commonModule = angular.module('app.common', [
 
   userPhotoUpload,
   roleCallsList,
-  roleCallMemberList
+  roleCallMemberList,
+  baseProjectTaskEdit
+
+
 
 ])
   

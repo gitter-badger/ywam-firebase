@@ -1,10 +1,11 @@
 
 /* @ngInject */
-let SiteFactory = function (Auth, $timeout, $firebaseObject) {
+let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) {
 
   const site = { location_id: null,
                  location : {} ,
                  user: {},
+                 showDialog: showDialog,
                
 
                 };
@@ -27,7 +28,17 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject) {
              site.presence = $firebaseObject(connectedRef)
 
    
-  
+  function showDialog($event, template) {
+       var parentEl = angular.element(document.body);
+       $mdDialog.show({
+         parent: parentEl,
+         targetEvent: $event,
+         clickOutsideToClose:true,
+         fullscreen: $mdMedia('xs'),
+         template,
+         controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
+      });
+    }  
 
 
 

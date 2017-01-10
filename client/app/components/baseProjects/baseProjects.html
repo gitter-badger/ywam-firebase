@@ -3,7 +3,7 @@
 
 <md-card flex="75">
 <md-card-content>
-Base Projects:
+Base Projects: <a> Add Project</a>
 
 <div ng-repeat="(key,item) in $ctrl.projects">
   <h1>{{item.name}} :</h1> 
@@ -17,7 +17,7 @@ Base Projects:
       </b>
       <md-divider></md-divider>
 
-  <div ng-repeat="task in item.tasks" >
+  <div ng-repeat="(tKey , task) in item.tasks" class="row-hover" ng-click="$ctrl.editTask($event, item.$id, tKey )" >
     <div layout="row">
     <div flex>{{task.name}}</div>
     <div flex>{{task.cost}}</div>
@@ -29,6 +29,7 @@ Base Projects:
 
   </div>
   </div>
+  <a ng-click="$ctrl.editTask($event, item.$id )" > Add Task / Item</a>
   
   
 </div>

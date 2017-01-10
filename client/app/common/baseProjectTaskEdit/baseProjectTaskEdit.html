@@ -1,0 +1,11 @@
+<div>
+
+<md-input-container>  
+<label>Name</label>
+<input ng-model="$ctrl.task.name">
+</md-input-container> 
+
+
+<md-button ng-click="$ctrl.save()">   {{ $ctrl.taskId =='undefined'? 'Add':'Update'}} Task </md-button>
+
+</div>

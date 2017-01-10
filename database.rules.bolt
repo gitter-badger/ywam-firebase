@@ -22,7 +22,7 @@ path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
 path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
 
 path /system/tasks { read() { isStaff() }
-                    index() = ["ref_fun","status"]}
+                    index() = ["status"]}
 
 path /prayers { read() { isStaff() },
                 write() { isStaff() }  }
@@ -125,8 +125,8 @@ path /locations/{id} is Location { read() { isStaff() }
 
 
 type Location {
-    id: String,
-    name: String,
+
+    projects: Object | Null,
  //   validate() { this.modified == now }
     
 }
