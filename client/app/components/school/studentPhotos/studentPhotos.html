@@ -81,8 +81,8 @@ float:left;
 <md-card  style="width:{{$ctrl.photo_size}}px;" >  
 <div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
 
-<img ng-src="{{app.user.avatar_200}}" width="100%" >
-
+<img ng-src="{{$ctrl.avatars[app.for.user_id]}}" width="100%" >
+<!--{{$ctrl.getAvatar(app.user.avatar_200)}}-->
 </div>
 
 

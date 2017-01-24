@@ -6,6 +6,8 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
                  location : {} ,
                  user: {},
                  showDialog: showDialog,
+                 getAvatar: getAvatar,
+                 avatars: {}
                
 
                 };
@@ -19,9 +21,12 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
                site.user.com = $firebaseObject(Ref);
                site.user.id = firebaseUser.uid;
                console.log('we have changed user '+firebaseUser.uid )
-            //  $timeout(function(){            })
-           }   
-          });         
+
+                getAvatar(site.user.id)  
+
+
+                }   
+                });         
         
 
         var connectedRef = firebase.database().ref(".info/connected");
@@ -38,7 +43,47 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
          template,
          controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
       });
-    }  
+    } 
+
+
+
+    function getAvatar(user_id){
+      //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
+          //this can be changed till then:
+         
+
+       if(user_id){
+              firebase.database().ref('/profiles/'+ user_id +'/com').once('value',function(snap){
+                var com = snap.val()
+                
+            if(com){
+              
+              if(com.avatar_200.includes("http")){
+                site.avatars[user_id] = com.avatar_200 
+              }else {//else get firebase file
+
+            firebase.storage().refFromURL(com.avatar_200)
+              .getDownloadURL().then(function(url){
+               
+
+                site.avatars[user_id] = url 
+                $timeout(function(){})
+                }).catch(function(error){console.log('not valid file'+error)})
+            }
+
+
+              }
+
+              
+              
+            
+              
+
+              })
+
+            
+       } 
+    } 
 
 
 

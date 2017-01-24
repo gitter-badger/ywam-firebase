@@ -29,6 +29,7 @@ class StudentListController {
      ctrl.statuses[11].active = true;
      ctrl.statuses[13].active = true;
      ctrl.statuses[30].active = true;
+     
       function filterList(item){
           var show = false;
          if(ctrl.statuses[item.meta.status] && ctrl.statuses[item.meta.status].active)

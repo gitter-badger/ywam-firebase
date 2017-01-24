@@ -16,6 +16,7 @@ import appAdminNotes from './appAdminNotes/appAdminNotes';
 import referenceDisplay from './referenceDisplay/referenceDisplay';
 
 import contactInfo from './contactInfo/contactInfo';
+import healthInfo from './healthInfo/healthInfo';
 
 import siteTaskList from './siteTaskList/siteTaskList';
 
@@ -40,6 +41,7 @@ let commonModule = angular.module('app.common', [
   appStatus,
   appAdminNotes,
   contactInfo,
+  healthInfo,
   referenceDisplay,
 
   siteTaskList,

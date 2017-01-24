@@ -1,0 +1,8 @@
+<h1 class="md-title">Health Information</h1>
+<u>Health Conditions?:</u> {{$ctrl.health.conditions}}<br>
+<u>Physical Disability?:</u> {{$ctrl.health.physical_disability}}<br>
+<u>On Medication?:</u> {{$ctrl.health.on_medication}} ( {{$ctrl.health.medications}} )<br>
+<u>Allergies?:</u> 
+
+
+<span ng-repeat="(key ,item) in $ctrl.health.allergies "> {{key}}, </span>{{$ctrl.health.other_allergies}}

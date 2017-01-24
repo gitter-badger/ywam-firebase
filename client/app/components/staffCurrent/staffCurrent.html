@@ -20,7 +20,7 @@ float:left;
 
 <div layout="row" layout-wrap layout-align="center">
 
-<div flex-gt-xs="75" flex>
+<div flex-gt-sm="75" flex-xs="100">
 
 <div layout="row" layout-align="center center" class="no-print" >  
 <md-input-container  style=""> 
@@ -32,7 +32,8 @@ float:left;
 <md-slider   flex min="90" max="200" ng-model="$ctrl.photo_size" aria-label="photo size" >
 
 </div>
-
+{{$ctrl.photo_size}}
+<a ng-click="$ctrl.photo_size = 110 " >print size</a>
 <!--
  <md-menu>
       <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">

@@ -1,5 +1,5 @@
 /* @ngInject */
-let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment) {
+let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment, Site) {
   const school = {
     apps : {},
     staff:{},
@@ -45,8 +45,9 @@ let getApps = (school_id, accepted_only ) => {
                         if(appForSnap.val()){
                          school.apps[index].for = appForSnap.val()
                          getProfileCom(appForSnap.val().user_id,index)
+                         
                         }else{
-                          console.error('no Application actually found for this index')
+                          console.error('no Application actually found for this index'+ appId)
                         }
                 } )//end on value
             
@@ -70,6 +71,8 @@ let getApps = (school_id, accepted_only ) => {
       }
 
       function getProfileCom(user_id, index){
+                      //get avatar as well
+                      Site.getAvatar(user_id)
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
                        school.apps[index].user = $firebaseObject(userRef)
                                                 // .on('value',function(snapshot) { 

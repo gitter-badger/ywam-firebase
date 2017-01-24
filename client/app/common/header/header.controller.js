@@ -9,12 +9,17 @@ class HeaderController {
           }
           ctrl.user = Site.user
           ctrl.presence = Site.presence
+          ctrl.avatars = Site.avatars
+       
 
     // any time auth state changes, add the user data to scope
    Auth.$onAuthStateChanged(function(firebaseUser) {
       ctrl.firebaseUser = firebaseUser;
+       
      
     });
+
+   
 
 
       ctrl.langKey = $translate.proposedLanguage()  || 'en'

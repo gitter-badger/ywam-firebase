@@ -1,11 +1,11 @@
 class BaseProjectTaskEditController {
    /* @ngInject */
-  constructor(Site) {
+  constructor(Site, $firebaseArray) {
     var ctrl = this
         ctrl.save = save
 
-       // console.log(ctrl.projectId)
-         console.log(ctrl)
+    var fundsRef = firebase.database().ref('locations/'+Site.location_id+'/funds')
+        ctrl.funds = $firebaseArray(fundsRef)
 
     var Ref = firebase.database().ref('locations/'+Site.location_id+'/projects/'+ctrl.projectId+'/tasks')
 
@@ -20,6 +20,7 @@ class BaseProjectTaskEditController {
 
       if(ctrl.taskId !='undefined'){
           Ref.child(ctrl.taskId).set(ctrl.task)
+          
       }else{
       
          //new task

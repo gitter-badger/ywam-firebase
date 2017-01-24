@@ -1,9 +1,10 @@
 class StudentPhotosController {
   /* @ngInject */
-  constructor(School,$stateParams, $mdMedia) {
+  constructor(School,$stateParams, $mdMedia, Site) {
       var ctrl = this;
       var school_id = $stateParams.school_id;
           ctrl.apps =  School.getApps(school_id, true)
+          ctrl.avatars = Site.avatars
          
         
           ctrl.photo_size = 150;

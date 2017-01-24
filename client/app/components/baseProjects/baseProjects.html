@@ -1,7 +1,7 @@
 
 <div layout="row" layout-align="center"> 
 
-<md-card flex="75">
+<md-card flex-gt-xs="75">
 <md-card-content>
 Base Projects: <a> Add Project</a>
 
@@ -10,20 +10,25 @@ Base Projects: <a> Add Project</a>
   <div>
     <b layout="row">
       <div flex >Task </div>
-      <div flex> Cost</div>
-      <div flex> Fund</div>
-      <div flex> Approved by</div>
-      <div flex> Status</div>
+        <div flex layout="row">
+          <div flex> Cost Estimate</div>
+          <div flex> Fund</div>
+          <div flex> Approved by</div>
+        </div>  
+      <div > Status</div>
       </b>
       <md-divider></md-divider>
 
   <div ng-repeat="(tKey , task) in item.tasks" class="row-hover" ng-click="$ctrl.editTask($event, item.$id, tKey )" >
     <div layout="row">
     <div flex>{{task.name}}</div>
-    <div flex>{{task.cost}}</div>
-    <div flex> {{$ctrl.funds[task.fund_id].name}}</div>
-    <div flex> </div>
-    <div flex> Status</div>
+    <div flex layout="row"  ng-if="task.cost_estimate" >
+        <div flex>{{task.cost_estimate}}</div>
+        <div flex> {{$ctrl.funds[task.fund_id].name}}</div>
+        <div flex > </div>
+    </div> 
+
+    <div > {{task.status}}</div>
     </div>
 <md-divider></md-divider>
 

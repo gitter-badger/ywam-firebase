@@ -5,6 +5,18 @@
 <input ng-model="$ctrl.task.name">
 </md-input-container> 
 
+<md-input-container>  
+<label>cost_estemate</label>
+<input ng-model="$ctrl.task.cost_estemate">
+</md-input-container> 
+
+<md-input-container>  
+<label>Fund</label>
+<md-select  ng-model="$ctrl.task.fund_id">
+<md-option ng-value="item.$id" ng-repeat="item in $ctrl.funds">{{item.name}}</md-option>
+</md-select>    
+</md-input-container> 
+
 
 <md-button ng-click="$ctrl.save()">   {{ $ctrl.taskId =='undefined'? 'Add':'Update'}} Task </md-button>
 

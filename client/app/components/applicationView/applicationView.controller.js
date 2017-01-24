@@ -33,6 +33,7 @@ class ApplicationViewController {
              var natRef = firebase.database().ref('/phrases/nations/en/').child(snap.val())
                  natRef.on('value',(snap)=>{ctrl.user.com.nationality=snap.val()
                      console.log(snap.val())})
+                      $timeout(function(){});  
          })   
 
          })//end userRef value
@@ -50,6 +51,7 @@ class ApplicationViewController {
                                 }
      
         var ref1data=[]
+        if(ctrl.app.reference1 && ctrl.app.reference1.form){
             ref1data.push(ctrl.app.reference1.form.scale.ambition)
             ref1data.push(ctrl.app.reference1.form.scale.communication)
             ref1data.push(ctrl.app.reference1.form.scale.emotion)
@@ -62,8 +64,10 @@ class ApplicationViewController {
             ref1data.push(ctrl.app.reference1.form.scale.servanthood)
             ref1data.push(ctrl.app.reference1.form.scale.teachability)
             ref1data.push(ctrl.app.reference1.form.scale.teamwork)
-
+        }
+       
         var ref2data=[]
+         if(ctrl.app.reference2 && ctrl.app.reference2.form){
             ref2data.push(ctrl.app.reference2.form.scale.ambition)
             ref2data.push(ctrl.app.reference2.form.scale.communication)
             ref2data.push(ctrl.app.reference2.form.scale.emotion)
@@ -76,6 +80,7 @@ class ApplicationViewController {
             ref2data.push(ctrl.app.reference2.form.scale.servanthood)
             ref2data.push(ctrl.app.reference2.form.scale.teachability)
             ref2data.push(ctrl.app.reference2.form.scale.teamwork)
+        }
 
         ctrl.ref_chart = [ ref1data, ref2data ];
 

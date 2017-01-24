@@ -1,32 +1,32 @@
 <div layout="row" layout-xs="column" >
-<div flex>
+<div flex style="border-left: 2px solid rgb(96,125,139); padding-left:4px">
 <b>Contact:</b> <br>
-Email: {{$ctrl.user.com.email}}<br>
-Skype: {{$ctrl.user.com.skype}}<br>
-Home Phone: {{$ctrl.user.com.home_phone}}<br>
-Mobile: {{$ctrl.user.com.mobile_phone}}<br>
+<a href="mailto:{{$ctrl.user.com.email}}">{{$ctrl.user.com.email}}</a> <br>
+<div ng-if="$ctrl.user.com.skype"> <u>Skype:</u> {{$ctrl.user.com.skype}}</div>
+<div ng-if="$ctrl.user.com.home_phone"><u> Home Phone:</u> {{$ctrl.user.com.home_phone}}</div>
+<div ng-if="$ctrl.user.com.mobile_phone"> <u>Mobile Phone:</u>   {{$ctrl.user.com.mobile_phone}}</div>
 
-Address: {{$ctrl.user.postal.address}}<br>
-City: {{$ctrl.user.postal.city}}<br>
-State: {{$ctrl.user.postal.state}}<br>
-Zip: {{$ctrl.user.postal.zip}}<br>
-Nation: {{$ctrl.user.postal.nation_id}}
+<u>Mailing Address:</u><br>
+ {{$ctrl.user.postal.address}}<br> {{$ctrl.user.postal.city}}, {{$ctrl.user.postal.state}}, {{$ctrl.user.postal.zip}}, 
+ {{$ctrl.user.postal.nation_id}}
 
 </div>
-<div flex style="background-color: rgba(255,0,0,0.1)">
+<div flex style="border-left: 2px solid red; padding-left:4px">
 <b>Emergency Contact:</b><br>
 {{$ctrl.user.emergency_contact.name}} ({{$ctrl.user.emergency_contact.relation}})<br>
-Email: {{$ctrl.user.emergency_contact.email}}<br>
-Skype: {{$ctrl.user.emergency_contact.skype}}<br>
-Phone: {{$ctrl.user.emergency_contact.phone}}<br>
-Phone2: {{$ctrl.user.emergency_contact.phone2}}<br>
+<a href="mailto:{{$ctrl.user.emergency_contact.email}}">{{$ctrl.user.emergency_contact.email}}</a><br>
 
-
-Address: {{$ctrl.user.emergency_contact.address}}<br>
-City: {{$ctrl.user.emergency_contact.city}}<br>
-State: {{$ctrl.user.emergency_contact.state}}<br>
-Zip: {{$ctrl.user.emergency_contact.zip}}<br>
-Nation: {{$ctrl.user.emergency_contact.nation_id}}
+<div ng-if="$ctrl.user.emergency_contact.skype"> <u>Skype:</u> {{$ctrl.user.emergency_contact.skype}}</div>
+<u>Phone:</u> {{$ctrl.user.emergency_contact.phone}}<br>
+<div ng-if="$ctrl.user.emergency_contact.phone2"> <u>Phone 2:</u> {{$ctrl.user.emergency_contact.phone2}}</div>
+<div ng-if="$ctrl.user.emergency_contact.address">
+<u>Address:</u> <br>
+{{$ctrl.user.emergency_contact.address}}<br>
+{{$ctrl.user.emergency_contact.city}},
+{{$ctrl.user.emergency_contact.state}},
+ {{$ctrl.user.emergency_contact.zip}},
+</div>
+{{$ctrl.user.emergency_contact.nation_id}}
  
 </div>
 </div>

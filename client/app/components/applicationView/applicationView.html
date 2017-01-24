@@ -10,6 +10,7 @@
 <!--<a du-smooth-scroll="transport"  du-smooth-scroll du-scrollspy  offset="50" >Travel Info </a><br>-->
 <!--<a du-smooth-scroll="visa"  du-smooth-scroll du-scrollspy  offset="50" >Visa </a><br>-->
 <a du-smooth-scroll="contact"  du-smooth-scroll du-scrollspy  offset="50" >Contact </a><br>
+<a du-smooth-scroll="health"  du-smooth-scroll du-scrollspy  offset="50" >Health </a><br>
 <a du-smooth-scroll="questions" du-smooth-scroll du-scrollspy  offset="50" >Questions </a><br>
 <a du-smooth-scroll="reference1"  du-smooth-scroll du-scrollspy  offset="50" >Reference 1 </a><br>
 <a du-smooth-scroll="reference2"  du-smooth-scroll du-scrollspy  offset="50" >Reference 2 </a><br>
@@ -133,6 +134,15 @@ Invoices and base account statement.
 </md-card-content>
 </md-card>
 
+<md-card>
+<md-card-content>
+<section id="health">
+<health-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id"></health-info>
+</section>
+</md-card-content>
+</md-card>
+
+
 <section id="questions">
 <md-card>
 <md-card-content class="in_dev">
@@ -153,18 +163,18 @@ Do they support you in your desire to come to YWAM?</h4>
 
 
 <section id="reference1"  >
-<md-card >
-<md-card-content>
+
+
 <reference-display data="$ctrl.app.reference1"></reference-display>
-</md-card-content>
-</md-card>
+
+
 </section>
 <section id="reference2"  >
-<md-card >
-<md-card-content>
+
+
 <reference-display data="$ctrl.app.reference2"></reference-display>
-</md-card-content>
-</md-card>
+
+
 </section>
 
 
