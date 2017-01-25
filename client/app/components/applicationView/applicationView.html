@@ -45,7 +45,7 @@
 
 <br>
 <md-divider></md-divider>
-<app-status data="$ctrl.app" date="true"></app-status>
+<app-status app-id="$ctrl.app_id" date="true" who="true"></app-status>
 <ref-status data="ref"  ng-repeat="ref in $ctrl.references"></ref-status><br>
 
 visa status<br>
@@ -57,7 +57,7 @@ visa status<br>
 <div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
 <img style="width:100%" align="right" ng-src="{{$ctrl.user.com.avatar_1080}}" ><br>
 <a href="" class="no-print"
- ui-sref="app.user.com.profile.change_photo({userId:$ctrl.user.com.id})">change photo</a>
+ ui-sref="userPhotoUpload({user_id:$ctrl.user_id })">change photo</a>
 </div>
 </div>
 

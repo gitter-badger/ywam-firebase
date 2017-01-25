@@ -4,8 +4,9 @@ import './appStatus.styl';
 
 let appStatusComponent = {
   restrict: 'E',
-  bindings: { data : '=',
-              date : '='},
+  bindings: { appId : '=',
+              date : '=',
+              who: '='},
   template,
   controller
 };
