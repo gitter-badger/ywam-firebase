@@ -46,39 +46,52 @@ float:left;
 
 </div>
 <div flex></div>
-</div>
-<!--
+
+
  <md-menu>
       <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
         <i md-menu-origin class="fa fa-print"></i>
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button ng-click="print('letter')" >
-         Print Selected Photos (Letter) 
+          <md-button ng-click="$ctrl.print('letter')" >
+           Letter
           </md-button>
         </md-menu-item>
          <md-menu-item>
-          <md-button  ng-click="print('A4')">
-         Print Selected Photos (A4) 
+          <md-button  ng-click="$ctrl.print('A4')">
+           A4
           </md-button>
         </md-menu-item>
          <md-menu-item>
-          <md-button  ng-click="print('A3')">
-         Print Selected Photos (A3) 
+          <md-button  ng-click="$ctrl.print('A3')">
+           A3
           </md-button>
         </md-menu-item>
 
       </md-menu-content>
-    </md-menu>-->
+    </md-menu>
+</div>
+<div class="print-only">
+
+<h1>
+{{$ctrl.school.name}} - {{$ctrl.school.start_date| date: 'MMMM, yyyy' }}
+</h1>
+
+</div>
 
 
 <div   >
 
 
-<div ng-repeat="app in $ctrl.apps | filter:$ctrl.search" class="photo" ui-sref="profile({user_id:app.for.user_id})"  style="cursor: pointer;">
+<div ng-repeat="(index,app) in $ctrl.apps | filter:$ctrl.search | orderBy: 'user.first_name'" class="photo" ui-sref="profile({user_id:app.for.user_id})"  style="cursor: pointer;">
 
-<md-card  style="width:{{$ctrl.photo_size}}px;" >  
+<md-card  style="width:{{$ctrl.photo_size}}px;  
+                 height:{{$ctrl.photo_size*1.5}}px;
+                 overflow:hidden;
+                 page-break-inside: avoid;
+                    -webkit-region-break-inside: avoid; 
+                    position: relative; " >  
 <div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
 
 <img ng-src="{{$ctrl.avatars[app.for.user_id]}}" width="100%" >
@@ -86,14 +99,16 @@ float:left;
 </div>
 
 
-<div style="padding:5px">
-<div class="ellipsis md-body-2">{{app.user.first_name }}</div>
-<div class="ellipsis md-body-2">{{app.user.last_name}}</div>
+<div style="padding:5px; md-body-2">
+<div class="ellipsis ">{{app.user.first_name }}</div>
+<div class="ellipsis ">{{app.user.last_name}}</div>
+
+<img   style="height:{{$ctrl.photo_size/7}}px" ng-if="app.user.nation_id" ng-src="http://flagpedia.net/data/flags/mini/{{ app.user.nation_id.toLowerCase() }}.png">
 
 <!--<div class="ellipsis md-caption" >{{app.user}}</div>-->
 </div>
 </md-card>
-
+<!--<div ng-if="index % $ctrl.photosPerPage === 0  &&  index !=0" class="new-page">NEW PAGE {{index % $ctrl.photosPerPage}} INDEX: {{index}}</div>-->
 
 </div>
 

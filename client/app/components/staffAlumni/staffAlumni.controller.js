@@ -3,6 +3,7 @@ class StaffAlumniController {
   constructor(Site, $firebaseArray, $timeout,$filter) {
     var ctrl = this;
         ctrl.staff = []
+        ctrl.avatars = Site.avatars
 
     var Ref = firebase.database().ref('locations/'+Site.location_id).child('alumni_staff_index')
 
@@ -28,6 +29,7 @@ class StaffAlumniController {
                                           //  ctrl.staff[index] =data;
                                           //  else
                                            ctrl.staff.push(data);
+                                           Site.getAvatar( user_id)
                                             // trigger $digest/$apply so Angular syncs the DOM
                                            
                                             });

@@ -1,11 +1,15 @@
 class StudentPhotosController {
   /* @ngInject */
-  constructor(School,$stateParams, $mdMedia, Site) {
+  constructor(School,$stateParams, $mdMedia, Site,$firebaseObject, $timeout ) {
       var ctrl = this;
       var school_id = $stateParams.school_id;
           ctrl.apps =  School.getApps(school_id, true)
           ctrl.avatars = Site.avatars
-         
+          ctrl.print = print
+
+      var school_ref = firebase.database().ref('/schools/'+school_id + '/public')
+
+          ctrl.school = $firebaseObject(school_ref);
         
           ctrl.photo_size = 150;
            if($mdMedia('xs'))
@@ -87,10 +91,26 @@ class StudentPhotosController {
             pointHitRadius: 10,
   }    
 
-  // ctrl.data = [
-  //   [65, 59, 80, 81, 56, 55, 40],
-  //   [28, 48, 40, 19, 86, 27, 90]
-  // ];
+function print(size){
+
+  if(size =='letter'){
+      ctrl.photo_size = 113;
+      ctrl.photosPerPage = 24;
+      $timeout(function(){  window.print();})
+     
+  }
+if(size =='A4'){
+      ctrl.photo_size = 113;
+      ctrl.photosPerPage = 24;
+      $timeout(function(){  window.print();})
+     
+  }
+
+
+}
+
+
+
   }
 }
 

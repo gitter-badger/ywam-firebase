@@ -55,7 +55,7 @@
 
 <md-divider></md-divider>
 
-<div ng-repeat="sch in $ctrl.schools | orderBy: 'start_date' : true | filter: $ctrl.search "   >
+<div ng-repeat="sch in $ctrl.schools | orderBy: '-public.start_date'  | filter: $ctrl.search "   >
 
 <div layout="row" layout-wrap  layout-align="space-between center"  class="row-hover"  
      style="cursor: pointer;"  
@@ -63,7 +63,7 @@
 <div ng-if="!$ctrl.$mdMedia('xs')" 
 	 flex-order="1">
 	 <div  style="width:106px;  max-height:50px; overflow:hidden; ">
-	<img ng-src="{{sch.public.banner_200}}" style="width:100%" > 
+	<img ng-src="{{sch.banner}}" style="width:100%" > 
 	</div>
 </div>
 <div flex flex-order="2"  style="margin-left:10px; margin-top:3px; " >

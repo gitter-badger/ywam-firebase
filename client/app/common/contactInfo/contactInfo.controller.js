@@ -1,12 +1,15 @@
 class ContactInfoController {
   constructor() {
    var ctrl = this
-      console.log('loading contact info for'+ctrl.userId)
+       
+       ctrl.$onInit = function() {
+ 
      var userRef = firebase.database().ref('profiles').child(ctrl.userId)
+         userRef.on('value',function(userSnap){
+           ctrl.user = userSnap.val()
+          })
 
-      userRef.on('value',function(userSnap){
-        ctrl.user = userSnap.val()
-      })
+      }//end on init
 
 
   }

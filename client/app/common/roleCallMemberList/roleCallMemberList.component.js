@@ -4,7 +4,7 @@ import './roleCallMemberList.styl';
 
 let roleCallMemberListComponent = {
   restrict: 'E',
-  bindings: { roleCallId : '='},
+  bindings: { roleCallId : '=?'},
   template,
   controller
 };

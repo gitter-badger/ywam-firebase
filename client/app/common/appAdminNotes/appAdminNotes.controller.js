@@ -5,7 +5,7 @@ class AppAdminNotesController {
        ctrl.addAdminNote = addAdminNote
        ctrl.deleteAdminNote = deleteAdminNote
   
-
+       ctrl.$onInit = function(){
     var appNotesRef = firebase.database().ref('applications').child(ctrl.appId).child('admin_notes')
         appNotesRef.on('value',function(snap){
           ctrl.notes = []
@@ -25,7 +25,7 @@ class AppAdminNotesController {
             }
         })
       })
-        
+}    
     
 
     function addAdminNote(){

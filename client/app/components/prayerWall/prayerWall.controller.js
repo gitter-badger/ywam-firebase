@@ -5,6 +5,7 @@ class PrayerWallController {
   constructor($firebaseArray,$timeout, Site, $firebaseObject) {
    var ctrl = this;
        ctrl.prayers = [];
+       ctrl.runMasson = runMasson;
        
        var Ref = firebase.database().ref('prayers')
            Ref.on('child_added',(snap)=>{

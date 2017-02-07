@@ -5,11 +5,18 @@ class RoleCallMemberListController {
        ctrl.setHere = setHere
        ctrl.filterList = filterList
        
+       if(ctrl.roleCallId){
 
         console.log('working with role call #' + ctrl.roleCallId)
         var roleCall_ref = firebase.database().ref('role_calls').child(ctrl.roleCallId).child('members')
 
          ctrl.members = $firebaseArray(roleCall_ref)
+
+
+
+
+         }
+
 
 
 

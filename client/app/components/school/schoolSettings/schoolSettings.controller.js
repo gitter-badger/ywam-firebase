@@ -81,7 +81,6 @@ class SchoolSettingsController {
           var downloadURL = uploadTask.snapshot.downloadURL;
           console.log('finished upload: ' +downloadURL)
 
-          //Save the URL to users profile
        
               banner_ref.set(downloadURL);
     

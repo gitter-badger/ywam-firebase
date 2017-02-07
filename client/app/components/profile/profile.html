@@ -40,7 +40,8 @@
 </div>
 <br>
 <div>
-<contact-info user-id="$ctrl.profile.$id" ng-if="$ctrl.profile.$id"></contact-info>
+  {{$ctrl.user_id}}
+<contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
 </div>
 <div> 
 Applications:

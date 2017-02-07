@@ -30,14 +30,19 @@ path /prayers { read() { isStaff() },
 path /search { read() { isStaff() },
                write() { isStaff()} }
 
+path /role_calls { read() { isStaff() }
+                }
 
 //Applications
+path /applications { index() = ["for/school_id"]  }
+
 path /applications/{id} is Application {  read() {    checkAppAccess(id)  }
-                                           write() {    checkAppAccess(id)  }  }
+                                           write() {    checkAppAccess(id)  }  
+                                          }
 
 path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
                                 write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
-                                }
+                               }
                                 
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}

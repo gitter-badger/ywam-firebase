@@ -1,6 +1,6 @@
 class SchoolsPageController {
      /* @ngInject */
-  constructor( $timeout,$firebaseArray,moment,Site, $filter,$mdMedia) {
+  constructor( $timeout,$firebaseArray,moment,Site, $filter,$mdMedia,$firebaseStorage) {
 
 
     var ref = firebase.database().ref('/locations').child(Site.location_id).child('schools_index');
@@ -22,14 +22,23 @@ class SchoolsPageController {
                     var index = ctrl.schools.indexOf(school[0])
                         //since a school could update value at any time..we make sure to add it to the already existing school in array instead of pushing a new one in. 
                        
+                      
 
                                 // trigger $digest/$apply so Angular syncs the DOM
                               $timeout(function() {
                                 if( snapshot.val() != null )  {
                                    var data = snapshot.val();
                                       data.id = key;
-
                                       
+                                     if(data.public.banner_1080){ 
+                                       //get banner
+                                    var storageRef = firebase.storage().ref("schools_public/"+key).child('banner_1080.jpg');
+                                      
+                                    $firebaseStorage(storageRef).$getDownloadURL()
+                                          .then(function(url) {
+                                                  data.banner = url;
+                                                });;
+                                      }
 
                                        if(index >-1){
                                         ctrl.schools[index] = data 

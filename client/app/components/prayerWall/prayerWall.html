@@ -12,9 +12,9 @@
 	Set by {{topic.user_name}} on {{topic.modifed | date }}
 	
 	</div> -->
-<div layout="row" layout-align="center" style="color:gray">	 
-<div  class="md-display-1"> Prayer Wall </div>		
-<div  class="md-display-1" ng-repeat="loc in $ctrl.locations">&nbsp;{{loc.name }} </div>
+<div layout="row" layout-wrap layout-align="center" style="color:gray">	 
+<div  class="md-display-1"> Prayer Wall of </div>		
+<div  class="md-display-1" ng-repeat="loc in $ctrl.locations">&nbsp;{{loc.name }}<span ng-if="!$last">,</span></div>
 </div> 
 
  <div class="grid prayerWall"  >
@@ -29,11 +29,12 @@
   				  
   				   }"   >
 		
-		<md-input-container>
-		<textarea style="line-height:initial;" ng-model="$ctrl.new_prayer"> </textarea>
+		<md-input-container style="width:100%">
+		<textarea style="line-height:initial; " ng-model="$ctrl.new_prayer" ng-change="$ctrl.runMasson()"> </textarea>
+				<md-button style=" bottom:0px;  font-style: normal;" ng-click="$ctrl.postPrayer()">Post New</md-button>
+
 		</md-input-container>
 		
-		<md-button style="position:absolute; bottom:0px;  font-style: normal;" ng-click="$ctrl.postPrayer()">Post New</md-button>
 		
 	
 	

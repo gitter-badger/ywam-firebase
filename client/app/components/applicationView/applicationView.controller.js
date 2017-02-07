@@ -6,6 +6,7 @@ class ApplicationViewController {
        ctrl.languages = {}
        ctrl.app_id = $stateParams.app_id;
   
+       ctrl.$onInit = function(){
     var appRef = firebase.database().ref('applications').child(ctrl.app_id)
         appRef.on('value',function(snap){
         
@@ -113,6 +114,8 @@ class ApplicationViewController {
             ctrl.ref_chart2.push(sum)
 
     },function(error){console.error(error)})//end on appRef value
+
+  }//end on init
 
  function calculateAge(birthday) { // birthday is a date
             var ageDifMs = Date.now() -  new Date(birthday).getTime();

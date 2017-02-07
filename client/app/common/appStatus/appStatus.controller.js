@@ -6,22 +6,25 @@ class AppStatusController {
 
           ctrl.changeStatus = changeStatus
 
+      ctrl.$onInit = function(){
         var Ref =   firebase.database().ref('/applications/'+ctrl.appId+'/meta')
           Ref.on('value',function(snap){ //Set this as a listener because we want to see it change when we change it!
               ctrl.appMeta = snap.val()
 
               if(ctrl.who){
                 var user_id = ctrl.appMeta.statuses[ctrl.appMeta.status].user_id
+                if(user_id) {
                 var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
                 userRef.once('value', function(snap){
                  
                   ctrl.status_by = snap.val().first_name + ' ' + snap.val().last_name.charAt(0) + '.';
                 })
+                }
               }
             
 
           })
-          
+      }  
           //var 
 
           function changeStatus(status_num){

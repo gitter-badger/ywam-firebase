@@ -57,9 +57,10 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
                 var com = snap.val()
                 
             if(com){
-              
+             
               if(com.avatar_200.includes("http")){
                 site.avatars[user_id] = com.avatar_200 
+           //     console.log('no gs avatar')
               }else {//else get firebase file
 
             firebase.storage().refFromURL(com.avatar_200)

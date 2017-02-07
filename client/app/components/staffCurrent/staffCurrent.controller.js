@@ -3,7 +3,7 @@ class StaffCurrentController {
   constructor(Site, $firebaseArray, $timeout,$filter,$mdMedia) {
     var ctrl = this;
         ctrl.staff = []
-        ctrl.getAvatar = getAvatar
+        ctrl.avatars = Site.avatars
 
     var Ref = firebase.database().ref('locations/'+Site.location_id).child('current_staff_index')
 
@@ -24,7 +24,7 @@ class StaffCurrentController {
                                                 data.id = user_id;
 
                                            var index =  ctrl.staff.push(data);
-                                           getAvatar(index)
+                                           Site.getAvatar( user_id)
                                            
                                            
                                             }
@@ -49,21 +49,21 @@ ctrl.print = print;
 
             
         }
-    function getAvatar(index){
-      //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
-          //this can be changed till then:
-        var index = index - 1
-          // console.log(ctrl.staff[index])
-            var av =   ctrl.staff[index].avatar_200
+    // function getAvatar(index){
+    //   //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
+    //       //this can be changed till then:
+    //     var index = index - 1
+    //       // console.log(ctrl.staff[index])
+    //         var av =   ctrl.staff[index].avatar_200
 
               
-              firebase.storage().refFromURL(av)
-              .getDownloadURL().then(function(url){
-               $timeout(function(){})
-               ctrl.staff[index].avatar =  url 
-                }).catch(function(error){console.log('not valid file')})
+    //           firebase.storage().refFromURL(av)
+    //           .getDownloadURL().then(function(url){
+    //            $timeout(function(){})
+    //            ctrl.staff[index].avatar =  url 
+    //             }).catch(function(error){console.log('not valid file')})
           
-    }
+    // }
 
 
 }

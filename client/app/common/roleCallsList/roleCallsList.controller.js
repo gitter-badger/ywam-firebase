@@ -1,15 +1,30 @@
 class RoleCallsListController {
-  constructor() {
+   /* @ngInject */
+  constructor($firebaseArray) {
     var ctrl = this
         ctrl.newRoleCall = newRoleCall
+
+ctrl.$onInit = function(){
+
     if(ctrl.schoolId){
-      console.log('Role call list for a school, everybody')
+      console.log('Role call list for a school, everybody'+ ctrl.schoolId)
+// .orderByChild('for/school_id').equalTo("38").on(
+      var Ref = firebase.database().ref('role_calls').orderByChild("school_id").equalTo(ctrl.schoolId)
+
+              ctrl.role_calls =  $firebaseArray(Ref)
+              
+
+           
 
     }
     if(ctrl.groupId){
       console.log('Role call list for a group, everybody')
 
     }
+
+
+   }//end on init
+   
 
 
     function newRoleCall(){
@@ -28,6 +43,7 @@ class RoleCallsListController {
 
                apps_ref.on('child_added',function(snap){
                  //now we have the app ID we need the user ID
+                 if(snap.val() ==30){
                  console.log('added'+snap.key)
                   firebase.database().ref('applications').child(snap.key).child('for/user_id')
                   .once('value',function(snap){
@@ -44,8 +60,9 @@ class RoleCallsListController {
                      })
                     }//end if
                    
-              
+                
                 })
+                  }//end if 30
                })
 
           

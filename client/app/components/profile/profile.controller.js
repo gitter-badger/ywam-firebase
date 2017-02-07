@@ -2,8 +2,8 @@ class ProfileController {
    /* @ngInject */
   constructor($stateParams, $firebaseObject, $timeout) {
       var ctrl = this;
-      var user_id = $stateParams.user_id    
-      var Ref = firebase.database().ref('profiles/'+user_id)
+          ctrl.user_id = $stateParams.user_id    
+      var Ref = firebase.database().ref('profiles/'+ctrl.user_id)
 
           ctrl.profile = $firebaseObject(Ref);
           

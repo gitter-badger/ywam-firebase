@@ -23,6 +23,11 @@ html, body
   // scales 1rem to equal 10px.
   //font 62.5% 'Roboto', sans-serif
   font-size 14px
+ 
+ 
+ .print-only{
+        display: none;
+    }
 
 a {
     color: #337ab7;
@@ -55,4 +60,14 @@ a {
     {
         display: none !important;
     }
+
+    .print-only{
+            display: block;
+   }
+   .new-page{
+   page-break-after: always;
+   position: relative;
+   }
+
+
 }
