@@ -33,6 +33,7 @@ ctrl.$onInit = function(){
 
            var data = {school_id: ctrl.schoolId,
                       name: 'role call for school',
+                      time: firebase.database.ServerValue.TIMESTAMP,
                       } 
 
          var newKey =  firebase.database().ref('role_calls').push(data).key
@@ -42,8 +43,9 @@ ctrl.$onInit = function(){
            var apps_ref =   firebase.database().ref('schools').child(ctrl.schoolId).child('app_index')
 
                apps_ref.on('child_added',function(snap){
+                   console.log('maybe'+snap.val())
                  //now we have the app ID we need the user ID
-                 if(snap.val() ==30){
+                 if(snap.val() == '30'){
                  console.log('added'+snap.key)
                   firebase.database().ref('applications').child(snap.key).child('for/user_id')
                   .once('value',function(snap){

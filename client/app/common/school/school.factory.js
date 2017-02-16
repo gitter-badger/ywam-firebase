@@ -99,7 +99,7 @@ let getApps = (school_id, accepted_only ) => {
 
 
 let getStaff = (school_id) => {
-  
+    school.staff={}
     var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/staff')
     var profileRef  = firebase.database().ref('/profiles')
     
@@ -113,6 +113,8 @@ let getStaff = (school_id) => {
                 console.log('adding or removing '+ staffId)
                 profileRef.child(staffId).child('com').on('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
+                       //get avatar as well
+                            Site.getAvatar(staffId)
                             school.staff[staffId] = profileSnap.val();
                                $timeout(function() { })
                     } else { delete school.staff[staffId]

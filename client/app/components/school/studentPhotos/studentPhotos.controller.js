@@ -100,7 +100,7 @@ function print(size){
      
   }
 if(size =='A4'){
-      ctrl.photo_size = 113;
+      ctrl.photo_size = 130;
       ctrl.photosPerPage = 24;
       $timeout(function(){  window.print();})
      

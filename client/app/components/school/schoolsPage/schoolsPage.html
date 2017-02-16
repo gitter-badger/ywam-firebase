@@ -49,7 +49,8 @@
       <input ng-model="$ctrl.search.$" placeholder="Search">
     </md-input-container>
 <span flex></span>
-
+Total DTS Students: {{$ctrl.total_dts_students}}<br>
+Total Secondary Students: {{$ctrl.total_secondary_students}}
 </div>	
 
 
@@ -90,10 +91,17 @@
 	</span>
 
 	<!-- If currently running  -->
-	<span flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now " 
+	<span flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now 
+					  && !(sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now)" 
 		  style="background-color:#A5D6A7;padding:2px; "
 		  class="md-caption" > Running 
 		  <span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
+
+		<!-- If currently on outreach  -->
+	 <span flex ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
+		  style="background-color:#A5D6A7;padding:2px; "
+		  class="md-caption" > Return from Outreach in
+		  <span am-time-ago="sch.public.outreach_end_date"  am-without-suffix="true"  ></span></span>	  
 
 
 

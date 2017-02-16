@@ -108,12 +108,15 @@ angular.module('app', [
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
+       $rootScope.$broadcast('hideLoginDialog');
 
-        if( state.data != null && state.data.authRequired === true && !Auth.$getAuth()){
-         
-           $rootScope.$broadcast('showLoginDialog');
-          // $timeout(function(){})
-          console.log("Not LOGGED in")
+        if( state.data != null ){
+         if(state.data.authRequired === true && !Auth.$getAuth()){
+            $rootScope.$broadcast('showLoginDialog');
+            // $timeout(function(){})
+            console.log("Not LOGGED in")
+         }
+          
         }
   
 

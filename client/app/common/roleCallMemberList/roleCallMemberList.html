@@ -3,15 +3,26 @@
   .here {
     background-color:green
   }
+  .not_here {
+    background-color:red
+  }
 </style>
-
-
-<div ng-repeat="item in $ctrl.members | orderBy: ['-present']" 
-  ng-class="{here:item.present}"
+Time: {{$ctrl.time | date}}<br>
+Here: {{$ctrl.here}}<br>
+Not Here: {{$ctrl.not_here}}
+<!--   | orderBy: ['-present']   -->
+<div ng-repeat="item in $ctrl.members " 
+  ng-class="{here:item.present,
+            not_here: item.present ==false}"
+ 
 >
-
+<div  layout="row"> 
+  <span flex>
   {{item.name}}
-
+  </span>
   <md-button ng-click="$ctrl.setHere(item.$id)">Here</md-button> 
-    <md-button>Not Here</md-button> 
+  <md-button ng-click="$ctrl.setNotHere(item.$id)">Not Here</md-button> 
+</div>
+<md-divider></md-divider>
+
 </div>

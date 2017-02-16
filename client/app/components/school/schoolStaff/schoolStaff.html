@@ -1,18 +1,19 @@
 <div layout="row" layout-align="center center">
 <div  flex-gt-sm="70">
 <md-card>
-<md-card-content layout="row">
- <div flex>   
+<md-card-content l>
+ <div >   
     <h1>School Staff</h1>
     <md-button ng-click="$ctrl.addStaff('staff')">Add Staff</md-button>
 
 <md-list class="md-dense">
     <md-list-item ng-repeat="(key, staff) in $ctrl.staffs" class="md-2-line">
-          <img ng-src="{{staff.avatar_200}}" class="md-avatar" alt="{{ staff.first_name }}" />
+          <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
             <h3>{{ staff.first_name }} {{ staff.last_name }}</h3>
             <!--<h4>{{ item.what }}</h4>-->
-            <!--<p>roles:</p>-->
+            <p ng-if="$ctrl.admins[key]">Admin Access</p>
+
             <i class="fa fa-trash" ng-click="$ctrl.remove('staff', key)"></i>
           </div>
           <md-divider ></md-divider>
@@ -20,9 +21,9 @@
 </md-list>
 
  </div>
- <span flex="10"> </span>
+
  <div flex>   
-    <h1>School Admins
+    <h1>Aditional Admins
         
     </h1>
     <small>  can see applications.. etc.</small>
@@ -30,8 +31,10 @@
     <md-button ng-click="$ctrl.addStaff('admin')">Add Admin</md-button>
 
 <md-list class="md-dense">
-    <md-list-item ng-repeat="(key, staff) in $ctrl.admins" class="md-2-line">
-          <img ng-src="{{staff.avatar_200}}" class="md-avatar" alt="{{ staff.first_name }}" />
+    <md-list-item ng-repeat="(key, staff) in $ctrl.admins"
+                  class="md-2-line" 
+                  ng-if="!$ctrl.staffs[key]">
+          <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
             <h3>{{ staff.first_name }} {{ staff.last_name }}</h3>
             <!--<h4>{{ item.what }}</h4>-->

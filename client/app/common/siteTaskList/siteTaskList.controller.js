@@ -1,15 +1,16 @@
 class SiteTaskListController {
   /* @ngInject */
-  constructor($firebaseArray) {
+  constructor($firebaseArray, $timeout) {
    var ctrl = this;
 
-     var Ref =  firebase.database().ref('system/tasks')
-        //  Ref.on('value',function(snap){
+    var RefTasks =  firebase.database().ref('system/tasks')
+     var Ref =  firebase.database().ref('system').child('stats')
+         Ref.on('value',function(snap){
+          ctrl.stats = snap.val()
 
-        // ctrl.task_count=   snap.numChilderen()
-        //  })
-
-     ctrl.tasks = $firebaseArray(Ref)
+    })
+     
+    ctrl.tasks = $firebaseArray(RefTasks)
     
 
   }

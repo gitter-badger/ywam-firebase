@@ -2,11 +2,12 @@ import editStaffDialog from './editStaffDialog.html';
 
 class SchoolStaffController {
    /* @ngInject */
-  constructor($stateParams, School, $mdDialog) {
+  constructor($stateParams, School, $mdDialog, Site) {
     var ctrl = this;
     var school_id = $stateParams.school_id;
     ctrl.staffs =  School.getStaff(school_id)
     ctrl.admins =  School.getAdmins(school_id)
+    ctrl.avatars = Site.avatars
 
     ctrl.addStaff = addStaff
     ctrl.remove = remove

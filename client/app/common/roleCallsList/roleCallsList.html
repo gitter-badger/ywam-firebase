@@ -1,6 +1,6 @@
 Role Call list:
-<a ng-click="$ctrl.newRoleCall()">new role call </a>
+<a ng-click="$ctrl.newRoleCall()">New Session </a>
 
 
 
-<div ng-repeat="item in $ctrl.role_calls"  > {{item.name}}</div>
+<div ng-repeat="item in $ctrl.role_calls"  ui-sref="{{$ctrl.schoolId?'school':''}}.roleCall({roleCallId :'{{item.$id}}' } )" > {{item.name}} {{item.$id}}</div>

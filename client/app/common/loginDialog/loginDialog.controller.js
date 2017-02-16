@@ -8,6 +8,10 @@ class LoginDialogController {
     ctrl.visible =true; //Site.showLoginDialog
     // do what you want to do
   });
+   $scope.$on('hideLoginDialog', function(event, args) {
+    ctrl.visible =false; //Site.showLoginDialog
+    // do what you want to do
+  });
 
     Auth.$onAuthStateChanged(function(firebaseUser) {
       if(firebaseUser){

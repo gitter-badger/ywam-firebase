@@ -21,6 +21,8 @@ path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
 //schools public data
 path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
 
+path /system { read() { isStaff() }
+                    }
 path /system/tasks { read() { isStaff() }
                     index() = ["status"]}
 
@@ -120,6 +122,8 @@ type ProfileCom {
 
   //  modified: CurrentTimestamp
 }
+path /profiles_search {read() {isStaff()}
+                       index() = ["string"] }
 
 
 path /locations_public { read() { true} }

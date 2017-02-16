@@ -13,6 +13,8 @@ class SchoolsPageController {
        ref.on('value', function(snapshot) {
             console.log('got school index')
             ctrl.schools = []
+            ctrl.total_dts_students = 0
+            ctrl.total_secondary_students = 0
             angular.forEach(snapshot.val(), function(value, key){
                 console.log('looking up'+ key)
               firebase.database().ref('/schools/'+key )
@@ -42,8 +44,14 @@ class SchoolsPageController {
 
                                        if(index >-1){
                                         ctrl.schools[index] = data 
-                                       }else
-                                      ctrl.schools.push(data );
+                                       }else{
+                                          ctrl.schools.push(data );
+                                          if(data.public.is_secondary)
+                                          ctrl.total_secondary_students += data.count.arrived
+                                          else
+                                          ctrl.total_dts_students += data.count.arrived
+                                        }
+                                    
 
                                       getLeaders(index,data) 
                                     }

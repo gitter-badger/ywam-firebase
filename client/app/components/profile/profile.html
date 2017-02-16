@@ -26,6 +26,21 @@
 
 <br>
 <md-divider></md-divider>
+<div> 
+
+<b> Applications:</b>
+<div ng-repeat="(key,app) in $ctrl.profile.app_index" >
+  <div ng-if="app.for.school_id" ui-sref="school.application({school_id: app.for.school_id, app_id:key})">
+    School : {{app.for.school_id}} <app-status app-id="key" date="true"></app-status>
+</div>
+<div ng-if="app.for.staff_location_id" ui-sref="staff.application({app_id:key})">
+    Staff @ : {{app.for.staff_location_id}} <app-status app-id="key" date="true"></app-status>
+</div>
+
+ </div>
+
+</div>
+
 </div>
 
 <div flex >
@@ -40,21 +55,7 @@
 </div>
 <br>
 <div>
-  {{$ctrl.user_id}}
 <contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
-</div>
-<div> 
-Applications:
-<div ng-repeat="(key,app) in $ctrl.profile.app_index" >
-  <div ng-if="app.for.school_id" ui-sref="school.application({school_id: app.for.school_id, app_id:key})">
-    School : {{app.for.school_id}} status: {{app.status}}
-</div>
-<div ng-if="app.for.staff_location_id" ui-sref="staff.application({app_id:key})">
-    Staff @ : {{app.for.staff_location_id}} status: {{app.status}}
-</div>
-
- </div>
-
 </div>
 
 
