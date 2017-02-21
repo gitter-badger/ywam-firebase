@@ -1,6 +1,7 @@
 <!doctype html>
-<html lang="en" manifest="app.manifest" style="overflow-y: auto;">
+<html  ng-app="app"  lang="en" manifest="app.manifest" style="overflow-y: auto;">
   <head>
+  
     <meta charset="utf-8">
     <title>YWAM Staff App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,15 +9,19 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="description" content="YWAM Staff App">
-    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+    <link rel="icon" sizes="120x120" href="{{'logos/' + location_id + '/icon120x120.png'}}" ng-if="location_id" >
+    <link rel="icon" sizes="180x180" href="{{'logos/' + location_id + '/icon180x180.png'}}"  ng-if="location_id">
+    
+   
     <base href="/">
     <!-- Angular Material style sheet -->
     <!--<link rel="stylesheet" href="css/angular-material.min.css">
     <link rel="stylesheet" href="css/font-awesome.min.css">
     -->
-
+   
   </head>
-  <body ng-app="app" ng-strict-di ng-cloak >
+  <body ng-strict-di ng-cloak >
 
     <login-dialog></login-dialog>
 
@@ -35,5 +40,5 @@
       // ga('create', 'UA-82214101-1', 'auto');
       // ga('send', 'pageview');
     </script>
-  <script src="vendor.bundle.4332305ec41f383de921.js"></script><script src="app.bundle.4332305ec41f383de921.js"></script></body>
+  <script src="vendor.bundle.2e6d04dca89bdace4f5c.js"></script><script src="app.bundle.2e6d04dca89bdace4f5c.js"></script></body>
 </html>
