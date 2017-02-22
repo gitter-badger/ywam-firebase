@@ -5,18 +5,31 @@
 
       
          
-    <md-autocomplete md-selected-item="selectedItem" 
+    <md-autocomplete 
+                     md-selected-item-change="selectedItemChange(item)"
                      md-search-text="searchText" 
-                     md-items="item in getMatches(searchText)" md-item-text="item.first_name +' '+item.last_name "
-                      placeholder="Add Staff Member">
-        <span md-highlight-text="searchText">{{item.first_name}} {{item.last_name}}</span>
+                     md-items="item in getMatches(searchText)" 
+                     md-item-text="item.name"
+                     placeholder="Add Staff Member"
+                     ng-if="!key">
+        <span md-highlight-text="searchText">{{item.name}}</span>
     </md-autocomplete>
 
-    
-  
+<!--TODo: it might be nice to show the name of the person when editing an existing -->
+
+Roles:
+
+<div layout="column">
+    <md-checkbox ng-model="roles.leader">School Leader</md-checkbox>
+    <md-checkbox ng-model="roles.staff">School Staff</md-checkbox>
+    <md-checkbox ng-model="roles.admin">School Admin</md-checkbox>
+</div>
+
        </div>
   </md-dialog-content>
   <md-dialog-actions>
-    <md-button ng-click="addStaff()" class="md-primary">Add {{type}}</md-button>
+   <md-button ng-if="key" ng-click=remove(key) >Remove</md-button>
+    <span flex></span>
+    <md-button ng-click="save()" class="md-primary">{{key?'Save':'Add'}} </md-button>
   </md-dialog-actions>
 </md-dialog>

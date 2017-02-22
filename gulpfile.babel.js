@@ -73,7 +73,8 @@ gulp.task('webpack', ['clean'], (cb) => {
 gulp.task('git', [], () => {
 
   const config = require('../ywam-staff-webapp-config.js');
-      
+       
+       
         gulp.src(['./dist/**/*','./dist/.nojekyll'])
        .pipe(ghPages(config.ghPages[0]))
 

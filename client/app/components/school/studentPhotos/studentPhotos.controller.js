@@ -30,7 +30,7 @@ class StudentPhotosController {
              angular.forEach(stats.start , weekSnap=>{
 
                start.push(weekSnap)
-               ctrl.labels.push( '-'+week_before +' weeks')
+               ctrl.labels.push( ' '+week_before +' wk.  ')
                week_before--
              })
 
@@ -64,7 +64,7 @@ class StudentPhotosController {
             }],
              xAxes: [{
           
-                display: false,
+                display: true,
                
             }],
         }

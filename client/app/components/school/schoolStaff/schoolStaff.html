@@ -1,20 +1,25 @@
 <div layout="row" layout-align="center center">
 <div  flex-gt-sm="70">
 <md-card>
-<md-card-content l>
+<md-card-content >
  <div >   
-    <h1>School Staff</h1>
-    <md-button ng-click="$ctrl.addStaff('staff')">Add Staff</md-button>
+    <h1>School Roles
+    <md-button ng-click="$ctrl.editStaff()">Add Staff</md-button>
+</h1>
 
 <md-list class="md-dense">
-    <md-list-item ng-repeat="(key, staff) in $ctrl.staffs" class="md-2-line">
+    <md-list-item ng-repeat="(key, staff) in $ctrl.staffs" class="md-2-line"
+     ng-if="staff.staff"
+     ng-click="$ctrl.editStaff(key)">
           <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
-            <h3>{{ staff.first_name }} {{ staff.last_name }}</h3>
-            <!--<h4>{{ item.what }}</h4>-->
-            <p ng-if="$ctrl.admins[key]">Admin Access</p>
+            <h3>{{ staff.name }} </h3>
+            <!--<h4>{{ staff }}</h4>-->
+            <p ng-if="staff.admin">Admin Access</p>
+             <p ng-if="staff.staff">School Staff</p>
+              <p ng-if="staff.leader">School Leader</p>
 
-            <i class="fa fa-trash" ng-click="$ctrl.remove('staff', key)"></i>
+        
           </div>
           <md-divider ></md-divider>
     </md-list-item>
@@ -28,18 +33,19 @@
     </h1>
     <small>  can see applications.. etc.</small>
    
-    <md-button ng-click="$ctrl.addStaff('admin')">Add Admin</md-button>
+    <!--<md-button ng-click="$ctrl.addStaff('admin')">Add Admin</md-button>-->
 
 <md-list class="md-dense">
-    <md-list-item ng-repeat="(key, staff) in $ctrl.admins"
+    <md-list-item ng-repeat="(key, staff) in $ctrl.staffs"
                   class="md-2-line" 
-                  ng-if="!$ctrl.staffs[key]">
+                  ng-if="staff.admin && ! staff.staff">
           <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
-            <h3>{{ staff.first_name }} {{ staff.last_name }}</h3>
-            <!--<h4>{{ item.what }}</h4>-->
-            <!--<p>roles:</p>-->
-              <i class="fa fa-trash" ng-click="$ctrl.remove('admin', key)"></i>
+            <h3>{{ staff.name }}  </h3>
+           <p ng-if="staff.admin">Admin Access</p>
+             <p ng-if="staff.staff">School Staff</p>
+              <p ng-if="staff.leader">School Leader</p>
+           
           </div>
           <md-divider ></md-divider>
     </md-list-item>

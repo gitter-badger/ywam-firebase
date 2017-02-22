@@ -4,8 +4,7 @@ import User from './user/user';
 import School from './school/school'; //service
 import Site from './site/site'
 
-// import Navbar from './navbar/navbar';
-// import Hero from './hero/hero';
+
 import Header from './header/header';
 import Sidenav from './sidenav/sidenav';
 import LoginButtons from './loginButtons/loginButtons';
@@ -26,8 +25,7 @@ import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 
 let commonModule = angular.module('app.common', [
-  // Navbar,
-  // Hero,
+  
   User,
   Auth,
   School,

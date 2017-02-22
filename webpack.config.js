@@ -42,7 +42,7 @@ module.exports = {
     }),
 
     new AppCachePlugin({
-      cache: ['apple-touch-icon-120x120-precomposed.png',
+      cache: [//'apple-touch-icon-120x120-precomposed.png',
               // 'css/angular-material.min.css',
               // 'css/font-awesome.min.css'
               ],

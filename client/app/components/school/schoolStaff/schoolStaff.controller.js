@@ -5,24 +5,13 @@ class SchoolStaffController {
   constructor($stateParams, School, $mdDialog, Site) {
     var ctrl = this;
     var school_id = $stateParams.school_id;
-    ctrl.staffs =  School.getStaff(school_id)
-    ctrl.admins =  School.getAdmins(school_id)
+    ctrl.staffs =  School.getStaffRoles(school_id)
+  
     ctrl.avatars = Site.avatars
 
-    ctrl.addStaff = addStaff
-    ctrl.remove = remove
-
-    function remove(type, key){
-      console.log(key)
-      console.log(type)
-       var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/'+type)
-                staffIndexRef.child(key ).remove()
-
-
-
-    }
-
-    function addStaff(type){
+    ctrl.editStaff = editStaff
+   
+    function editStaff(key){//Edit staff
        var parentEl = angular.element(document.body);
        $mdDialog.show({
          parent: parentEl,
@@ -36,8 +25,18 @@ class SchoolStaffController {
       });
       function DialogController($scope, $mdDialog, Site, $timeout, $filter) {
         $scope.staff = []
-        $scope.type= type;
-       // get the current staff 
+        $scope.key= key;
+
+        //if we are editing an existing role
+        if(key){
+            var RoleRef = firebase.database().ref('/schools/'+school_id +'/roles/'+key)
+                RoleRef.once('value',function(snap){
+                  $scope.roles = snap.val()
+                })
+
+        }else{// this is a new role get list of all staff
+
+       // get the current staff list
           var Ref = firebase.database().ref('locations/'+Site.location_id).child('current_staff_index')
               Ref.on('child_added', function(snap) {
                 console.log(snap.key)
@@ -46,12 +45,13 @@ class SchoolStaffController {
                           console.log('UserID: ',user_id)
 
                           firebase.database().ref('/profiles/'+ user_id +'/com' )
-                                         .on('value',function(snapshot) { 
+                                         .once('value',function(snapshot) { 
                                             if(snapshot.val() != null){
                                             
                                           $timeout(function() {  
-                                            var data = snapshot.val()
-                                                data.id = user_id;
+                                            var data = {name:snapshot.val().first_name +' '+snapshot.val().last_name,
+                                                      id: user_id } 
+                                               
                                         
                                           $scope.staff.push(data);
                                             });
@@ -59,6 +59,9 @@ class SchoolStaffController {
                                          },function(error){console.error(error)})                    
                 },function(error){console.error(error)});
        
+             }//end if new role 
+
+
          $scope.getMatches = function (searchText){
            
           // console.log(searchText)
@@ -66,12 +69,24 @@ class SchoolStaffController {
 
          }  
 
-         $scope.addStaff= function(){
-           console.log($scope.selectedItem.id)
-            var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/'+type)
-                staffIndexRef.child($scope.selectedItem.id ).set(true)
+         $scope.selectedItemChange = function(item){
+           $scope.selectedItem= item.id
+         }
+
+         $scope.save= function(){
+         console.log($scope.selectedItem)
+           if(!$scope.key )
+              $scope.key = $scope.selectedItem
+
+            var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/roles')
+                staffIndexRef.child($scope.key ).set($scope.roles)
                  $mdDialog.hide();
          }     
+        $scope.remove = function(user_id){
+       var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/roles/')
+                staffIndexRef.child(user_id ).remove()
+                  $mdDialog.hide();
+    } 
 
         // $scope.items = items;
         $scope.closeDialog = function() {

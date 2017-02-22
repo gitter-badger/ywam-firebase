@@ -79,7 +79,7 @@ let getApps = (school_id, accepted_only ) => {
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
                       userRef.once('value',function(snapshot) { 
                                                   school.apps[index].user  = snapshot.val()
-                                                  //  $timeout(function() {  });
+                                                   $timeout(function() {  });
                                                      getNationality(user_id, index)
                                                 })
       }
@@ -98,24 +98,27 @@ let getApps = (school_id, accepted_only ) => {
   };
 
 
-let getStaff = (school_id) => {
+let getStaffRoles = (school_id) => {
     school.staff={}
-    var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/staff')
+
+    var staffIndexRef = firebase.database().ref('/schools/'+school_id +'/roles')
     var profileRef  = firebase.database().ref('/profiles')
     
 
         staffIndexRef.on('child_added', process)
+        staffIndexRef.on('child_changed', process)
         staffIndexRef.on('child_removed', remove)
         
         function process(indexSnap) { // loop over children
           
                 var staffId = indexSnap.key;
                 console.log('adding or removing '+ staffId)
-                profileRef.child(staffId).child('com').on('value', function(profileSnap) {
+                profileRef.child(staffId).child('com').once('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
                        //get avatar as well
                             Site.getAvatar(staffId)
-                            school.staff[staffId] = profileSnap.val();
+                            school.staff[staffId] = indexSnap.val() 
+                             school.staff[staffId].name =    profileSnap.val().first_name + ' '+profileSnap.val().last_name;
                                $timeout(function() { })
                     } else { delete school.staff[staffId]
                             console.log('deleted')
@@ -140,23 +143,23 @@ let getStaff = (school_id) => {
 
 };
 
-let getAdmins = (school_id) => {
-    school.admins ={}//clear it out for swiching schools
-    var adminIndexRef = firebase.database().ref('/schools/'+school_id +'/admin')
-    var profileRef  = firebase.database().ref('/profiles')
+// let getAdmins = (school_id) => {
+//     school.admins ={}//clear it out for swiching schools
+//     var adminIndexRef = firebase.database().ref('/schools/'+school_id +'/admin')
+//     var profileRef  = firebase.database().ref('/profiles')
     
-        adminIndexRef.on('child_added', function(indexSnap) { // loop over children
-                var adminId = indexSnap.key;
-                console.log(adminId)
-                profileRef.child(adminId).child('com').on('value', function(profileSnap) {
-                    if( profileSnap.val() != null ){ 
-                            school.admins[adminId] = profileSnap.val();
-                               $timeout(function() { })
-                    } else { delete school.admins[adminId] }
-                });//end profile load
-        });//end child_added
-    return school.admins;
-};
+//         adminIndexRef.on('child_added', function(indexSnap) { // loop over children
+//                 var adminId = indexSnap.key;
+//                 console.log(adminId)
+//                 profileRef.child(adminId).child('com').on('value', function(profileSnap) {
+//                     if( profileSnap.val() != null ){ 
+//                             school.admins[adminId] = profileSnap.val();
+//                                $timeout(function() { })
+//                     } else { delete school.admins[adminId] }
+//                 });//end profile load
+//         });//end child_added
+//     return school.admins;
+// };
 
 
   let getSchool = (school_id) => {
@@ -169,7 +172,7 @@ let getAdmins = (school_id) => {
     return school.public;
   };
 
-  return { getApps, getSchool, getStaff, getAdmins};
+  return { getApps, getSchool, getStaffRoles};
 };
 
 export default SchoolFactory;

@@ -94,9 +94,10 @@ angular.module('app', [
 
 
   })
-  .run((Site,$firebaseObject)=>{ //Find location from host names
+  .run((Site,$firebaseObject, $rootScope)=>{ //Find location from host names
      "ngInject";
             Site.location_id  =  Domains[location.hostname]
+            $rootScope.location_id = Site.location_id
         var Ref = firebase.database().ref('locations_public/'+Site.location_id)
             Site.location = $firebaseObject(Ref)
         if(!Site.location_id)

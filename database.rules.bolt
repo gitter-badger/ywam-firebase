@@ -15,8 +15,8 @@ path /languages { read() { auth != null }   }
 
 //Schools
 path /schools/{id} { read() { isStaff() } }
-path /schools/{id}/staff { write() { isSchoolAdmin(id) } }
-path /schools/{id}/admin { write() { isSchoolAdmin(id) } }
+path /schools/{id}/roles { write() { isSchoolAdmin(id) } }
+
 
 //schools public data
 path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
@@ -172,10 +172,10 @@ isStaffAppAdmin(location_id) {
         }
 
 // Is this user a school admin of this school?
-isSchoolAdmin(school_id) { root.schools[school_id].admin[auth.uid] != null }
+isSchoolAdmin(school_id) { root.schools[school_id].roles[auth.uid].admin != null }
 
 // Is this user a school staff of this school?
-isSchoolStaff(school_id) { root.schools[school_id].staff[auth.uid] != null }
+isSchoolStaff(school_id) { root.schools[school_id].roles[auth.uid].staff != null }
 
 
 checkAppAccess(appID){ 
