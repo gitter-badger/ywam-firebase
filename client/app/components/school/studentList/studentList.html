@@ -47,7 +47,7 @@
 </div>
 
 <md-toolbar class="md-table-toolbar md-default" ng-show="$ctrl.selected.length" >
- 
+
   <div class="md-toolbar-tools" layout="row">
     <div>{{$ctrl.selected.length}} student{{$ctrl.selected.length > 1 ? 's':''}}  selected</div>
     
@@ -73,7 +73,7 @@
       <!-- we can let ng-repeat sort the columns for us -->
       <tr  md-row md-select="app" md-select-id="app.id" ng-repeat="app in $ctrl.apps | orderBy: $ctrl.query.order | filter:$ctrl.filterList | filter:$ctrl.searchText "
           ui-sref="school.application({app_id: app.id})" style="cursor:pointer">
-        <td md-cell>{{app.user.first_name}} </td> 
+        <td md-cell>{{app.user.first_name}}   </td> 
         <td md-cell>{{app.user.last_name}}</td> 
 
         <td md-cell> <app-status app-id="app.id"></app-status></td>

@@ -62,12 +62,12 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
      style="cursor: pointer;"  
 	 ui-sref="school.studentPhotos({school_id:sch.id})">		
 <div ng-if="!$ctrl.$mdMedia('xs')" 
-	 flex-order="1">
+	 flex-order="1" >
 	 <div  style="width:106px;  max-height:50px; overflow:hidden; ">
 	<img ng-src="{{sch.banner}}" style="width:100%" > 
 	</div>
 </div>
-<div flex flex-order="2"  style="margin-left:10px; margin-top:3px; " >
+<div flex flex-order="1" flex-order-gt-xs="2"  style="margin-left:10px; margin-top:3px; " >
 	<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>
 </div>
 
@@ -75,7 +75,7 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 		 flex-gt-xs="25"  
 		 layout="row"
 		 layout-wrap
-		 flex-order-gt-xs="3" flex-order="5"
+		 flex-order-gt-xs="3" flex-order="3"
 		 style="font-size:100%; margin-left:10px" >
 	
 
@@ -132,7 +132,7 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
 
 
-<div   style="text-align:right ; " flex-order="3"  flex-order-gt-xs="5" flex="10">
+<div   style="text-align:right ; " flex-order="2"  flex-order-gt-xs="4" flex="10">
 			<md-menu style="padding:0px">
            
             <md-button ng-click="$mdOpenMenu($event)" style="min-width:20px;  margin:0px; min-height: 20px; line-height: 20px; ">
