@@ -24,7 +24,7 @@ import roleCallsList from './roleCallsList/roleCallsList';
 import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 
-import hello from './hello/hello'
+
 
 let commonModule = angular.module('app.common', [
   
@@ -51,7 +51,7 @@ let commonModule = angular.module('app.common', [
   roleCallMemberList,
   baseProjectTaskEdit,
 
-hello
+
 
 ])
   
