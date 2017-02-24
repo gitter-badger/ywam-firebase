@@ -8,7 +8,8 @@ class UserPhotoUploadController {
      var storageRef = firebase.storage().ref('/profiles/'+ctrl.user_id);
     
     var comRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('com');
-        comRef.on('value',function(snap){
+        comRef.on('value',function(snap)
+        {
                
 
            ctrl.avatar = snap.val().avatar_1080

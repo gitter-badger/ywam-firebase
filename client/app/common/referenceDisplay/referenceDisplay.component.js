@@ -4,7 +4,7 @@ import './referenceDisplay.styl';
 
 let referenceDisplayComponent = {
   restrict: 'E',
-  bindings: {data :'='},
+  bindings: {key :'='},
   template,
   controller
 };

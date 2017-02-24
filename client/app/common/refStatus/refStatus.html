@@ -1,0 +1,25 @@
+
+
+<div class="ref-status-box">
+
+<span ng-if="$ctrl.status.current == 'sent' "  style="background-color:#49afcd"  >sent 
+    <span ng-if="$ctrl.date" > at {{$ctrl.status.sent | date}}  </span> 
+</span> 
+<span ng-if="$ctrl.status.current == 'failed' "  style="background-color:#d9534f" > failed 
+    <span ng-if="$ctrl.date" >at {{$ctrl.status.failed | date}}  </span> 
+</span>
+<span ng-if="$ctrl.status.current == 'opened' "  style="background-color:#FFCC00"  > opened
+    <span ng-if="$ctrl.date" >at {{$ctrl.status.opened | date}}  </span>
+</span> 
+<span ng-if="$ctrl.status.current == 'accessed' "  style="background-color:#FF6600"  > accessed 
+    <span ng-if="$ctrl.date" >at {{$ctrl.status.accessed | date}}  </span>
+</span> 
+<span ng-if="$ctrl.status.current == 'submitted' " style="background-color:#5cb85c"   > submitted 
+    <span ng-if="$ctrl.date" >at {{$ctrl.status.submitted | date}}  </span>
+</span> 
+<span ng-if="$ctrl.status.current == 'received' " style="background-color:#5cb85c"   > received 
+    <span ng-if="$ctrl.date" >at {{$ctrl.status.received | date}}  </span>
+</span> 
+
+
+</div>

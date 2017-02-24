@@ -6,7 +6,9 @@
         <md-icon class="fa fa-comment"></md-icon>
       </md-toolbar-filler>
       <div>
-        <h2 class="md-toolbar-tools">Reference {{r.$id}}</h2>
+        <h2 class="md-toolbar-tools">Reference {{$ctrl.id }}</h2>
+    
+          <ref-status key="$ctrl.key" date="true" ></ref-status>
         <md-menu-bar>
           
           <md-menu>
@@ -32,28 +34,28 @@
 
 <p>
   <span class="question">How well does reference know Applicant?:</span><br>
-  {{$ctrl.data.form.how_well}}</p>
+  {{$ctrl.reference.form.how_well}}</p>
 
 <p><span class="question">Does Reference think applicant is Christian?:</span><br>
-{{$ctrl.data.form.christian}}</p>
+{{$ctrl.reference.form.christian}}references
 
 <p><span class="question">Family Relations:</span><br>
-{{$ctrl.data.form.family}}</p>
+{{$ctrl.reference.form.family}}</p>
 
 <p><span class="question">Response to conflict?:</span><br>
-{{$ctrl.data.form.conflict}}</p>
+{{$ctrl.reference.form.conflict}}</p>
 
 <p><span class="question">Involvement with Church:</span><br>
-{{$ctrl.data.form.church_life}}</p>
+{{$ctrl.reference.form.church_life}}</p>
 
 <p><span class="question">Weaknesses:</span><br>
-{{$ctrl.data.form.weakness}}</p>
+{{$ctrl.reference.form.weakness}}</p>
 
 <p><span class="question">Strengths:</span><br>
-{{$ctrl.data.form.strengths}}</p>
+{{$ctrl.reference.form.strengths}}</p>
 
-<p ng-if="$ctrl.data.form.other"><span class="question">Other Notes:</span><br>
-{{$ctrl.data.form.other}}</p>
+<p ng-if="$ctrl.reference.form.other"><span class="question">Other Notes:</span><br>
+{{$ctrl.reference.form.other}}</p>
 
 </md-card-content> 
 </md-card>

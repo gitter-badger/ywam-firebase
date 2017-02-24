@@ -11,6 +11,7 @@ import LoginButtons from './loginButtons/loginButtons';
 import LoginDialog from './loginDialog/loginDialog';
 
 import appStatus from './appStatus/appStatus';
+import refStatus from './refStatus/refStatus';
 import appAdminNotes from './appAdminNotes/appAdminNotes';
 import referenceDisplay from './referenceDisplay/referenceDisplay';
 
@@ -39,6 +40,7 @@ let commonModule = angular.module('app.common', [
   LoginDialog,
 
   appStatus,
+  refStatus,
   appAdminNotes,
   contactInfo,
   healthInfo,

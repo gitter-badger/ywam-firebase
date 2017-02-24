@@ -2,12 +2,11 @@ class AppStatusController {
  /* @ngInject */
   constructor(Auth) {
       var ctrl = this;
-     
-
           ctrl.changeStatus = changeStatus
 
-      ctrl.$onInit = function(){
-        var Ref =   firebase.database().ref('/applications/'+ctrl.appId+'/meta')
+      ctrl.$onInit = function()
+      { 
+          var Ref =   firebase.database().ref('/applications/'+ctrl.appId+'/meta')
           Ref.on('value',function(snap){ //Set this as a listener because we want to see it change when we change it!
               ctrl.appMeta = snap.val()
 
@@ -27,14 +26,15 @@ class AppStatusController {
       }  
           //var 
 
-          function changeStatus(status_num){
+      function changeStatus(status_num)
+      {
             var user_id = Auth.$getAuth().uid;
             console.log(ctrl.appId)
            firebase.database().ref('applications/' +ctrl.appId + '/meta/status').set(status_num);
            firebase.database().ref('applications/' +ctrl.appId + '/meta/statuses/'+status_num +'/date').set(new Date().getTime())
            firebase.database().ref('applications/' +ctrl.appId + '/meta/statuses/'+status_num +'/user_id').set(user_id)
 
-          }
+       }
 
   }
 }
