@@ -66,8 +66,11 @@ path /applications/{id}/meta  { read() {  isStaff() }
 path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
                                  write() {auth.uid == data.parent().child('for').child('user_id').val()} }
 
-path /applications/{id}/admin_notes {read() {   isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
-                                   write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } }
+path /applications/{id}/admin_notes 
+{
+    read()  {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
+    write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } 
+}
 
 path /applications/{id}/log { read() {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
                               write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } }

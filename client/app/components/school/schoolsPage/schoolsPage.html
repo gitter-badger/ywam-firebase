@@ -58,114 +58,94 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
 <div ng-repeat="sch in $ctrl.schools | orderBy: '-public.start_date'  | filter: $ctrl.search "   >
 
-<div layout="row" layout-wrap  layout-align="space-between center"  class="row-hover"  
+<div layout="row"   layout-align="space-between center"  class="row-hover"  
      style="cursor: pointer;"  
 	 ui-sref="school.studentPhotos({school_id:sch.id})">		
-<div ng-if="!$ctrl.$mdMedia('xs')" 
-	 flex-order="1" >
-	 <div  style="width:106px;  max-height:50px; overflow:hidden; ">
-	<img ng-src="{{sch.banner}}" style="width:100%" > 
-	</div>
-</div>
-<div flex flex-order="1" flex-order-gt-xs="2"  style="margin-left:10px; margin-top:3px; " >
-	<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>
-</div>
+			
+			<div hide-xs >
+				<div  style="width:106px;  max-height:50px; overflow:hidden; ">
+				<img ng-src="{{sch.banner}}" style="width:100%" > 
+				</div>
+			</div>
 
-	<div flex="100" 
-		 flex-gt-xs="25"  
-		 layout="row"
-		 layout-wrap
-		 flex-order-gt-xs="3" flex-order="3"
-		 style="font-size:100%; margin-left:10px" >
-	
+			<div flex layout="row" layout-wrap>
+			
+			<div flex-xs="100"  flex  style=" margin-top:3px; padding-left:10px " >
+				<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>
+			</div>
 
-	<span flex-gt-xs="100" flex="60" class="md-caption" > {{ sch.public.start_date | date :'MMM d yyyy'}}
-	 
-	 - {{sch.public.end_date | date :'MMM d yyyy'}}</span>
-	
-	<!-- if start is in future -->
-	<span flex ng-if="sch.public.start_date > $ctrl.now" 
-		  style="background-color:#FFE082;padding:2px;" 
-		  class="md-caption"> Starts 
-	<span am-time-ago="sch.public.start_date"></span>
-	</span>
+			<div    flex="100" 
+					flex-gt-xs="35"  
+					layout="row"
+					layout-wrap
+					flex-order-gt-xs="3" 
+					style="font-size:100%; padding-left:10px;" >
+							
 
-	<!-- If currently running  -->
-	<span flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now 
-					  && !(sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now)" 
-		  style="background-color:#A5D6A7;padding:2px; "
-		  class="md-caption" > Running 
-		  <span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
+							<span flex-gt-xs="100" flex="60" class="md-caption" > 
+								{{ sch.public.start_date | date :'MMM d yyyy'}}
+							  - {{sch.public.end_date | date :'MMM d yyyy'}}</span>
+							
+							<!-- if start is in future -->
+							<span flex ng-if="sch.public.start_date > $ctrl.now" 
+								style="background-color:#FFE082;padding:2px;" 
+								class="md-caption"> Starts 
+							<span am-time-ago="sch.public.start_date"></span>
+							</span>
 
-		<!-- If currently on outreach  -->
-	 <span flex ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
-		  style="background-color:#A5D6A7;padding:2px; "
-		  class="md-caption" > Return from Outreach in
-		  <span am-time-ago="sch.public.outreach_end_date"  am-without-suffix="true"  ></span></span>	  
+							<!-- If currently running  -->
+							<span flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now 
+											&& !(sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now)" 
+								style="background-color:#A5D6A7;padding:2px; "
+								class="md-caption" > Running 
+								<span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span></span>
 
-
-
-	</div>
-
-
-<!--
-<div flex="10"  hide-xs   flex-order-gt-xs="4">
-	<div class="status-bar" style="width:{{sch.count.total}}px;  font-size:100%">	
-	 
-	
-		<div style="width:{{ (sch.count.started*100) / sch.count.total }}%; background-color:#3F51B5;" ></div>
-		<div style="width:{{ ((sch.count.cancelled*1 + sch.count.denied*1) *100) / sch.count.total}}%; background-color:#607D8B" ></div>
-		<div style="width:{{ ((sch.count.submited*1 + sch.count.process*1) *100) / sch.count.total}}%; background-color:#FFC107;" > 
-		<div style="top:10px; " > 
-		
-		<div ng-if="sch.count.submited>0" style="hieght:20px; background-color: #FFC107;" class="warning"> &nbsp;{{sch.count.submited}}&nbsp;New!&nbsp; </div>
-		<div ng-if="sch.count.process>0" style="hieght:20px;background-color: #FFC107; " class="warning"> &nbsp;{{sch.process_count}}&nbsp;Waiting!&nbsp; </div>
-		
-		</div>
-		</div>
-		<div style="width:{{ ((sch.count.accepted*1 + sch.count.arrived*1) *100) / sch.count.total}}%; background-color:#4CAF50" ></div>
-	</div>	
- 
-								
-</div>-->
+								<!-- If currently on outreach  -->
+							<span flex ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
+								style="background-color:#A5D6A7;padding:2px; "
+								class="md-caption" > Return from Outreach in
+								<span am-time-ago="sch.public.outreach_end_date"  am-without-suffix="true"  ></span></span>	  
 
 
 
+				</div>
 
-<div   style="text-align:right ; " flex-order="2"  flex-order-gt-xs="4" flex="10">
-			<md-menu style="padding:0px">
-           
-            <md-button ng-click="$mdOpenMenu($event)" style="min-width:20px;  margin:0px; min-height: 20px; line-height: 20px; ">
-			 <md-tooltip >
-          	View counts
-        	</md-tooltip>
-			<span class="">{{sch.count.accepted*1 + sch.count.arrived*1}}</span>
-			</md-button>
-            <md-menu-content>
-		
-				<md-menu-item>
-				{{sch.count.started}} Started
-				</md-menu-item>
-				<md-menu-item>
-				{{sch.count.cancelled}} Cancelled
-				</md-menu-item>
-				<md-menu-item>
-				{{sch.count.denied}} Denied
-				</md-menu-item>
-				<md-menu-item>
-				{{sch.count.submited}} Submited
-				</md-menu-item>
-				<md-menu-item>{{sch.count.process}} In Review
-				</md-menu-item>
-				<md-menu-item>{{sch.count.accepted}} Accepted
-				</md-menu-item>
-				<md-menu-item>{{sch.count.arrived*1}} Arrived
-				</md-menu-item>
+			</div>
+
+			<div   style="text-align:right ; "  flex="10"   >
+						<md-menu style="padding:0px">
+					
+						<md-button ng-click="$mdOpenMenu($event)" style="min-width:20px;  margin:0px; min-height: 20px; line-height: 20px; ">
+						<md-tooltip >
+						View counts
+						</md-tooltip>
+						<span class="">{{sch.count.accepted*1 + sch.count.arrived*1}}</span>
+						</md-button>
+						<md-menu-content>
+					
+							<md-menu-item>
+							{{sch.count.started}} Started
+							</md-menu-item>
+							<md-menu-item>
+							{{sch.count.cancelled}} Cancelled
+							</md-menu-item>
+							<md-menu-item>
+							{{sch.count.denied}} Denied
+							</md-menu-item>
+							<md-menu-item>
+							{{sch.count.submited}} Submited
+							</md-menu-item>
+							<md-menu-item>{{sch.count.process}} In Review
+							</md-menu-item>
+							<md-menu-item>{{sch.count.accepted}} Accepted
+							</md-menu-item>
+							<md-menu-item>{{sch.count.arrived*1}} Arrived
+							</md-menu-item>
+							
 				
-	
-            </md-menu-content>
-			</md-menu>
-</div>
+						</md-menu-content>
+						</md-menu>
+			</div>
 
 
 </div>
@@ -189,3 +169,25 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
  </div>
  </div>
+
+
+ <!--
+<div flex="10"  hide-xs   flex-order-gt-xs="4">
+	<div class="status-bar" style="width:{{sch.count.total}}px;  font-size:100%">	
+	 
+	
+		<div style="width:{{ (sch.count.started*100) / sch.count.total }}%; background-color:#3F51B5;" ></div>
+		<div style="width:{{ ((sch.count.cancelled*1 + sch.count.denied*1) *100) / sch.count.total}}%; background-color:#607D8B" ></div>
+		<div style="width:{{ ((sch.count.submited*1 + sch.count.process*1) *100) / sch.count.total}}%; background-color:#FFC107;" > 
+		<div style="top:10px; " > 
+		
+		<div ng-if="sch.count.submited>0" style="hieght:20px; background-color: #FFC107;" class="warning"> &nbsp;{{sch.count.submited}}&nbsp;New!&nbsp; </div>
+		<div ng-if="sch.count.process>0" style="hieght:20px;background-color: #FFC107; " class="warning"> &nbsp;{{sch.process_count}}&nbsp;Waiting!&nbsp; </div>
+		
+		</div>
+		</div>
+		<div style="width:{{ ((sch.count.accepted*1 + sch.count.arrived*1) *100) / sch.count.total}}%; background-color:#4CAF50" ></div>
+	</div>	
+ 
+								
+</div>-->

@@ -63,18 +63,16 @@ class SidenavController {
     // state: 'app.groups',
     // fa_icon:'fa fa-users'}, 
 
-    // {title: 'Accounting',
-    // state: 'accounting',
-    // fa_icon:'fa fa-eur'},
+    
 
     
     // {title: 'Nations',
     // state: 'app.nations',
     // fa_icon:'icon-globe'},
 
-    {title: 'Projects',
-    state: 'projects',
-    fa_icon:'fa fa-star-o'},
+    // {title: 'Projects',
+    // state: 'projects',
+    // fa_icon:'fa fa-star-o'},
 
     //   {title: 'Updates',
     // state: 'app.dashboard',
@@ -110,6 +108,24 @@ class SidenavController {
       {title: 'Translation',
     state: 'translation',
     fa_icon:'fa fa-language'}, 
+
+     {title: 'In Development',
+    // state: 'app.finance',
+    fa_icon:'fa fa-flask',
+
+    sub_nav: [  
+             {title: 'Projects',
+              state: 'projects',
+              fa_icon:'fa fa-star-o'},
+               {title: 'Server Tasks',
+              state: 'settings',
+              fa_icon:'fa fa-server'},
+              {title: 'Accounting',
+              state: 'accounting',
+              fa_icon:'fa fa-eur'},
+              ]
+            }, 
+
 
 ]
   $rootScope.$on('$viewContentLoaded',function(){

@@ -2,6 +2,18 @@
 
 <div flex  flex-offset-gt-md="10" flex-gt-md="80">
 
+
+
+<md-card ng-show="$ctrl.selected.length">
+  <md-card-content>
+    Actions for selected:<br>
+    <div  ng-repeat="(key,item) in $ctrl.statuses">
+        <a ng-click="$ctrl.setStatusSelected(key)"> set all as {{item.text}}</a>
+    </div>
+
+  </md-card-content>
+</md-card>
+
 <md-card >
 
 <div layout="row">

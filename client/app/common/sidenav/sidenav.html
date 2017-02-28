@@ -40,12 +40,15 @@
 
                   <!-- SUBITEMS -->
                     <div ng-repeat="sub_item in item.sub_nav" class="sub_nav"  ng-if=" item.active" > 
-                    <a class="ml-side-menu-button" layout ng-click="$ctrl.sideBarNav(sub_item)" ng-class="{'active': sub_item.active}">
+                        <a class="side-menu-button" 
+                           layout="row" 
+                           ng-click="$ctrl.sideBarNav(sub_item)" 
+                           ng-class="{'active': sub_item.active}">
                     <span style="width:25px;">   
                     <i class="material-icons">{{sub_item.md_icon}}</i> 
                     <i class="fa {{sub_item.fa_icon}}"></i> 
                     </span>
-                    <span >{{sub_item.title}}</span></a>
+                    <span flex>{{sub_item.title}}</span></a>
                     <md-divider ng-if="!$last"></md-divider>
                     </div>
 

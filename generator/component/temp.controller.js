@@ -1,5 +1,7 @@
-class <%= upCaseName %>Controller {
-  constructor() {
+class <%= upCaseName %>Controller 
+{
+  constructor() 
+  {
     this.name = '<%= name %>';
   }
 }

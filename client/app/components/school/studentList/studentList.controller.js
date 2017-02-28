@@ -1,9 +1,10 @@
 class StudentListController {
     /* @ngInject */
-  constructor($stateParams, $firebaseObject,$timeout,School) {
+  constructor($stateParams, $firebaseObject,$timeout,School, Auth) {
     var ctrl = this;
         ctrl.selected = [];
         ctrl.filterList = filterList;
+        ctrl.setStatusSelected = setStatusSelected
         ctrl.query = {
                       order: ['meta.status','user.first_name'],
                       limit: 5,
@@ -36,6 +37,22 @@ class StudentListController {
            show =  true;
           return show;
         };
+
+     function setStatusSelected(status_num)
+     {    var user_id = Auth.$getAuth().uid;
+          ctrl.selected.forEach(function(item){
+          console.log('seting status of '+item.id)
+
+           firebase.database().ref('applications/' +item.id + '/meta/status').set(status_num);
+           firebase.database().ref('applications/' +item.id + '/meta/statuses/'+status_num +'/date').set(new Date().getTime())
+           firebase.database().ref('applications/' +item.id + '/meta/statuses/'+status_num +'/user_id').set(user_id)
+
+         
+        })
+
+
+
+     }   
    
           
     
