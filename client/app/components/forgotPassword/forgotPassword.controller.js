@@ -1,13 +1,12 @@
 class ForgotPasswordController {
    /* @ngInject */
-  constructor(Auth) {
+  constructor(Auth,$state) {
   
     var ctrl = this; 
 
         ctrl.send = function(){
 
           var emailAddress = ctrl.email;
-
           Auth.$sendPasswordResetEmail(emailAddress).then(function(result) {
                 console.log(result)
                   // Email sent.
@@ -18,6 +17,11 @@ class ForgotPasswordController {
                 });
 
         }
+
+         Auth.$onAuthStateChanged(function(firebaseUser) {
+              if(firebaseUser)
+                $state.go('home')
+          });
 
   }
 }
