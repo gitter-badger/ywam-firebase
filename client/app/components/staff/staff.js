@@ -10,7 +10,8 @@ let staffModule = angular.module('staff', [
   $stateProvider
     .state('staff', {
       url: '/staff',
-      component: 'staff'
+      component: 'staff',
+      data: {authRequired:true},
     });
 })
 .component('staff', staffComponent)

@@ -109,7 +109,8 @@ angular.module('app', [
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
-       $rootScope.$broadcast('hideLoginDialog');
+      
+          $rootScope.$broadcast('hideLoginDialog');
 
         if( state.data != null ){
          if(state.data.authRequired === true && !Auth.$getAuth()){
@@ -120,7 +121,6 @@ $transitions.onStart({
           
         }
   
-
     },
     from:function(state){
         //set previous state

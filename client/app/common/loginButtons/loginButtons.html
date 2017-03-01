@@ -11,17 +11,20 @@
        <md-input-container  class="no-md-error login-inputs" md-no-float >
         <input placeholder="password" type="password" ng-model="$ctrl.password">
        </md-input-container>
-       <div style="border: solid 1px red ">
+       <!--<div style="border: solid 1px red ">
        If you previously had a mission-live.com account <br>please reset your password <a ui-sref="forgotPassword"> here</a>
-       </div>
+       </div>-->
     <!--<div layout="row">
                <span flex></span>-->
                 <!--<md-button>Sign up</md-button>-->
                 <md-button type="submit" class="md-primary md-raised">login</md-button>
        <!--</div>-->
        </form>
-        <div style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="forgotPassword">
+        <a style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="forgotPassword">
          Forgot Password
-        </div>
+        </a>
+        <a style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="forgotPassword">
+         Sign Up
+        </a>
 
 </div>
