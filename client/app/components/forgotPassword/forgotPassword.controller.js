@@ -11,9 +11,16 @@ class ForgotPasswordController {
                 console.log(result)
                   // Email sent.
                   ctrl.message = 'Please check your email';
+                  ctrl.error_message = ''
+                  
                 }, function(error) {
                   // An error happened.
                   console.log(error)
+                  ctrl.error_message =error.message;
+
+                  ctrl.error_key = error.code.replace(/[/[\]'.]/g, "");
+                  console.log('error_key for translation:'+ ctrl.error_key)
+
                 });
 
         }
