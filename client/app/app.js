@@ -125,9 +125,9 @@ $transitions.onStart({
     from:function(state){
         //set previous state
         //console.log(state.name)
-        $state.previous = {name : $state.current.name, 
-                          params: $state.params
-                        }
+        $state.previous = { name : $state.current.name, 
+                            params: $state.params
+                          }
      
        // console.log($state.previous.name)
     }

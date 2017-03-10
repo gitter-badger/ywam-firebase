@@ -6,7 +6,8 @@ let appStatusComponent = {
   restrict: 'E',
   bindings: { appId : '=',
               date : '=',
-              who: '='},
+              who: '=',
+              admin:'='},
   template,
   controller
 };
