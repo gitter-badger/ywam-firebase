@@ -2,14 +2,15 @@
 <md-menu class="app-status-menu">
 <div class="app-status-{{$ctrl.appMeta.status}} app-status-box"  ng-click="$mdOpenMenu()"> 
     
-<span ng-if="$ctrl.appMeta.status < 8 ">Started </span>
-<span ng-if="$ctrl.appMeta.status == 8">Cancelled </span>
-<span ng-if="$ctrl.appMeta.status == 10">Submitted </span>
-<span ng-if="$ctrl.appMeta.status == 11">In Review </span>
-<span ng-if="$ctrl.appMeta.status == 12">Denied</span>
-<span ng-if="$ctrl.appMeta.status == 13">Accepted </span>
-<span ng-if="$ctrl.appMeta.status == 30">Arrived </span>
-<span ng-if="$ctrl.appMeta.status == 70">Alumni</span>
+<span ng-if="$ctrl.appMeta.status < 8 " translate="started">Started </span>
+<span ng-if="$ctrl.appMeta.status == 8" translate="cancelled">Cancelled </span>
+<span ng-if="$ctrl.appMeta.status == 9" translate="withdrawn">Withdrawn </span>
+<span ng-if="$ctrl.appMeta.status == 10" translate="submitted">Submitted </span>
+<span ng-if="$ctrl.appMeta.status == 11" translate="in_review">In Review </span>
+<span ng-if="$ctrl.appMeta.status == 12" translate="denied">Denied</span>
+<span ng-if="$ctrl.appMeta.status == 13" translate="accepted">Accepted </span>
+<span ng-if="$ctrl.appMeta.status == 30" translate="arrived">Arrived </span>
+<span ng-if="$ctrl.appMeta.status == 70" translate="completed">Completed</span>
 
 <span ng-if="$ctrl.date"> (<span am-time-ago="$ctrl.appMeta.statuses[$ctrl.appMeta.status].date"></span> ) </span>
  {{$ctrl.status_by}} 
@@ -19,43 +20,51 @@
 
 
  <md-menu-content ng-show="$ctrl.admin"> 
-      <md-menu-item>
-            <md-button ng-click="$ctrl.changeStatus(11)" > 
-                 <div class="app-status-11 app-status-menu-icon"></div> Set As "In Review"
+     
+     <md-menu-item >
+            <md-button ng-click="$ctrl.changeStatus(1)" >
+                 <div class="app-status-1 app-status-menu-icon"></div>set as "{{"started" | translate}}"
+            </md-button> 
+        </md-menu-item>
+     
+      <md-menu-item >
+            <md-button ng-click="$ctrl.changeStatus(8)" >
+                 <div class="app-status-8 app-status-menu-icon"></div>set as "{{"cancelled" | translate}}"
             </md-button> 
         </md-menu-item> 
+     
+     <md-menu-item >
+            <md-button ng-click="$ctrl.changeStatus(9)" >
+                 <div class="app-status-9 app-status-menu-icon"></div>set as "{{"withdrawn" | translate}}"
+            </md-button> 
+        </md-menu-item>
+     
+      <md-menu-item>
+            <md-button ng-click="$ctrl.changeStatus(11)" > 
+                 <div class="app-status-11 app-status-menu-icon"></div>set as "{{"in_review" | translate}}"
+            </md-button> 
+        </md-menu-item> 
+     
+     <md-menu-item > 
+            <md-button ng-click="$ctrl.changeStatus(12)" >
+                 <div class="app-status-12 app-status-menu-icon"></div>set as "{{"denied" | translate}}"
+            </md-button> 
+        </md-menu-item>
         
         <md-menu-item >  
             <md-button ng-click="$ctrl.changeStatus(13)" >
-                 <div class="app-status-13 app-status-menu-icon"></div>Accept Application
+                 <div class="app-status-13 app-status-menu-icon"></div>set as "{{"accepted" | translate}}"
             </md-button> 
         </md-menu-item>
            <md-menu-item >  
             <md-button ng-click="$ctrl.changeStatus(30)" >
-                 <div class="app-status-30 app-status-menu-icon"></div>Mark as Arived
+                 <div class="app-status-30 app-status-menu-icon"></div>set as "{{"arrived" | translate}}"
             </md-button> 
         </md-menu-item>
-        
-        <md-menu-item >
-            <md-button ng-click="$ctrl.changeStatus(8)" >
-                 <div class="app-status-8 app-status-menu-icon"></div>Cancel Application
-            </md-button> 
-        </md-menu-item>
-        
-        <md-menu-item >
-            <md-button ng-click="$ctrl.changeStatus(1)" >
-                 <div class="app-status-1 app-status-menu-icon"></div>Restart Application
-            </md-button> 
-        </md-menu-item>  
-            
-        <md-menu-item > 
-            <md-button ng-click="$ctrl.changeStatus(12)" >
-                 <div class="app-status-12 app-status-menu-icon"></div> Deny Application
-            </md-button> 
-        </md-menu-item>
+       
         <md-menu-item > 
             <md-button ng-click="$ctrl.changeStatus(70)" >
-                 <div class="app-status-1 app-status-menu-icon"></div> Set as Alumni
+                 <div class="app-status-1 app-status-menu-icon"></div>set as "{{"completed" | translate}}"
             </md-button> 
         </md-menu-item>
  
