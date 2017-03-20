@@ -17,8 +17,8 @@ Memory Usage: {{$ctrl.stats.memory}}MB
   <div flex>{{item.reference}}</div>
    <div flex>{{item.function}}</div>
     <div flex="10">
-      {{item.status ==0 ? 'pending':'' }}
-      {{item.status ==1 ? 'working':'' }}
+      {{item.status ==0 ? 'Waiting Urgent':'' }}
+      {{item.status ==1 ? 'Waiting':'' }}
       {{item.status ==2 ? 'completed':'' }}</div>
      <div flex="15">
        <span ng-if="!item.completed_time">

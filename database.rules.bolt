@@ -60,7 +60,7 @@ path /applications/{id}/reference1/user  {
 //                                   write() {auth.uid == root.applications[id].for.user_id}
 //                                 }  
 
-path /applications/{id}/meta  { read() {  isStaff() }  
+path /applications/{id}/meta  { read() {  isStaff() ||  auth.uid == data.parent().child('for').child('user_id').val() }  
                                 write() {  checkAppAccess(id) }
                                 }                                
 path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
