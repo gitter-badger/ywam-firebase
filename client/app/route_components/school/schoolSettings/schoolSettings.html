@@ -15,8 +15,8 @@
 
 <div layout="row" layout-align="center">
 <!-- Preview of what is seen on apply site -->
-<md-card  flex="100" flex-gt-xs="50"  flex-gt-sm="30">
-     <img ng-src="{{public.banner_1080}}" alt=" {{public.name}}" style="    height: initial !important;" >
+<!--<md-card  flex="100" flex-gt-xs="50"  flex-gt-sm="30">
+     <img ng-src="{{public.banner_1080}}" ng-if="public.banner_1080" alt="{{public.name}}" style="    height: initial !important;" >
      <md-card-title>
           <md-card-title-text>
             <span class="md-headline"> {{public.name}}</span>
@@ -33,15 +33,15 @@
         <md-card-content>
          
             
-            <!--{{public.description}}-->
+     
          
         </md-card-content>
          <md-card-actions layout="row" layout-align="end center">
-          <!--<md-button>More Info</md-button>-->
+  
           <md-button ng-click="$ctrl.applyNow(public.id)">Apply Now</md-button>
          
         </md-card-actions>
-   </md-card>
+   </md-card>-->
 
 </div>
 

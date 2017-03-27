@@ -4,6 +4,7 @@ let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment,
     apps : [],
     staff:{},
     stats: {started_week:[]}
+
   };
   const stats = {started_week:[]}
 let getApps = (school_id, accepted_only ) => {
@@ -74,7 +75,7 @@ let getApps = (school_id, accepted_only ) => {
 
       function getProfileCom(user_id, index){
                       //get avatar as well
-                      Site.getAvatar(user_id)
+                    //  Site.getAvatar(user_id)
                    
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
                       userRef.once('value',function(snapshot) { 
@@ -116,9 +117,10 @@ let getStaffRoles = (school_id) => {
                 profileRef.child(staffId).child('com').once('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
                        //get avatar as well
-                            Site.getAvatar(staffId)
+                           
                             school.staff[staffId] = indexSnap.val() 
                              school.staff[staffId].name =    profileSnap.val().first_name + ' '+profileSnap.val().last_name;
+                             school.staff[staffId].avatar = profileSnap.val().avatar_200
                                $timeout(function() { })
                     } else { delete school.staff[staffId]
                             console.log('deleted')
@@ -143,22 +145,22 @@ let getStaffRoles = (school_id) => {
 
 };
 
-// let getAdmins = (school_id) => {
-//     school.admins ={}//clear it out for swiching schools
-//     var adminIndexRef = firebase.database().ref('/schools/'+school_id +'/admin')
+// let getLeaders = (school_id) => {
+//     var leaders ={}//clear it out for swiching schools
+//     var rolesIndexRef = firebase.database().ref('/schools/'+school_id +'/roles').orderByChild('leader').equalTo(true)
 //     var profileRef  = firebase.database().ref('/profiles')
     
-//         adminIndexRef.on('child_added', function(indexSnap) { // loop over children
-//                 var adminId = indexSnap.key;
-//                 console.log(adminId)
-//                 profileRef.child(adminId).child('com').on('value', function(profileSnap) {
+//         rolesIndexRef.on('child_added', function(indexSnap) { // loop over children
+//                 var rolesId = indexSnap.key;
+//                 console.log(rolesId)
+//                 profileRef.child(rolesId).child('com').on('value', function(profileSnap) {
 //                     if( profileSnap.val() != null ){ 
-//                             school.admins[adminId] = profileSnap.val();
+//                             school.leaders[rolesId] = profileSnap.val();
 //                                $timeout(function() { })
-//                     } else { delete school.admins[adminId] }
+//                     } else { delete school.leaders[rolesId] }
 //                 });//end profile load
 //         });//end child_added
-//     return school.admins;
+//     return leaders;
 // };
 
 

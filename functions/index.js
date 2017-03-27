@@ -3,6 +3,7 @@ var functions = require('firebase-functions');
 exports.applications = require('./applications/index.js')
 exports.avatars = require('./avatars/index.js')
 
+exports.schools = require('./schools/index.js')
 // // Start writing Firebase Functions
 // // https://firebase.google.com/functions/write-firebase-functions
 //

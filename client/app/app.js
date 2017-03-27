@@ -32,17 +32,8 @@ import Domains from './domains.json'
 import  firebase from 'firebase';
 window.firebase = firebase //angularfire expects firebase as a global varible for some reason?
 // import 'firebase-util'; // this will be useful once it supports the 3.0 SDK
-
-//------- Initialize Firebase
-        var config = {
-          apiKey: "AIzaSyBSBD_FNaMQZyd3h0mcv0ZMUt9QXY2m3f4",
-          authDomain: "staffapp-95f17.firebaseapp.com",
-          databaseURL: "https://staffapp-95f17.firebaseio.com",
-          storageBucket: "staffapp-95f17.appspot.com",
-        };
-        firebase.initializeApp(config);
-
 import 'angularfire';
+
 
 
 
@@ -61,6 +52,18 @@ angular.module('app', [
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     // $locationProvider.html5Mode(true).hashPrefix('!');
+
+
+//------- Initialize Firebase
+        var config = {
+          apiKey: "AIzaSyBSBD_FNaMQZyd3h0mcv0ZMUt9QXY2m3f4",
+          authDomain: "staffapp-95f17.firebaseapp.com",
+          databaseURL: "https://staffapp-95f17.firebaseio.com",
+          storageBucket: "staffapp-95f17.appspot.com",
+        };
+        firebase.initializeApp(config);
+
+
 
 //------  Angular Translate Settings
       $translateProvider

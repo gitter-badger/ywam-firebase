@@ -64,7 +64,8 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 			
 			<div hide-xs >
 				<div  style="width:106px;  max-height:50px; overflow:hidden; ">
-				<img ng-src="{{sch.banner}}" style="width:100%" > 
+				<img firebase-src="{{sch.public.banner_100}}"
+				style="width:100%" > 
 				</div>
 			</div>
 
@@ -72,6 +73,11 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 			
 			<div flex-xs="100"  flex  style=" margin-top:3px; padding-left:10px " >
 				<span  class="md-title" style="font-size:110%; "  >  {{sch.public.name}}</span>
+				<div class="md-caption">
+				<span ng-repeat="leader in sch.leaders">{{leader.first_name}} {{leader.last_name|limitTo:1}}.
+					<!--<span ng-if="!$last">,</span>	-->
+				</span>
+				</div>
 			</div>
 
 			<div    flex="100" 

@@ -7,7 +7,7 @@ class SchoolStaffController {
     var school_id = $stateParams.school_id;
     ctrl.staffs =  School.getStaffRoles(school_id)
   
-    ctrl.avatars = Site.avatars
+    // ctrl.avatars = Site.avatars
 
     ctrl.editStaff = editStaff
    

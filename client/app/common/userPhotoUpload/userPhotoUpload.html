@@ -1,22 +1,28 @@
 
-<div layout="row" layout-align="center">
+<div ng-show="$ctrl.avatar" layout="row">
+<span flex></span>
+<md-button ng-click="$ctrl.avatar = false">change photo</md-button>
+<!--<img ng-src="{{$ctrl.avatar_200}}" alt="" height="100px">-->
 
-<md-card flex-gt-sm="60">
-   <md-progress-linear md-mode="determinate" value="{{$ctrl.upload_progress}}"></md-progress-linear>
+ <img  alt=""
+          ng-if="$ctrl.avatar && !$ctrl.processing"
+         
+           height="100px"
+           firebase-src="{{$ctrl.avatar}}"
+           >
+    
 
-<md-card-content>  
-<div ng-hide="$ctrl.myImage">
-Please upload a portrait Photo where your face is clearly visible! 
-<br />
-<br />  
-
- <div>Select an image file: <input type="file" id="fileInput" /></div>
-
+      
 </div>
+<div ng-hide="$ctrl.avatar || $ctrl.processing">
 
-<md-button ng-show="$ctrl.myImage" ng-click="$ctrl.savePhoto()" class="pull-right btn btn-primary">Save</md-button>
+<md-progress-linear md-mode="{{$ctrl.upload_progress < 10 && $ctrl.upload_progress  ? 'indeterminate': 'determinate'}}" 
+value="{{$ctrl.upload_progress}}"></md-progress-linear>
 
- <div class="cropArea"  ng-show="$ctrl.myImage"   >
+<md-card-content>
+Please upload a portrait Photo where your face is clearly visible.
+
+<div class="cropArea" ng-hide="!$ctrl.file_selected"  >
   
 
 
@@ -28,13 +34,32 @@ Please upload a portrait Photo where your face is clearly visible!
         result-image-quality="1"
         result-image-size="1080"
         result-image-format="image/jpeg"
-        area-type="square">
-        
-        
-        </img-crop>
+        area-type="square"></img-crop>
    </div>  
 
-  </md-card-content>
- 
-</md-card>
+<div layout="row">
+<span flex> </span>
+<span ng-hide="$ctrl.file_selected">
+<input class="ng-hide" id="fileInput" multiple type="file" />
+<label for="fileInput" class="md-button md-raised md-primary">Choose File</label>
+</span>
+
+
+<md-button ng-hide="!$ctrl.file_selected" 
+           ng-click="$ctrl.savePhoto()" class="md-raised btn btn-primary md-primary">Save</md-button>
+
+
+
+
+</div>
+</div>
+
+<div layout="row" layout-align="center " ng-if="$ctrl.processing" style="padding: 25px">
+   <span flex></span>     
+   <md-progress-circular   md-mode="indeterminate"></md-progress-circular>  
+
+</div>
+
+
+</md-card-content>
 </div>

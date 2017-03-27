@@ -22,7 +22,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
                site.user.id = firebaseUser.uid;
                console.log('we have changed user '+firebaseUser.uid )
 
-                getAvatar(site.user.id)  
+              //  getAvatar(site.user.id)  
 
 
                 }   

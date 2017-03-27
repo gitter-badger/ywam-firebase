@@ -33,8 +33,9 @@
      <div  ng-click="$mdOpenMenu($event)" style="height:48px">
       
       <img  alt=" "
-           style="border-radius: 50%; height:100%"
-           ng-src="{{$ctrl.avatars[ $ctrl.user.id] }}">
+            ng-if="$ctrl.user.com.avatar_200"
+            style="border-radius: 50%; height:100%"
+            firebase-src="{{$ctrl.user.com.avatar_200}}" >
       </div>     
       <md-menu-content  width="3" >
           <md-menu-item><md-button ui-sref="profile({user_id:$ctrl.user.id })"> Your Profile </md-button> </md-menu-item>
@@ -48,4 +49,3 @@
  <div ng-hide="$ctrl.presence.$value">
      <md-progress-linear md-mode="indeterminate"></md-progress-linear>
  </div>
-{{$ctrl.avatar}}

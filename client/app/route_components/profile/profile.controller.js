@@ -11,12 +11,12 @@ class ProfileController {
           //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
           //this can be changed till then:
           Ref.on('value', snap=>{
-              console.log(snap.val().com.avatar_640)
-              firebase.storage().refFromURL(snap.val().com.avatar_640)
-              .getDownloadURL().then(function(url){
-               $timeout(function(){})
-                ctrl.avatar_640 =  url 
-                })
+            //   console.log(snap.val().com.avatar_640)
+            //   firebase.storage().refFromURL(snap.val().com.avatar_640)
+            //   .getDownloadURL().then(function(url){
+            //    $timeout(function(){})
+            //     ctrl.avatar_640 =  url 
+            //     })
           })
 
   }

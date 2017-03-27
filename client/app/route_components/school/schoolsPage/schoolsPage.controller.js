@@ -31,21 +31,15 @@ class SchoolsPageController {
                                 if( snapshot.val() != null )  {
                                    var data = snapshot.val();
                                       data.id = key;
-                                      
-                                     if(data.public.banner_1080){ 
-                                       //get banner
-                                    var storageRef = firebase.storage().ref("schools_public/"+key).child('banner_1080.jpg');
-                                      
-                                    $firebaseStorage(storageRef).$getDownloadURL()
-                                          .then(function(url) {
-                                                  data.banner = url;
-                                                });;
-                                      }
+                                      data.leaders ={}
+                                   
 
                                        if(index >-1){
                                         ctrl.schools[index] = data 
+                                        
                                        }else{
-                                          ctrl.schools.push(data );
+                                        var newIndex =   ctrl.schools.push(data );
+                                          getLeaders(newIndex,data) 
                                           if(data.public.is_secondary)
                                           ctrl.total_secondary_students += data.count.arrived
                                           else
@@ -53,7 +47,7 @@ class SchoolsPageController {
                                         }
                                     
 
-                                      getLeaders(index,data) 
+                                     
                                     }
                                // else { delete ctrl.schools[key] }
                                 });
@@ -67,8 +61,22 @@ class SchoolsPageController {
 
 function getLeaders(index,school){
 
-  console.log(school.leaders)
-//ctrl.schools[index].
+  // console.log(school.leaders)
+    index--
+    var rolesIndexRef = firebase.database().ref('/schools/'+school.id +'/roles').orderByChild('leader').equalTo(true)
+    var profileRef  = firebase.database().ref('/profiles')
+    
+        rolesIndexRef.on('child_added', function(indexSnap) { // loop over children
+                var rolesId = indexSnap.key;
+                // console.log(rolesId)
+                profileRef.child(rolesId).child('com').on('value', function(profileSnap) {
+                    if( profileSnap.val() != null ){ 
+                            ctrl.schools[index].leaders[rolesId] = profileSnap.val();
+                               $timeout(function() { })
+                    } else { delete ctrl.schools[index].leaders[rolesId] }
+                });//end profile load
+        });//end child_added
+
 
 }
 

@@ -24,7 +24,7 @@ class StaffCurrentController {
                                                 data.id = user_id;
 
                                            var index =  ctrl.staff.push(data);
-                                           Site.getAvatar( user_id)
+                                         //  Site.getAvatar( user_id)
                                            
                                            
                                             }

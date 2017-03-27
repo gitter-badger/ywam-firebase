@@ -1,50 +1,58 @@
 class UserPhotoUploadController {
     /* @ngInject */
-  constructor($scope,Auth,$firebaseObject, $stateParams,$state,$timeout,) {
+  constructor($scope,Auth,$firebaseObject, $timeout) {
     var ctrl = this;
-    ctrl.user_id = $stateParams.user_id
+    ctrl.user_id = Auth.$getAuth().uid
     ctrl.avatar = null;
-
-     var storageRef = firebase.storage().ref('/profiles/'+ctrl.user_id);
-    
-    var comRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('com');
-        comRef.on('value',function(snap)
-        {
-               
-
-           ctrl.avatar = snap.val().avatar_1080
-
-              console.log(snap.val().current_avatar_id)
-              
-           firebase.storage().refFromURL(snap.val().avatar_200).getDownloadURL().then(function(url){
-                console.log('got download url '+ url)
-                $timeout(function(){
-                ctrl.avatar_200 =  url 
-
-                })
-              
-           })
-         
-        })
-       
-   
     ctrl.myImage= null;//$firebaseObject(comRef)
     ctrl.myCroppedImage='';
     ctrl.savePhoto = savePhoto;
+    ctrl.$onInit = onInit
+
+function onInit(){
+  
+    
+    var comRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('com');
+        comRef.child('avatar_200').on('value',function(snap){
+          ctrl.processing = false
+          ctrl.avatar =snap.val();
+       })
 
 
     angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
     
+  //  var fileInput =  document.getElementById('fileInput')
+  //      fileInput.addEventListener('change', function(e){
+  //       var file =   e.target.files[0];
+  //        ctrl.myImage = file
+  //        ctrl.file_selected = true
+  //        console.log('changed file!!')
+  //        $timeout(()=>{})
+
+  //      })  
+  // }
+    
+     function handleFileSelect(evt) {
+          var file=evt.currentTarget.files[0];
+          var reader = new FileReader();
+          reader.onload = function (evt) {
+            $scope.$apply(function($scope){
+               ctrl.file_selected = true
+              ctrl.myImage=evt.target.result;
+            });
+          };
+          reader.readAsDataURL(file);
+         
+      };
+  };
+
+
     function savePhoto(){
-       
-       ctrl.upload_progress = 1
-      
-      // Create a root reference
+        var storageRef = firebase.storage().ref('/profiles/'+ctrl.user_id+'/avatars');
+        ctrl.upload_progress = 1
 
-      var file =  ctrl.myCroppedImage
-      // console.log(file)
-
-     var uploadTask = storageRef.child('avatar_1080.jpg' ).put(file);
+        var file =  ctrl.myCroppedImage
+        var uploadTask = storageRef.child('avatar.jpg' ).put(file);
 
             // Register three observers:
         // 1. 'state_changed' observer, called any time the state changes
@@ -69,35 +77,9 @@ class UserPhotoUploadController {
           // Handle unsuccessful uploads
         }, function() {
           // Handle successful uploads on complete
-          // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          var downloadURL = uploadTask.snapshot.downloadURL;
-          console.log('finished upload: ' +downloadURL)
+          
+          ctrl.processing = true;
 
-          //Save the URL to users profile
-       
-
-          //push a new avatar_id into the avatars node
-          var data=  {1080:false}
-       firebase.database().ref('/profiles/' +ctrl.user_id ).child('avatars').push(data)
-              .then(function(snap){
-                console.log(snap.key)
-                comRef.child('current_avatar_id').set(snap.key);
-
-            //navigate to return state
-            if($state.previous.name != 'userPhotoUpload'){
-                console.log('going back somewhere')
-               $state.go($state.previous.name, $state.previous.params)
-            }else {
-                console.log('going to profile' +$stateParams.user_id)
-                $state.go('profile', {user_id:$stateParams.user_id}  );  
-            }
-         
-              
-            
-            }) ;
-            
-              //
-    
 
         });
 
@@ -106,18 +88,7 @@ class UserPhotoUploadController {
 
     }
     
-    function handleFileSelect(evt) {
-          var file=evt.currentTarget.files[0];
-          var reader = new FileReader();
-          reader.onload = function (evt) {
-            $scope.$apply(function($scope){
-              ctrl.myImage=evt.target.result;
-            });
-          };
-          reader.readAsDataURL(file);
-         
-        };
-
+   
 
 
 

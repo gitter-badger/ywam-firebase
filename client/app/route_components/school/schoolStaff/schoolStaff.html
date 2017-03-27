@@ -11,7 +11,7 @@
     <md-list-item ng-repeat="(key, staff) in $ctrl.staffs" class="md-2-line"
      ng-if="staff.staff"
      ng-click="$ctrl.editStaff(key)">
-          <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
+          <img firebase-src="{{staff.avatar}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
             <h3>{{ staff.name }} </h3>
             <!--<h4>{{ staff }}</h4>-->
@@ -32,16 +32,16 @@
         
     </h1>
     <small>  can see applications.. etc.</small>
-   
+
     <!--<md-button ng-click="$ctrl.addStaff('admin')">Add Admin</md-button>-->
 
 <md-list class="md-dense">
     <md-list-item ng-repeat="(key, staff) in $ctrl.staffs"
                   class="md-2-line" 
                   ng-if="staff.admin && ! staff.staff">
-          <img ng-src="{{$ctrl.avatars[key]}}" class="md-avatar" alt="{{ staff.first_name }}" />
+          <img firebase-src="{{staff.avatar}}" class="md-avatar" alt="{{ staff.first_name }}" />
          <div class="md-list-item-text" layout="column">
-            <h3>{{ staff.name }}  </h3>
+            <h3>{{ staff.name }}   </h3>
            <p ng-if="staff.admin">Admin Access</p>
              <p ng-if="staff.staff">School Staff</p>
               <p ng-if="staff.leader">School Leader</p>
