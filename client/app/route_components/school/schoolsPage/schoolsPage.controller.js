@@ -8,15 +8,16 @@ class SchoolsPageController {
       var ctrl = this
           //ctrl.schools = []// $firebaseArray(ref);
           ctrl.now = moment().format("YYYY-MM-DD");
+          ctrl.in30days = moment().add(30, 'days').format("YYYY-MM-DD");
           ctrl.$mdMedia = $mdMedia
       
        ref.on('value', function(snapshot) {
-            console.log('got school index')
+           // console.log('got school index')
             ctrl.schools = []
             ctrl.total_dts_students = 0
             ctrl.total_secondary_students = 0
             angular.forEach(snapshot.val(), function(value, key){
-                console.log('looking up'+ key)
+              //  console.log('looking up'+ key)
               firebase.database().ref('/schools/'+key )
                   .on('value',function(snapshot) {
 

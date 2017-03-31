@@ -20,9 +20,9 @@ float:left;
 
 <div layout="row" layout-wrap layout-align="center" >
 
-<div flex-gt-xs="75">
+<div flex-gt-xs="75" flex-xs="100" class="print_width_100">
 
-<div layout="row" layout-align="center center" hide-xs >  
+<div layout="row" layout-align="center center" hide-xs class="no-print" >  
 <md-input-container > 
 <input ng-model="$ctrl.search" placeholder="filter">
 </md-input-container>
@@ -94,7 +94,7 @@ float:left;
                     position: relative; " >  
 <div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
 
-<img ng-src="{{$ctrl.avatars[app.for.user_id]}}" width="100%" >
+<img firebase-src="{{app.user.avatar_200}}" width="100%" >
 <!--{{$ctrl.getAvatar(app.user.avatar_200)}}-->
 </div>
 

@@ -6,7 +6,6 @@ const gcs = require('@google-cloud/storage')();
 const spawn = require('child-process-promise').spawn;
 
 const admin = require('../config.js').admin;
-
 // [END import]
 
 // [START generateThumbnail]
@@ -15,7 +14,7 @@ const admin = require('../config.js').admin;
  * ImageMagick.
  */
 // [START generateThumbnailTrigger]
-exports.generateThumbnail = functions.storage.object().onChange(event => {
+function banner(event){
 // [END generateThumbnailTrigger]
   // [START eventAttributes]
   const object = event.data; // The Storage object.
@@ -25,7 +24,7 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
   const contentType = object.contentType; // File content type.
   const resourceState = object.resourceState; // The resourceState is 'exists' or 'not_exits' (for file/folder deletions).
   const pathArray = filePath.split('/')
-  const userId = pathArray[1]
+  const schoolId = pathArray[1]
   // [END eventAttributes]
 
   // [START stopConditions]
@@ -38,14 +37,14 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
     // Get the file name.
   const fileName = pathArray.pop();
   // Exit if the image is not right file.
-   if (!fileName.startsWith('avatar.jpg')) {
-    console.log('Not avatar.jpg');
+   if (!fileName.startsWith('banner_1080.jpg')) {
+    console.log('banner_1080.jpg');
     return;
   }
 
 
   // Exit if the image is already a thumbnail.
-  if (fileName.startsWith('thumb_200_')) {
+  if (fileName.startsWith('thumb_100_')) {
     console.log('Already a Thumbnail.');
     return;
   }
@@ -67,25 +66,27 @@ exports.generateThumbnail = functions.storage.object().onChange(event => {
     console.log('Image downloaded locally to', tempFilePath);
    const timestamp =  new Date().getTime()
     // Generate a thumbnail using ImageMagick.
-    return spawn('convert', [tempFilePath, '-thumbnail', '200x200>', tempFilePath]).then(() => {
+    return spawn('convert', [tempFilePath, '-thumbnail', '100x100>', tempFilePath]).then(() => {
       console.log('Thumbnail created at', tempFilePath);
 
       // We add a 'thumb_' prefix to thumbnails file name. That's where we'll upload the thumbnail.
-      const thumbFilePath = filePath.replace(/(\/)?([^\/]*)$/, `$1thumb_200_${timestamp}_$2`);
+      const thumbFilePath = filePath.replace(/(\/)?([^\/]*)$/, `$1thumb_100_${timestamp}_$2`);
    
       // Uploading the thumbnail.
       return bucket.upload(tempFilePath, {
         destination: thumbFilePath
       }).then(() => {
-          console.log('Thumbnail uploaded to Storage at for user',userId ,thumbFilePath);
+          console.log('Thumbnail uploaded to Storage at for school',schoolId ,thumbFilePath);
 
-        admin.database().ref('/profiles/'+userId+'/com/avatar_200').set(thumbFilePath)
-         admin.database().ref('/profiles/'+userId+'/com/avatar_1080').set(filePath)
-    
+        admin.database().ref('/schools/'+schoolId+'/public/banner_100').set(thumbFilePath)
+        admin.database().ref('/schools/'+schoolId+'/public/banner_1080').set(filePath)
+
 
         });
     });
   });
   // [END thumbnailGeneration]
-});
+};
 // [END generateThumbnail]
+
+exports.banner = banner

@@ -20,7 +20,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
              var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/com' )
                site.user.com = $firebaseObject(Ref);
                site.user.id = firebaseUser.uid;
-               console.log('we have changed user '+firebaseUser.uid )
+               console.log('Current user is: '+firebaseUser.uid )
 
               //  getAvatar(site.user.id)  
 

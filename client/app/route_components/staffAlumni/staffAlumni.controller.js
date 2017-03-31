@@ -29,7 +29,7 @@ class StaffAlumniController {
                                           //  ctrl.staff[index] =data;
                                           //  else
                                            ctrl.staff.push(data);
-                                           Site.getAvatar( user_id)
+                                      
                                             // trigger $digest/$apply so Angular syncs the DOM
                                            
                                             });

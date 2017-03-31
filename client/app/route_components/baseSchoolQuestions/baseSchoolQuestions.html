@@ -1,0 +1,28 @@
+<div layout="row" layout-align="center">
+  <div  flex flex-gt-md="75">
+<md-card>
+  <md-card-content>
+    <h1>Default Application Questions for New Schools</h1>
+     Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_......"</a>
+<br><br>
+
+<div>
+<div layout="row">
+<div>Question Text</div><div>Type</div> <div>Is Default?</div>
+</div>
+
+<div  ng-repeat="question in $ctrl.questions">
+  <div layout="row">
+<div>{{question.label.en}}<br>{{question.label.de}}
+
+  </div>
+  <div>{{question.type}} </div>
+  <div>Is Default?</div>
+</div>
+<md-divider></md-divider>
+</div>
+</div>
+
+  </md-card-content>
+</md-card>
+</div>

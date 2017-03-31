@@ -11,6 +11,9 @@ path /phrases { read() { true }  write() { canEditPhrases() } }
 
 //list of languages at this path
 path /languages { read() { auth != null }   }
+
+path /questions_for_applications { read(){auth != null} }
+
  
 
 //Schools
@@ -132,6 +135,7 @@ path /profiles_search {read() {isStaff()}
 path /locations_public { read() { true} }
 path /locations_public/{id}/notices { write() {canEditLocationNotices(id) } }
 path /locations_public/{id}/nations { write() {canEditLocationVisaReq(id) } }
+path /locations_public/{id}/settings { write() {canEditLocationVisaReq(id) } }
 path /locations/{id} is Location { read() { isStaff() }
                                    write() { isStaff() }}
 

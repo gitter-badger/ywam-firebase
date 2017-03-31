@@ -4,7 +4,7 @@ class StudentPhotosController {
       var ctrl = this;
       var school_id = $stateParams.school_id;
           ctrl.apps =  School.getApps(school_id, true)
-          ctrl.avatars = Site.avatars
+       
           ctrl.print = print
 
       var school_ref = firebase.database().ref('/schools/'+school_id + '/public')
