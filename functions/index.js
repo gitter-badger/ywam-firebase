@@ -10,7 +10,7 @@ var profile_avatar = require('./profiles/avatar.js')
 // watch for storage bucket changes.. 
 // hopefully in the future we can watch for a specific file and not just ALL changes
 
-exports.storageChanges = functions.storage.object().onChange(event => {
+/*exports.storageChanges = functions.storage.object().onChange(event => {
 
   const object = event.data; // The Storage object.
   const filePath = object.name; // File path in the bucket.
@@ -46,4 +46,4 @@ exports.storageChanges = functions.storage.object().onChange(event => {
     }
 
 });
-// [END generateThumbnail]
+// [END generateThumbnail]*/

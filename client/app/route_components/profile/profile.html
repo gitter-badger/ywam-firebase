@@ -1,63 +1,64 @@
 <div layout="row" layout-align="center">
   
-
 <md-card  flex="100" flex-gt-md="70">
 <md-card-content>
 
-<div  layout="row" >  
-<div flex>
+    <div  layout="row" >  
+        <div flex>
 
-<h1 class="md-display-1">{{$ctrl.profile.com.first_name}} {{$ctrl.profile.com.last_name}}<br>
-<small class="md-subhead">{{$ctrl.profile.passport.first_name | uppercase}} {{$ctrl.profile.passport.middle_name | uppercase}} {{$ctrl.profile.passport.last_name | uppercase}}
-</small>
-</h1>
-
-
-{{$ctrl.profile.com.nationality}}<br>
- {{$ctrl.profile.com.gender}} {{$ctrl.calculateAge($ctrl.profile.com.dob)}} <span style=" text-transform: capitalize;">{{$ctrl.profile.com.marital_status}}<span><br>
-{{$ctrl.profile.com.dob | date}}  <br>
-<div ng-repeat="lang in $ctrl.languages">{{lang.text}}
-  <span style="color:gray">
-  <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>
-  {{lang.prof}}% </span>
-     </div>
+            <h1 class="md-display-1">{{$ctrl.profile.com.first_name}} {{$ctrl.profile.com.last_name}}<br>
+            <small class="md-subhead">{{$ctrl.profile.passport.first_name | uppercase}} {{$ctrl.profile.passport.middle_name | uppercase}} {{$ctrl.profile.passport.last_name | uppercase}}
+            </small>
+            </h1>
 
 
+            {{$ctrl.profile.com.nationality}}<br>
+            {{$ctrl.profile.com.gender}} {{$ctrl.calculateAge($ctrl.profile.com.dob)}} <span style=" text-transform: capitalize;"></span>{{$ctrl.profile.com.marital_status}}<span></span><br>
+            {{$ctrl.profile.com.dob | date}}  <br>
+            <div ng-repeat="lang in $ctrl.languages">{{lang.text}}
+              <span style="color:gray">
+              <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>
+              {{lang.prof}}% </span>
+            </div>
 
-<br>
-<md-divider></md-divider>
-<div> 
 
-<b> Applications:</b>
-<div ng-repeat="(key,app) in $ctrl.profile.app_index" >
-  <div ng-if="app.for.school_id" ui-sref="school.application({school_id: app.for.school_id, app_id:key})">
-    School : {{app.for.school_id}} <app-status app-id="key" date="true"></app-status>
-</div>
-<div ng-if="app.for.staff_location_id" ui-sref="staff.application({app_id:key})">
-    Staff @ : {{app.for.staff_location_id}} <app-status app-id="key" date="true"></app-status>
-</div>
 
- </div>
+            <br>
+            <md-divider></md-divider>
+            <div> 
 
-</div>
+                <b> Applications:</b>
+                <div ng-repeat="(key,app) in $ctrl.profile.app_index" >
+                    <div ng-if="app.for.school_id" ui-sref="school.application({school_id: app.for.school_id, app_id:key})">
+                        School : {{app.for.school_id}} <app-status app-id="key" date="true"></app-status>
+                    </div>
+                    <div ng-if="app.for.staff_location_id" ui-sref="staff.application({app_id:key})">
+                        Staff @ : {{app.for.staff_location_id}} <app-status app-id="key" date="true"></app-status>
+                    </div>
 
-</div>
+                </div>
 
-<div flex >
-<div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
-<img style="width:100%" align="right"  firebase-src="{{$ctrl.profile.com.avatar_200}}"
- ><br>
+            </div>
 
-<a href="" class="no-print"
- ui-sref="userPhotoUpload({user_id:$ctrl.profile.$id })">change photo</a>
-</div>
-</div>
+        </div>
+       
 
-</div>
-<br>
-<div>
-<contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
-</div>
+        <div flex >
+            <div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
+                <img style="width:100%" align="right"  firebase-src="{{$ctrl.profile.com.avatar_200}}"
+                 ><br>
+
+                <a href="" class="no-print"
+                 ui-sref="userPhotoUpload({user_id:$ctrl.profile.$id })">change photo</a>
+            </div>
+        </div>
+
+    </div>
+            
+    <br>
+    <div>
+    <contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
+    </div>
 
 
 
