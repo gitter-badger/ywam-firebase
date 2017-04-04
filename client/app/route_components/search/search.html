@@ -12,11 +12,12 @@
 <md-progress-linear  ng-if="$ctrl.searching && $ctrl.site.searchString" md-mode="indeterminate"  ></md-progress-linear>
 {{$ctrl.results.length}}
  <md-list ng-if="$ctrl.site.searchString">   
- <md-list-item ng-repeat="item  in $ctrl.results | filter:$ctrl.site.searchString "  > 
+ <!--<md-list-item ng-repeat="item  in $ctrl.results | filter:$ctrl.site.searchString "  > -->
+ <md-list-item ng-repeat="item  in $ctrl.results "  > 
 
 
- <div flex="50" ui-sref="profile({user_id:item.id})" style="cursor:pointer">
- <img height="35px" ng-src="{{$ctrl.site.avatars[item.id]}}" > 
+ <div flex="50" ui-sref="profile({user_id:item.objectID})" style="cursor:pointer">
+ <!--<img height="35px" firebase-src="{{$ctrl.site.avatars[item.id]}}" > -->
 
 {{item.first_name}} {{item.last_name}}
 </div>

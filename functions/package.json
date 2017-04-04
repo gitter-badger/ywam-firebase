@@ -2,6 +2,8 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "algoliasearch": "^3.10.2",
+    "botkit": "^0.5.2",
     "@google-cloud/storage": "^0.4.0",
     "child-process-promise": "^2.2.0",
     "firebase-admin": "^4.1.2",

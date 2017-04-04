@@ -2,6 +2,7 @@ var functions = require('firebase-functions');
 
 exports.applications = require('./applications/index.js')
 exports.references = require('./references/index.js')
+exports.search = require('./search/index.js')
 
 var school_banner = require('./schools/banner.js')
 var profile_avatar = require('./profiles/avatar.js')

@@ -52,9 +52,9 @@ path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val() 
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
                                 }   
-path /applications/{id}/reference1/user  {  
-                                  write() {auth.uid == root.applications[id].for.user_id}
-                                  read() {auth.uid == root.applications[id].for.user_id}
+path /applications/{id}/reference1/user_set  {  
+                                  write() {auth.uid == root.applications[id].for.user_id.val()}
+                                  read() {auth.uid == root.applications[id].for.user_id.val()}
                                 }  
 // path /applications/{id}/reference1/name  {  
 //                                   write() {auth.uid == root.applications[id].for.user_id}

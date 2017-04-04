@@ -10,6 +10,7 @@ class SearchController {
                    Site.searchString="" 
 
            $scope.$watch('$ctrl.site.searchString', function() {
+             ctrl.searching = true;
                ctrl.goSearch()
             });
 
@@ -28,35 +29,37 @@ class SearchController {
 
         console.log(string)
        if(string){ 
-           ctrl.searching = true;
-             SearchRef.child('requests').child(string).set(true)
-              SearchRef.child('requests').child(string).on('value',function(snap){
-                  if(snap.val()==null){
-                      snap.ref.off()
-                 ctrl.searching = false;
-                  }
-                 
-              })
+           
+             SearchRef.child('queries').child(string).child('query').set(Site.searchString)
+        
       
       var ref = firebase.database().ref('search/results').child(string)
         .on('value',  function fn(snap) { 
            
            if( snap.val() !== null ) {     // wait for data
-             snap.ref.off('value', fn); // stop listening
-            //  snap.ref.remove();         // clear the queue
-             snap.forEach(function(snapshot){
-               var data = snapshot.val()
-                data.id = snapshot.key
-             
-                    var filter =  $filter('filter')(ctrl.results, {id: data.id}, true);
-           var index = ctrl.results.indexOf(filter[0])
             
-            if(index == -1){
-              ctrl.results.push(data);
-              Site.getAvatar(snapshot.key)
-            }
+            //  snap.ref.off('value', fn); // stop listening
+            //  snap.ref.remove();         // clear the queue
+        
+         
+           $timeout(()=>{
+              ctrl.results = snap.val().hits
+               ctrl.searching = false;
+           })
+        // console.log(ctrl.results)
+          //    snap.forEach(function(snapshot){
+          //      var data = snapshot.val()
+          //       data.id = snapshot.key
              
-             })
+          //           var filter =  $filter('filter')(ctrl.results, {id: data.id}, true);
+          //  var index = ctrl.results.indexOf(filter[0])
+            
+          //   if(index == -1){
+          //     ctrl.results.push(data);
+          //     // Site.getAvatar(snapshot.key)
+          //   }
+             
+          //    })
 
            
            
@@ -98,11 +101,11 @@ class SearchController {
       //  });
     
      }//if Site.searchString
-      else {
-        //also clear the list ..keeps it from getting too long from repeated searches 
-      ctrl.results = []
-      console.log('clearing results list')
-      }
+      // else {
+      //   //also clear the list ..keeps it from getting too long from repeated searches 
+      // ctrl.results = []
+      // console.log('clearing results list')
+      // }
 
   }, 250, false)
 
