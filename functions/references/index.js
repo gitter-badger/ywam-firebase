@@ -118,11 +118,15 @@ admin.database().ref('locations_private/'+ data.location.id ).child('mailgun')
          }, function (err, info) {
            if (err) {
              console.log('Error: ' + err);
+               return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('mailgun').set(err)
            }
            else {
              console.log('Response: ' , info);
-              //refRef.child('mailgun').set( info);
-             return 
+             return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('mailgun').set(info).then(function(){
+              admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('user_set/sent').set( true );   
+              admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('user_set/send_requested').set( false); 
+             })
+         
              
            }
          });
