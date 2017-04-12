@@ -16,7 +16,7 @@ class AppStatusController {
                 if(user_id) {
                 var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
                 userRef.once('value', function(snap){
-                 
+                   if(snap.val()) 
                   ctrl.status_by = snap.val().first_name + ' ' + snap.val().last_name.charAt(0) + '.';
               
                 })

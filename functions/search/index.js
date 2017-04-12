@@ -18,6 +18,8 @@ exports.indexProfile = functions.database.ref('/profiles/{userId}/com').onWrite(
     firebaseObject.first_name = event.data.val().first_name;
     firebaseObject.last_name = event.data.val().last_name;
     firebaseObject.email = event.data.val().email;
+    firebaseObject.home_phone = event.data.val().home_phone;
+    firebaseObject.mobile_phone = event.data.val().mobile_phone;
 
   firebaseObject.objectID = event.params.userId;
 

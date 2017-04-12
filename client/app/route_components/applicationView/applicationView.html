@@ -48,9 +48,9 @@
 <b>Application Status:</b><br>
 <app-status app-id="$ctrl.app_id" date="true" who="true" admin="true"></app-status><br>
 <b>Reference 1: </b><br>
-<ref-status key="$ctrl.app_id + '/reference1'" ></ref-status><br>
+<ref-status key="$ctrl.app_id + '/reference1'"  date="true"></ref-status><br>
 <b>Reference 2:</b><br>
-<ref-status key="$ctrl.app_id + '/reference2'" ></ref-status><br>
+<ref-status key="$ctrl.app_id + '/reference2'"  date="true"></ref-status><br>
 <!--
 visa status<br>
 <md-checkbox >PostCard Sent(not working yet)</md-checkbox>-->
@@ -147,22 +147,24 @@ Invoices and base account statement.
 </md-card>
 
 
-<section id="questions">
+
 <md-card>
-<md-card-content class="in_dev">
-<h4 class="md-subhead" >
-Why do you want to attend </h4>
-<span class="md-body-1">{{$ctrl.app.why_school}}</span>
+<md-card-content >
+  Answers to questions
+<section id="questions">
 
-<h4 class="md-title">
-How would you describe your relationship with your family? 
-Do they support you in your desire to come to YWAM?</h4>
-<span class="md-body-1">{{$ctrl.app.family}}</span>
+  <div ng-repeat="(key,item) in $ctrl.app.answers_to_questions">
 
-
+<span class="question">{{$ctrl.app_questions[key].label.en }}
+  <small>{{$ctrl.app_questions[key].label.de }}</small>
+</span>
+<div >{{item}}</div>
+<md-divider></md-divider>
+  </div>
+</section>
 </md-card-content>
 </md-card>
-</section>
+
 
 
 

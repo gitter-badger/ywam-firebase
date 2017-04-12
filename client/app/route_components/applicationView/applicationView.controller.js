@@ -7,6 +7,8 @@ class ApplicationViewController {
        ctrl.app_id = $stateParams.app_id;
   
        ctrl.$onInit = function(){
+     var questionsRef  = firebase.database().ref('questions_for_applications')
+        ctrl.app_questions = $firebaseObject(questionsRef)
     var appRef = firebase.database().ref('applications').child(ctrl.app_id)
         appRef.on('value',function(snap){
         
@@ -28,14 +30,18 @@ class ApplicationViewController {
                   ctrl.languages[snap.key].prof = ctrl.user.com.languages[snap.key]
                   $timeout(function(){});  
               })})//end on ref languages
-
-         userRef.child('passport/nation_id').on('value',(snap)=>{
+            
+         userRef.child('passport').child('nation_id').once('value',(snap)=>{
             //  console.log(snap.val())
+            if(snap.val())
+            {
              var natRef = firebase.database().ref('/phrases/nations/en/').child(snap.val())
                  natRef.on('value',(snap)=>{ctrl.user.com.nationality=snap.val()
                      console.log(snap.val())})
                       $timeout(function(){});  
-         })   
+            } 
+         })  
+         
 
          })//end userRef value
 
@@ -88,6 +94,7 @@ class ApplicationViewController {
         ctrl.ref_chart2_labels = ['To Get Help', 'To escape bad env.', 'To grow', 'To get equipped', 'For Adventure'];
 													
         ctrl.ref_chart2=[]
+        if(ctrl.app.reference2 && ctrl.app.reference1){
             var sum = 0
             ctrl.app.reference1.form.why.get_help?sum++:'';
             ctrl.app.reference2.form.why.get_help?sum++:'' 
@@ -112,7 +119,7 @@ class ApplicationViewController {
             ctrl.app.reference1.form.why.for_adventure? sum++ :''
             ctrl.app.reference2.form.why.for_adventure? sum++:''
             ctrl.ref_chart2.push(sum)
-
+        }
     },function(error){console.error(error)})//end on appRef value
 
   }//end on init

@@ -1,5 +1,5 @@
 class RefStatusController {
-  constructor() {
+  constructor($timeout) {
       var ctrl = this;
           ctrl.$onInit = onInit
               
@@ -8,9 +8,12 @@ class RefStatusController {
           
       function onInit()
       {
-        var refRef =  firebase.database().ref('applications/'+ ctrl.key)
+        var refRef =  firebase.database().ref('applications/'+ ctrl.key) 
             refRef.on('value', function(snap){
+                if(snap.val()){
                 ctrl.status = snap.val().status
+                $timeout()
+                }
             })
           
       }

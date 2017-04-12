@@ -56,9 +56,14 @@ path /applications/{id}/reference1/user_set  {
                                   write() {auth.uid == root.applications[id].for.user_id.val()}
                                   read() {auth.uid == root.applications[id].for.user_id.val()}
                                 }  
-// path /applications/{id}/reference1/name  {  
-//                                   write() {auth.uid == root.applications[id].for.user_id}
-//                                 }                                      
+path /applications/{id}/reference1/meta {  
+                                  read()  { root.applications[id].reference1.hash == auth.uid} 
+                                    }   
+path /applications/{id}/reference1/form {  
+                                  read()  { root.applications[id].reference1.hash == auth.uid} 
+                                  write()  { root.applications[id].reference1.hash == auth.uid} 
+                                    }                                     
+
 // path /applications/{id}/reference1/relation  {  
 //                                   write() {auth.uid == root.applications[id].for.user_id}
 //                                 }  
@@ -82,8 +87,9 @@ path /applications/{id}/log { read() {  isSchoolAdmin(data.parent().child('for')
 
 type Application {}
 
-
-
+// Reference tokens can be read directly 
+path /reference_tokens/{hash} {read(){ true}}
+path /reference_tokens/{hash}/token_requested {write(){ true}}
 
 
 // Profiles Node

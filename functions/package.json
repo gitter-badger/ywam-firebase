@@ -2,14 +2,14 @@
   "name": "functions",
   "description": "Cloud Functions for Firebase",
   "dependencies": {
+    "@google-cloud/storage": "^0.4.0",
     "algoliasearch": "^3.10.2",
     "botkit": "^0.5.2",
-    "@google-cloud/storage": "^0.4.0",
     "child-process-promise": "^2.2.0",
     "firebase-admin": "^4.1.2",
     "firebase-functions": "^0.5",
-      "nodemailer-mailgun-transport":"^1.2.4",
-      "nodemailer":"^3.1.8"
+    "nodemailer": "^3.1.8",
+    "nodemailer-mailgun-transport": "^1.2.4"
   },
   "private": true
 }

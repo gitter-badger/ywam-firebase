@@ -2,7 +2,9 @@ var functions = require('firebase-functions');
 
 exports.applications = require('./applications/index.js')
 exports.references = require('./references/index.js')
+exports.reference_tokens = require('./reference_tokens/index.js')
 exports.search = require('./search/index.js')
+exports.mailgun = require('./mailgun/index.js')
 
 var school_banner = require('./schools/banner.js')
 var profile_avatar = require('./profiles/avatar.js')
@@ -10,7 +12,7 @@ var profile_avatar = require('./profiles/avatar.js')
 // watch for storage bucket changes.. 
 // hopefully in the future we can watch for a specific file and not just ALL changes
 
-/*exports.storageChanges = functions.storage.object().onChange(event => {
+exports.storageChanges = functions.storage.object().onChange(event => {
 
   const object = event.data; // The Storage object.
   const filePath = object.name; // File path in the bucket.
@@ -46,4 +48,3 @@ var profile_avatar = require('./profiles/avatar.js')
     }
 
 });
-// [END generateThumbnail]*/

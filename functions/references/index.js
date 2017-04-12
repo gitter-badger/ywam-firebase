@@ -1,7 +1,8 @@
 var functions = require('firebase-functions');
 const admin = require('../config.js').admin;
-const nodemailer= require('nodemailer');
-const mg=require('nodemailer-mailgun-transport');
+ var nodemailer = require('nodemailer');
+const mg = require('nodemailer-mailgun-transport');
+const gcs = require('@google-cloud/storage')();
 
 
 exports.sendEmail = functions.database.ref('/applications/{appId}/{refKey}/user_set/send_requested')
@@ -9,27 +10,41 @@ exports.sendEmail = functions.database.ref('/applications/{appId}/{refKey}/user_
       // Grab the current value of what was written to the Realtime Database.
       const original = event.data.val();
     
-        if(original){
+        if(original == true){
+
+
             console.log('refernece requested to be sent!', event.params.appId, event.params.refKey);
-               return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).on('value',function(snap){
+               return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).once('value').then(function(snap){
                      var data={appId:event.params.appId,
                               refId:event.params.refKey,
-                              refData:snap.val()}
+                              refData:snap.val(),
+                             }
                      
-                  return admin.database().ref('/applications/'+event.params.appId+'/for').on('value',function(snap){
+                  return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){
                       data.appData=snap.val()  ;
-                    return  admin.database().ref('/profiles/'+data.appData.user_id+'/com').on('value',function(snap){
-                          data.userData=snap.val();
-                     return  emailStep1(data);
-                      })
+                    return  admin.database().ref('/profiles/'+data.appData.user_id+'/com').once('value').then(function(snap){
+                            data.userData=snap.val();
+                            
+                            return  emailStep1(data);
+                           
+                        // console.log('found default bucket:' , functions.config().firebase.storageBucket)  
+                        //  var file = gcs.bucket(functions.config().firebase.storageBucket).file(data.userData.avatar_200)
+                        //  return   file.getMetadata().then(function(metadata) {
+                        //             console.log(metadata)
+                        //            data.userData.avatar_url = metadata[0].selfLink;
+                        //           return  emailStep1(data);
+                        //         });
+
+                        
+
+                    
+                      })//end get user data
                       
                   })   //end get applicaton
                     
                    
                  });//end get reference
             
-         /* return  admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey+'/user_set/send_requested').set(false);
-         admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey+'/user_set/sent').set(true);*/
         }
         else
         {
@@ -39,14 +54,21 @@ exports.sendEmail = functions.database.ref('/applications/{appId}/{refKey}/user_
 
 
     });
-
+//Get school if school and  location data
 function emailStep1(data){
-     console.log(data);
+    console.log('email step 1!')
+    //create token 
+    var refRef = '/applications/'+data.appId+'/'+data.refId
+
+return admin.database().ref('/reference_tokens/').push({ref:refRef,created: new Date().getTime()}).then(function(snap){
+
+    data.hash = snap.key
+    //  console.log(data);
     if(data.appData.school_id){
        
-       return admin.database().ref('/schools/'+data.appData.school_id+'/public/').on( 'value',function(snap){
+       return admin.database().ref('/schools/'+data.appData.school_id+'/public/').once('value').then(function(snap){
             data.school=snap.val()
-           return admin.database().ref('/locations_public/'+data.school.location_id+'/meta/').on('value',function(snap){
+           return admin.database().ref('/locations_public/'+data.school.location_id+'/meta/').once('value').then(function(snap){
              data.location=snap.val()
                data.location.id=data.school.location_id;
           
@@ -59,12 +81,16 @@ function emailStep1(data){
         return emailStep2(data);
     }
     
-    
+})
+
+
 }
 
+// Compose the HTML in the language
 function emailStep2(data){
+     console.log('email step 2!')
      data.html= `no language set`  
-     var url=data.location.apply_url+"/referenceForm/"+data.appId+"/"+data.refId
+     data.url=data.location.apply_url+"/referenceForm/"+data.hash
      
      
     if(data.refData.user_set.language=="en"){
@@ -86,23 +112,22 @@ function emailStep2(data){
          `We are sending you this email because ${data.userData.first_name} ${data.userData.last_name} has applied for ${appFor} at Youth with a Mission ${data.location.name}. `+
          `<p>School:<br>${schoolDate}</p>`+
          `To better understand ${data.userData.first_name}'s application, we ask that you complete our online reference form. <br>Please click the link below to continue: <br>`+
-        `<a href="${url}">${url}</a>`
+        `<a href="${data.url}">${data.url}</a>`
      
      
     }
    return emailStep3(data);
 }
+
+
 function emailStep3(data){
+     console.log('email step 3!')
     //get mailgun auth details
-admin.database().ref('locations_private/'+ data.location.id ).child('mailgun')
- .once('value',function(snap){
-   //if(debug) console.log('got location mailgun info...')
-   
-   var auth = { auth: snap.val() }
-   var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+   return admin.database().ref('/locations_private/'+data.location.id).once('value').then(function(snap){
+       
+         var auth = { auth: snap.val().mailgun }
+        var nodemailerMailgun = nodemailer.createTransport(mg(auth));
     
-   return admin.database().ref('/locations_private/'+data.location.id).on( 'value',function(snap){
-        var mailgun=snap.val()
         
       return nodemailerMailgun.sendMail({
            from: 'info@ywamsarasota.com',
@@ -114,35 +139,37 @@ admin.database().ref('locations_private/'+ data.location.id ).child('mailgun')
            //You can use "html:" to send HTML email content. It's magic!
            html: data.html,
            //You can use "text:" to send plain-text content. It's oldschool!
+           'v:statusRef' : '/applications/'+data.appId+'/'+data.refId+'/status/email',
            text: 'Mailgun rocks, pow pow!'
          }, function (err, info) {
            if (err) {
              console.log('Error: ' + err);
-               return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('mailgun').set(err)
+               return admin.database().ref('/applications/'+data.appId+'/'+data.refId).child('mailgun').set(err)
            }
            else {
              console.log('Response: ' , info);
-             return admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('mailgun').set(info).then(function(){
-              admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('user_set/sent').set( true );   
-              admin.database().ref('/applications/'+event.params.appId+'/'+event.params.refKey).child('user_set/send_requested').set( false); 
-             })
+             var updates = { mailgun: info,
+                            'user_set/sent': true,
+                            'user_set/send_requested': false,
+                            url: data.url,
+                            hash: data.hash,
+                            meta: {applicant_first_name: data.userData.first_name,
+                                                       applicant_last_name: data.userData.last_name,
+                                                       applicant_gender: data.userData.gender,
+                                                       applicant_avatar: data.userData.avatar_200,
+                                                      for: data.appData,
+                                                      reference_name: data.refData.user_set.name,
+                                                      language: data.refData.user_set.language,
+                                                      },
+                            }
+
+             return admin.database().ref('/applications/'+data.appId+'/'+data.refId).update(updates) 
+             
          
              
            }
          });
 
-
-
-
-
-         /*refRef.child('status/current/sent').set(true)
-         refRef.child('status/sent').set( new Date().getTime() );
-         refRef.child('user/sent').set( true );
-         refRef.child('user/send_requested').set( false);
-         refRef.child('processing').set( false);
-         refRef.child('hash').set( hash );*/
-        
-    })
 })
     
 }
