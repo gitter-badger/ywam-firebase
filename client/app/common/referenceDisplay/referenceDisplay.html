@@ -1,61 +1,111 @@
 <md-card>
 
-  <md-toolbar class="md-menu-toolbar">
-    <div layout="row">
-      <md-toolbar-filler layout layout-align="center center">
-        <md-icon class="fa fa-comment"></md-icon>
-      </md-toolbar-filler>
-      <div>
-        <h2 class="md-toolbar-tools">Reference {{$ctrl.id }}</h2>
-    
-          <ref-status key="$ctrl.key" date="true" ></ref-status>
-        <md-menu-bar>
-          
-          <md-menu>
-            <button ng-click="$mdOpenMenu()">
-              Edit
-            </button>
-            <md-menu-content>
-              <md-menu-item class="md-indent">
-                <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
-                  Find and replace...
-                  <!-- <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> -->
+    <md-toolbar class="md-hue-2">
+        <div layout="row" layout-align="start center">
+
+            <div class="md-toolbar-tools" style="width:143px;">
+                <h2>Reference {{$ctrl.id }}</h2>
+            </div>
+
+            <ref-status key="$ctrl.key" date="true" ></ref-status>    
+
+            <div flex></div>
+
+            <md-menu>
+                <md-button class="md-icon-button" aria-label="Settings" ng-click="$mdOpenMenu()">
+                    <md-icon md-svg-icon="img/icons/edit.svg"></md-icon>
                 </md-button>
-              </md-menu-item>
-            </md-menu-content>
-          </md-menu>
-         
-        </md-menu-bar>
-      </div>
-    </div>
-  </md-toolbar>
 
-<md-card-content>
-{{$ctrl.form}}
-<p>
-  <span class="question">How well does reference know Applicant?:</span><br>
-  {{$ctrl.reference.form.how_well}}</p>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button ng-click="ctrl.redial($event)">
+                        
+                        Redial
+                        </md-button>
+                    </md-menu-item>
+                        <md-menu-item>
+                        <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
+                       
+                        Check voicemail
+                        </md-button>
+                        </md-menu-item>
+                        <md-menu-divider></md-menu-divider>
+                        <md-menu-item>
+                        <md-button ng-click="ctrl.toggleNotifications()">
+                        
+                        {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
+                        </md-button>
+                        </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
+                            Find and replace...
+                            <!-- <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> -->
+                        </md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu> 
+            
+        </div>
+    </md-toolbar>
+    
+    
+    <md-card-content>
+        
+        {{$ctrl.form}}
 
-<p><span class="question">Does Reference think applicant is Christian?:</span><br>
-{{$ctrl.reference.form.christian}}references
+        <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">How well does reference know Applicant?:</span>
+            <br>
+            {{$ctrl.reference.form.how_well}}
+        </p>
 
-<p><span class="question">Family Relations:</span><br>
-{{$ctrl.reference.form.family}}</p>
+        <p ng-if="$ctrl.reference.form.christian">
+            <span class="question">Does Reference think applicant is Christian?:</span>
+            <br>
+            {{$ctrl.reference.form.christian}}
+        </p>
 
-<p><span class="question">Response to conflict?:</span><br>
-{{$ctrl.reference.form.conflict}}</p>
+        <p ng-if="$ctrl.reference.form.family">
+            <span class="question">Family Relations:</span>
+            <br>
+            {{$ctrl.reference.form.family}}
+        </p>
 
-<p><span class="question">Involvement with Church:</span><br>
-{{$ctrl.reference.form.church_life}}</p>
+        <p ng-if="$ctrl.reference.form.conflict">
+            <span class="question">Response to conflict?:</span>
+            <br>
+            {{$ctrl.reference.form.conflict}}
+        </p>
 
-<p><span class="question">Weaknesses:</span><br>
-{{$ctrl.reference.form.weakness}}</p>
+        <p ng-if="$ctrl.reference.form.church_life">
+            <span class="question">Involvement with Church:</span>
+            <br>
+            {{$ctrl.reference.form.church_life}}
+        </p>
 
-<p><span class="question">Strengths:</span><br>
-{{$ctrl.reference.form.strengths}}</p>
+        <p ng-if="$ctrl.reference.form.weaknesses">
+            <span class="question">Weaknesses:</span>
+            <br>
+            {{$ctrl.reference.form.weaknesses}}
+        </p>
 
-<p ng-if="$ctrl.reference.form.other"><span class="question">Other Notes:</span><br>
-{{$ctrl.reference.form.other}}</p>
+        <p ng-if="$ctrl.reference.form.strengths">
+            <span class="question">Strengths:</span>
+            <br>
+            {{$ctrl.reference.form.strengths}}
+        </p>
 
-</md-card-content> 
+        <p ng-if="$ctrl.reference.form.other">
+            <span class="question">Other Notes:</span>
+            <br>
+            {{$ctrl.reference.form.other}}
+        </p>
+
+        <p ng-if="$ctrl.reference.form.encouragement">
+            <span class="question">Encouragement:</span>
+            <br>
+            {{$ctrl.reference.form.encouragement}}
+        </p>
+
+    </md-card-content> 
 </md-card>

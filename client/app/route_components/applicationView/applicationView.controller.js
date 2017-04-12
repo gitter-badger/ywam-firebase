@@ -46,7 +46,7 @@ class ApplicationViewController {
          })//end userRef value
 
 
-         ctrl.ref_chart_labels = ['ambition', 'communication', 'emotion', 'initiative', 'leadership', 
+         ctrl.ref_chart_labels = ['ambition', 'communication', 'initiative', 'leadership', 
             'moral', 'organization','punctual','reliable','servanthood','teachability','teamwork'];
        ctrl.ref_chart_series = ['Reference 1', 'Reference 2'];
       ctrl.ref_chart_options = { scales: {
@@ -61,7 +61,6 @@ class ApplicationViewController {
         if(ctrl.app.reference1 && ctrl.app.reference1.form){
             ref1data.push(ctrl.app.reference1.form.scale.ambition)
             ref1data.push(ctrl.app.reference1.form.scale.communication)
-            ref1data.push(ctrl.app.reference1.form.scale.emotion)
             ref1data.push(ctrl.app.reference1.form.scale.initiative)
             ref1data.push(ctrl.app.reference1.form.scale.leadership)
             ref1data.push(ctrl.app.reference1.form.scale.moral)
@@ -77,7 +76,6 @@ class ApplicationViewController {
          if(ctrl.app.reference2 && ctrl.app.reference2.form){
             ref2data.push(ctrl.app.reference2.form.scale.ambition)
             ref2data.push(ctrl.app.reference2.form.scale.communication)
-            ref2data.push(ctrl.app.reference2.form.scale.emotion)
             ref2data.push(ctrl.app.reference2.form.scale.initiative)
             ref2data.push(ctrl.app.reference2.form.scale.leadership)
             ref2data.push(ctrl.app.reference2.form.scale.moral)
