@@ -1,21 +1,23 @@
 
-<div  ng-if="!$ctrl.status.recieved">
+<div  ng-if="!$ctrl.status.recieved ">
 
-<div class="ref-status-box" ng-if="$ctrl.status.email.current =='delivered' "  style="background-color:#49afcd"  >sent 
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.email.delivered | date}}  </span> 
-</div> 
-<div class="ref-status-box" ng-if="$ctrl.status.email.current == 'dropped' "  style="background-color:#d9534f" > failed 
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.email.dropped | date}}  </span> 
+<div ng-if="!$ctrl.status.accessed "> 
+        <div class="ref-status-box" ng-if="$ctrl.status.email.current =='delivered' "  style="background-color:#49afcd"  >sent 
+            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.delivered | date}}  </span> 
+        </div> 
+        <div class="ref-status-box" ng-if="$ctrl.status.email.current == 'dropped' "  style="background-color:#d9534f" > failed 
+            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.dropped | date}}  </span> 
+        </div>
+        <div class="ref-status-box" ng-if="$ctrl.status.email.current =='opened' "  style="background-color:#FFCC00"  > email opened
+            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.opened | date}}  </span>
+        </div> 
 </div>
-<div class="ref-status-box" ng-if="$ctrl.status.email.current =='opened' "  style="background-color:#FFCC00"  > opened
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.email.opened | date}}  </span>
-</div> 
-<div class="ref-status-box" ng-if="$ctrl.status.current == 'accessed' "  style="background-color:#FF6600"  > accessed 
+
+
+<div class="ref-status-box" ng-if="$ctrl.status.accessed "  style="background-color:#FF6600"  > form accessed 
     <span ng-if="$ctrl.date" >on {{$ctrl.status.accessed | date}}  </span>
 </div> 
-<div class="ref-status-box" ng-if="$ctrl.status.current == 'submitted' " style="background-color:#5cb85c"   > submitted 
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.submitted | date}}  </span>
-</div> 
+
 
 </div>
 

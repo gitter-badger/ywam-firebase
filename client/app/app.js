@@ -2,7 +2,8 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
 import Common from './common/common';
-import Components from './route_components/route_components';
+import staffComponents from './staff_app_route_components/staff_app_route_components';
+import applyComponents from './apply_app_route_components/apply_app_route_components';
 import AppComponent from './app.component';
 import 'normalize.css';
 
@@ -45,7 +46,8 @@ angular.module('app', [
     'firebase',
      'chart.js',
     Common,
-    Components
+    staffComponents,
+    applyComponents
   ])
   .config(($locationProvider, $translateProvider, $mdThemingProvider) => {
     "ngInject";

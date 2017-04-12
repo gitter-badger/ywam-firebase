@@ -40,6 +40,9 @@ exports.opened = functions.https.onRequest((req, res) => {
 exports.dropped = functions.https.onRequest((req, res) => {
 
   console.log(req.body)
+  console.log(req.params)
+  console.log(req.param('statusRef'))
+  
     if(!req.body['statusRef']){
       
     console.log('no statusRef in request.. not saving update')

@@ -51,22 +51,23 @@ path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val() 
                                 
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
-                                }   
-path /applications/{id}/reference1/user_set  {  
-                                  write() {auth.uid == root.applications[id].for.user_id.val()}
-                                  read() {auth.uid == root.applications[id].for.user_id.val()}
+                                 }   
+path /applications/{id}/{ref_key}/user_set  {  
+                                  write() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key) }
+                                  read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
                                 }  
-path /applications/{id}/reference1/meta {  
-                                  read()  { root.applications[id].reference1.hash == auth.uid} 
+path /applications/{id}/{ref_key}/meta {  
+                                  read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
                                     }   
-path /applications/{id}/reference1/form {  
-                                  read()  { root.applications[id].reference1.hash == auth.uid} 
-                                  write()  { root.applications[id].reference1.hash == auth.uid} 
+path /applications/{id}/{ref_key}/form {  
+                                  read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
+                                  write()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
                                     }                                     
 
-// path /applications/{id}/reference1/relation  {  
-//                                   write() {auth.uid == root.applications[id].for.user_id}
-//                                 }  
+checkRef(ref_key){
+    ref_key == 'reference1' || ref_key=='reference2'
+}
+
 
 path /applications/{id}/meta  { read() {  isStaff() ||  auth.uid == data.parent().child('for').child('user_id').val() }  
                                 write() {  checkAppAccess(id) }
