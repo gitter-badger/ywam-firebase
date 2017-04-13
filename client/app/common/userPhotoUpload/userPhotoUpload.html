@@ -1,7 +1,7 @@
 
 <div ng-show="$ctrl.avatar" layout="row">
 <span flex></span>
-<md-button ng-click="$ctrl.avatar = false">change photo</md-button>
+<md-button ng-click="$ctrl.avatar = false" translate="78">change photo</md-button>
 <!--<img ng-src="{{$ctrl.avatar_200}}" alt="" height="100px">-->
 
  <img  alt=""
@@ -18,9 +18,12 @@
 
 <md-progress-linear md-mode="{{$ctrl.upload_progress < 10 && $ctrl.upload_progress  ? 'indeterminate': 'determinate'}}" 
 value="{{$ctrl.upload_progress}}"></md-progress-linear>
-
+    
 <md-card-content>
-Please upload a portrait Photo where your face is clearly visible.
+    
+<h1 class="md-title" translate="100">Photo Upload:</h1>
+    
+<span translate="77">Please upload a portrait Photo where your face is clearly visible.</span>
 
 <div class="cropArea" ng-hide="!$ctrl.file_selected"  >
   
@@ -41,7 +44,7 @@ Please upload a portrait Photo where your face is clearly visible.
 <span flex> </span>
 <span ng-hide="$ctrl.file_selected">
 <input class="ng-hide" id="fileInput" multiple type="file" />
-<label for="fileInput" class="md-button md-raised md-primary">Choose File</label>
+<label for="fileInput" class="md-button md-raised md-primary" translate="79">Choose File</label>
 </span>
 
 

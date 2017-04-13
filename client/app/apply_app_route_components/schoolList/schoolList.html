@@ -1,0 +1,43 @@
+
+ <div layout="row" layout-wrap layout-align="center">
+  
+<div  ng-repeat="school in $ctrl.schools" flex="100" flex-gt-xs="50"  flex-gt-sm="30" >
+  
+
+   
+   <md-card >
+     <img firebase-src="{{school.banner_1080}}" ng-if="school.banner_1080" style="    height: initial !important;" >
+     <img src="img/default_banner.jpg" ng-if="!school.banner_1080">
+
+     <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"> {{school.name}}</span>
+              <span class="md-subhead">
+                {{school.start_date | date :'MMM d, y' }} - {{school.end_date | date :'MMM d, y'}}<br>
+              {{$ctrl.location.meta.location}}<br>
+           <span translate="5"></span>: {{school.app_fee | currency:school.currency+" ":0 }}<br>
+           <span translate="6"></span>: {{school.school_fee | currency:school.currency+" ":0}}<br>
+         <span ng-if="school.mini_outreach"> 
+             <span translate="60"></span>: {{school.mini_outreach_fee | currency:school.currency+" ":0}}<br>
+        </span> 
+           <span translate="9"></span>: {{school.outreach_fee | currency:school.currency+" ":0}}<br>
+             </span>
+          </md-card-title-text>
+         
+        </md-card-title>
+        <md-card-content>
+         
+            
+            <!--{{school.description}}-->
+         
+        </md-card-content>
+         <md-card-actions layout="row" layout-align="end center">
+          <!--<md-button>More Info</md-button>-->
+         <app-status ng-if="school.user_has_app" date="true" app-id="school.user_has_app" ></app-status>
+             <div flex></div>
+          <md-button ng-if="school.user_has_app_status<10 || !school.user_has_app_status " ng-click="$ctrl.applyNow(school.id)">{{school.user_has_app ?  45: 4|translate}}</md-button>
+        
+        </md-card-actions>
+   </md-card>
+</div>
+

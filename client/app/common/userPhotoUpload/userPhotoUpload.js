@@ -6,14 +6,6 @@ import userPhotoUploadComponent from './userPhotoUpload.component';
 let userPhotoUploadModule = angular.module('userPhotoUpload', [
   uiRouter,  'ngImgCrop'
 ])
-.config(($stateProvider) => {
-  "ngInject";
-  $stateProvider
-    .state('userPhotoUpload', {
-      url: '/userPhotoUpload/:user_id',
-      component: 'userPhotoUpload'
-    });
-})
 
 .component('userPhotoUpload', userPhotoUploadComponent)
 

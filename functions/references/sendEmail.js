@@ -53,7 +53,7 @@ exports.sendEmail = functions.database.ref('/applications/{appId}/{refKey}/user_
       
 
 
-    });
+  
 //Get school if school and  location data
 function emailStep1(data){
     console.log('email step 1!')
@@ -175,8 +175,4 @@ function emailStep3(data){
 }
                                                                     
                                                                     
-                                                                    
-                                                                    
-                                                                    
-                                                                    
-                                                                    
+  });

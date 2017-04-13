@@ -36,7 +36,7 @@ import profile from './profile/profile';
 
 import ApplicationView from './applicationView/applicationView';
 import forgotPassword from './forgotPassword/forgotPassword';
-import signUp from './signUp/signUp';
+
 import prayerWall from './prayerWall/prayerWall';
 
 let componentModule = angular.module('app.components', [
@@ -57,7 +57,7 @@ let componentModule = angular.module('app.components', [
   Search,
   ApplicationView,
   forgotPassword,
-  signUp,    
+  
   prayerWall,
   accounting,
   staff,

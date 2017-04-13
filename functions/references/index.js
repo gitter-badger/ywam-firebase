@@ -1,7 +1,7 @@
 var functions = require('firebase-functions');
 const admin = require('../config.js').admin;
 
-var sendEmail = require('./sendEmail.js')
+exports.sendEmail = require('./sendEmail.js').sendEmail
 
 exports.accessed = functions.database.ref('/applications/{appId}/{refKey}/form/accessed')
     .onWrite(event => {
@@ -15,7 +15,10 @@ exports.accessed = functions.database.ref('/applications/{appId}/{refKey}/form/a
     .onWrite(event => {
         if(event.data.val()){
      
-        return    admin.database().ref('/applications/'+event.params.appId +'/'+event.params.refKey +'/status/recieved').set(new Date().getTime());
+        return    admin.database().ref('/applications/'+event.params.appId +'/'+event.params.refKey +'/status/recieved')
+        .set(new Date().getTime()).then(function(){
+            // return notify('reference_recived')
+        });
         }else{
             return
         }

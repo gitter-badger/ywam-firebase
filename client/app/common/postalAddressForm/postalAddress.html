@@ -1,0 +1,38 @@
+<form name="$ctrl.AddressForm">
+    
+    <div layout="row">
+        <md-input-container flex="50">
+          <label translate="21">Address:</label>
+          <input ng-model="postal.address" required>
+        </md-input-container>
+        <md-input-container flex>
+          <label translate="22">City:</label>
+          <input ng-model="postal.city" required>
+        </md-input-container>
+    </div>
+
+    <div layout="row" flex>
+        <md-input-container flex="50">
+          <label translate="23">state:</label>
+          <input ng-model="postal.state">
+        </md-input-container>
+        <md-input-container flex >
+          <label translate="24">Zip:</label>
+          <input ng-model="postal.zip" required>
+        </md-input-container>
+    </div>
+
+    <md-autocomplete md-selected-item="$ctrl.post_nation" 
+                     md-selected-item-change="$ctrl.updateNation($ctrl.post_nation.id)"
+                     md-search-text="searchText" 
+                     md-items="item in $ctrl.getMatches(searchText)" 
+                     md-item-text="item.name"
+                     ng-attr-md-floating-label="{{14 | translate}}"
+                     required
+                    >
+        <span md-highlight-text="searchText">{{item.name}}</span>
+    </md-autocomplete>
+    
+</form>
+
+<!--{{$ctrl.AddressForm.$valid}}-->

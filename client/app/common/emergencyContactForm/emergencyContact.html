@@ -1,0 +1,81 @@
+<h1 class="md-title" translate="96">Emergency Contact:</h1>
+<form name="$ctrl.EMForm">
+<div layout="row">
+<md-input-container flex>
+<label>Name</label>
+<input required ng-model="emergency_contact.name">
+</md-input-container>
+
+<md-input-container flex>
+<label translate="65">Relation</label>
+<input required ng-model="emergency_contact.relation">
+</md-input-container>
+
+</div>
+
+
+
+<!--<div layout="row">
+
+<md-input-container flex>
+<label>Address</label>
+<input required ng-model="emergency_contact.address">
+</md-input-container>
+
+<md-input-container flex>
+<label>City</label>
+<input required ng-model="emergency_contact.city">
+</md-input-container>
+
+
+<md-input-container flex>
+<label>State</label>
+<input required ng-model="emergency_contact.state">
+</md-input-container>
+
+
+<md-input-container flex>
+<label>Zip</label>
+<input required ng-model="emergency_contact.zip">
+</md-input-container>
+
+</div>-->
+
+<div layout="row">
+<md-input-container flex>
+<label>Email</label>
+<input required type="email" ng-model="emergency_contact.email">
+</md-input-container>
+
+
+<md-autocomplete md-selected-item="$ctrl.em_nation" 
+                 md-selected-item-change="$ctrl.updateNation($ctrl.em_nation.id)"
+                 md-search-text="searchText" 
+                 md-items="item in $ctrl.getMatches(searchText)" 
+                 md-item-text="item.name"
+                 ng-attr-md-floating-label="{{14 | translate}}"
+                 required
+                 flex
+                >
+  <span md-highlight-text="searchText">{{item.name}}</span>
+</md-autocomplete>
+
+
+</div>
+<div layout="row">
+<md-input-container flex>
+<label>{{ 97| translate }} 1</label>
+<input required ng-model="emergency_contact.phone">
+<div class="hint" >+1 555 555 5555 </div>
+</md-input-container>
+
+<md-input-container flex>
+<label>{{ 97| translate }} 2</label>
+<input ng-model="emergency_contact.phone2">
+</md-input-container>
+<!--Skype: {{emergency_contact.skype}}<br>-->
+</div>
+
+
+</form>
+

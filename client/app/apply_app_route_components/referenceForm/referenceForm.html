@@ -1,0 +1,407 @@
+
+<div layout="row"  layout-align="center" style="background-image: url(img/default_avatar.png);">
+ <div ng-show="$ctrl.loading" flex="100"  flex-gt-xs="70" layout="column" >
+            <md-card >
+           
+            <md-card-content layout="row" layout-align="center">
+                <md-progress-circular></md-progress-circular>
+                </md-card-content>
+     </md-card>
+    </div>
+    
+    <div ng-show="form.submit" flex="100"  flex-gt-xs="70" layout="column" >
+            <md-card >
+           
+            <md-card-content layout="row" layout-align="center">
+               <span translate="177">Thank you!</span>
+                </md-card-content>
+     </md-card>
+    </div>
+     
+    <div ng-hide="$ctrl.loading || form.submit" flex="100"  flex-gt-xs="70" layout="column" >
+
+<form name="refForm">
+        <md-card >
+           
+            <md-card-content>
+            <h1 class="md-title">{{$ctrl.school.name}} {{ 119| translate }} {{ 120| translate }}</h1>
+
+            <div layout="row" layout-align="start center">
+                <div style="height:70px;" >
+                <img ng-if="$ctrl.meta.applicant_avatar" style="border-radius: 50%; height:100%"  firebase-src="{{$ctrl.meta.applicant_avatar}}" >
+                
+                <img ng-if="!$ctrl.meta.applicant_avatar" style="border-radius: 50%; height:100%"  src="img/default_avatar.png" >
+                <br>
+            </div>
+            <div flex style="padding-left:10px; float:left;">
+                <h1 class="md-display-1">{{$ctrl.meta.applicant_first_name}} {{$ctrl.meta.applicant_last_name}}</h1>
+            </div>
+            </div>    
+            <br><br>
+            <div>
+                <span translate="121">Hello</span> {{$ctrl.meta.reference_name}},<br>
+                <span translate="122">In order to further process the</span> {{$ctrl.meta.applicant_first_name}}
+                <span translate="123">'s application, we ask that you answer the following questions to the best of your ability. All information will, of course, be handled in a confidential manner. Thank you for your help.</span>
+            </div>
+                <br>
+
+            <!-- 
+            <div flex	ng-if="form.scale.school"   style="max-width:200px" >
+            <b>Course:</b>
+            <img ng-src="{{form.scale.school.banner}}">
+
+                <div class="md-body-2" style="margin-bottom:5px">
+                {{form.scale.school.name}}</div>
+                <div class="md-body-1" style="margin-bottom:5px" >
+                {{form.scale.school.description}}
+                </div>
+                <md-divider style="margin-bottom:10px"></md-divider>
+                <div class="md-subhead">
+                {{form.scale.school.start_date | date }} - {{form.scale.school.end_date | date }}</div>
+                <div class="md-subhead">
+                {{form.scale.school.school_fee}}  {{form.scale.school.location}} 
+                </div>
+             -->
+            </md-card-content>
+        </md-card>
+
+
+
+        <md-card>
+            <md-card-content>
+
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label >
+                            <span translate="124">What is your relationship to</span> {{$ctrl.meta.applicant_first_name}}? <span translate="125">(Friend, Pastor, Co-worker, etc.)</span>
+                        </label>
+                        <input ng-model="form.relation" type="text"  required="required">
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="126">How well do you know</span> {{$ctrl.meta.applicant_first_name}}?
+                        </label>
+                        <input ng-model="form.how_well" type="text"  required="required">
+                    </md-input-container>
+                </div>
+
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="127">According to your knowledge, has</span> {{$ctrl.meta.applicant_first_name}} <span translate="128">given</span> <span translate="129" ng-if="$ctrl.meta.applicant_gender=='Male'">his</span><span translate="130" ng-if="$ctrl.meta.applicant_gender=='Female'">her</span> <span translate="131">life to Jesus?</span><br>
+                        <span translate="132">How is</span> {{$ctrl.meta.applicant_first_name}}<span translate="133">relationship to God?</span>
+                        </label>
+                        <input ng-model="form.christian" type="text"  required="required">
+                    </md-input-container>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-content>
+
+                <h3 class="md-subhead"><span translate="134">
+                    Please rate</span> {{$ctrl.meta.applicant_first_name}}, <span translate="135">according to your observations, in the following areas</span>:
+                </h3>
+                <br>
+                <br>
+                <div layout="row" flex-gt-xs="60" flex="100" flex-offset-gt-xs="20" layout-align="center center" style="text-align:center;" layout-wrap>
+                        <div flex translate="172">
+                            poor
+                        </div>
+                        <div flex  translate="173">
+                            average
+                        </div>
+                        <div flex layout layout-align="center center"  translate="174">
+                            good
+                        </div>
+                </div>
+                <br>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="136">Communication</span>:</span>
+                    </div>                
+                    
+                    <md-slider flex   flex-order-xs="3" md-discrete ng-model="form.scale.communication" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                  
+                    <div ng-if="form.scale.communication" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.communication]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.communication" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;" >
+                        <span class="md-body-1"><span translate="137">Teachability</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.teachability" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.teachability" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.teachability]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.teachability" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="138">Ambition</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.ambition" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.ambition" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.ambition]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.ambition" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="139">Organization</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.organization" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.organization" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.organization]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.organization" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="140">Leadership</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.leadership" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.leadership" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.leadership]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.leadership" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="141">Reliable</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.reliable" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.reliable" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.reliable]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.reliable" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="142">Servanthood</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.servanthood" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.servanthood" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.servanthood]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.servanthood" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="143">Moral</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.moral" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.moral" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.moral]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.moral" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>  
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="144">Punctual</span>:</span>
+                    </div>
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.punctual" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>
+                    <div ng-if="form.scale.punctual" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.punctual]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.punctual" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div>   
+                <br>
+                <div layout="row" layout-wrap>
+                    <div flex-gt-xs="20" flex="50" layout layout-align="end center" style="padding-right:10px;">
+                        <span class="md-body-1"><span translate="145">Initiative</span>:</span>
+                    </div>
+                    
+                    <md-slider flex flex-xs="100"  flex-order-xs="3" md-discrete ng-model="form.scale.initiative" step="1" min="1" max="5" aria-label="rating" required>
+                    </md-slider>                  
+                   
+                    <div ng-if="form.scale.initiative" flex-gt-xs="20" flex-xs="50" flex-order-xs="2" layout layout layout-align="start center"  style="padding-left:10px;">
+                        {{$ctrl.rating[form.scale.initiative]| translate}}
+                    </div>
+                    <div ng-if="!form.scale.initiative" flex-gt-xs="20" flex-xs="50" flex-order-gt-xs="2" layout layout-align="start center" style="padding-left:10px;">
+                        {{176| translate}} {{$ctrl.meta.applicant_first_name}}
+                    </div>
+                </div> 
+                <br>
+                <div layout="row" flex-gt-xs="60" flex="100" flex-offset-gt-xs="20" layout-align="center center" style="text-align:center;" layout-wrap>
+                        <div flex translate="172">
+                            poor
+                        </div>
+                        <div flex  translate="173">
+                            average
+                        </div>
+                        <div flex layout layout-align="center center"  translate="174">
+                            good
+                        </div>
+                </div>
+            </md-card-content>
+        </md-card>
+
+
+        <md-card>
+            <md-card-content >
+                <h3 class="md-subhead">
+                    <span translate="146">In your opinion, what are the strengths and weaknesses of</span> {{$ctrl.meta.applicant_first_name}}?
+                </h3>                
+                
+               <div layout="row">
+                    <md-input-container flex="100">
+                        <label ><span translate="148">Strengths</span>:</label>
+                        <input ng-model="form.strength" type="text"  required="required">
+                    </md-input-container>            
+                </div>
+                
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label ><span translate="147">Weakness</span>:</label>
+                        <input ng-model="form.weakness" type="text"  required="required">
+                    </md-input-container>
+                </div>
+                
+            </md-card-content>
+        </md-card>
+
+
+        <md-card>
+            <md-card-content>
+                <div layout="row">
+                    <md-input-container flex="100">
+
+                        <label><span translate="149">How does</span> {{$ctrl.meta.applicant_first_name}} <span translate="150">react to difficult situations and to conflict?</span></label>
+                        <input ng-model="form.conflict" type="text"  required="required">
+
+                    </md-input-container>
+                </div>
+                
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="151">Please try to describe</span> {{$ctrl.meta.applicant_first_name}}
+                            <span translate="152">'s relationship to</span> 
+                            <span translate="129" ng-if="$ctrl.meta.applicant_gender=='Male'">his</span>
+                            <span translate="130" ng-if="$ctrl.meta.applicant_gender=='Female'">her</span> 
+                            <span translate="153">family members</span>:
+                        </label>
+                        <input ng-model="form.family" type="text"  required="required">
+                    </md-input-container>
+                </div>
+                
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="154">How would you describe</span> {{$ctrl.meta.applicant_first_name}}<span translate="152">'s relationship to</span> <span translate="129" ng-if="$ctrl.meta.applicant_gender=='Male'">his</span>
+                            <span translate="130" ng-if="$ctrl.meta.applicant_gender=='Female'">her</span> <span translate="155">church</span>?<br>
+                            <span translate="156">How active is</span> {{$ctrl.meta.applicant_first_name}} 
+                            <span translate="157">there</span>?
+                        </label>
+                        <input ng-model="form.church_life" type="text"  required="required">
+                    </md-input-container>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-content layout-wrap>
+                <h3 class="md-subhead">
+                    <span translate="160">Why do you think</span> {{$ctrl.meta.applicant_first_name}} <span translate="161">would like to participate in this program</span>?
+                </h3>
+                <br>
+
+                <div flex>
+                    <md-checkbox ng-model="form.why.to_grow" aria-label="{{162|translate}}">
+                        <span translate="162">To grow spiritually</span>
+                    </md-checkbox>
+                    <md-checkbox ng-model="form.why.to_escape" aria-label="{{163|translate}}">
+                        <span translate="163">To escape a bad environment</span>
+                    </md-checkbox>
+                    <md-checkbox ng-model="form.why.get_help" aria-label="{{ 164| translate }}">
+                        <span translate="164">To get help</span>
+                    </md-checkbox>
+                    <md-checkbox ng-model="form.why.for_adventure" aria-label="{{165|translate}}">
+                        <span translate="165">For adventure</span>
+                    </md-checkbox>
+                    <md-checkbox ng-model="form.why.get_equipped" aria-label="{{166|translate}}">
+                        <span translate="166">To be equipped for futher service/ministry</span>
+                    </md-checkbox>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-content>
+                
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="168">Other comments</span>: (optional)
+                        </label>
+                        <input ng-model="form.other" type="text">
+                    </md-input-container>
+                </div>
+
+               <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="169">Encouragement for</span> {{$ctrl.meta.applicant_first_name}}: (optional)
+                            <span translate="170">(Shared upon their arival)</span>
+                        </label>
+                        <input ng-model="form.encouragement" type="text">
+                    </md-input-container>
+                </div>
+                
+                <div style="text-align:right">
+                    <md-button ng-click="$ctrl.submit(refForm)" type="submit" class="md-raised md-primary" translate="167">Submit</md-button>
+                </div>
+
+            </md-card-content>
+        </md-card>
+
+        </form>
+    </div>
+</div>
+

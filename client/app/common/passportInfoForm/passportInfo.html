@@ -1,0 +1,157 @@
+<h1 class="md-title" translate="102">Passport</h1>
+
+
+    <span translate="109">
+        This helps us to prepare the documents for your residence permit.<br>
+    </span>
+    <br><br>
+    <md-checkbox aria-label="Disabled checkbox" ng-model="passport.no_passport">
+        <span translate="108">I do not have a passport</span>
+    </md-checkbox>
+    <br>
+    <span translate="104" ng-show="passport.no_passport" style="color:red;">
+        NOTE: If you do not have a passport yet, please leave this section blank, you can fill it in later at anytime on the home page.
+    </span>
+    <br>
+    <br>
+    
+<form name="PassportForm" ng-if="!passport.no_passport">   
+    <span translate="16" style="padding-left:2px;">Names_as printed in passport</span>
+    <br>
+   
+
+    <div layout="row">
+        
+        <md-input-container flex>
+            <label translate="7">first name</label>
+            <input  required ng-model="passport.first_name">
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label translate="15">middle name</label>
+            <input ng-model="passport.middle_name">
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label  translate="8">last name</label>
+            <input  required ng-model="passport.last_name">
+        </md-input-container>
+
+    </div>
+    
+    <div layout="row">
+        
+        <md-input-container flex>
+            <label translate="17">passport number</label>
+            <input  required ng-model="passport.number">
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label translate="18">issue_date:</label>
+            <md-datepicker ng-model="$ctrl.issue_date"
+                         ng-change="$ctrl.changeIssueDate()"
+                         required
+                         md-open-on-focus>
+            </md-datepicker>
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label translate="19">expire_date:</label>
+            <md-datepicker ng-model="$ctrl.expire_date"
+                         ng-change="$ctrl.changeExpireDate()"
+                         required
+                         md-open-on-focus >
+            </md-datepicker>
+        </md-input-container>
+        
+    </div>
+
+    <div layout="row">
+
+        <md-autocomplete flex
+                         md-selected-item="$ctrl.passport_nation" 
+                         md-selected-item-change="$ctrl.updateNation($ctrl.passport_nation.id)"
+                         md-search-text="searchText" 
+                         md-items="item in $ctrl.getMatches(searchText)" 
+                         md-item-text="item.name"
+                         ng-attr-md-floating-label="{{14 | translate}}"
+                         required
+                        >
+            <span md-highlight-text="searchText">{{item.name}}</span>
+        </md-autocomplete>
+        
+        <md-input-container flex>
+            <label translate="20">authority:</label>
+            <input required ng-model="passport.authority">
+        </md-input-container>
+
+    </div>
+
+    <div layout="row">
+        
+        <md-input-container flex>
+            <label translate="21">address</label>
+            <input required ng-model="passport.address">
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label translate="22">City:</label>
+            <input required ng-model="passport.city">
+        </md-input-container>
+        
+    </div>
+    <div layout="row">
+        
+        <md-input-container flex>
+            <label translate="23">state:</label>
+            <input ng-model="passport.state">
+        </md-input-container>
+        
+        <md-input-container flex>
+            <label translate="24">Zip:</label>
+            <input required ng-model="passport.zip">
+        </md-input-container>
+        
+    </div>
+    
+    <div layout="row">
+        
+        <md-input-container flex ng-if="$ctrl.settings.eye_color_needed_for_visa">
+            <label translate="111">eye_color</label>
+            <md-select ng-model="passport.eye_color" required >
+                <md-option value="blau" translate="112"></md-option>
+                <md-option value="grün" translate="113" ></md-option>
+                <md-option value="braun" translate="114" ></md-option>
+                <md-option value="grau" translate="115" ></md-option>
+            </md-select> 
+        </md-input-container>         
+        
+        <md-input-container flex ng-if="$ctrl.settings.height_needed_for_visa">
+            <label translate="110">height</label>
+            <input required type="number" ng-model="passport.height">
+        </md-input-container>
+        
+    </div>
+
+    
+    <!-- Translation!-->
+    <div class="info" ng-if="$ctrl.need_invitation">
+        {{$ctrl.need_invitation.$value}}
+    </div>
+
+    <div class="info" ng-if="$ctrl.need_entry_visa">
+        {{$ctrl.need_entry_visa.$value}}
+    </div>
+
+    <div class="info" ng-if="$ctrl.need_visa_extention">
+        {{$ctrl.need_visa_extention.$value}}
+    </div>
+
+    <div class="info" ng-if="$ctrl.can_not_process_visa">
+        {{$ctrl.can_not_process_visa.$value}}
+    </div>
+
+    <!--PassportForm valid?
+    {{$ctrl.PassportForm.$valid}}-->
+
+</form>

@@ -2,6 +2,7 @@ import angular from 'angular';
 import uiRouter from 'angular-ui-router';
 
 import Common from './common/common';
+import services from './services/services';
 import staffComponents from './staff_app_route_components/staff_app_route_components';
 import applyComponents from './apply_app_route_components/apply_app_route_components';
 import AppComponent from './app.component';
@@ -24,6 +25,8 @@ require("font-awesome-webpack");
 //angular translate 
 import 'angular-translate';
 import 'angular-translate-loader-static-files';
+import 'angular-translate-loader-partial';
+import 'angular-dynamic-locale'; // for dynamic locale loading 
 import English from './en.json'; //include english translations by default so they don't have to load seperate 
 
 import Domains from './domains.json'
@@ -43,18 +46,20 @@ angular.module('app', [
     'ngMaterial',
     DataTable,
     'pascalprecht.translate',//ngTranslate
+     'tmh.dynamicLocale',// for dynamic locale loading 
     'firebase',
      'chart.js',
     Common,
+    services,
     staffComponents,
     applyComponents
   ])
-  .config(($locationProvider, $translateProvider, $mdThemingProvider) => {
+  .config(($locationProvider, $translateProvider, $mdThemingProvider,$urlRouterProvider) => {
     "ngInject";
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     // $locationProvider.html5Mode(true).hashPrefix('!');
-
+    $urlRouterProvider.otherwise('/schoolApplyList');
 
 //------- Initialize Firebase
         var config = {
@@ -67,20 +72,6 @@ angular.module('app', [
 
 
 
-//------  Angular Translate Settings
-      $translateProvider
-       .translations('en', English)
-        .useStaticFilesLoader({
-          prefix: 'https://staffapp-95f17.firebaseio.com/phrases/',
-          suffix: '.json'})
-        .registerAvailableLanguageKeys(['en','de','es'],{
-          'en_*': 'en',
-          'de_*': 'de',
-          'es_*': 'es',
-          '*': 'en'
-        })
-        .determinePreferredLanguage()
-        .fallbackLanguage('en');
 
 //------ Material Design Theme config        
       $mdThemingProvider.theme('default')
@@ -93,12 +84,47 @@ angular.module('app', [
           })
           .backgroundPalette('grey');
 
+  })
+  //Translation config
+.config(($translateProvider,$translatePartialLoaderProvider ,tmhDynamicLocaleProvider) => {
+    "ngInject";
+  
+     $translatePartialLoaderProvider.addPart('apply-app');
+      $translateProvider.useLoader('$translatePartialLoader',{
+          urlTemplate: 'https://staffapp-95f17.firebaseio.com/phrases/{part}/{lang}.json',
+         })
+        .registerAvailableLanguageKeys(['en','de','es'],{
+          'en_*': 'en',
+          'de_*': 'de',
+          'es_*': 'es',
+          '*': 'en'
+        })
+        .determinePreferredLanguage()
+        .fallbackLanguage('en')
+        .useSanitizeValueStrategy('sanitizeParameters')
+        .useLoaderCache(true)
+        //---------- locale settings... load from https://cdnjs.com/libraries/angular-i18n
+    tmhDynamicLocaleProvider.localeLocationPattern('https://cdnjs.cloudflare.com/ajax/libs/angular-i18n/1.5.8/angular-locale_{{locale}}.js');
+
+
+})
 
 
 
+  .run(($rootScope,$translate,tmhDynamicLocale, Site)=>{
+      "ngInject";
+    $rootScope.$on('$translateChangeSuccess', function() {
+     //Watching for angular-translate changes.. and change the angular-locale also
+       console.log('Changing language and locale to ' + $translate.proposedLanguage())
+      //  if($translate.proposedLanguage()!='en')// ignore english since it is already in angular
+        tmhDynamicLocale.set($translate.proposedLanguage());
+        
+        Site.language = $translate.proposedLanguage();
+    });
 
 
   })
+
   .run((Site,$firebaseObject, $rootScope)=>{ //Find location from host names
      "ngInject";
             Site.location_id  =  Domains[location.hostname]
@@ -110,14 +136,20 @@ angular.module('app', [
   })
 
 
-.run(["$transitions", "Auth" ,"$rootScope","$state", function($transitions, Auth, $rootScope,$state) {
+.run(["$transitions", "Auth" ,"$rootScope","$state","Site" , function($transitions, Auth, $rootScope,$state, Site) {
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
-      
+
+        //Things to reset on every state transtion
           $rootScope.$broadcast('hideLoginDialog');
+          Site.hideSideNav = false;
 
         if( state.data != null ){
+          
+          if(state.data.hideSideNav)
+             Site.hideSideNav=true
+          
          if(state.data.authRequired === true && !Auth.$getAuth()){
             $rootScope.$broadcast('showLoginDialog');
             // $timeout(function(){})

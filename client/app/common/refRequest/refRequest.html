@@ -1,0 +1,107 @@
+<h1 class="md-title" translate="103">References</h1>
+{{$ctrl.appId}}
+<p translate="35">
+    translated.........Your application is nearly complete! As a final step, please choose two people who can be a reference for you. 
+    A reference should be someone who you trust and who knows you. 
+</p>
+<br>
+<div> 
+    <b>
+        <span translate="36">...Reference</span> 1
+    </b> 
+    <span translate="37">translated.....Pastor/Leader/Teacher</span>
+
+    <div ng-show="$ctrl.reference1.send_requested || $ctrl.reference1.sent " style="height:40px; padding:20px; color:gray; ">
+        <span ng-show="$ctrl.reference1.send_requested">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+            <span translate="62">  tranlated...  Sending... Email </span>
+        </span>
+        <span ng-show="$ctrl.reference1.sent"> 
+            <span translate="64"> translated....  Email sent, waiting for reference.</span>
+            <a ng-click="$ctrl.reference1.sent = false; " translate="63"> translated...   send again </a>
+        </span>
+    </div>
+
+    <div layout="row" layout-align="top" layout-wrap  ng-hide="$ctrl.reference1.send_requested || $ctrl.reference1.sent " >
+
+        <md-input-container flex-gt-xs="50" flex="100" >
+            <label>Name</label>
+            <input required ng-model="$ctrl.reference1.name">
+        </md-input-container>  
+
+        <md-input-container flex-gt-xs="50" flex="100">
+            <label translate="65">Relation</label>
+            <input required ng-model="$ctrl.reference1.relation">
+        </md-input-container>  
+
+        <md-input-container flex-gt-xs="50" flex="100">
+            <label>Email</label>
+            <input required ng-model="$ctrl.reference1.email">
+        </md-input-container>
+
+        <md-input-container flex-gt-xs="30"  flex="50">
+            <label translate="66">Language</label>
+            <md-select required  ng-model="$ctrl.reference1.language">
+                <md-option ng-value="'en'" translate="68">English</md-option>
+                <md-option ng-value="'de'" translate="69" >German</md-option>
+            </md-select>                    
+        </md-input-container>
+
+        <div flex></div>
+
+        <div>
+            <md-button ng-click="$ctrl.sendRef1()" class="md-raised" translate="67" >Send</md-button>
+        </div>
+    </div>
+</div>
+
+
+<div>
+    <b>
+        <span translate="36">...Reference</span> 2
+    </b> 
+    <span translate="61" >Friend/Relative/Co-Worker</span>
+
+    <div ng-show="$ctrl.reference2.send_requested || $ctrl.reference2.sent " style="height:40px; padding:20px; color:gray; ">
+        <span ng-show="$ctrl.reference2.send_requested">
+          <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+          <span translate="62">  tranlated...  Sending... Email </span>
+        </span>
+        <span ng-show="$ctrl.reference2.sent">
+            <span translate="64"> translated....  Email sent, waiting for reference.</span>
+            <a ng-click="$ctrl.reference2.sent = false;" translate="63">  send again </a>
+        </span>
+    </div>
+
+    <div layout="row" layout-align="top" layout-wrap ng-hide="$ctrl.reference2.send_requested || $ctrl.reference2.sent ">
+
+        <md-input-container  flex-gt-xs="50" flex="100">
+            <label>Name</label>
+            <input required ng-model="$ctrl.reference2.name">
+        </md-input-container>  
+
+        <md-input-container  flex-gt-xs="50" flex="100">
+            <label translate="65">Relation</label>
+            <input required ng-model="$ctrl.reference2.relation">
+        </md-input-container>  
+
+        <md-input-container  flex-gt-xs="50" flex="100" >
+            <label>Email</label>
+            <input required ng-model="$ctrl.reference2.email">
+        </md-input-container>  
+
+        <md-input-container flex-gt-xs="30"  flex="50">
+            <label translate="66">Language</label>
+            <md-select required  ng-model="$ctrl.reference2.language">
+                <md-option ng-value="'en'" translate="68">English</md-option>
+                <md-option ng-value="'de'" translate="69">Deutsch</md-option>
+            </md-select>
+        </md-input-container>
+
+        <div flex></div>
+
+        <div>
+            <md-button ng-click="$ctrl.sendRef2()" class="md-raised" translate="67" >Send</md-button>
+        </div>
+    </div>
+</div>

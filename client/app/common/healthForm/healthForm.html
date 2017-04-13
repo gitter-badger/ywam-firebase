@@ -1,0 +1,92 @@
+<h1 class="md-title" translate="80">Health Information</h1>
+
+<span translate="81">We will do our best to accommodate for your needs but can not guarantee that we can facilitate for every special need or request.</span>
+<br><br>
+
+<form name="$ctrl.healthForm"  >
+
+    <div layout="row"> 
+        <md-input-container flex="100">
+            <label translate="82">Health conditions </label>
+            <input ng-model="health.conditions"  >
+        </md-input-container>
+    </div>
+    
+    <div>	 
+        <md-checkbox ng-model="health.physical_disability"  >
+            <span translate="83">Physical Disability?</span>
+        </md-checkbox>
+        
+        <div layout="row">
+            <md-input-container ng-if="health.physical_disability" flex >
+                <label translate="86">Describe physical disability</label>
+                <input ng-model="health.physical_disabilities" ng-required="health.physical_disability"  >
+            </md-input-container>
+        </div>
+        
+        <md-checkbox ng-model="health.on_medication"  >
+            <span translate="84">On Medication?</span>
+        </md-checkbox>
+    </div>
+    
+    <div layout="row">
+        <md-input-container ng-if="health.on_medication" flex >
+            <label translate="85">Medications</label>
+            <input ng-model="health.medications" ng-required="health.on_medication"  >
+        </md-input-container>
+    </div>
+
+    <div layout="row" layout-align="start center" layout-wrap >
+        <div flex="100">
+            <br>
+            <span translate="87">Allergies:</span>
+            <br>
+            <br>
+        </div>
+        <br><br>
+        
+        <md-checkbox ng-model="health.allergies.lactose" aria-label="lactose?">
+            <span translate="88">Lactose</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.gluten" aria-label="gluten?">
+            <span translate="89">Gluten</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.tree_nut" aria-label="Tree Nut?">
+            <span translate="90">Tree Nuts</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.shellfish" aria-label="Shellfish?">
+            <span translate="91">Shellfish</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.peanut" aria-label="Peanut?">
+            <span translate="92">Peanut</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.fish" aria-label="fish?">
+            <span translate="93">Fish</span>
+        </md-checkbox>
+        
+        <md-checkbox ng-model="health.allergies.other" aria-label="Other?">
+            <span translate="94">Other</span>
+        </md-checkbox>
+
+    </div>
+    
+    <div layout="row">
+        <md-input-container flex ng-if="health.allergies.other" >
+            <label translate="95">Other Allergy</label>
+            <input ng-model="health.other_allergies" ng-required="health.allergies.other" >
+        </md-input-container>
+    </div>
+    <br>
+    <div layout="row"> 
+        <md-input-container flex="100">
+            <label translate="98">Dietary preferences </label>
+            <input ng-model="health.dietary_preferences">
+        </md-input-container>
+    </div>
+
+</form>

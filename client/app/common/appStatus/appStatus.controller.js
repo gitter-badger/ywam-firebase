@@ -9,7 +9,7 @@ class AppStatusController {
           var Ref =   firebase.database().ref('/applications/'+ctrl.appId+'/meta')
           Ref.on('value',function(snap){ //Set this as a listener because we want to see it change when we change it!
               ctrl.appMeta = snap.val()
-      console.log(ctrl.appMeta.status <8);
+
               $timeout(function(){});
               if(ctrl.who){
                 var user_id = ctrl.appMeta.statuses[ctrl.appMeta.status].user_id

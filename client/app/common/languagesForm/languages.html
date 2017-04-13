@@ -1,0 +1,52 @@
+<h1 class="md-title" translate="99">Languages</h1>
+
+<span translate="72">Select any languages you know:</span>
+<br><br>
+
+<div>
+    <md-button ng-repeat="(key,item) in  $ctrl.languages" 
+               ng-click="$ctrl.addLang(key)"
+               ng-if="!user_lang[key]"> {{item.text}}
+    </md-button>
+</div>
+<br>
+<md-divider></md-divider>
+<br>
+<form name="$ctrl.LangForm">
+    <div layout="row" layout-align="center">
+
+        <div flex-gt-xs="50">
+            <div ng-repeat="(key,item) in user_lang" 
+              layout="row" layout-align="space-between center" 
+              style="margin-bottom:0px">
+                <div flex>   
+                    <a ng-click="$ctrl.removeLang(key)" >X</a>  
+                    <strong>{{$ctrl.languages[key].text}}</strong>
+                    <em ng-hide="key == 'en'">{{$ctrl.languages[key].en_text}}</em>
+                </div> 
+                
+                <md-input-container flex>
+                    <label translate="118">Skill </label>
+                    <md-select ng-model="user_lang[key]" flex style="margin:0" required>
+                        <md-option value="100" translate="73">Native</md-option>
+                        <md-option value="70" translate="74">Fluent</md-option>
+                        <md-option value="40" translate="75">Conversational</md-option>
+                        <md-option value="15" translate="76">Basic</md-option>
+                    </md-select>  
+                </md-input-container>  
+
+            </div>
+        </div>
+    </div>
+</form>
+
+<!--	$pro[1]='Native';
+        $pro[2]='Fluent';
+        $pro[3]='Conversational'; //Conversant
+        $pro[4]='Basic';
+    
+    	            $pro[0]=100;
+					$pro[1]=100;
+					$pro[2]=70;
+					$pro[3]=40; //Conversant
+					$pro[4]=15;-->

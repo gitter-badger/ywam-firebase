@@ -1,0 +1,47 @@
+
+  <md-card class="signUp" >
+    <md-card-content>
+      <h1 class="md-title" >{{41 | translate}}</h1>
+      <br>
+        <br>
+      <form ng-submit="$ctrl.signUp()" ng-if="!$ctrl.message" layout="column" class="signUpForm">
+      <md-input-container class="login-inputs no-md-error " md-no-float>
+        <label>Email</label>
+        <input  required name="email" ng-model="$ctrl.email">
+          <!--<div ng-messages="signUpForm.email.$error">
+              <div translate="40" ng-message="required">  This is required...</div>
+          </div>-->
+      </md-input-container>
+    <md-input-container  class="login-inputs no-md-error " md-no-float>
+       
+        <input placeholder="{{38 | translate}}*" required name="password" type="password" ng-model="$ctrl.password">
+        <!--<div ng-messages="signUpForm.password.$error">
+              <div translate="40" ng-message="required">  This is required...</div>
+          </div>-->
+      </md-input-container>
+          
+          <md-input-container  class="login-inputs no-md-error " md-no-float>
+      
+        <input placeholder="{{7|translate}}*" required name="first_name" ng-model="$ctrl.first_name">
+              <!--<div ng-messages="signUpForm.first_name.$error">
+              <div translate="40" ng-message="required">  This is required...</div>
+          </div>-->
+      </md-input-container>
+    <md-input-container  class="login-inputs no-md-error " md-no-float>
+    
+        <input placeholder="{{8|translate}}*" required name="last_name" ng-model="$ctrl.last_name">
+        <!--<div ng-messages="signUpForm.last_name.$error">
+              <div translate="40" ng-message="required">  This is required...</div>
+          </div>-->
+      </md-input-container>
+          
+    <md-button translate="39" type="submit" class="md-primary md-raised">Sign Up</md-button>
+      </form>
+<h1>
+    {{$ctrl.message}}
+</h1>
+    <login-buttons ng-if="$ctrl.message"></login-buttons>
+        <b style="color:red;">{{$ctrl.error_key | translate}}</b>
+    <md-card-content>
+  </md-card>
+

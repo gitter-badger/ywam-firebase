@@ -1,11 +1,8 @@
 class UserPhotoUploadController {
     /* @ngInject */
-  constructor($scope,Auth,$firebaseObject, $timeout, $stateParams) {
+  constructor($scope,Auth,$firebaseObject, $timeout) {
     var ctrl = this;
-    ctrl.user_id = $stateParams.user_id
-    if(!ctrl.user_id)
     ctrl.user_id = Auth.$getAuth().uid
-
     ctrl.avatar = null;
     ctrl.myImage= null;//$firebaseObject(comRef)
     ctrl.myCroppedImage='';

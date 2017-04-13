@@ -7,12 +7,16 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
                  user: {},
                  showDialog: showDialog,
                  getAvatar: getAvatar,
-                 avatars: {}
+                 avatars: {},
+                
+                 hideSideNav:false,
+
                
 
                 };
 
-                // any time auth state changes, add the user data to scope
+
+        // any time auth state changes, add the user data to scope
         Auth.$onAuthStateChanged(function(firebaseUser) {
            
            if(firebaseUser){

@@ -1,0 +1,34 @@
+    <!--If User is already logged in -->
+    <div ng-show="$ctrl.firebaseUser">
+    <div layout="row" layout-sm="column" layout-align="space-around" style="margin-top:100px">
+          <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+
+    <!--If we need to log the user in-->
+
+<div  ng-hide="$ctrl.firebaseUser" > 
+
+   <h1   translate="app_start" class="md-title" style="text-align: center"></h1>
+
+
+
+<div layout="row" layout-align="center" layout-wrap>
+  
+  <sign-up flex="100" flex-gt-sm="30">  </sign-up>
+    <div flex-gt-xs="5" flex="100"  layout="row" layout-align="center center">
+      <span > OR</span> 
+    </div>
+  <md-card flex flex-gt-sm="30" >
+  <md-card-content  style="text-align:center">
+ 
+    <login-buttons></login-buttons>
+
+    </md-card-content>
+
+
+  </md-card>
+</div>
+
+
+</div>

@@ -1,34 +1,46 @@
 class HeaderController {
    /* @ngInject */
-  constructor($translate,$mdSidenav, Auth, $state, Site) {
+  constructor($translate, Auth, Site,$state,$stateParams,$mdSidenav ) {
 
       var ctrl = this;
-          ctrl.logout = ()=>{
-            Auth.$signOut()
-             $state.transitionTo('home')
-          }
-          ctrl.user = Site.user
-          ctrl.presence = Site.presence
-          ctrl.avatars = Site.avatars
-       
-
-    // any time auth state changes, add the user data to scope
-   Auth.$onAuthStateChanged(function(firebaseUser) {
-      ctrl.firebaseUser = firebaseUser;
-       
-     
-    });
-
-   
-
-
-      ctrl.langKey = $translate.proposedLanguage()  || 'en'
-      ctrl.changeLanguage = function () {
-        $translate.use(ctrl.langKey);
-      };
+      ctrl.$onInit= onInit;
+      ctrl.langKey = $translate.proposedLanguage()  || 'en' //get the current language
+      ctrl.site = Site;
+      ctrl.user = Site.user
       ctrl.openLeftMenu = function() {
         $mdSidenav('left').toggle();
       };
+      
+      
+      
+      function onInit(){
+          
+     
+      ctrl.presence = Site.presence
+    //  ctrl.avatars = Site.avatars
+      
+      ctrl.changeLanguage = function (langKey) {
+          $translate.use(langKey);
+          ctrl.langKey=langKey
+      };
+     ctrl.logout = ()=>{
+            Auth.$signOut()
+             $state.go('home')
+          }
+
+           
+      
+   
+}
+  
+  // any time auth state changes, add the user data to scope
+   Auth.$onAuthStateChanged(function(firebaseUser) {
+      ctrl.firebaseUser = firebaseUser;
+    });
+
+
+
+
 
   }
 }

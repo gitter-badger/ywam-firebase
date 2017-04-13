@@ -1,0 +1,195 @@
+<div layout="row" layout-align="" style=" height: 100%;" >
+    
+    <div flex-gt-sm="25">
+        
+        <div  du-scroll-container="scroll-container-1" du-spy-context style="position:fixed; padding:15px;"  hide-xs hide-sm layout="column"  >
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="comForm.$valid  && $ctrl.addressForm">
+                <span translate="10">Contact Information</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="profile_com.avatar_1080">
+                <span translate="100">Photo</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.LangForm">
+                <span translate="99">Language</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.schoolQuestions">
+                <span translate="101">Questions</span> 
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.healthForm">
+                <span translate="80"> Health info</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.emergencyForm">
+                <span translate="96"> Emergency Contact</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.passportForm">
+                <span translate="102"> Passport</span>
+            </md-checkbox>
+
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-model="$ctrl.refForm">
+                <span translate="103"> References</span>
+            </md-checkbox>
+
+        <!--<img ng-src="{{profile_com.avatar_1080}}" alt="" width="200px">-->
+        </div>
+    </div>
+
+    <div flex="100" flex-gt-sm="50">
+
+        <md-card>
+            <md-card-content>
+                <h1 class="md-title" translate="10">Contact Information:</h1>
+
+                <form name="comForm" >
+                    <div layout>
+                        <md-input-container flex>
+                            <label translate="7"></label>
+                            <input ng-model="profile_com.first_name" required  >                            
+                            <div ng-messages="projectForm.description.$error">
+                                <div ng-message="required">This is required.</div>
+                                <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+                            </div>
+                        </md-input-container>  
+                        
+                        <md-input-container flex>
+                            <label translate="8"></label>
+                            <input ng-model="profile_com.last_name" required >
+                        </md-input-container>  
+                    </div>
+
+                    <div layout="row" layout-align="space-between start">
+                        
+                        <md-input-container flex="30" >
+                            <label translate="25"></label>
+                            <md-select ng-model="profile_com.gender" required >
+                                <md-option value="Male" translate="26"></md-option>
+                                <md-option value="Female" translate="27" ></md-option>
+                            </md-select>  
+                        </md-input-container> 
+
+                        <md-input-container  flex>
+                            <label translate="28">marital_status </label>
+                            <md-select ng-model="profile_com.marital_status" required >
+                                <md-option value="single" translate="29">Single</md-option>
+                                <md-option value="engaged" translate="30">Engaged</md-option>
+                                <md-option value="married" translate="31">Married</md-option>
+                                <md-option value="widowed" translate="32">Widowed</md-option>
+                                <md-option value="divorced" translate="33">Divorced</md-option>
+                                <md-option value="separated" translate="34">Separated</md-option>
+                            </md-select>  
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label translate="13"></label>
+                            <md-datepicker ng-model="$ctrl.dob"
+                                   ng-change="$ctrl.changeDOB()"
+                                   required
+                                   md-open-on-focus	
+                                   md-current-view="year"
+                                   md-max-date="$ctrl.maxDate"
+                                   md-min-date="$ctrl.minDate"	>
+                            </md-datepicker>
+                        </md-input-container>              
+
+                    </div>
+                    
+                    <div layout="row">
+                        <md-input-container flex>
+                            <label translate="106">home_phone</label>
+                            <input required ng-model="profile_com.home_phone" ng-required="!profile_com.mobile_phone" >
+                        <div class="hint" >+1 555 555 5555 </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label translate="107">mobile_phone</label>
+                            <input ng-model="profile_com.mobile_phone" ng-required="!profile_com.home_phone" >
+                            <div class="hint" >+1 555 555 5555 </div>
+                        </md-input-container>
+                        <!--Skype: {{emergency_contact.skype}}<br>-->
+                    </div>
+
+                </form>
+
+                <postal-address is-valid="$ctrl.addressForm" ></postal-address>
+                
+               
+                 Email?
+                
+            </md-card-content>
+        </md-card>
+
+
+        <md-card>
+            <user-photo-upload></user-photo-upload>
+        </md-card>
+
+
+
+        <md-card>
+            <md-card-content>
+                <languages is-valid="$ctrl.LangForm"></languages>
+            </md-card-content>
+        </md-card> 
+        
+
+        <md-card>
+          <md-card-content>
+              <school-questions ng-if="$ctrl.school_id" school-id="$ctrl.school_id" app-id="$ctrl.app_id" is-valid="$ctrl.schoolQuestions"></school-questions>
+          </md-card-content> 
+        </md-card>
+
+
+        <md-card>
+            <md-card-content>
+                <health-form is-valid="$ctrl.healthForm"></health-form>
+            </md-card-content>
+        </md-card> 
+
+
+        <md-card>
+            <md-card-content>
+                <emergency-contact is-valid="$ctrl.emergencyForm"></emergency-contact>
+            </md-card-content>
+        </md-card> 
+
+
+        <md-card>
+            <md-card-content>
+                <passport-info is-valid="$ctrl.passportForm"></passport-info>
+            </md-card-content>
+        </md-card> 
+
+        <md-card>
+            <md-card-content>
+                <ref-request ng-if="$ctrl.app_id" app-id="$ctrl.app_id" is-valid="$ctrl.refForm"></ref-request>
+            </md-card-content>
+        </md-card>
+
+        <md-card>
+            <md-card-content>
+              <md-button ng-click="$ctrl.submit()" class="md-raised" translate="105">Submit Applcation</md-button>
+            </md-card-content>
+        </md-card>
+        
+        <!--
+        <md-card>
+          stuff is going here
+
+        School/public
+        <pre>{{ $ctrl.school | json }}</pre>
+
+        Application/for/
+         <pre>{{app_for | json}}</pre>
+
+         Profile/
+         <pre>{{profile | json}}</pre>
+        </md-card>-->
+    </div>
+
+</div>
