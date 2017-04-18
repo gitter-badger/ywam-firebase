@@ -70,23 +70,23 @@ angular.module('app', [
 
     //------ Material Design Theme config  
 
-        $mdThemingProvider.definePalette('amazingPaletteName', {
-        '50': 'ffebee',
-        '100': 'ffcdd2',
-        '200': 'ef9a9a',
-        '300': 'e57373',
-        '400': 'ef5350',
+        $mdThemingProvider.definePalette('YWAMSarasotaColorPalette', {
+        '50': 'a6efe0',
+        '100': '94ecda',
+        '200': '82e9d4',
+        '300': '70e6ce',
+        '400': '5ee3c8',
         
         '500': '4de0c2',
       
-        '600': '4de0c2',
-        '700': 'd32f2f',
-        '800': 'c62828',
-        '900': 'b71c1c',
-        'A100': 'ff8a80',
+        '600': '45c9ae',
+        '700': '3db39b',
+        '800': '359c87',
+        '900': '2e8674',
+        'A100': '7e7e7c',
         'A200': 'ff5252',
         'A400': 'ff1744',
-        'A700': 'd50000',
+        'A700': 'b0b0b0',
         'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
                                             // on this palette should be dark or light
 
@@ -98,7 +98,8 @@ angular.module('app', [
 
 
       $mdThemingProvider.theme('default')
-         .primaryPalette('amazingPaletteName')
+         .primaryPalette('YWAMSarasotaColorPalette')
+         .accentPalette('YWAMSarasotaColorPalette')
           // .primaryPalette('blue-grey')
           // .accentPalette('amber', {
           // 'default': '500', // by default use shade 400 from the pink palette for primary intentions
