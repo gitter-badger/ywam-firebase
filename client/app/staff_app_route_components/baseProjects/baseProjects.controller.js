@@ -4,10 +4,10 @@ class BaseProjectsController {
     var ctrl = this;
         ctrl.editTask = editTask
 
-    var Ref = firebase.database().ref('locations/'+Site.location_id+'/projects')
+    var Ref = firebase.database().ref('location/projects')
         ctrl.projects = $firebaseArray(Ref)
 
-      var FundRef = firebase.database().ref('locations/'+Site.location_id+'/funds')
+      var FundRef = firebase.database().ref('location/funds')
         ctrl.funds = $firebaseObject(FundRef)    
  
 

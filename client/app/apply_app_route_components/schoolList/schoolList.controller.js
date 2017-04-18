@@ -12,7 +12,7 @@ class SchoolListController {
         
         console.log('hello from the school list controller')
           //get list of online schools for location
-          var ref = firebase.database().ref('locations_public').child(Site.location_id).child('online_schools');
+          var ref = firebase.database().ref('location_public').child('online_schools');
               ref.on('child_added', function(snapshot) {
              
                 var school_id = snapshot.key  

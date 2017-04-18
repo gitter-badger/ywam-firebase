@@ -33,12 +33,12 @@
      <div  ng-click="$mdOpenMenu($event)" style="height:48px; cursor:pointer;">
       
        <img  alt=" "
-            ng-if="$ctrl.user.com.avatar_200"
+            ng-if="$ctrl.user.contact.avatar_200"
            style="border-radius: 50%; height:100%"
-           firebase-src="{{$ctrl.user.com.avatar_200}}"
+           firebase-src="{{$ctrl.user.contact.avatar_200}}"
            >
          <img  alt=" "
-            ng-if="!$ctrl.user.com.avatar_200"
+            ng-if="!$ctrl.user.contact.avatar_200"
            style="border-radius: 50%; height:100%"
            src="img/default_avatar.png"
            >

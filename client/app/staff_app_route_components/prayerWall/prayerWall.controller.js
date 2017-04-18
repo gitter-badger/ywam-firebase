@@ -16,14 +16,14 @@ class PrayerWallController {
              var index = ctrl.prayers.push(data)
                  index = index-1
                       // console.log(index)
-                  var userRef =   firebase.database().ref('/profiles/'+ data.user_id +'/com' )
+                  var userRef =   firebase.database().ref('/profiles/'+ data.user_id +'/contact' )
                        ctrl.prayers[index].user = $firebaseObject(userRef)
 
              }) 
 
               Ref.on('value',(snap)=>{$timeout(runMasson, 500)}) 
-      var locationsRef =   firebase.database().ref('locations_public')
-        ctrl.locations = $firebaseObject(locationsRef) 
+      var locationRef =   firebase.database().ref('location_public')
+        ctrl.location = $firebaseObject(locationRef) 
 
       //  ctrl.prayers = $firebaseArray(Ref);
 

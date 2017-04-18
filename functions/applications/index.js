@@ -57,7 +57,7 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
                 console.log('updating app indexes', app_id, status);
 
              if(appfor.staff_location_id >=0){
-                var staff_location_id = application.for.staff_location_id;
+                var staff_location_id = appfor.staff_location_id;
                 
                 // //All staff Ever index
                 admin.database().ref('locations/'+ staff_location_id ).child('staff_app_index').child(app_id).set(status);
@@ -78,7 +78,6 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
             
             if(appfor.school_id){
                admin.database().ref('schools/'+ appfor.school_id ).child('app_index').child(app_id).set(status);
-
             }
     
                 return   admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).set(data)

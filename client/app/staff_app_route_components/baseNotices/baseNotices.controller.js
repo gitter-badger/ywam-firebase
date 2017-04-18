@@ -3,11 +3,11 @@ class BaseNoticesController {
   constructor(Site, $firebaseObject,$scope, $timeout, Auth) {
     var ctrl = this
 
-    var location_notices_ref = firebase.database().ref('locations_public').child(Site.location_id).child('notices')
+    var location_notices_ref = firebase.database().ref('location_public').child('notices')
     
         ctrl.notices =  $firebaseObject(location_notices_ref)//.$bindTo($scope, "notices");
        location_notices_ref.on('value', function(snap){
-         var ref = firebase.database().ref('profiles').child(snap.val().lastSaveBy).child('com')
+         var ref = firebase.database().ref('profiles').child(snap.val().lastSaveBy).child('contact')
              ctrl.lastSaveUser = $firebaseObject(ref);
        })
        

@@ -77,7 +77,7 @@ let getApps = (school_id, accepted_only ) => {
                       //get avatar as well
                     //  Site.getAvatar(user_id)
                    
-                   var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
+                   var userRef =   firebase.database().ref('/profiles/'+ user_id +'/contact' )
                       userRef.once('value',function(snapshot) { 
                                                   school.apps[index].user  = snapshot.val()
                                                    $timeout(function() {  });
@@ -114,7 +114,7 @@ let getStaffRoles = (school_id) => {
           
                 var staffId = indexSnap.key;
                 console.log('adding or removing '+ staffId)
-                profileRef.child(staffId).child('com').once('value', function(profileSnap) {
+                profileRef.child(staffId).child('contact').once('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
                        //get avatar as well
                            
@@ -153,7 +153,7 @@ let getStaffRoles = (school_id) => {
 //         rolesIndexRef.on('child_added', function(indexSnap) { // loop over children
 //                 var rolesId = indexSnap.key;
 //                 console.log(rolesId)
-//                 profileRef.child(rolesId).child('com').on('value', function(profileSnap) {
+//                 profileRef.child(rolesId).child('contact').on('value', function(profileSnap) {
 //                     if( profileSnap.val() != null ){ 
 //                             school.leaders[rolesId] = profileSnap.val();
 //                                $timeout(function() { })

@@ -4,7 +4,7 @@ class BasePermissionsController {
   
     var ctrl = this; 
         ctrl.perms= {};
-    var Ref  =  firebase.database().ref('locations/' + Site.location_id +'/perms');
+    var Ref  =  firebase.database().ref('location/perms');
 
         Ref.on('child_added', function(snap){ 
 
@@ -15,7 +15,7 @@ class BasePermissionsController {
                         var user_id = key
                         console.log('UserID: ',user_id)   
 
-                          firebase.database().ref('/profiles/'+ user_id +'/com' )
+                          firebase.database().ref('/profiles/'+ user_id +'/contact' )
                                          .on('value',function(snapshot) { 
                                             
                                             if(snapshot.val() != null){

@@ -16,7 +16,7 @@ class StartApplicationController {
           var school_id = app_for.replace( /^\D+/g, ''); // replace all leading non-digits with nothing
           console.log('app appears to be for a school! school ID ' +school_id)
        //Check if is online
-       firebase.database().ref('/locations_public/'+Site.location_id+'/online_schools/'+school_id)
+       firebase.database().ref('/location_public/online_schools/'+school_id)
         .once('value').then(function(snapshot) {
            if(snapshot.val() == true)
            {
@@ -52,7 +52,7 @@ class StartApplicationController {
       //     var school_id = app_for.replace( /^\D+/g, ''); // replace all leading non-digits with nothing
           console.log('looks like a staff App')
       //  //Check if is online
-      //  firebase.database().ref('/locations_public/'+Site.location_id+'/online_schools/'+school_id)
+      //  firebase.database().ref('/location_public/online_schools/'+school_id)
       //   .once('value').then(function(snapshot) {
       //      if(snapshot.val() == true)
       //      {

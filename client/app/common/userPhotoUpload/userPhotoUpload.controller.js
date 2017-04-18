@@ -4,7 +4,7 @@ class UserPhotoUploadController {
     var ctrl = this;
     ctrl.user_id = Auth.$getAuth().uid
     ctrl.avatar = null;
-    ctrl.myImage= null;//$firebaseObject(comRef)
+    ctrl.myImage= null;//$firebaseObject(contactRef)
     ctrl.myCroppedImage='';
     ctrl.savePhoto = savePhoto;
     ctrl.$onInit = onInit
@@ -12,8 +12,8 @@ class UserPhotoUploadController {
 function onInit(){
   
     
-    var comRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('com');
-        comRef.child('avatar_200').on('value',function(snap){
+    var contactRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('contact');
+        contactRef.child('avatar_200').on('value',function(snap){
           ctrl.processing = false
           ctrl.avatar =snap.val();
        })

@@ -13,8 +13,7 @@
 	
 	</div> -->
 <div layout="row" layout-wrap layout-align="center" style="color:gray">	 
-<div  class="md-display-1"> Prayer Wall of </div>		
-<div  class="md-display-1" ng-repeat="loc in $ctrl.locations">&nbsp;{{loc.name }}<span ng-if="!$last">,</span></div>
+<div  class="md-display-1"> Prayer Wall of {{location.meta.name}} </div>		
 </div> 
 
  <div class="grid prayerWall"  >

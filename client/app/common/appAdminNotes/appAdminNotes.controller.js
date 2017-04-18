@@ -15,7 +15,7 @@ class AppAdminNotesController {
                   note.$id = snap.key
            
             if(note.user_id){      
-            firebase.database().ref('profiles').child(note.user_id).child('com').on('value',
+            firebase.database().ref('profiles').child(note.user_id).child('contact').on('value',
             function(snap){
                note.user = snap.val()
                ctrl.notes.push(note)

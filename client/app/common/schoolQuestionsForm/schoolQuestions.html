@@ -1,4 +1,16 @@
 <h1 class="md-title" translate="101">Questions</h1>
 <div>
-  <h1>{{ $ctrl.questions }}</h1>
+
+<div ng-repeat="(key,item) in $ctrl.school_questions" layout="row">
+
+<md-input-container flex="100">
+
+  <label> {{$ctrl.questions[key].label[$ctrl.langKey] }}  </label>
+  <input ng-model="answers[key]">
+
+</md-input-container>
+
+</div>  
+
+
 </div>

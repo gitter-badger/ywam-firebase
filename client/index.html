@@ -1,5 +1,5 @@
 <!doctype html>
-<html  ng-app="app"  lang="en" manifest="app.manifest" style="overflow-y: auto;">
+<html  ng-app="app"  lang="en" manifest="manifest.appcache" style="overflow-y: auto;">
   <head>
   
     <meta charset="utf-8">
@@ -19,7 +19,6 @@
       Loading....
     </app>
 
-    
 
     <!-- Google Analytics: change UA-71073175-2 to be your site's ID -->
     <script>
@@ -30,5 +29,17 @@
       // ga('create', 'UA-82214101-1', 'auto');
       // ga('send', 'pageview');
     </script>
+
+        <script>
+    //------- Initialize Firebase
+        window.firebaseConfig = {
+          apiKey: "AIzaSyBSBD_FNaMQZyd3h0mcv0ZMUt9QXY2m3f4",
+          authDomain: "staffapp-95f17.firebaseapp.com",
+          databaseURL: "https://staffapp-95f17.firebaseio.com",
+          storageBucket: "staffapp-95f17.appspot.com",
+        };
+       
+    </script>
+
   </body>
 </html>

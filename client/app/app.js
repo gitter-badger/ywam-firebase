@@ -59,16 +59,11 @@ angular.module('app', [
     // @see: https://github.com/angular-ui/ui-router/wiki/Frequently-Asked-Questions
     // #how-to-configure-your-server-to-work-with-html5mode
     // $locationProvider.html5Mode(true).hashPrefix('!');
+    
+
     $urlRouterProvider.otherwise('/schoolApplyList');
 
-//------- Initialize Firebase
-        var config = {
-          apiKey: "AIzaSyBSBD_FNaMQZyd3h0mcv0ZMUt9QXY2m3f4",
-          authDomain: "staffapp-95f17.firebaseapp.com",
-          databaseURL: "https://staffapp-95f17.firebaseio.com",
-          storageBucket: "staffapp-95f17.appspot.com",
-        };
-        firebase.initializeApp(config);
+ firebase.initializeApp(window.firebaseConfig);
 
 
 
@@ -127,12 +122,12 @@ angular.module('app', [
 
   .run((Site,$firebaseObject, $rootScope)=>{ //Find location from host names
      "ngInject";
-            Site.location_id  =  Domains[location.hostname]
-            $rootScope.location_id = Site.location_id
-        var Ref = firebase.database().ref('locations_public/'+Site.location_id)
+            // Site.location_id  =  Domains[location.hostname]
+            // $rootScope.location_id = Site.location_id
+        var Ref = firebase.database().ref('location_public')
             Site.location = $firebaseObject(Ref)
-        if(!Site.location_id)
-        console.warn('No location matching domain '+ location.hostname)
+        // if(!Site.location_id)
+        // console.warn('No location matching domain '+ location.hostname)
   })
 
 

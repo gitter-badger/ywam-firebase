@@ -14,7 +14,7 @@ class AppStatusController {
               if(ctrl.who){
                 var user_id = ctrl.appMeta.statuses[ctrl.appMeta.status].user_id
                 if(user_id) {
-                var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
+                var userRef =   firebase.database().ref('/profiles/'+ user_id +'/contact' )
                 userRef.once('value', function(snap){
                    if(snap.val()) 
                   ctrl.status_by = snap.val().first_name + ' ' + snap.val().last_name.charAt(0) + '.';

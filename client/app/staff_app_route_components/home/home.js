@@ -12,8 +12,8 @@ let homeModule = angular.module('home', [
   
 
   $stateProvider
-    .state('home', {
-      url: '/',
+    .state('staffHome', {
+      url: '/home',
       component: 'home'
     });
 })

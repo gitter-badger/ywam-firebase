@@ -8,8 +8,8 @@ class StaffAppsController {
         ctrl.transferSelected = transferSelected
         
         //get list of locations for the transfer to action
-        var ref =   firebase.database().ref('locations_public')
-        ctrl.locations = $firebaseArray(ref) 
+        var ref =   firebase.database().ref('location_public')
+        ctrl.location = $firebaseArray(ref) 
 
         ctrl.query = {
                       order: ['meta.status','user.first_name'],
@@ -19,7 +19,7 @@ class StaffAppsController {
       
     var accepted_only = false
 
-    var appIndexRef = firebase.database().ref('/locations/'+Site.location_id +'/staff_app_index')
+    var appIndexRef = firebase.database().ref('/location/staff_app_index')
           appIndexRef.on('value', function(indexSnap){
 
             indexSnap.forEach(function(appSnap){
@@ -58,7 +58,7 @@ class StaffAppsController {
       }
 
       function getProfileCom(user_id, index){
-                   var userRef =   firebase.database().ref('/profiles/'+ user_id +'/com' )
+                   var userRef =   firebase.database().ref('/profiles/'+ user_id +'/contact' )
                        ctrl.apps[index].user = $firebaseObject(userRef)
                                                 // .on('value',function(snapshot) { 
                                                 //   ctrl.apps[index].user  = snapshot.val()

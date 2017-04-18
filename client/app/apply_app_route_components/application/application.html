@@ -8,7 +8,7 @@
                 <span translate="10">Contact Information</span>
             </md-checkbox>
 
-            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="profile_com.avatar_1080">
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="profile_contact.avatar_1080">
                 <span translate="100">Photo</span>
             </md-checkbox>
 
@@ -36,7 +36,7 @@
                 <span translate="103"> References</span>
             </md-checkbox>
 
-        <!--<img ng-src="{{profile_com.avatar_1080}}" alt="" width="200px">-->
+        <!--<img ng-src="{{profile_contact.avatar_1080}}" alt="" width="200px">-->
         </div>
     </div>
 
@@ -50,7 +50,7 @@
                     <div layout>
                         <md-input-container flex>
                             <label translate="7"></label>
-                            <input ng-model="profile_com.first_name" required  >                            
+                            <input ng-model="profile_contact.first_name" required  >                            
                             <div ng-messages="projectForm.description.$error">
                                 <div ng-message="required">This is required.</div>
                                 <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
@@ -59,7 +59,7 @@
                         
                         <md-input-container flex>
                             <label translate="8"></label>
-                            <input ng-model="profile_com.last_name" required >
+                            <input ng-model="profile_contact.last_name" required >
                         </md-input-container>  
                     </div>
 
@@ -67,7 +67,7 @@
                         
                         <md-input-container flex="30" >
                             <label translate="25"></label>
-                            <md-select ng-model="profile_com.gender" required >
+                            <md-select ng-model="profile_contact.gender" required >
                                 <md-option value="Male" translate="26"></md-option>
                                 <md-option value="Female" translate="27" ></md-option>
                             </md-select>  
@@ -75,7 +75,7 @@
 
                         <md-input-container  flex>
                             <label translate="28">marital_status </label>
-                            <md-select ng-model="profile_com.marital_status" required >
+                            <md-select ng-model="profile_contact.marital_status" required >
                                 <md-option value="single" translate="29">Single</md-option>
                                 <md-option value="engaged" translate="30">Engaged</md-option>
                                 <md-option value="married" translate="31">Married</md-option>
@@ -102,13 +102,13 @@
                     <div layout="row">
                         <md-input-container flex>
                             <label translate="106">home_phone</label>
-                            <input required ng-model="profile_com.home_phone" ng-required="!profile_com.mobile_phone" >
+                            <input required ng-model="profile_contact.home_phone" ng-required="!profile_contact.mobile_phone" >
                         <div class="hint" >+1 555 555 5555 </div>
                         </md-input-container>
 
                         <md-input-container flex>
                             <label translate="107">mobile_phone</label>
-                            <input ng-model="profile_com.mobile_phone" ng-required="!profile_com.home_phone" >
+                            <input ng-model="profile_contact.mobile_phone" ng-required="!profile_contact.home_phone" >
                             <div class="hint" >+1 555 555 5555 </div>
                         </md-input-container>
                         <!--Skype: {{emergency_contact.skype}}<br>-->

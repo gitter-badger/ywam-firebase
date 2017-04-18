@@ -1,10 +1,10 @@
 <div layout="row" layout-xs="column" >
 <div flex style="border-left: 2px solid rgb(96,125,139); padding-left:4px">
 <b>Contact:</b> <br>
-<a href="mailto:{{$ctrl.user.com.email}}">{{$ctrl.user.com.email}}</a> <br>
-<div ng-if="$ctrl.user.com.skype"> <u>Skype:</u> {{$ctrl.user.com.skype}}</div>
-<div ng-if="$ctrl.user.com.home_phone"><u> Home Phone:</u> {{$ctrl.user.com.home_phone}}</div>
-<div ng-if="$ctrl.user.com.mobile_phone"> <u>Mobile Phone:</u>   {{$ctrl.user.com.mobile_phone}}</div>
+<a href="mailto:{{$ctrl.user.contact.email}}">{{$ctrl.user.contact.email}}</a> <br>
+<div ng-if="$ctrl.user.contact.skype"> <u>Skype:</u> {{$ctrl.user.contact.skype}}</div>
+<div ng-if="$ctrl.user.contact.home_phone"><u> Home Phone:</u> {{$ctrl.user.contact.home_phone}}</div>
+<div ng-if="$ctrl.user.contact.mobile_phone"> <u>Mobile Phone:</u>   {{$ctrl.user.contact.mobile_phone}}</div>
 
 <u>Mailing Address:</u><br>
  {{$ctrl.user.postal.address}}<br> {{$ctrl.user.postal.city}}, {{$ctrl.user.postal.state}}, {{$ctrl.user.postal.zip}}, 

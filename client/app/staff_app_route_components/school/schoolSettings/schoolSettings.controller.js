@@ -1,6 +1,6 @@
 class SchoolSettingsController {
   /* @ngInject */
-  constructor(School, $stateParams, $scope , $timeout, Site) {
+  constructor(School, $stateParams, $scope , $timeout, Site, $firebaseObject) {
     var ctrl = this;
         ctrl.savePhoto = savePhoto
         ctrl.toggle_mini_outreach  = toggle_mini_outreach
@@ -10,9 +10,14 @@ class SchoolSettingsController {
         ctrl.location = Site.location
        
 
-    var school_id = $stateParams.school_id
+        ctrl.school_id = $stateParams.school_id
 
-       School.getSchool(school_id).$bindTo($scope, "public");
+       School.getSchool(ctrl.school_id).$bindTo($scope, "public");
+      
+      var ref = firebase.database().ref('/schools/'+ctrl.school_id )
+        ctrl.school = $firebaseObject(ref)
+      var questionsRef = firebase.database().ref('/questions_for_applications/' )
+        ctrl.questions = $firebaseObject(questionsRef)  
 
       angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
 
@@ -46,8 +51,8 @@ class SchoolSettingsController {
      ctrl.upload_progress = 1
 
         // Create a root reference
-      var storageRef = firebase.storage().ref('/schools_public/'+school_id);
-      var banner_ref =   firebase.database().ref('/schools/' +school_id ).child('public/banner_1080');
+      var storageRef = firebase.storage().ref('/schools_public/'+ctrl.school_id);
+      var banner_ref =   firebase.database().ref('/schools/' +ctrl.school_id ).child('public/banner_1080');
 
       var file =  ctrl.myCroppedImage
       // console.log(file)
@@ -80,7 +85,7 @@ class SchoolSettingsController {
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
           var downloadURL = uploadTask.snapshot.downloadURL;
           console.log('finished upload: ' +downloadURL)
-
+           ctrl.myImage= null
        
               banner_ref.set(downloadURL);
     

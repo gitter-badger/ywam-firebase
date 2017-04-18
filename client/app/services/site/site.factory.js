@@ -1,6 +1,6 @@
 
 /* @ngInject */
-let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) {
+let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, $state) {
 
   const site = { location_id: null,
                  location : {} ,
@@ -21,11 +21,17 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
            
            if(firebaseUser){
 
-             var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/com' )
+             var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
                site.user.com = $firebaseObject(Ref);
                site.user.id = firebaseUser.uid;
                console.log('Current user is: '+firebaseUser.uid )
 
+               firebase.database().ref('location/current_staff_index').child(site.user.id)
+               .once('value',function(snap){//if the logged in user is a current staff take them home!
+                console.log('current user is a staff? '+ snap.val())
+                 //if(snap.val())
+               //  $state.go('staffHome')
+               })
               //  getAvatar(site.user.id)  
 
 
@@ -57,7 +63,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia) 
          
 
        if(user_id){
-              firebase.database().ref('/profiles/'+ user_id +'/com').once('value',function(snap){
+              firebase.database().ref('/profiles/'+ user_id +'/contact').once('value',function(snap){
                 var com = snap.val()
                 
             if(com){

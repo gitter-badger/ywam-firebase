@@ -47,7 +47,7 @@ module.exports = {
               // 'css/font-awesome.min.css'
               ],
       exclude: ['file.txt', /.*\.map$/],  // Exclude file.txt and all .map files 
-      output: 'app.manifest'
+      output: 'manifest.appcache'
     }),
     
     new CopyWebpackPlugin([
@@ -55,6 +55,7 @@ module.exports = {
              { from: 'client/sounds', to:'sounds' },
               { from: 'client/logos', to:'logos' },
                { from: 'client/.nojekyll', to:'' },
+                 { from: 'client/img', to:'img' },
             // { from: 'client/square_space_scripts', to:'square_space_scripts' },
             // { from: 'node_modules/angular-material/angular-material.min.css', to:'css' },
             // { from: 'node_modules/font-awesome/css/font-awesome.min.css', to:'css' }

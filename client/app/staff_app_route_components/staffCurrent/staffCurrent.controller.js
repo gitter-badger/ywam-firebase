@@ -5,7 +5,7 @@ class StaffCurrentController {
         ctrl.staff = []
         ctrl.avatars = Site.avatars
 
-    var Ref = firebase.database().ref('locations/'+Site.location_id).child('current_staff_index')
+    var Ref = firebase.database().ref('location').child('current_staff_index')
 
         Ref.on('child_added', function(snap) {
           console.log(snap.key)
@@ -13,7 +13,7 @@ class StaffCurrentController {
                       var user_id = snap.key
                           console.log('UserID: ',user_id)
 
-                          firebase.database().ref('/profiles/'+ user_id +'/com' )
+                          firebase.database().ref('/profiles/'+ user_id +'/contact' )
                                          .on('value',function(snapshot) { 
                                             
                                             if(snapshot.val() != null){

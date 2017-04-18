@@ -2,7 +2,7 @@ path / {read(){ false}
         write(){false}
         }
 
-path /locations_private {read(){ false}
+path /location_private {read(){ false}
                          write(){false}
                          }        
 
@@ -27,19 +27,19 @@ path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
 path /system { read() { isStaff() }
                     }
 path /system/tasks { read() { isStaff() }
-                    index() = ["status"]}
+                    index() {["status"] }}
 
-path /prayers { read() { isStaff() },
+path /prayers { read() { isStaff() }
                 write() { isStaff() }  }
 
-path /search { read() { isStaff() },
+path /search { read() { isStaff() }
                write() { isStaff()} }
 
 path /role_calls { read() { isStaff() }
                 }
 
 //Applications
-path /applications { index() = ["for/school_id"]  }
+path /applications { index() { ["for/school_id"] } }
 
 path /applications/{id} is Application {  read() {    checkAppAccess(id)  }
                                            write() {    checkAppAccess(id)  }  
@@ -136,14 +136,14 @@ type ProfileCom {
   //  modified: CurrentTimestamp
 }
 path /profiles_search {read() {isStaff()}
-                       index() = ["string"] }
+                       index() {["string"] } }
 
 
-path /locations_public { read() { true} }
-path /locations_public/{id}/notices { write() {canEditLocationNotices(id) } }
-path /locations_public/{id}/nations { write() {canEditLocationVisaReq(id) } }
-path /locations_public/{id}/settings { write() {canEditLocationVisaReq(id) } }
-path /locations/{id} is Location { read() { isStaff() }
+path /location_public { read() { true} }
+path /location_public/notices { write() {canEditLocationNotices() } }
+path /location_public/nations { write() {canEditLocationVisaReq() } }
+path /location_public/settings { write() {canEditLocationVisaReq() } }
+path /location is Location { read() { isStaff() }
                                    write() { isStaff() }}
 
 
@@ -155,11 +155,11 @@ type Location {
 }
 
 
-path /paypal_transactions/{location_id} { read() { canAccessPaypalTransactions(location_id) }
-                                          write() { canAccessPaypalTransactions(location_id) }
+path /paypal_transactions { read() { canAccessPaypalTransactions() }
+                                          write() { canAccessPaypalTransactions() }
                                           }
 
-path /role_calls/{id} { read() { isStaff() },
+path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }
 
 
@@ -174,15 +174,12 @@ belongsToUser() { auth != null && auth.uid == data.child('user_id').val()  }
 
 // is this user a in the current_staff_index at the location they claim to be at?
 isStaff() {  
-  root.profiles[auth.uid].com.current_location_id != null &&
-
-  root.locations[ root.profiles[auth.uid].com.current_location_id + ''  ]
-      .current_staff_index[ auth.uid ] != null 
+  root.location.current_staff_index[ auth.uid ] != null 
   }
 
 //Can this user access Staff Applications at this location? 
-isStaffAppAdmin(location_id) {  
-    prior(root.locations[location_id].perms.access_staff_apps[ auth.uid ] ) != null 
+isStaffAppAdmin() {  
+    prior(root.location.perms.access_staff_apps[ auth.uid ] ) != null 
         }
 
 // Is this user a school admin of this school?
@@ -195,26 +192,25 @@ isSchoolStaff(school_id) { root.schools[school_id].roles[auth.uid].staff != null
 checkAppAccess(appID){ 
 //checking if the app is for staff at a location and if this user is isStaffAppAdmin()
 // to make sure it is a string adding this:  + '' 
-root.applications[appID].for.staff_location_id != null &&
-isStaffAppAdmin( root.applications[appID].for.staff_location_id + '' )
+
+isStaffAppAdmin(  )
  //or we check if they are a school admin
 ||
 isSchoolAdmin(  root.applications[appID].for.school_id + '' ) 
 }
 
-canAccessPaypalTransactions(location_id){
-    root.locations[location_id].perms['access_paypal_transactions'][auth.uid] != null}
-canEditLocationNotices(location_id){
-    root.locations[location_id].perms['can_edit_location_notices'][auth.uid] != null}
-canEditLocationVisaReq(location_id){
-    root.locations[location_id].perms['can_edit_location_visa_requirements'][auth.uid] != null}
+canAccessPaypalTransactions(){
+    root.location.perms['access_paypal_transactions'][auth.uid] != null}
+canEditLocationNotices(){
+    root.location.perms['can_edit_location_notices'][auth.uid] != null}
+canEditLocationVisaReq(){
+    root.location.perms['can_edit_location_visa_requirements'][auth.uid] != null}
 
 
 //Can Edit Translation phrases
 canEditPhrases(){
-   root.profiles[auth.uid].com.current_location_id != null && // check for location
-   root.locations[ root.profiles[auth.uid].com.current_location_id + ''  ] // use location
-        .perms['access_translation'][auth.uid] != null
+
+   root.location.perms['access_translation'][auth.uid] != null
   }
 
 

@@ -37,14 +37,14 @@ class SchoolStaffController {
         }else{// this is a new role get list of all staff
 
        // get the current staff list
-          var Ref = firebase.database().ref('locations/'+Site.location_id).child('current_staff_index')
+          var Ref = firebase.database().ref('location').child('current_staff_index')
               Ref.on('child_added', function(snap) {
                 console.log(snap.key)
      
                       var user_id = snap.key
                           console.log('UserID: ',user_id)
 
-                          firebase.database().ref('/profiles/'+ user_id +'/com' )
+                          firebase.database().ref('/profiles/'+ user_id +'/contact' )
                                          .once('value',function(snapshot) { 
                                             if(snapshot.val() != null){
                                             

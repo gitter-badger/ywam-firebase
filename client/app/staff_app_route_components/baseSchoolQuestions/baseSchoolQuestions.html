@@ -11,13 +11,13 @@
 <div>Question Text</div><div>Type</div> <div>Is Default?</div>
 </div>
 
-<div  ng-repeat="question in $ctrl.questions">
+<div  ng-repeat="(key, question) in $ctrl.questions">
   <div layout="row">
-<div>{{question.label.en}}<br>{{question.label.de}}
+<div flex>{{question.label.en}}<br>{{question.label.de}}
 
   </div>
-  <div>{{question.type}} </div>
-  <div>Is Default?</div>
+  <div flex>{{question.type}} </div>
+  <div flex>{{$ctrl.default_questions[key]}} </div>
 </div>
 <md-divider></md-divider>
 </div>

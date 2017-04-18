@@ -1,7 +1,7 @@
 class BaseSchoolQuestionsController 
 /* @ngInject */
 {
-  constructor() 
+  constructor(Site, $timeout) 
   {
     var ctrl = this
 
@@ -9,6 +9,13 @@ class BaseSchoolQuestionsController
         Ref.on('value',function(snap){
           ctrl.questions = snap.val()
         })   
+
+        var defaultRef = firebase.database().ref('location/default_school_questions') 
+        defaultRef.on('value',function(snap){
+         
+          ctrl.default_questions = snap.val()
+          $timeout()
+        })  
         
   }
 }

@@ -19,7 +19,7 @@ class ApplicationViewController {
         userRef.on('value',function(userSnap){
         ctrl.user = userSnap.val()
        
-        userRef.child('com/languages').on('child_added',function(snap){
+        userRef.child('contact/languages').on('child_added',function(snap){
          console.log(snap.key)
           //look up languages
           var lang = snap.key;
@@ -27,7 +27,7 @@ class ApplicationViewController {
                 langRef.on('value',function(snap){
                   console.log(snap.val())
                   ctrl.languages[snap.key] = snap.val();
-                  ctrl.languages[snap.key].prof = ctrl.user.com.languages[snap.key]
+                  ctrl.languages[snap.key].prof = ctrl.user.contact.languages[snap.key]
                   $timeout(function(){});  
               })})//end on ref languages
             
@@ -36,7 +36,7 @@ class ApplicationViewController {
             if(snap.val())
             {
              var natRef = firebase.database().ref('/phrases/nations/en/').child(snap.val())
-                 natRef.on('value',(snap)=>{ctrl.user.com.nationality=snap.val()
+                 natRef.on('value',(snap)=>{ctrl.user.contact.nationality=snap.val()
                      console.log(snap.val())})
                       $timeout(function(){});  
             } 

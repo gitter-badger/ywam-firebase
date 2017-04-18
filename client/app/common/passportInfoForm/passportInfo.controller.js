@@ -3,14 +3,18 @@ class PassportInfoController {
   constructor(Auth, $firebaseObject, $scope, $firebaseArray, $filter ,$translate,$timeout ,Site , moment) {
 
          var ctrl = this;
-             ctrl.nations = []
-             ctrl.updateNation = updateNation
-             ctrl.changeIssueDate = changeIssueDate
-             ctrl.changeExpireDate = changeExpireDate
+            
              ctrl.$onInit = onInit
          
          //start things up
          function onInit() {   
+
+              ctrl.nations = []
+             ctrl.updateNation = updateNation
+             ctrl.changeIssueDate = changeIssueDate
+             ctrl.changeExpireDate = changeExpireDate
+
+
             $scope.$watch('PassportForm.$valid',function(v){
                 ctrl.isValid = $scope.PassportForm.$valid
             })
@@ -33,7 +37,7 @@ class PassportInfoController {
           
       
         //load location visa settings
-            var settings_ref =  firebase.database().ref('/locations_public/'+Site.location_id+'/settings')   
+            var settings_ref =  firebase.database().ref('/location_public/settings')   
                 settings_ref.once('value', function(snap){
                     ctrl.settings=snap.val()
                 })
@@ -72,7 +76,7 @@ class PassportInfoController {
             })
            
 
-         }//end onInit
+       
 
 
 
@@ -86,12 +90,12 @@ class PassportInfoController {
            if(id){
            profile_passport_ref.child('nation_id').set(id)
         
-          var nation_reg_ref =  firebase.database().ref('/locations_public/'+Site.location_id+'/nations/'+id)   
+          var nation_reg_ref =  firebase.database().ref('/location_public/nations/'+id)   
           
           if(lang_key=='de'){
-          var notices_ref =  firebase.database().ref('/locations_public/'+Site.location_id+'/notices/DE')   
+          var notices_ref =  firebase.database().ref('/location_public/notices/DE')   
           }else{
-          var notices_ref=  firebase.database().ref('/locations_public/'+Site.location_id+'/notices/EN')   
+          var notices_ref=  firebase.database().ref('/location_public/notices/EN')   
           }
               nation_reg_ref.once('value',function(snap){
                  ctrl.need_invitation = null
@@ -128,13 +132,14 @@ class PassportInfoController {
 
         function changeIssueDate(){
         $scope.passport.issue_date = moment(ctrl.issue_date).format("YYYY-MM-DD");
-        //  console.log('changeIssue date ' +  $scope.profile_com.dob)
+        //  console.log('changeIssue date ' +  $scope.profile_contact.dob)
         }
         function changeExpireDate(){
         $scope.passport.expire_date = moment(ctrl.expire_date).format("YYYY-MM-DD");
-        //  console.log('changeexpire date ' +  $scope.profile_com.dob)
+        //  console.log('changeexpire date ' +  $scope.profile_contact.dob)
         }   
 
+  }//end onInit
 
   }
 }

@@ -6,20 +6,20 @@
             <div  layout="row" >  
                 <div flex>
 
-                    <h1 class="md-display-1">{{$ctrl.profile.com.first_name}} {{$ctrl.profile.com.last_name}}                
+                    <h1 class="md-display-1">{{$ctrl.profile.contact.first_name}} {{$ctrl.profile.contact.last_name}}                
                         <br>
                         <small class="md-subhead">{{$ctrl.profile.passport.first_name | uppercase}} {{$ctrl.profile.passport.middle_name | uppercase}} {{$ctrl.profile.passport.last_name | uppercase}}
                         </small>
                     </h1>
 
-                    {{$ctrl.profile.com.nationality}}
+                    {{$ctrl.profile.contact.nationality}}
                     <br>
-                    {{$ctrl.profile.com.gender}} {{$ctrl.calculateAge($ctrl.profile.com.dob)}} 
+                    {{$ctrl.profile.contact.gender}} {{$ctrl.calculateAge($ctrl.profile.contact.dob)}} 
                     <span style=" text-transform: capitalize;"></span>
-                    {{$ctrl.profile.com.marital_status}}
+                    {{$ctrl.profile.contact.marital_status}}
                     <span></span>
                     <br>
-                    {{$ctrl.profile.com.dob | date}}  
+                    {{$ctrl.profile.contact.dob | date}}  
                     <br>
                     <div ng-repeat="lang in $ctrl.languages">
                         {{lang.text}}
@@ -33,9 +33,9 @@
                 </div>
                 <div flex >
                     <div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
-                        <img ng-if="$ctrl.profile.com.avatar_200" style="width:100%" align="right" firebase-src="{{$ctrl.profile.com.avatar_1080}}" >
+                        <img ng-if="$ctrl.profile.contact.avatar_200" style="width:100%" align="right" firebase-src="{{$ctrl.profile.contact.avatar_1080}}" >
                         <br>
-                        <img ng-if="!$ctrl.profile.com.avatar_200" style="width:100%" align="right"  src="img/default_avatar.png" >
+                        <img ng-if="!$ctrl.profile.contact.avatar_200" style="width:100%" align="right"  src="img/default_avatar.png" >
                         <br>
                         <a href="" class="no-print" ng-click="$ctrl.editPhotoDialog()">change photo</a>
                     </div>

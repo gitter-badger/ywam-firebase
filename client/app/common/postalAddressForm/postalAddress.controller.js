@@ -5,8 +5,8 @@ class PostalAddressController {
          var ctrl = this;
              ctrl.nations = []
          var user_id = Auth.$getAuth().uid
-         var profile_com_postal_ref =   firebase.database().ref('/profiles/' +user_id+'/postal' );
-         $firebaseObject(profile_com_postal_ref).$bindTo($scope, "postal");
+         var profile_contact_postal_ref =   firebase.database().ref('/profiles/' +user_id+'/postal' );
+         $firebaseObject(profile_contact_postal_ref).$bindTo($scope, "postal");
            
              $scope.$watch('$ctrl.AddressForm.$valid',function(v){
                $timeout(function(){
@@ -36,7 +36,7 @@ class PostalAddressController {
             //once all nations loaded and when the field is loaded from profile.. set the nation in autocomplete
             nations_ref.child('en').on('value',()=>{
                 console.log('nations loaded')
-                 profile_com_postal_ref.on('value',function(snap){
+                 profile_contact_postal_ref.on('value',function(snap){
                 if( snap.val().nation_id){
                   $timeout(function(){
                     ctrl.post_nation = $filter('filter')(ctrl.nations,  {id: snap.val().nation_id})[0];
@@ -55,7 +55,7 @@ class PostalAddressController {
 
          ctrl.updateNation = function (id){
            if(id)
-           profile_com_postal_ref.child('nation_id').set(id)
+           profile_contact_postal_ref.child('nation_id').set(id)
          }
              
 

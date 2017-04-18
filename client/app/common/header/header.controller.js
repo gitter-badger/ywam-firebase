@@ -25,7 +25,7 @@ class HeaderController {
       };
      ctrl.logout = ()=>{
             Auth.$signOut()
-             $state.go('home')
+             $state.go('apply.schoolList')
           }
 
            

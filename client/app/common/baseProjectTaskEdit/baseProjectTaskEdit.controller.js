@@ -4,10 +4,10 @@ class BaseProjectTaskEditController {
     var ctrl = this
         ctrl.save = save
 
-    var fundsRef = firebase.database().ref('locations/'+Site.location_id+'/funds')
+    var fundsRef = firebase.database().ref('location/funds')
         ctrl.funds = $firebaseArray(fundsRef)
 
-    var Ref = firebase.database().ref('locations/'+Site.location_id+'/projects/'+ctrl.projectId+'/tasks')
+    var Ref = firebase.database().ref('location/projects/'+ctrl.projectId+'/tasks')
 
     if(ctrl.taskId !='undefined'){
         Ref.child(ctrl.taskId).once('value',function(snap){

@@ -25,9 +25,9 @@ class ApplicationController {
 
       }
 
-     var profile_com_ref =   firebase.database().ref('/profiles/' +user_id+'/com' );
-         $firebaseObject(profile_com_ref).$bindTo($scope, "profile_com");
-         profile_com_ref.once('value', (snap)=>{
+     var profile_contact_ref =   firebase.database().ref('/profiles/' +user_id+'/contact' );
+         $firebaseObject(profile_contact_ref).$bindTo($scope, "profile_contact");
+         profile_contact_ref.once('value', (snap)=>{
           if(snap.val().dob)
           ctrl.dob =  new Date( snap.val().dob)
          })
@@ -62,8 +62,8 @@ class ApplicationController {
 
 
      function changeDOB(){
-        $scope.profile_com.dob = moment(ctrl.dob).format("YYYY-MM-DD");
-         console.log('changeDOB ' +  $scope.profile_com.dob)
+        $scope.profile_contact.dob = moment(ctrl.dob).format("YYYY-MM-DD");
+         console.log('changeDOB ' +  $scope.profile_contact.dob)
      }
 
 

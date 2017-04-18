@@ -2,7 +2,7 @@ class BaseInfoController {
   /* @ngInject */
   constructor($firebaseObject, Site, $scope) {
     var ctrl = this
-    var ref = firebase.database().ref('locations_public').child(Site.location_id) 
+    var ref = firebase.database().ref('location_public') 
         //ref.on('value',function(snap))
         ctrl.info = $firebaseObject(ref)
 

@@ -8,8 +8,8 @@ class SiteSettingsController {
           Site.location_id = ctrl.location_id;
          // $timeout(()=>{})
         }
-    var ref =   firebase.database().ref('locations_public')
-        ctrl.locations = $firebaseArray(ref) 
+    var ref =   firebase.database().ref('location_public')
+        ctrl.location = $firebaseArray(ref) 
     
   }
 }

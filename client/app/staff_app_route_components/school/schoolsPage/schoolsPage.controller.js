@@ -3,7 +3,7 @@ class SchoolsPageController {
   constructor( $timeout,$firebaseArray,moment,Site, $filter,$mdMedia,$firebaseStorage) {
 
 
-    var ref = firebase.database().ref('/locations').child(Site.location_id).child('schools_index');
+    var ref = firebase.database().ref('/location').child('schools_index');
       
       var ctrl = this
           //ctrl.schools = []// $firebaseArray(ref);
@@ -70,7 +70,7 @@ function getLeaders(index,school){
         rolesIndexRef.on('child_added', function(indexSnap) { // loop over children
                 var rolesId = indexSnap.key;
                 // console.log(rolesId)
-                profileRef.child(rolesId).child('com').on('value', function(profileSnap) {
+                profileRef.child(rolesId).child('contact').on('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
                             ctrl.schools[index].leaders[rolesId] = profileSnap.val();
                                $timeout(function() { })
