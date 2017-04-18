@@ -64,8 +64,8 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 			
 			<div hide-xs >
 				<div  style="width:106px;  max-height:50px; overflow:hidden; ">
-				<img firebase-src="{{sch.public.banner_100}}"
-				style="width:100%" > 
+				<img ng-if="sch.public.banner_100" firebase-src="{{sch.public.banner_100}}"style="width:100%" > 
+				<img ng-if="!sch.public.banner_100" src="img/default_banner.jpg"style="width:100%" > 
 				</div>
 			</div>
 

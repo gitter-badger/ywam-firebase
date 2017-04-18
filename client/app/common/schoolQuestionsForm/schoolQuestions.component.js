@@ -4,7 +4,7 @@ import './schoolQuestions.styl';
 
 let schoolQuestionsComponent = {
   restrict: 'E',
-  bindings: {appId:'=', schoolId:'='},
+  bindings: {appId:'=', schoolId:'=', isValid:'=' },
   template,
   controller
 };

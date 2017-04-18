@@ -5,10 +5,21 @@
     <img src="img/default_banner.jpg" ng-if="$ctrl.banner && !app.school.banner_100" style="width:100%;">
     <md-card-content style=" padding:10px;">        
         <app-for app-id="app.id"></app-for>
-        <md-card-actions layout="row" layout-align="end center" style="margin:0;">
-        <app-status app-id="app.id" date="true"></app-status>
-        <div flex></div>
-        <md-button class="md-raised" ng-if="app.status<10" ng-click="$ctrl.contiueApplication(app)">{{45|translate}}</md-button>
+        <md-card-actions  style="margin:0;">
+        
+        <div layout="row" layout-align="end center">
+            <app-status app-id="app.id" date="true"></app-status>
+
+            <div flex></div>
+            <md-button class="md-raised" ng-if="app.status<10" ng-click="$ctrl.contiueApplication(app)">{{45|translate}}</md-button>
+        </div>
+        <div layout="row" layout-align="start center">
+            Reference 1: <ref-status key="app.id +'/reference1' " ></ref-status>
+        </div>   
+          <div layout="row" layout-align="start center">    
+            Reference 2: <ref-status key="app.id +'/reference2' "></ref-status>
+        </div>    
+
         </md-card-actions>
     </md-card-content>
 </md-card>

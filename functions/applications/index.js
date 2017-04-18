@@ -56,22 +56,22 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
                             for: appfor }
                 console.log('updating app indexes', app_id, status);
 
-             if(appfor.staff_location_id >=0){
-                var staff_location_id = appfor.staff_location_id;
+             if(appfor.type ==1){
+               
                 
                 // //All staff Ever index
-                admin.database().ref('locations/'+ staff_location_id ).child('staff_app_index').child(app_id).set(status);
+                admin.database().ref('location' ).child('staff_app_index').child(app_id).set(status);
                 //current_staff_index
                 if(status == 30){
-                    admin.database().ref('locations/'+ staff_location_id ).child('current_staff_index').child(user_id).set(true);
+                    admin.database().ref('location' ).child('current_staff_index').child(user_id).set(true);
                 }else{
-                    admin.database().ref('locations/'+ staff_location_id ).child('current_staff_index').child(user_id).remove();
+                    admin.database().ref('location' ).child('current_staff_index').child(user_id).remove();
                 }
                 //alumni_staff_index
                 if(status == 70){
-                    admin.database().ref('locations/'+ staff_location_id ).child('alumni_staff_index').child(user_id).set(true);
+                    admin.database().ref('location' ).child('alumni_staff_index').child(user_id).set(true);
                 }else{
-                    admin.database().ref('locations/'+ staff_location_id ).child('alumni_staff_index').child(user_id).remove();
+                    admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove();
                 }
             
             }//end if a staff app

@@ -8,6 +8,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  showDialog: showDialog,
                  getAvatar: getAvatar,
                  avatars: {},
+                 language:null,
                 
                  hideSideNav:false,
 
