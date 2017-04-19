@@ -204,12 +204,11 @@ $transitions.onStart({
 
         //Things to reset on every state transtion
           $rootScope.$broadcast('hideLoginDialog');
-          Site.hideSideNav = false;
+
 
         if( state.data != null ){
           
-          if(state.data.hideSideNav)
-             Site.hideSideNav=true
+
           
          if(state.data.authRequired === true && !Auth.$getAuth()){
             $rootScope.$broadcast('showLoginDialog');

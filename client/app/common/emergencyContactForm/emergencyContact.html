@@ -41,8 +41,8 @@
 
 </div>-->
 
-<div layout="row">
-<md-input-container flex>
+<div layout="row" layout-wrap>
+<md-input-container flex="100" flex-gt-xs="50">
 <label>Email</label>
 <input required type="email" ng-model="emergency_contact.email">
 </md-input-container>
@@ -55,7 +55,7 @@
                  md-item-text="item.name"
                  ng-attr-md-floating-label="{{14 | translate}}"
                  required
-                 flex
+                 flex="100" flex-gt-xs="50"
                 >
   <span md-highlight-text="searchText">{{item.name}}</span>
 </md-autocomplete>

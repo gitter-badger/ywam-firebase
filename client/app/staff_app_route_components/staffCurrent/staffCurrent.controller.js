@@ -8,10 +8,10 @@ class StaffCurrentController {
     var Ref = firebase.database().ref('location').child('current_staff_index')
 
         Ref.on('child_added', function(snap) {
-          console.log(snap.key)
+        //   console.log(snap.key)
      
                       var user_id = snap.key
-                          console.log('UserID: ',user_id)
+                        //   console.log('UserID: ',user_id)
 
                           firebase.database().ref('/profiles/'+ user_id +'/contact' )
                                          .on('value',function(snapshot) { 
@@ -25,6 +25,7 @@ class StaffCurrentController {
 
                                            var index =  ctrl.staff.push(data);
                                          //  Site.getAvatar( user_id)
+                                            $timeout()
                                            
                                            
                                             }

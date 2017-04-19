@@ -12,6 +12,7 @@ let applyDashboardModule = angular.module('applyDashboard', [
     .state('apply.dashboard', {
       url: '/dashboard',
       component: 'applyDashboard',
+    
       //  resolve:{
       //     "currentAuth":["Auth",function(Auth){
       //         return Auth.$waitForSignIn();

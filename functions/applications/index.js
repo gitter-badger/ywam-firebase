@@ -60,8 +60,10 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
       // Grab the current value of what was written to the Realtime Database.
        const status = event.data.val();
        const app_id  = event.params.appId
+       const promises = [];
    
    return   admin.database().ref('applications/'+app_id+'/for' ).on('value',function(snap){
+                
                 var appfor = snap.val();
                 var user_id = appfor.user_id
                 var data = {status: status,
@@ -72,27 +74,29 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
                
                 
                 // //All staff Ever index
-                admin.database().ref('location' ).child('staff_app_index').child(app_id).set(status);
+                promises.push(admin.database().ref('location' ).child('staff_app_index').child(app_id).set(status));
                 //current_staff_index
                 if(status == 30){
-                    admin.database().ref('location' ).child('current_staff_index').child(user_id).set(true);
+                    promises.push(admin.database().ref('location' ).child('current_staff_index').child(user_id).set(true));
                 }else{
-                    admin.database().ref('location' ).child('current_staff_index').child(user_id).remove();
+                    promises.push(admin.database().ref('location' ).child('current_staff_index').child(user_id).remove());
                 }
                 //alumni_staff_index
                 if(status == 70){
-                    admin.database().ref('location' ).child('alumni_staff_index').child(user_id).set(true);
+                    promises.push(admin.database().ref('location' ).child('alumni_staff_index').child(user_id).set(true));
                 }else{
-                    admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove();
+                    promises.push(admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove());
                 }
             
             }//end if a staff app
             
             if(appfor.school_id){
-               admin.database().ref('schools/'+ appfor.school_id ).child('app_index').child(app_id).set(status);
+               promises.push(admin.database().ref('schools/'+ appfor.school_id ).child('app_index').child(app_id).set(status));
             }
     
-                return   admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).set(data)
+             promises.push(admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).set(data))
+              console.log(promises.length + ' promises to resolve')
+              return Promise.all(promises);
 
        })
 

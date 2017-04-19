@@ -15,7 +15,7 @@ let applyModule = angular.module('apply', [
     .state('apply', {
       // url: '',
       component: 'apply',
-      data: {hideSideNav:true},
+
       resolve:{
         
           "currentAuth":["Auth",function(Auth){

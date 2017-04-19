@@ -8,6 +8,7 @@ import signUpPage from './signUpPage/signUpPage';
 import profile from './profile/profile'
 import apply from './apply/apply'
 import applyDashboard from './applyDashboard/applyDashboard'
+import applyStaff from './applyStaff/applyStaff'
 import referenceForm from './referenceForm/referenceForm'
 
 let componentModule = angular.module('app.apply.components', [
@@ -20,7 +21,8 @@ let componentModule = angular.module('app.apply.components', [
   profile,
   referenceForm,
   apply,
-  applyDashboard
+  applyDashboard,
+  applyStaff
 ])
   
 .name;

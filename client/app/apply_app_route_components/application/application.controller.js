@@ -1,7 +1,7 @@
 class ApplicationController {
   /* @ngInject */
-  constructor($stateParams,$firebaseObject,$scope,Auth, moment,Site) {
-     
+  constructor($stateParams,$firebaseObject,$scope,Auth, moment,Site,$state) {
+        Site.hideSideNav = true
     var user_id =   Auth.$getAuth().uid; 
     var ctrl = this;
     var now = new Date();
@@ -58,6 +58,8 @@ class ApplicationController {
 
        console.log('submiting')
        firebase.database().ref('/applications/' +ctrl.app_id + '/requests/submit').set(true);
+       $state.go('apply.dashboard')
+
      }
 
 

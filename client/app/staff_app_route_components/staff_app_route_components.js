@@ -9,6 +9,7 @@ import SchoolPage from './school/schoolPage/schoolPage';
 import StudentList from './school/studentList/studentList';
 import StudentPhotos from './school/studentPhotos/studentPhotos';
 import SchoolSettings from './school/schoolSettings/schoolSettings';
+import schoolStats from './school/schoolStats/schoolStats';
 import SchoolStaff from './school/schoolStaff/schoolStaff';
 import schoolRoleCalls from './school/schoolRoleCalls/schoolRoleCalls';
 import schoolRoleCall from './school/schoolRoleCall/schoolRoleCall';
@@ -48,6 +49,7 @@ let componentModule = angular.module('app.components', [
   SchoolPage,
   StudentList,
   StudentPhotos,
+  schoolStats,
   SchoolSettings,
   SchoolStaff,
   schoolRoleCalls,

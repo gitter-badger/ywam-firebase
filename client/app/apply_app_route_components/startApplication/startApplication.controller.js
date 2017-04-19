@@ -8,10 +8,8 @@ class StartApplicationController {
         var app_for = $stateParams.app_for;
         var meta_data = { };
    
-      
-
-
-        if(app_for.indexOf('school') !== -1)
+   //School Applications
+      if(app_for.indexOf('school') !== -1)
         { 
           var school_id = app_for.replace( /^\D+/g, ''); // replace all leading non-digits with nothing
           console.log('app appears to be for a school! school ID ' +school_id)
@@ -38,47 +36,17 @@ class StartApplicationController {
          }, function(error){
            console.log(error)
          })
+        }//end school
 
-
-
-
-        }
-
-
-
+//Staff Appliations    
         if(app_for.indexOf('staff') !== -1)
         { 
 
-      //     var school_id = app_for.replace( /^\D+/g, ''); // replace all leading non-digits with nothing
           console.log('looks like a staff App')
-      //  //Check if is online
-      //  firebase.database().ref('/location_public/online_schools/'+school_id)
-      //   .once('value').then(function(snapshot) {
-      //      if(snapshot.val() == true)
-      //      {
-      //           console.log('school ID ' +school_id + ' is infact open for registration')
-      //             //todo make a check if they are trying to start multible DTS.. have them cancelle one before starting another
-                
-      //           meta_data.school_id = school_id;
-                meta_data.type = 1; //type 1 is staff
-
-      //      }
-      //      else
-      //      {
-      //      console.log('school ID ' +school_id + ' is NOT open for registration')
-      //      meta_data.type = null;
-      //      }
-
-      //     //run nextStep only after all info has been retrived
-      //      nextStep()
-      //    }, function(error){
-      //      console.log(error)
-      //    })
-
-
-
-
-        }
+          meta_data.type = 1; //type 1 is staff
+           nextStep()
+    
+        }//end staff 
 
 
 

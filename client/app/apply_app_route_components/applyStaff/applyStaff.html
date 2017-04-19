@@ -1,0 +1,36 @@
+
+ <div layout="row" layout-wrap layout-align="center">
+  
+<div flex="100" flex-gt-xs="50"  flex-gt-sm="30" >
+  
+  <md-card >
+    <img src="img/default_banner.jpg">
+
+     <md-card-title>
+          <md-card-title-text>
+            <span class="md-headline"> {{$ctrl.location.meta.name}} Staff</span>
+              <span class="md-subhead">
+               
+              {{$ctrl.location.meta.location}}<br>
+          
+         
+             </span>
+          </md-card-title-text>
+         
+        </md-card-title>
+        <md-card-content>
+         
+            
+            <!--{{school.description}}-->
+         
+        </md-card-content>
+         <md-card-actions layout="row" layout-align="end center">
+          <!--<md-button>More Info</md-button>-->
+         <app-status ng-if="school.user_has_app" date="true" app-id="school.user_has_app" ></app-status>
+             <div flex></div>
+          <md-button ng-if="school.user_has_app_status<10 || !school.user_has_app_status " ui-sref="start({app_for:'staff'})">{{school.user_has_app ?  45: 4|translate}}</md-button>
+        
+        </md-card-actions>
+   </md-card>
+</div>
+

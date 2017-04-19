@@ -54,8 +54,8 @@ function avatar(event){
       }).then(() => {
           console.log('Thumbnail uploaded to Storage at for user',userId ,thumbFilePath);
 
-         admin.database().ref('/profiles/'+userId+'/com/avatar_200').set(thumbFilePath)
-         admin.database().ref('/profiles/'+userId+'/com/avatar_1080').set(filePath)
+         admin.database().ref('/profiles/'+userId+'/contact/avatar_200').set(thumbFilePath)
+         admin.database().ref('/profiles/'+userId+'/contact/avatar_1080').set(filePath)
     
 
         });

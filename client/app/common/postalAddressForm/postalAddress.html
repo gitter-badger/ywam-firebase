@@ -1,22 +1,20 @@
 <form name="$ctrl.AddressForm">
     
-    <div layout="row">
-        <md-input-container flex="50">
+    <div layout="row" layout-wrap>
+        <md-input-container flex="100" flex-gt-xs="50" >
           <label translate="21">Address:</label>
           <input ng-model="postal.address" required>
         </md-input-container>
-        <md-input-container flex>
+        <md-input-container flex="100" flex-gt-xs="50">
           <label translate="22">City:</label>
           <input ng-model="postal.city" required>
         </md-input-container>
-    </div>
 
-    <div layout="row" flex>
-        <md-input-container flex="50">
+        <md-input-container flex="100" flex-gt-xs="50">
           <label translate="23">state:</label>
           <input ng-model="postal.state">
         </md-input-container>
-        <md-input-container flex >
+        <md-input-container flex="100" flex-gt-xs="50" >
           <label translate="24">Zip:</label>
           <input ng-model="postal.zip" required>
         </md-input-container>

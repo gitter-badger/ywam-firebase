@@ -99,7 +99,7 @@ path /profiles/{id} is Profile { read() { auth.uid == id }
                                  write() {auth.uid == id }}                                 
 
 type Profile {
-    com: Object
+    contact: Object
     health: Object | Null
     passport: Object | Null
     postal: Object | Null
@@ -110,9 +110,9 @@ type Profile {
     avatars: Object | Null
 
 }
-path /profiles/{id}/com is ProfileCom { read() {isStaff() }}
+path /profiles/{id}/contact is ProfileContact { read() {isStaff() }}
 
-type ProfileCom {
+type ProfileContact {
     avatar_1080: String | Null
     avatar_200: String | Null
     avatar_640: String | Null

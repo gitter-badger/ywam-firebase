@@ -9,8 +9,8 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  getAvatar: getAvatar,
                  avatars: {},
                  language:null,
-                
-                 hideSideNav:false,
+                 hideSideNav : true,
+                 isStaff :false
 
                
 
@@ -23,15 +23,23 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
            if(firebaseUser){
 
              var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
-               site.user.com = $firebaseObject(Ref);
+
+              .once('value').then(function(snap){
+               site.user.contact= snap.val()
+              })
+
+               
                site.user.id = firebaseUser.uid;
                console.log('Current user is: '+firebaseUser.uid )
 
                firebase.database().ref('location/current_staff_index').child(site.user.id)
                .once('value',function(snap){//if the logged in user is a current staff take them home!
                 console.log('current user is a staff? '+ snap.val())
-                 //if(snap.val())
-               //  $state.go('staffHome')
+                
+                 if(snap.val()){
+                    site.hideSideNav = false
+                    site.isStaff = true
+                 }
                })
               //  getAvatar(site.user.id)  
 
