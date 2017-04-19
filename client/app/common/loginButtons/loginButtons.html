@@ -2,26 +2,28 @@
 <div layout="column">
         <md-button class="btn-google" ng-click="$ctrl.login('google')" > {{57 | translate}} Google</md-button> 
         <md-button class="btn-facebook" ng-click="$ctrl.login('facebook')" > {{57 | translate}} Facebook</md-button> 
-       
-       <div style="text-align:center; padding-top:10px" class="md-caption"> {{58 | translate}}</div>
-       <form ng-submit="$ctrl.emailPassLogin()" layout="column">
-       <md-input-container class="no-md-error login-inputs" md-no-float >
-        <input placeholder="Email" ng-model="$ctrl.email">
-       </md-input-container>
-       <md-input-container  class="no-md-error login-inputs" md-no-float >
-        <input placeholder="{{38 | translate}}" type="password" ng-model="$ctrl.password">
-        <b md-colors="{color:'warn'}">{{$ctrl.error_key | translate}}</b>
-       </md-input-container>
-        
-      
+
+        <div style="text-align:center; padding-top:10px" class="md-caption"> {{58 | translate}}</div>
+        <form ng-submit="$ctrl.emailPassLogin()" layout="column">
+                <md-input-container class="no-md-error login-inputs" md-no-float >
+                        <input placeholder="Email" ng-model="$ctrl.email">
+                </md-input-container>
+                <md-input-container  class="no-md-error login-inputs" md-no-float >
+                        <input placeholder="{{38 | translate}}" type="password" ng-model="$ctrl.password"> 
+
+                        <div ng-messages="$ctrl.error_key" ng-if="$ctrl.error_key">
+                                <div ng-message="md-maxlength">{{$ctrl.error_key | translate}}</div>
+                        </div>       
+                </md-input-container>
+
                 <md-button type="submit" class="md-primary md-raised" translate="56" md-prevent-menu-close>login</md-button>
-    
-       </form>
+
+        </form>
         <a style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="forgotPassword">
-         {{59 | translate}}
+                {{59 | translate}}
         </a>
         <a style="text-align:center; margin-top:5px; cursor:pointer" class="md-caption" ui-sref="signUp({app_for:$ctrl.app_for})">
-         {{39 | translate}}
+                {{39 | translate}}
         </a>
     
 
