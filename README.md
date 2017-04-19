@@ -1,6 +1,7 @@
 
 
 # Table of Contents
+* [Angular Material Color Theming](#Angular Material Color Theming)
 * [Walkthrough](#walkthrough)
     * [Build System](#build-system)
     * [File Structure](#file-structure)
@@ -13,6 +14,10 @@
         * [Testing](#testing)
 		* [Generating Components](#generating-components)		
 * [Starter Kit Support and Questions](#starter-kit-support-and-questions)
+
+# Angular Material Color Theming
+## Color Theme Generator
+https://angular-md-color.com/#/
 
 # Walkthrough
 ## Build System

@@ -70,44 +70,80 @@ angular.module('app', [
 
     //------ Material Design Theme config  
 
-        $mdThemingProvider.definePalette('YWAMSarasotaColorPalette', {
-        '50': 'a6efe0',
-        '100': '94ecda',
-        '200': '82e9d4',
-        '300': '70e6ce',
-        '400': '5ee3c8',
-        
-        '500': '4de0c2',
-      
-        '600': '45c9ae',
-        '700': '3db39b',
-        '800': '359c87',
-        '900': '2e8674',
-        'A100': '7e7e7c',
-        'A200': 'ff5252',
-        'A400': 'ff1744',
-        'A700': 'b0b0b0',
+    var YWAMSarasotaColorPalettePrimary = {
+        '50': '#a2ded2',
+        '100': '#8fd8c9',
+        '200': '#7dd1c0',
+        '300': '#6acab6',
+        '400': '#57c4ad',
+        '500': '#44BDA4',
+        '600': '#3cab94',
+        '700': '#369884',
+        '800': '#2f8574',
+        '900': '#287363',
+        'A100': '#b5e5db',
+        'A200': '#c8ece4',
+        'A400': '#dbf2ed',
+        'A700': '#226053',
         'contrastDefaultColor': 'light',    // whether, by default, text (contrast)
                                             // on this palette should be dark or light
 
-        'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
-        '200', '300', '400', 'A100'],
-        'contrastLightColors': undefined    // could also specify this if default was 'dark'
-      });
+         'contrastDarkColors': ['50', '100', //hues which contrast should be 'dark' by default
+         '200', '300', '400', 'A100'],
+         'contrastLightColors': undefined    // could also specify this if default was 'dark'
+    };
+    $mdThemingProvider
+        .definePalette('YWAMSarasotaColorPalettePrimary', 
+                        YWAMSarasotaColorPalettePrimary);
+
+    var YWAMSarasotaColorPaletteAccent = {
+        '50': '#bc420a',
+        '100': '#d44a0b',
+        '200': '#ec530d',
+        '300': '#f3621f',
+        '400': '#f47338',
+        '500': '#f68450',
+        '600': '#f8a680',
+        '700': '#fab798',
+        '800': '#fbc8b1',
+        '900': '#fcd9c9',
+        'A100': '#f8a680',
+        'A200': '#F79568',
+        'A400': '#f68450',
+        'A700': '#fdeae1'
+    };
+    $mdThemingProvider
+        .definePalette('YWAMSarasotaColorPaletteAccent', 
+                        YWAMSarasotaColorPaletteAccent);
+
+    var YWAMSarasotaColorPaletteWarn = {
+        '50': '#fcdbdb',
+        '100': '#fac3c4',
+        '200': '#f7acad',
+        '300': '#f59595',
+        '400': '#f37d7e',
+        '500': '#F16667',
+        '600': '#ef4f50',
+        '700': '#ed3739',
+        '800': '#eb2021',
+        '900': '#dd1416',
+        'A100': '#fef2f2',
+        'A200': '#ffffff',
+        'A400': '#ffffff',
+        'A700': '#c51213'
+    };
+    $mdThemingProvider
+        .definePalette('YWAMSarasotaColorPaletteWarn', 
+                        YWAMSarasotaColorPaletteWarn);
+
+   $mdThemingProvider.theme('default')
+       .primaryPalette('YWAMSarasotaColorPalettePrimary')
+       .accentPalette('YWAMSarasotaColorPaletteAccent')
+       .warnPalette('YWAMSarasotaColorPaletteWarn')
+       .backgroundPalette('grey')
 
 
-
-      $mdThemingProvider.theme('default')
-         .primaryPalette('YWAMSarasotaColorPalette')
-         .accentPalette('YWAMSarasotaColorPalette')
-          // .primaryPalette('blue-grey')
-          // .accentPalette('amber', {
-          // 'default': '500', // by default use shade 400 from the pink palette for primary intentions
-          // 'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
-          // 'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
-          // 'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
-          // })
-          .backgroundPalette('grey');
+     
 
   })
   //Translation config
