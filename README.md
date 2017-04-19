@@ -1,7 +1,7 @@
 
 
 # Table of Contents
-* [Angular Material Color Theming](#Angular Material Color Theming)
+* [Angular Material Color Theming](#angular-material-color-theming)
 * [Walkthrough](#walkthrough)
     * [Build System](#build-system)
     * [File Structure](#file-structure)
