@@ -131,7 +131,8 @@ function nextStep(){
           //create it now if it passed all the above criteria 
           if(meta_data.type != null){
              ctrl.app_for_ref.set(meta_data)
-             $state.go('application',{appId:ctrl.app_id});
+             console.log('changing state to appliation form '+ctrl.app_id)
+             $state.go('apply.application',{appId:ctrl.app_id});
           }
           else{
             console.log('Something went wrong' , meta_data)

@@ -1,6 +1,6 @@
 var functions = require('firebase-functions');
 const admin = require('../config.js').admin;
-const slack = require('../config.js').slack;
+const notification = require('../notification').notification;
 
 exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
     .onWrite(event => {
@@ -27,11 +27,23 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
                                 console.log('adding start date', event.params.appId, original);
                             // add created timestamp & status of 1
                             var data ={ status: 1,
-                                            statuses:{ 1: {date:  new Date().getTime()} }}
+                                        statuses:{ 1: {date:  new Date().getTime()} }}
                                 
                                 return  admin.database().ref('/applications/'+event.params.appId+'/meta').set(data).then(function(){
+                                        return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){
+                                                   // console.log('user_id'+ snap.val())
+                                            return admin.database().ref('/profiles/'+snap.val().user_id+'/contact/').once('value').then(function(snap){
+                                                 var contact = snap.val()
+                                                // console.log(contact)
+                                                 var message = 'New Application Started! by: '
+                                                 if(contact)
+                                                  message +=  contact.first_name+' '+contact.last_name;
 
-                                        return slack('C48NTKRLY','New Application Started! '+ event.params.appId)
+                                                 return notification(message,{type:'application_started'})
+                                            })
+                                            
+                                        })
+                                       
                                     }) ;
                         }
 
@@ -84,10 +96,35 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
 
        })
 
-
-
-
-    
     });
 
 
+exports.submit = functions.database.ref('/applications/{appId}/requests/submit')
+    .onWrite(event => {
+      // Grab the current value of what was written to the Realtime Database.
+       const submit = event.data.val();
+       if(submit){
+          var data ={ status: 10,
+                      statuses:{ 10: {date:  new Date().getTime()} }}
+                                
+              return  admin.database().ref('/applications/'+event.params.appId+'/meta').set(data).then(function(){
+                      return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){
+                             return admin.database().ref('/profiles/'+snap.val().user_id+'/contact/').once('value').then(function(snap){
+                                    var contact = snap.val()
+                                    var message = 'Application Submited! by: '
+                                        if(contact)
+                                           message +=  contact.first_name+' '+contact.last_name;
+                                           return notification(message,{type:'application_started'})
+                              });
+                                            
+                       });
+                                       
+                });
+
+
+       }else{
+           return
+       }
+
+
+    })

@@ -14,13 +14,13 @@ class SignUpController
                 function(res)
                 {
                     console.log(res.uid);
-                    var data= {com:{first_name:ctrl.first_name, last_name:ctrl.last_name,email:ctrl.email}}
+                    var data= {contact:{first_name:ctrl.first_name, last_name:ctrl.last_name,email:ctrl.email}}
                     firebase.database().ref("profiles/"+res.uid).set(data)
                     if($stateParams.app_for){
                         $state.go('start',{app_for:$stateParams.app_for})
                     }
                     else{
-                        $state.go('home')
+                        $state.go('apply.schoolList')
                     }
                 }
             )
