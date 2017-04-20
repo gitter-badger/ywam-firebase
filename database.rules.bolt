@@ -52,6 +52,10 @@ path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val() 
 path /applications/{id}/requests  {  
                                   write() {auth.uid == data.parent().child('for').child('user_id').val()}
                                  }   
+path /applications/{id}/answers_to_questions  {  
+                                  write() {auth.uid == root.applications[id].for.user_id.val() }
+                                  read() {auth.uid == root.applications[id].for.user_id.val()}
+                                }                                   
 path /applications/{id}/{ref_key}/user_set  {  
                                   write() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key) }
                                   read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
@@ -139,20 +143,15 @@ path /profiles_search {read() {isStaff()}
                        index() {["string"] } }
 
 
-path /location_public { read() { true} }
-path /location_public/notices { write() {canEditLocationNotices() } }
-path /location_public/nations { write() {canEditLocationVisaReq() } }
-path /location_public/settings { write() {canEditLocationVisaReq() } }
-path /location is Location { read() { isStaff() }
-                                   write() { isStaff() }}
+path /location_public { read() { true}
+                        write() {canEditLocationInfo()} }
 
 
-type Location {
 
-    projects: Object | Null,
- //   validate() { this.modified == now }
-    
-}
+path /location  { read() { isStaff() }}
+path /location/default_school_questions {write(){canEditLocationInfo()}}
+
+
 
 
 path /paypal_transactions { read() { canAccessPaypalTransactions() }
@@ -201,8 +200,8 @@ isSchoolAdmin(  root.applications[appID].for.school_id + '' )
 
 canAccessPaypalTransactions(){
     root.location.perms['access_paypal_transactions'][auth.uid] != null}
-canEditLocationNotices(){
-    root.location.perms['can_edit_location_notices'][auth.uid] != null}
+canEditLocationInfo(){
+    root.location.perms['can_edit_location_info'][auth.uid] != null}
 canEditLocationVisaReq(){
     root.location.perms['can_edit_location_visa_requirements'][auth.uid] != null}
 

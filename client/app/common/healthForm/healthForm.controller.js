@@ -7,11 +7,13 @@ class HealthFormController {
     var ref = firebase.database().ref('/profiles/' +user_id+'/health' );
          $firebaseObject(ref).$bindTo($scope, "health");
 
-    $scope.$watch('$ctrl.healthForm.$valid',function(v){
-            $timeout(function(){
-              ctrl.isValid = ctrl.healthForm.$valid
-            })
+    $scope.$watch('$ctrl.healthForm.$valid',()=>{
+             ctrl.healthForm.$valid? ctrl.isValid = true : ctrl.isValid = false
+             $timeout()
           })
+
+
+
   }
 }
 

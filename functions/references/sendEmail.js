@@ -68,9 +68,9 @@ return admin.database().ref('/reference_tokens/').push({ref:refRef,created: new 
        
        return admin.database().ref('/schools/'+data.appData.school_id+'/public/').once('value').then(function(snap){
             data.school=snap.val()
-           return admin.database().ref('/location_public/'+data.school.location_id+'/meta/').once('value').then(function(snap){
+           return admin.database().ref('/location_public/meta/').once('value').then(function(snap){
              data.location=snap.val()
-               data.location.id=data.school.location_id;
+             
           
            return emailStep2(data);
            
@@ -123,7 +123,7 @@ function emailStep2(data){
 function emailStep3(data){
      console.log('email step 3!')
     //get mailgun auth details
-   return admin.database().ref('/location_private/'+data.location.id).once('value').then(function(snap){
+   return admin.database().ref('/location_private/').once('value').then(function(snap){
        
          var auth = { auth: snap.val().mailgun }
         var nodemailerMailgun = nodemailer.createTransport(mg(auth));

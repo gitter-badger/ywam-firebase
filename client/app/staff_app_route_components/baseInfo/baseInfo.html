@@ -1,14 +1,18 @@
 <div layout="row" layout-align="center">
 <md-card flex-gt-sm="75">
 <md-card-content>
-  <h2>Base info</h2>
- <b>Staff Fee: {{$ctrl.info.currencySym}}<span contenteditable ng-model="$ctrl.info.staff_fee"></span> <br>
- Mission Builder Fee: {{$ctrl.info.currencySym}}{{$ctrl.info.mission_builder_fee}}</b> (if longer than 4 weeks)<br>
- <b>Short Term Staff Fee: {{$ctrl.info.currencySym}}{{$ctrl.info.short_term_staff_fee}}</b> (less than 3 months )
+  <h2>Base Info</h2>
+ 
+ <!--<b>Staff Fee: {{$ctrl.location_public.currencySym}}<span contenteditable ng-model="$ctrl.location_public.staff_fee"></span> <br>
+ Mission Builder Fee: {{$ctrl.location_public.currencySym}}{{$ctrl.location_public.mission_builder_fee}}</b> (if longer than 4 weeks)<br>
+ <b>Short Term Staff Fee: {{$ctrl.location_public.currencySym}}{{$ctrl.location_public.short_term_staff_fee}}</b> (less than 3 months )
 <b>Base housing</b>
 <br>
-lease
+lease-->
 
+<pre>
+{{$ctrl.meta | json}}
+</pre>
 
 </md-card-content>
 </md-card>

@@ -249,9 +249,15 @@
 <md-card>
   <md-card-content>
     	<h1 class="md-title">School Application Questions</h1>
-      <div ng-repeat="(key ,item) in public.questions_index">
-
-      {{$ctrl.questions[key]}}
+      <div ng-repeat="(key ,item) in $ctrl.questions">
+        <div layout="row">
+          <div flex>
+        {{item.label.en}} {{item.label.de}}
+          </div>
+          <md-checkbox ng-model="public.questions_index[key]"></md-checkbox>
+       
+        </div>
+        <md-divider></md-divider>
       </div>
 
 

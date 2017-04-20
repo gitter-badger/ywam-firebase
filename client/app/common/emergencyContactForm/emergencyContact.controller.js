@@ -10,9 +10,9 @@ class EmergencyContactController {
          $firebaseObject(ref).$bindTo($scope, "emergency_contact");
            
           $scope.$watch('$ctrl.EMForm.$valid',function(v){
-            $timeout(function(){
-              ctrl.isValid = ctrl.EMForm.$valid
-            })
+              ctrl.EMForm.$valid ? ctrl.isValid = true : ctrl.isValid = false
+              $timeout()
+           
           })
 
 

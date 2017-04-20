@@ -55,10 +55,14 @@ class ApplicationController {
     
 
      function submit(){
-
-       console.log('submiting')
-       firebase.database().ref('/applications/' +ctrl.app_id + '/requests/submit').set(true);
-       $state.go('apply.dashboard')
+ 
+      angular.forEach(ctrl.forms, function(item,key){
+        console.log(key,item)
+      })
+      
+      //  console.log('submiting')
+      //  firebase.database().ref('/applications/' +ctrl.app_id + '/requests/submit').set(true);
+      //  $state.go('apply.dashboard')
 
      }
 

@@ -7,9 +7,10 @@ class UserApplicationsListController {
         ctrl.contiueApplication=applyNow;
         ctrl.$onInit=function()
         {
-          var userId=Auth.$getAuth().uid;
+          if(!ctrl.userId)
+           ctrl.userId=Auth.$getAuth().uid;
             
-            firebase.database().ref("profiles/"+userId+"/app_index").on("child_added",function(snap)
+            firebase.database().ref("profiles/"+ctrl.userId+"/app_index").on("child_added",function(snap)
             {
               var app=snap.val();
                   app.id=snap.key;

@@ -9,9 +9,9 @@ class PostalAddressController {
          $firebaseObject(profile_contact_postal_ref).$bindTo($scope, "postal");
            
              $scope.$watch('$ctrl.AddressForm.$valid',function(v){
-               $timeout(function(){
-                  ctrl.isValid = ctrl.AddressForm.$valid
-               })
+             
+                  ctrl.isValid = ctrl.AddressForm.$valid ? ctrl.isValid = true: ctrl.isValid = false;
+               $timeout()
                
             })
 

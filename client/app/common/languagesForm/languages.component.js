@@ -4,7 +4,7 @@ import './languages.styl';
 
 let languagesComponent = {
   restrict: 'E',
-  bindings: {isValid:'='},
+  bindings: { isValid :'='},
   template,
   controller
 };

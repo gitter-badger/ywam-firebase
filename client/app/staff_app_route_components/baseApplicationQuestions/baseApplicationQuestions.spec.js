@@ -1,16 +1,16 @@
-import BaseSchoolQuestionsModule from './baseSchoolQuestions'
-import BaseSchoolQuestionsController from './baseSchoolQuestions.controller';
-import BaseSchoolQuestionsComponent from './baseSchoolQuestions.component';
-import BaseSchoolQuestionsTemplate from './baseSchoolQuestions.html';
+import BaseApplicationQuestionsModule from './baseApplicationQuestions'
+import BaseApplicationQuestionsController from './baseApplicationQuestions.controller';
+import BaseApplicationQuestionsComponent from './baseApplicationQuestions.component';
+import BaseApplicationQuestionsTemplate from './baseApplicationQuestions.html';
 
-describe('BaseSchoolQuestions', () => {
+describe('BaseApplicationQuestions', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(BaseSchoolQuestionsModule));
+  beforeEach(window.module(BaseApplicationQuestionsModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new BaseSchoolQuestionsController();
+      return new BaseApplicationQuestionsController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('BaseSchoolQuestions', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(BaseSchoolQuestionsTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(BaseApplicationQuestionsTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = BaseSchoolQuestionsComponent;
+      let component = BaseApplicationQuestionsComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(BaseSchoolQuestionsTemplate);
+        expect(component.template).to.equal(BaseApplicationQuestionsTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(BaseSchoolQuestionsController);
+        expect(component.controller).to.equal(BaseApplicationQuestionsController);
       });
   });
 });

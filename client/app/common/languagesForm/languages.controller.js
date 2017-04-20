@@ -6,12 +6,12 @@ class LanguagesController {
        ctrl.removeLang = removeLang;
        ctrl.addLang = addLang
 
-            $scope.$watch('$ctrl.LangForm.$valid',function(v){
-               $timeout(function(){
-                  ctrl.isValid = ctrl.LangForm.$valid
-               })
+       //Watch for form validity 
+        $scope.$watch('$ctrl.LangForm.$valid',() => {
+               ctrl.LangForm.$valid ? ctrl.isValid = true : ctrl.isValid = false
                
-            })
+                $timeout()
+                })
 
 
    var profile_language_ref =   firebase.database().ref('/profiles/' +user_id+'/basic/languages' );

@@ -4,7 +4,7 @@ import './userApplicationsList.styl';
 
 let userApplicationsListComponent = {
   restrict: 'E',
-  bindings: {banner:'='},
+  bindings: {banner:'=', userId:'='},
   template,
   controller
 };

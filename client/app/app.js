@@ -6,11 +6,14 @@ import services from './services/services';
 import staffComponents from './staff_app_route_components/staff_app_route_components';
 import applyComponents from './apply_app_route_components/apply_app_route_components';
 import AppComponent from './app.component';
+
 import 'normalize.css';
 
 //Material Design 
 import 'angular-material'
 require('angular-material/angular-material.css');
+
+// Material Data Table
 import DataTable from 'angular-material-data-table';
 require('angular-material-data-table/dist/md-data-table.css')
 

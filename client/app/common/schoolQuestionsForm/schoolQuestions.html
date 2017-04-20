@@ -3,7 +3,7 @@
 
 <form name="QuestionsForm">
 
-<div ng-repeat="(key,item) in $ctrl.school_questions" layout="row">
+<div ng-repeat="(key,item) in $ctrl.school_questions" ng-if="item" layout="row">
 
 <md-input-container flex="100">
 

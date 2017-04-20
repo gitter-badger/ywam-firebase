@@ -15,8 +15,8 @@ class PassportInfoController {
              ctrl.changeExpireDate = changeExpireDate
 
 
-            $scope.$watch('PassportForm.$valid',function(v){
-                ctrl.isValid = $scope.PassportForm.$valid
+            $scope.$watch('$ctrl.PassportForm.$valid',function(v){
+                ctrl.PassportForm.$valid ? ctrl.isValid = true:  ctrl.isValid = false;
             })
            
 
