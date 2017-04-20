@@ -10,7 +10,7 @@ let applyStaffModule = angular.module('applyStaff', [
 
   $stateProvider
     .state('apply.staff', {
-      url: '/appyStaff',
+      url: '/applyStaff',
       component: 'applyStaff',
     });
 })
