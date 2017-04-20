@@ -1,6 +1,6 @@
 <md-toolbar  md-whiteframe="1">
       <div class="md-toolbar-tools">
-        <div hide-gt-sm ng-click="$ctrl.openLeftMenu()" flex style="height:50px; padding-top:10px; " >
+        <div ng-if="$ctrl.site.isStaff" hide-gt-sm ng-click="$ctrl.openLeftMenu()" flex style="height:50px; padding-top:10px; " >
          <i class="fa fa-bars"></i>
         </div>
 

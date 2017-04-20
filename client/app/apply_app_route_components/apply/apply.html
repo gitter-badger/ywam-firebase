@@ -1,6 +1,6 @@
 <md-nav-bar md-selected-nav-item="$ctrl.current" nav-bar-aria-label="navigation links">
     
-      <md-nav-item md-nav-sref="apply.dashboard" name="apply.dashboard"  >dashboard</md-nav-item>
+      <md-nav-item ng-show="$ctrl.site.user.id" md-nav-sref="apply.dashboard" name="apply.dashboard"  >dashboard</md-nav-item>
     <md-nav-item md-nav-sref="apply.schoolList" name="apply.schoolList"  >{{1|translate}}</md-nav-item>
   
     <!--<md-nav-item md-nav-sref="events" name="events">{{2|translate}}</md-nav-item>-->
