@@ -1,11 +1,12 @@
 class LoginButtonsController {
   /* @ngInject */
-  constructor(Auth,$mdMedia,$stateParams,$mdMenu) {
+  constructor(Auth,$mdMedia,$stateParams,$mdMenu,$state) {
       var ctrl = this
       //  ctrl.auth = Auth;
        ctrl.login = login;
        ctrl.emailPassLogin = emailPassLogin;
       ctrl.app_for = $stateParams.app_for;
+      ctrl.hideSignUp= $state.is('start')
 
        function login(provider){
          if($mdMedia('gt-sm'))

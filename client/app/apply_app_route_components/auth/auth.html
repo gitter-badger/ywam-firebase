@@ -1,0 +1,42 @@
+<div layout='row' layout-align='center'>
+  <!--<h1>{{ $ctrl.params }}</h1>-->
+
+<div flex="100" flex-gt-sm="50" flex-gt-md="30">
+<md-card ng-if="$ctrl.mode=='resetPassword' ">
+    <md-card-content ng-hide="$ctrl.invalidLink">
+      <h1 class="md-title" >{{179 | translate}}</h1>
+      <br>
+        <br>
+      <form ng-submit="$ctrl.resetPassword()" ng-if="!$ctrl.message" layout="column" class="resetPasswordForm">
+      
+    <md-input-container  class="login-inputs no-md-error " md-no-float>
+       
+        <input placeholder="{{38 | translate}}*" required name="password" type="password" ng-model="$ctrl.password">
+    <div ng-messages="$ctrl.error_key" ng-if="$ctrl.error_key">
+                                
+          <div ng-message="md-maxlength">{{$ctrl.error_key | translate}}</div>
+
+      </div> 
+      </md-input-container>
+    
+          
+    <md-button translate="180" type="submit" class="md-primary md-raised">reset</md-button>
+      </form>
+    </md-card-content>
+    <md-card-content ng-show="$ctrl.invalidLink">
+     
+     <span translate="182">Password reset link expired </span>
+        <md-button type="submit" ui-sref="forgotPassword" class="md-primary md-raised" translate="183" >try again</md-button>
+        
+        </md-card-content>
+
+
+  </md-card>
+
+
+
+<md-card ng-if="$ctrl.invalidLink">
+  
+</md-card>
+</div>
+</div>
