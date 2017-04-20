@@ -10,6 +10,7 @@ import apply from './apply/apply'
 import applyDashboard from './applyDashboard/applyDashboard'
 import applyStaff from './applyStaff/applyStaff'
 import referenceForm from './referenceForm/referenceForm'
+import changeUserPhoto from './changeUserPhoto/changeUserPhoto'
 import auth from './auth/auth'
 
 let componentModule = angular.module('app.apply.components', [
@@ -24,6 +25,7 @@ let componentModule = angular.module('app.apply.components', [
   apply,
   applyDashboard,
   applyStaff,
+  changeUserPhoto,
   auth
 ])
   
