@@ -2,7 +2,10 @@ class UserPhotoUploadController {
     /* @ngInject */
   constructor($scope,Auth,$firebaseObject, $timeout) {
     var ctrl = this;
-    ctrl.user_id = Auth.$getAuth().uid
+    
+    if(!ctrl.userId)
+    ctrl.userId = Auth.$getAuth().uid
+    
     ctrl.avatar = null;
     ctrl.myImage= null;//$firebaseObject(contactRef)
     ctrl.myCroppedImage='';
@@ -12,7 +15,7 @@ class UserPhotoUploadController {
 function onInit(){
   
     
-    var contactRef =   firebase.database().ref('/profiles/' +ctrl.user_id ).child('contact');
+    var contactRef =   firebase.database().ref('/profiles/' +ctrl.userId ).child('contact');
         contactRef.child('avatar_200').on('value',function(snap){
           ctrl.processing = false
           ctrl.avatar =snap.val();
@@ -48,7 +51,7 @@ function onInit(){
 
 
     function savePhoto(){
-        var storageRef = firebase.storage().ref('/profiles/'+ctrl.user_id+'/avatars');
+        var storageRef = firebase.storage().ref('/profiles/'+ctrl.userId+'/avatars');
         ctrl.upload_progress = 1
 
         var file =  ctrl.myCroppedImage

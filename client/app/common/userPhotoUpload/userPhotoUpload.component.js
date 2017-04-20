@@ -4,7 +4,7 @@ import './userPhotoUpload.styl';
 
 let userPhotoUploadComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {userId:'='},
   template,
   controller
 };
