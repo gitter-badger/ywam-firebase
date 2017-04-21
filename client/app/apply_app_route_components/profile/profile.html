@@ -32,7 +32,7 @@
                     <br>
                 </div>
                 <div flex >
-                    <div class="photo" style="float:right; text-align:center; max-height:300px;   max-width:300px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
+                    <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:300px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
                         <img ng-if="$ctrl.profile.contact.avatar_200" style="width:100%; height:100%"align="right" firebase-src="{{$ctrl.profile.contact.avatar_1080}}" >
                       
                         <img ng-if="!$ctrl.profile.contact.avatar_200" style="width:100%; height:100%" align="right"  src="img/default_avatar.png" >
