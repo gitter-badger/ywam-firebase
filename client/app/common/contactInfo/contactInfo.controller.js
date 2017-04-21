@@ -1,13 +1,14 @@
 class ContactInfoController {
-  constructor() {
+  constructor($firebaseObject) {
    var ctrl = this
        
        ctrl.$onInit = function() {
  
      var userRef = firebase.database().ref('profiles').child(ctrl.userId)
-         userRef.on('value',function(userSnap){
-           ctrl.user = userSnap.val()
-          })
+        ctrl.contact= $firebaseObject(userRef.child('contact'))
+        ctrl.em_contact= $firebaseObject(userRef.child('emergency_contact'))
+        ctrl.postal= $firebaseObject(userRef.child('postal'))
+         
 
       }//end on init
 

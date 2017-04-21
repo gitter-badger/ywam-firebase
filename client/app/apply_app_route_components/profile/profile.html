@@ -6,20 +6,20 @@
             <div  layout="row" >  
                 <div flex>
 
-                    <h1 class="md-display-1">{{$ctrl.profile.contact.first_name}} {{$ctrl.profile.contact.last_name}}                
+                    <h1 class="md-display-1">{{$ctrl.contact.first_name}} {{$ctrl.contact.last_name}}                
                         <br>
-                        <small class="md-subhead">{{$ctrl.profile.passport.first_name | uppercase}} {{$ctrl.profile.passport.middle_name | uppercase}} {{$ctrl.profile.passport.last_name | uppercase}}
+                        <small class="md-subhead">{{$ctrl.passport.first_name | uppercase}} {{$ctrl.passport.middle_name | uppercase}} {{$ctrl.passport.last_name | uppercase}}
                         </small>
                     </h1>
 
-                    {{$ctrl.profile.contact.nationality}}
+                    
                     <br>
-                    {{$ctrl.profile.contact.gender}} {{$ctrl.calculateAge($ctrl.profile.contact.dob)}} 
-                    <span style=" text-transform: capitalize;"></span>
-                    {{$ctrl.profile.contact.marital_status}}
+                     
+                    <span style=" text-transform: capitalize;">{{$ctrl.contact.gender}} {{$ctrl.calculateAge($ctrl.contact.dob)}}  {{$ctrl.contact.marital_status}}</span>
+                    
                     <span></span>
                     <br>
-                    {{$ctrl.profile.contact.dob | date}}  
+                    {{$ctrl.contact.dob | date}}  
                     <br>
                     <div ng-repeat="lang in $ctrl.languages">
                         {{lang.text}}
@@ -30,20 +30,21 @@
                     </div>
 
                     <br>
+                    <div layout="row" layout-align="start center">
+                    <img style="height:{{$ctrl.photo_size/7}}px; padding-right:5px;" ng-if="$ctrl.passport.nation_id" ng-src="http://flagpedia.net/data/flags/mini/{{ $ctrl.passport.nation_id.toLowerCase() }}.png">
+                    {{$ctrl.nationality}}
+                    </div>
                 </div>
                 <div flex >
-                    <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:300px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
-                        <img ng-if="$ctrl.profile.contact.avatar_200" style="width:100%; height:100%"align="right" firebase-src="{{$ctrl.profile.contact.avatar_1080}}" >
+                    <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
+                        <img ng-if="$ctrl.contact.avatar_200" style="width:100%; height:100%"align="right" firebase-src="{{$ctrl.contact.avatar_1080}}" >
                       
-                        <img ng-if="!$ctrl.profile.contact.avatar_200" style="width:100%; height:100%" align="right"  src="img/default_avatar.png" >
+                        <img ng-if="!$ctrl.contact.avatar_200" style="width:100%; height:100%" align="right"  src="img/default_avatar.png" >
                         
                         <div class="editButton" layout="row" layout-align="center center" > 
-                            <!--<div flex  >-->
-                        <!--<a href="" class="no-print" ng-click="$ctrl.editPhotoDialog()">change photo</a>-->
-                        <!--<md-button class="md-icon-button" aria-label="Settings" >-->
-                    <md-icon flex md-svg-icon="img/icons/edit.svg"></md-icon>
-                <!--</md-button>-->
-                            <!--</div>-->
+                           
+                    <md-icon flex md-svg-icon="img/icons/edit_white.svg"></md-icon>
+     
                         
                         </div>
                     </div>
@@ -52,23 +53,50 @@
         </md-card-content>
     </md-card>    
     <!--<div layout="row" layout-wrap>   -->   
-   <md-card flex="100" flex-gt-xs="70">
+   
+    <!--</div>   -->
+    <md-card flex="100" flex-gt-xs="70">
+        <md-card-content>
+        <h1 class="md-title" >Contact Information</h1>
+            <div>
+                <contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
+            </div>           
+
+        </md-card-content>
+    </md-card>
+
+    <md-card flex="100" flex-gt-xs="70">
+        <md-card-content>
+            <div layout="row" layout-align="start center">
+                <h1 class="md-title" >Passport Information</h1><md-icon ng-click="$ctrl.editPassportDialog()" style="margin-left:5px; cursor:pointer;" md-svg-icon="img/icons/edit_black.svg"></md-icon>
+            </div>
+       {{$ctrl.passport}}
+            <div layout="row" layout-xs="column" >
+                <div flex style="border-left: 2px solid #F3E274; padding-left:4px">
+                <b>Contact:</b> <br>
+                {{$ctrl.passport.first_name | uppercase}} {{$ctrl.passport.middle_name | uppercase}} {{$ctrl.passport.last_name | uppercase}}
+                <u translate="17">passport number:</u>   {{$ctrl.passport.number}}<br>     
+                <u translate="18">issue_date:</u>        {{$ctrl.passport.issue_date}}<br>
+                <u translate="19">expire_date:</u>        {{$ctrl.passport.expire_date}}<br>
+                <u translate="14">nation:</u>        {{$ctrl.passport.nation_id}}<br>
+                <u translate="20">authority:</u>        {{$ctrl.passport.authority}}<br>
+                
+                <u>Address:</u><br>
+                {{$ctrl.passport.address}}<br> {{$ctrl.passport.city}}<br>
+                {{$ctrl.passport.state}}, {{$ctrl.passport.zip}}, 
+                {{$ctrl.passport.nation_id}}
+
+                </div>
+            </div> 
+        </md-card-content>
+    </md-card>
+
+
+    <md-card flex="100" flex-gt-xs="70">
         <md-card-content>
             <h1 class="md-title" translate="116">Applications</h1>
     <user-applications-list user-id="$ctrl.user_id" ng-if="$ctrl.profile"  flex="100" flex-gt-xs="70"></user-applications-list>   
       </md-card-content>
-    </md-card>
-    <!--</div>   -->
-    <md-card flex="100" flex-gt-xs="70">
-        <md-card-content>
-        
-            <div>
-                <contact-info user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-info>
-            </div>
-
-            <a ng-click="$ctrl.editPassportDialog()">edit passport info</a>
-
-        </md-card-content>
     </md-card>
 
 </div>
