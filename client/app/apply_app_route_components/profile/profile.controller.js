@@ -12,7 +12,7 @@ class ProfileController {
            ctrl.calculateAge = calculateAge
 
         
-firebase.database().ref('profiles/'+ctrl.user_id+'/passport/').once('value',function (snap){
+firebase.database().ref('profiles/'+ctrl.user_id+'/passport/').on('value',function (snap){
   ctrl.passport=snap.val()
   firebase.database().ref('phrases/nations/'+Site.language+'/'+ctrl.passport.nation_id).once('value',function (snap){
   ctrl.nationality= snap.val()
