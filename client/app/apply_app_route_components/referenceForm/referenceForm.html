@@ -1,5 +1,5 @@
 
-<div layout="row"  layout-align="center" style="background-image: url(img/default_avatar.png);">
+<div layout="row"  layout-align="center" style="background-image: url({{$ctrl.avatar}});">
  <div ng-show="$ctrl.loading" flex="100"  flex-gt-xs="70" layout="column" >
             <md-card >
            
@@ -20,7 +20,7 @@
      
     <div ng-hide="$ctrl.loading || form.submit" flex="100"  flex-gt-xs="70" layout="column" >
 
-<form name="refForm">
+<form name="refForm" ng-model-options="{  debounce: 500 }">
         <md-card >
            
             <md-card-content>
@@ -28,9 +28,9 @@
 
             <div layout="row" layout-align="start center">
                 <div style="height:70px;" >
-                <img ng-if="$ctrl.meta.applicant_avatar" style="border-radius: 50%; height:100%"  firebase-src="{{$ctrl.meta.applicant_avatar}}" >
+                <!--<img ng-if="$ctrl.meta.applicant_avatar" style="border-radius: 50%; height:100%"  firebase-src="{{$ctrl.meta.applicant_avatar}}" >-->
                 
-                <img ng-if="!$ctrl.meta.applicant_avatar" style="border-radius: 50%; height:100%"  src="img/default_avatar.png" >
+                <img  style="border-radius: 50%; height:100%"  ng-src="{{$ctrl.avatar}}" >
                 <br>
             </div>
             <div flex style="padding-left:10px; float:left;">

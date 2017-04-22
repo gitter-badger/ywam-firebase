@@ -16,7 +16,7 @@ class LoginDialogController {
     Auth.$onAuthStateChanged(function(firebaseUser) {
       if(firebaseUser){
          ctrl.visible =false;
-         $state.reload()
+        //  $state.reload()//note this causes a problem when using token auth as in referenceForm
       }
      
     });

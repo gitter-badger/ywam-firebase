@@ -60,9 +60,9 @@ class ApplicationController {
         console.log(key,item)
       })
       
-      //  console.log('submiting')
-      //  firebase.database().ref('/applications/' +ctrl.app_id + '/requests/submit').set(true);
-      //  $state.go('apply.dashboard')
+       console.log('submiting')
+       firebase.database().ref('/applications/' +ctrl.app_id + '/requests/submit').set(true);
+       $state.go('apply.dashboard')
 
      }
 

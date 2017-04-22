@@ -98,7 +98,14 @@ path /reference_tokens/{hash}/token_requested {write(){ true}}
 
 
 // Profiles Node
-path /profiles {read() {isStaff() }}
+// path /profiles {read() {isStaff() }}
+path /profiles/{id}/contact {read() {isStaff() }}
+path /profiles/{id}/postal {read() {isStaff() }}
+path /profiles/{id}/emergency_contact {read() {isStaff() }}
+path /profiles/{id}/passport {read() {isStaff() }}
+
+
+
 path /profiles/{id} is Profile { read() { auth.uid == id }  
                                  write() {auth.uid == id }}                                 
 

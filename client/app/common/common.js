@@ -43,7 +43,7 @@ let commonModule = angular.module('app.common', [
   
  
 
-  Header,
+   Header,
   Sidenav,
   LoginButtons,
   LoginDialog,

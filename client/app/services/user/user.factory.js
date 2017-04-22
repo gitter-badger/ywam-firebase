@@ -27,6 +27,7 @@ var parentEl = angular.element(document.body);
        
             Auth.$onAuthStateChanged(function(firebaseUser) {
             if(firebaseUser){
+              console.log('hide dialog')
               $mdDialog.hide();
               $state.reload()
             }

@@ -6,8 +6,6 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  location : {} ,
                  user: {},
                  showDialog: showDialog,
-                 getAvatar: getAvatar,
-                 avatars: {},
                  language:null,
                  hideSideNav : true,
                  isStaff :false
@@ -25,8 +23,9 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
              var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
 
               .once('value').then(function(snap){
+               if(snap.val()){
                site.user.contact= snap.val()
-              })
+              
 
                
                site.user.id = firebaseUser.uid;
@@ -41,7 +40,10 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                     site.isStaff = true
                  }
                })
-              //  getAvatar(site.user.id)  
+             
+
+              }//if data
+              })
 
 
                 }   
@@ -64,46 +66,10 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
       });
     } 
 
+ var Ref = firebase.database().ref('location_public')
+            site.location = $firebaseObject(Ref)
 
 
-    function getAvatar(user_id){
-      //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
-          //this can be changed till then:
-         
-
-       if(user_id){
-              firebase.database().ref('/profiles/'+ user_id +'/contact').once('value',function(snap){
-                var com = snap.val()
-                
-            if(com){
-             
-              if(com.avatar_200.includes("http")){
-                site.avatars[user_id] = com.avatar_200 
-           //     console.log('no gs avatar')
-              }else {//else get firebase file
-
-            firebase.storage().refFromURL(com.avatar_200)
-              .getDownloadURL().then(function(url){
-               
-
-                site.avatars[user_id] = url 
-                $timeout(function(){})
-                }).catch(function(error){console.log('not valid file'+error)})
-            }
-
-
-              }
-
-              
-              
-            
-              
-
-              })
-
-            
-       } 
-    } 
 
 
 

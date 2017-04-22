@@ -22,7 +22,7 @@ exports.sendEmail = functions.database.ref('/applications/{appId}/{refKey}/user_
                      
                   return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){
                       data.appData=snap.val()  ;
-                    return  admin.database().ref('/profiles/'+data.appData.user_id+'/com').once('value').then(function(snap){
+                    return  admin.database().ref('/profiles/'+data.appData.user_id+'/contact').once('value').then(function(snap){
                             data.userData=snap.val();
                             
                             return  emailStep1(data);

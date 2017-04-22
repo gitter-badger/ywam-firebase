@@ -175,7 +175,8 @@ angular.module('app', [
 
 
 
-  .run(($rootScope,$translate,tmhDynamicLocale, Site)=>{
+  .run(($rootScope,$translate,tmhDynamicLocale, Site
+  )=>{
       "ngInject";
     $rootScope.$on('$translateChangeSuccess', function() {
      //Watching for angular-translate changes.. and change the angular-locale also
@@ -189,18 +190,7 @@ angular.module('app', [
 
   })
 
-  .run((Site,$firebaseObject, $rootScope)=>{ //Find location from host names
-     "ngInject";
-            // Site.location_id  =  Domains[location.hostname]
-            // $rootScope.location_id = Site.location_id
-        var Ref = firebase.database().ref('location_public')
-            Site.location = $firebaseObject(Ref)
-        // if(!Site.location_id)
-        // console.warn('No location matching domain '+ location.hostname)
-  })
-
-
-.run(["$transitions", "Auth" ,"$rootScope","$state","Site" , function($transitions, Auth, $rootScope,$state, Site) {
+.run(["$transitions", "Auth" ,"$rootScope","$state" , function($transitions, Auth, $rootScope,$state) {
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {

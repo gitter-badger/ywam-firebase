@@ -69,8 +69,8 @@ function getLeaders(index,school){
     
         rolesIndexRef.on('child_added', function(indexSnap) { // loop over children
                 var rolesId = indexSnap.key;
-                // console.log(rolesId)
-                profileRef.child(rolesId).child('contact').on('value', function(profileSnap) {
+                console.log(rolesId)
+                profileRef.child(rolesId).child('contact').once('value', function(profileSnap) {
                     if( profileSnap.val() != null ){ 
                             ctrl.schools[index].leaders[rolesId] = profileSnap.val();
                                $timeout(function() { })
