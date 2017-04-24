@@ -1,27 +1,27 @@
 <div layout="row" layout-xs="column" >
 <div flex style="border-left: 2px solid #F79568; padding-left:4px">
-<b>Contact:</b> <br>
+<b translate="184">Contact:</b> <br>
 <a href="mailto:{{$ctrl.contact.email}}">{{$ctrl.contact.email}}</a> <br>
 <div ng-if="$ctrl.contact.skype"> <u>Skype:</u> {{$ctrl.contact.skype}}</div>
-<div ng-if="$ctrl.contact.home_phone"><u> Home Phone:</u> {{$ctrl.contact.home_phone}}</div>
-<div ng-if="$ctrl.contact.mobile_phone"> <u>Mobile Phone:</u>   {{$ctrl.contact.mobile_phone}}</div>
+<div ng-if="$ctrl.contact.home_phone"><u translate="106"> Home Phone</u><u>:</u> {{$ctrl.contact.home_phone}}</div>
+<div ng-if="$ctrl.contact.mobile_phone"> <u translate="107">Mobile Phone</u><u>:</u>   {{$ctrl.contact.mobile_phone}}</div>
 
-<u>Mailing Address:</u><br>
+<u translate="21">Address</u><u>:</u><br>
  {{$ctrl.postal.address}}<br> {{$ctrl.postal.city}}<br>
  {{$ctrl.postal.state}}, {{$ctrl.postal.zip}}, 
  {{$ctrl.postal.nation_id}}
 
 </div>
 <div flex style="border-left: 2px solid #F16667; padding-left:4px">
-<b>Emergency Contact:</b><br>
+<b translate="96">Emergency Contact:</b><br>
 {{$ctrl.em_contact.name}} ({{$ctrl.em_contact.relation}})<br>
 <a href="mailto:{{$ctrl.em_contact.email}}">{{$ctrl.em_contact.email}}</a><br>
 
-<div ng-if="$ctrl.em_contact.skype"> <u>Skype:</u> {{$ctrl.em_contact.skype}}</div>
-<u>Phone:</u> {{$ctrl.em_contact.phone}}<br>
-<div ng-if="$ctrl.em_contact.phone2"> <u>Phone 2:</u> {{$ctrl.em_contact.phone2}}</div>
+<div ng-if="$ctrl.em_contact.skype"> <u>Skype</u>: {{$ctrl.em_contact.skype}}</div>
+<u translate="97">Phone</u><u> 1:</u> {{$ctrl.em_contact.phone}}<br>
+<div ng-if="$ctrl.em_contact.phone2"> <u translate="97">Phone</u><u> 2:</u> {{$ctrl.em_contact.phone2}}</div>
 <div ng-if="$ctrl.em_contact.address">
-<u>Address:</u> <br>
+<u translate="21">Address</u><u>:</u><br>
 {{$ctrl.em_contact.address}}<br>
 {{$ctrl.em_contact.city}}<br>
 {{$ctrl.em_contact.state}},

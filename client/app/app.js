@@ -177,7 +177,7 @@ angular.module('app', [
 
 
 
-  .run(($rootScope,$translate,tmhDynamicLocale, Site
+  .run(($rootScope,$translate,tmhDynamicLocale, Site, moment
   )=>{
       "ngInject";
     $rootScope.$on('$translateChangeSuccess', function() {
@@ -186,7 +186,9 @@ angular.module('app', [
       //  if($translate.proposedLanguage()!='en')// ignore english since it is already in angular
         tmhDynamicLocale.set($translate.proposedLanguage());
         
+        
         Site.language = $translate.proposedLanguage();
+        moment.locale(Site.language);
     });
 
 
