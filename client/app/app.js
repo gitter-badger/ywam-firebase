@@ -30,6 +30,7 @@ import 'angular-translate';
 import 'angular-translate-loader-static-files';
 import 'angular-translate-loader-partial';
 import 'angular-dynamic-locale'; // for dynamic locale loading 
+import 'angular-moment';
 import English from './en.json'; //include english translations by default so they don't have to load seperate 
 
 import Domains from './domains.json'
@@ -50,6 +51,7 @@ angular.module('app', [
     DataTable,
     'pascalprecht.translate',//ngTranslate
      'tmh.dynamicLocale',// for dynamic locale loading 
+     'angularMoment',
     'firebase',
      'chart.js',
     Common,
@@ -190,7 +192,7 @@ angular.module('app', [
 
   })
 
-.run(["$transitions", "Auth" ,"$rootScope","$state","$stateParams" , function($transitions, Auth, $rootScope,$state,$stateParams) {
+.run(["$transitions", "Auth" ,"$rootScope","$state","$location" , function($transitions, Auth, $rootScope,$state,$location) {
 //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
@@ -215,12 +217,10 @@ $transitions.onStart({
     from:function(state){
         //set previous state
     //   
-        console.log(state)
-        $state.previous = { name : $state.name, 
-                            params: $stateParams
-                          }
+        // console.log( $location.path())
+        $state.previous = $location.path()
      
-    //    console.log( $state.previous)
+       console.log( $state.previous)
     }
 })
 }])
