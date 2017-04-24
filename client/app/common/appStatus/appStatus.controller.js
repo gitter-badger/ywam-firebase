@@ -33,7 +33,7 @@ class AppStatusController {
             var user_id = Auth.$getAuth().uid;
             console.log(ctrl.appId)
            firebase.database().ref('applications/' +ctrl.appId + '/meta/status').set(status_num);
-           firebase.database().ref('applications/' +ctrl.appId + '/meta/statuses/'+status_num +'/date').set(new Date().getTime())
+           firebase.database().ref('applications/' +ctrl.appId + '/meta/statuses/'+status_num +'/time').set(new Date().getTime())
            firebase.database().ref('applications/' +ctrl.appId + '/meta/statuses/'+status_num +'/user_id').set(user_id)
 
        }
