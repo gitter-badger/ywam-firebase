@@ -86,8 +86,8 @@ float:left;
                     position: relative; " >  
 <div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
 
-<img firebase-src="{{app.user.avatar_200}}" width="100%" >
-<!--{{$ctrl.getAvatar(app.user.avatar_200)}}-->
+<img ng-if="app.user.avatar_200" firebase-src="{{app.user.avatar_200}}" width="100%" >
+<img ng-if="!app.user.avatar_200" src="img/default_avatar.png" width="100%" >
 </div>
 
 

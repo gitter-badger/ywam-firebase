@@ -8,7 +8,8 @@ class UserApplicationsListController {
         ctrl.$onInit=function()
         {
           if(!ctrl.userId)
-           ctrl.userId=Auth.$getAuth().uid;
+           ctrl.userId = Auth.$getAuth().uid;
+            
             
             firebase.database().ref("profiles/"+ctrl.userId+"/app_index").on("child_added",function(snap)
             {

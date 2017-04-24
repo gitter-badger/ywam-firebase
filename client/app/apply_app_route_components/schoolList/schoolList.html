@@ -1,11 +1,11 @@
 
- <div layout="row" layout-wrap layout-align="center">
+ <div layout-gt-xs="row"  layout-align="center">
   
-<div  ng-repeat="school in $ctrl.schools" flex="100" flex-gt-xs="50"  flex-gt-sm="30" >
+
   
 
    
-   <md-card >
+   <md-card ng-repeat="school in $ctrl.schools" flex="100"   flex-gt-sm="30" >
      <img firebase-src="{{school.banner_1080}}" ng-if="school.banner_1080" style="    height: initial !important;" >
      <img src="img/default_banner.jpg" ng-if="!school.banner_1080">
 
@@ -39,5 +39,7 @@
         
         </md-card-actions>
    </md-card>
+
+
 </div>
 

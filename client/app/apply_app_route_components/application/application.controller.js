@@ -2,10 +2,10 @@ class ApplicationController {
   /* @ngInject */
   constructor($stateParams,$firebaseObject,$scope,Auth, moment,Site,$state) {
         Site.hideSideNav = true
-    var user_id =   Auth.$getAuth().uid; 
+   
     var ctrl = this;
     var now = new Date();
-    
+        ctrl.user_id =   Auth.$getAuth().uid; 
         ctrl.app_id = $stateParams.appId;
         ctrl.maxDate = new Date( new Date().setFullYear( now.getFullYear() - 15) )
         ctrl.minDate = new Date( new Date().setFullYear( now.getFullYear() - 100) )
@@ -25,7 +25,7 @@ class ApplicationController {
 
       }
 
-     var profile_contact_ref =   firebase.database().ref('/profiles/' +user_id+'/contact' );
+     var profile_contact_ref =   firebase.database().ref('/profiles/' +ctrl.user_id+'/contact' );
          $firebaseObject(profile_contact_ref).$bindTo($scope, "profile_contact");
          profile_contact_ref.once('value', (snap)=>{
           if(snap.val().dob)

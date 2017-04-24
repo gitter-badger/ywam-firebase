@@ -1,13 +1,13 @@
 class AppAdminNotesController {
      /* @ngInject */
-  constructor(Auth, $firebaseObject) {
+  constructor(Auth, $firebaseObject,$timeout) {
    var ctrl = this
        ctrl.addAdminNote = addAdminNote
        ctrl.deleteAdminNote = deleteAdminNote
   
        ctrl.$onInit = function(){
-    var appNotesRef = firebase.database().ref('applications').child(ctrl.appId).child('admin_notes')
-        appNotesRef.on('value',function(snap){
+     ctrl.appNotesRef = firebase.database().ref('applications').child(ctrl.appId).child('admin_notes')
+        ctrl.appNotesRef.on('value',function(snap){
           ctrl.notes = []
           
           snap.forEach(function(snap){
@@ -19,6 +19,7 @@ class AppAdminNotesController {
             function(snap){
                note.user = snap.val()
                ctrl.notes.push(note)
+               $timeout()
             })
             }else{
                ctrl.notes.push(note)//push it in with out the user (some really old notes won't have user id)
@@ -34,13 +35,13 @@ class AppAdminNotesController {
                      time: firebase.database.ServerValue.TIMESTAMP,
                      user_id: user_id,
                     }
-    var newKey=  appNotesRef.push(adminNote)//push(adminNote);
+    var newKey=  ctrl.appNotesRef.push(adminNote)//push(adminNote);
         ctrl.new_admin_note = '';
 }
 
 function deleteAdminNote(id){
   console.log(id)
-   appNotesRef.child(id).remove();
+   ctrl.appNotesRef.child(id).remove();
 }
 
 

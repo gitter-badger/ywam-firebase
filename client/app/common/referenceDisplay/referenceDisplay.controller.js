@@ -1,4 +1,5 @@
 class ReferenceDisplayController {
+  /* @ngInject */
   constructor() {
    var ctrl = this;
       

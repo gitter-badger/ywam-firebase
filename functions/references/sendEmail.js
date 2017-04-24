@@ -134,7 +134,7 @@ function emailStep3(data){
            to: data.refData.user_set.email, // An array if you have multiple recipients.
            //cc:'second@domain.com',
            //bcc:'secretagent@company.gov',
-           subject: 'Hey you, awesome!',
+           subject: 'Reference Request',
            //'h:Reply-To': 'reply2this@company.com',
            //You can use "html:" to send HTML email content. It's magic!
            html: data.html,

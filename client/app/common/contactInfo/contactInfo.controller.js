@@ -1,4 +1,5 @@
 class ContactInfoController {
+     /* @ngInject */
   constructor($firebaseObject) {
    var ctrl = this
        

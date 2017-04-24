@@ -33,7 +33,7 @@ import baseProjects from './baseProjects/baseProjects';
 
 
 import Search from './search/search';
-import profile from './profile/profile';
+
 
 import ApplicationView from './applicationView/applicationView';
 import forgotPassword from './forgotPassword/forgotPassword';
@@ -78,7 +78,6 @@ let componentModule = angular.module('app.components', [
   baseVisaRequirements,
   baseApplicationQuestions,
 
-  profile
 
 ])
   

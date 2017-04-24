@@ -80,7 +80,7 @@ let getApps = (school_id, accepted_only ) => {
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/contact' )
                       userRef.once('value',function(snapshot) { 
                                                   school.apps[index].user  = snapshot.val()
-                                                   $timeout(function() {  });
+                                                  //  $timeout(function() {  });
                                                      getNationality(user_id, index)
                                                 })
       }
@@ -89,8 +89,11 @@ let getApps = (school_id, accepted_only ) => {
                      
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/passport/nation_id' )
                       userRef.once('value',function(snapshot) { 
-                                                  school.apps[index].user.nation_id  = snapshot.val()
-                                                  //  $timeout(function() {  });
+                            school.apps[index].user.nation_id  = snapshot.val()
+                            firebase.database().ref('phrases/nations/'+Site.language+'/'+snapshot.val()).once('value',function (snap){
+                                    school.apps[index].user.nationality = snap.val()                      
+                                                   $timeout();
+                                                })
                                                 })
       }
 

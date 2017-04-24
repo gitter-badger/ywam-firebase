@@ -23,15 +23,15 @@ function sendToChannel(channel, message_text){
 
         slack.say( {
                     channel:channel,
-                    text:message_text
-                    // attachments: [{
-                    //      author_name: user_name,
-                    //      author_icon:response.user.profile.image_24,
-                    //      thumb_url:response.user.profile.image_72,
-                    //       text:   message.text,
-                    //       color:'#0099e6'
-                    //     }
-                    // ]
+                    // text:message_text
+                    attachments: [{
+                        //  author_name: user_name,
+                        //  author_icon:response.user.profile.image_24,
+                        //  thumb_url:response.user.profile.image_72,
+                          text:   message_text,
+                          color:'#0099e6'
+                        }
+                    ]
                     },function(err,res) {
                     if (err) {
                     reject(err);
@@ -56,7 +56,7 @@ function notification(message,options){
 
 console.log(options)
 
-return sendToChannel('C48NTKRLY',message)
+return sendToChannel('C0K401WLV',message)
 
 
 }

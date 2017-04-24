@@ -12,7 +12,7 @@ let schoolPageModule = angular.module('schoolPage', [
     .state('school', {
       url: '/school/:school_id',
       component: 'schoolPage',
-     
+       data: {authRequired:true},
     });
 })
 

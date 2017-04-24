@@ -31,7 +31,7 @@
 
                     <br>
                     <div layout="row" layout-align="start center">
-                    <img style="height:{{$ctrl.photo_size/7}}px; padding-right:5px;" ng-if="$ctrl.passport.nation_id" ng-src="http://flagpedia.net/data/flags/mini/{{ $ctrl.passport.nation_id.toLowerCase() }}.png">
+                    <img style=" padding-right:5px;" ng-if="$ctrl.passport.nation_id" ng-src="http://flagpedia.net/data/flags/mini/{{ $ctrl.passport.nation_id.toLowerCase() }}.png">
                     {{$ctrl.nationality}}
                     </div>
                 </div>
@@ -95,7 +95,7 @@
     <md-card flex="100" flex-gt-xs="70">
         <md-card-content>
             <h1 class="md-title" translate="116">Applications</h1>
-    <user-applications-list user-id="$ctrl.user_id" ng-if="$ctrl.profile"  flex="100" flex-gt-xs="70"></user-applications-list>   
+    <user-applications-list user-id="$ctrl.user_id" ng-if="$ctrl.user_id"  flex="100" flex-gt-xs="70"></user-applications-list>   
       </md-card-content>
     </md-card>
 

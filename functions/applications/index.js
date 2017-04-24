@@ -24,23 +24,48 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
                         }
                         
                         else {
-                                console.log('adding start date', event.params.appId, original);
+                                console.log('adding start time', event.params.appId, original);
                             // add created timestamp & status of 1
                             var data ={ status: 1,
-                                        statuses:{ 1: {date:  new Date().getTime()} }}
-                                
-                                return  admin.database().ref('/applications/'+event.params.appId+'/meta').set(data).then(function(){
-                                        return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){
-                                                   // console.log('user_id'+ snap.val())
-                                            return admin.database().ref('/profiles/'+snap.val().user_id+'/contact/').once('value').then(function(snap){
+                                        statuses:{ 1: {time:  new Date().getTime()} }}
+
+                            var appRef =  admin.database().ref('/applications/'+event.params.appId)
+
+                                return  appRef.child('meta').set(data).then(function(){
+                                        return appRef.child('/for').once('value').then(function(snap){
+                                                  
+                                            var appfor = snap.val()
+
+                                            return admin.database().ref('/profiles/'+appfor.user_id+'/contact/').once('value').then(function(snap){
                                                  var contact = snap.val()
-                                                // console.log(contact)
-                                                 var message = 'New Application Started! by: '
+                                                
+                                                 return admin.database().ref('/location_public/meta/').once('value').then(function(snap){
+                                                    var url = snap.val().apply_url
+                                                
+                                                var text = ''
+                                                
+                                                 switch(appfor.type) {
+                                                        case 0:
+                                                            text += 'School'
+                                                            url += '/school/'+appfor.school_id
+                                                            break;
+                                                        case 1:
+                                                            text += 'Staff'
+                                                            url += '/staff'
+                                                            break;
+                                                        
+                                                    }
+                                                    url += '/application/'+event.params.appId +'/'
+                                               
+                                                  var message = '<'+ url +'|'+text+' Application Started! > '
+
                                                  if(contact)
-                                                  message +=  contact.first_name+' '+contact.last_name;
+                                                  message += 'by:'+  contact.first_name+' '+contact.last_name;
 
                                                  return notification(message,{type:'application_started'})
                                             })
+
+                                             })
                                             
                                         })
                                        
@@ -74,15 +99,17 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
                
                 
                 // //All staff Ever index
-                promises.push(admin.database().ref('location' ).child('staff_app_index').child(app_id).set(status));
+                promises.push(admin.database().ref('location').child('staff_app_index').child(app_id).set(status));
                 //current_staff_index
-                if(status == 30){
+                if(status == 30 || status == '30'){
                     promises.push(admin.database().ref('location' ).child('current_staff_index').child(user_id).set(true));
                 }else{
+                    console.log('removing from current staff list')
                     promises.push(admin.database().ref('location' ).child('current_staff_index').child(user_id).remove());
                 }
                 //alumni_staff_index
-                if(status == 70){
+                if(status == 70 || status == '70'){
+                    console.log('Seting as Alumni')
                     promises.push(admin.database().ref('location' ).child('alumni_staff_index').child(user_id).set(true));
                 }else{
                     promises.push(admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove());
@@ -109,7 +136,7 @@ exports.submit = functions.database.ref('/applications/{appId}/requests/submit')
        const submit = event.data.val();
        if(submit){
           var data ={ status: 10,
-                      statuses:{ 10: {date:  new Date().getTime()} }}
+                      statuses:{ 10: {time:  new Date().getTime()} }}
                                 
               return  admin.database().ref('/applications/'+event.params.appId+'/meta').set(data).then(function(){
                       return admin.database().ref('/applications/'+event.params.appId+'/for').once('value').then(function(snap){

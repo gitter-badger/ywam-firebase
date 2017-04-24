@@ -1,4 +1,5 @@
 class RefStatusController {
+     /* @ngInject */
   constructor($timeout) {
       var ctrl = this;
           ctrl.$onInit = onInit

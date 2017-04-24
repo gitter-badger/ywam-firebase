@@ -1,4 +1,4 @@
-<div layout="row" layout-wrap style=" height: 100%;">
+<div layout="row"  style=" height: 100%;">
 <div flex-gt-md="15"  class="no-print"  >
 
 <div  du-scroll-container="scroll-container-1" du-spy-context class="page-index " style="position:fixed; padding:15px; "  hide-xs hide-sm hide-md >
@@ -58,11 +58,18 @@ visa status<br>
 
 </div>
 <div flex >
-<div style="float:right; text-align:center; max-height:300px;   max-width:300px;">
-<img style="width:100%" align="right" firebase-src="{{$ctrl.user.contact.avatar_1080}}" ><br>
-<a href="" class="no-print"
- ui-sref="userPhotoUpload({user_id:$ctrl.user_id })">change photo</a>
-</div>
+<div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
+                        <img ng-if="$ctrl.user.contact.avatar_200" style="width:100%; height:100%"align="right" firebase-src="{{$ctrl.user.contact.avatar_1080}}" >
+                      
+                        <img ng-if="!$ctrl.user.contact.avatar_200" style="width:100%; height:100%" align="right"  src="img/default_avatar.png" >
+                        
+                        <div class="editButton" layout="row" layout-align="center center" > 
+                           
+                    <md-icon flex md-svg-icon="img/icons/edit_white.svg"></md-icon>
+     
+                        
+                        </div>
+                    </div>
 </div>
 
 </md-card-content>

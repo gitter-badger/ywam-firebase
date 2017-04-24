@@ -13,39 +13,6 @@
 
 
 
-<div layout="row" layout-align="center">
-<!-- Preview of what is seen on apply site -->
-<!--<md-card  flex="100" flex-gt-xs="50"  flex-gt-sm="30">
-     <img ng-src="{{public.banner_1080}}" ng-if="public.banner_1080" alt="{{public.name}}" style="    height: initial !important;" >
-     <md-card-title>
-          <md-card-title-text>
-            <span class="md-headline"> {{public.name}}</span>
-              <span class="md-subhead">
-                {{public.start_date | date :'MMM d, y' }} - {{public.end_date | date :'MMM d, y'}}<br>
-              {{$ctrl.location.meta.location}}<br>
-           Application Fee: {{public.app_fee}}<br>
-           Lecture Phase: {{public.school_fee}}<br>
-           Outreach: {{public.outreach_fee}}<br>
-             </span>
-          </md-card-title-text>
-         
-        </md-card-title>
-        <md-card-content>
-         
-            
-     
-         
-        </md-card-content>
-         <md-card-actions layout="row" layout-align="end center">
-  
-          <md-button ng-click="$ctrl.applyNow(public.id)">Apply Now</md-button>
-         
-        </md-card-actions>
-   </md-card>-->
-
-</div>
-
-
 
 
 
@@ -111,14 +78,14 @@
 <span flex></span>
 <md-input-container flex>  
  <label> School Start Date:</label>
- <datepicker  date-format=" yyyy-MM-dd ">
+ <datepicker  date-format="yyyy-MM-dd" ng-if="public">
   <input ng-model="public.start_date" type="text"/>
 </datepicker>
 </md-input-container>
 
 <md-input-container flex>  
 <label> School End Date: </label>
- <datepicker date-format=" yyyy-MM-dd ">
+ <datepicker date-format="yyyy-MM-dd" ng-if="public">
 <input ng-model="public.end_date"  type="text">
  </datepicker>
 </md-input-container>
@@ -130,14 +97,14 @@
 
 <md-input-container flex>
 <label> Mini Outreach Start Date:</label>
-<datepicker date-format=" yyyy-MM-dd ">
+<datepicker date-format="yyyy-MM-dd">
 <input ng-model="public.mini_outreach_start_date"  type="text" ng-disabled="!public.mini_outreach">
 </datepicker>
 </md-input-container>
 
 <md-input-container flex>
   <label>Mini Outreach End Date:</label>
-<datepicker date-format=" yyyy-MM-dd ">
+<datepicker date-format="yyyy-MM-dd">
 <input ng-model="public.mini_outreach_end_date"  type="text" ng-disabled="!public.mini_outreach">
 </datepicker>
 </md-input-container>
@@ -150,14 +117,14 @@
 
 <md-input-container flex >
   <label> Outreach Start Date:</label>
-  <datepicker date-format=" yyyy-MM-dd ">
+  <datepicker date-format="yyyy-MM-dd">
 <input ng-model="public.outreach_start_date"  type="text" ng-disabled="!public.outreach">
   </datepicker>
 </md-input-container>
 
 <md-input-container flex>
   <label>Outreach End Date:</label>
-  <datepicker date-format=" yyyy-MM-dd ">
+  <datepicker date-format="yyyy-MM-dd">
 <input ng-model="public.outreach_end_date"  type="text" ng-disabled="!public.outreach">
   </datepicker>
 </md-input-container>

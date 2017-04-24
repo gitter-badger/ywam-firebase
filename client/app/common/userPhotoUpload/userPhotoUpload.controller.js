@@ -1,10 +1,9 @@
 class UserPhotoUploadController {
     /* @ngInject */
-  constructor($scope,Auth,$firebaseObject, $timeout) {
+  constructor($scope,Auth,$firebaseObject, $timeout, Site) {
     var ctrl = this;
     
-    if(!ctrl.userId)
-    ctrl.userId = Auth.$getAuth().uid
+   
     
     ctrl.avatar = null;
     ctrl.myImage= null;//$firebaseObject(contactRef)
@@ -13,8 +12,10 @@ class UserPhotoUploadController {
     ctrl.$onInit = onInit
 
 function onInit(){
-  
-    
+   if(!ctrl.userId)
+    ctrl.userId = Auth.$getAuth().uid
+
+    console.log('userphotoupload user id'+ctrl.userId )
     var contactRef =   firebase.database().ref('/profiles/' +ctrl.userId ).child('contact');
         contactRef.child('avatar_200').on('value',function(snap){
           ctrl.processing = false
@@ -80,6 +81,8 @@ function onInit(){
           // Handle unsuccessful uploads
         }, function() {
           // Handle successful uploads on complete
+          if(ctrl.onCompleate)
+          ctrl.onCompleate()
           
           ctrl.processing = true;
 

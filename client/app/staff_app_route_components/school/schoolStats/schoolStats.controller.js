@@ -1,6 +1,6 @@
 class SchoolStatsController {
    /* @ngInject */
-  constructor($stateParams) {
+  constructor($stateParams, moment) {
     var ctrl = this;
         
        var school_id = $stateParams.school_id;
@@ -13,41 +13,72 @@ class SchoolStatsController {
 
 
          ctrl.data = []
-          ctrl.labels =[]
 
-
-          firebase.database().ref('schools').child(school_id).child('stats/lead_up')
-          .once('value',snap=>{
-            var week_before = 20
-            var stats = snap.val()
+        ctrl.labels =[]
+           var week_before = 40
             var start =[]
             var submit =[]
+            var accepted=[]
 
-      
-             angular.forEach(stats.start , weekSnap=>{
+          var Ref =  firebase.database().ref('schools').child(school_id)
 
-               start.push(weekSnap)
-               ctrl.labels.push( ' '+week_before +' wk.  ')
-               week_before--
-             })
 
-             angular.forEach( stats.submit ,weekSnap=>{
-               submit.push(weekSnap)
-             })
 
-           //  ctrl.data.push(start)
-             ctrl.data.push(submit)
-             console.log(ctrl.data)
+          Ref.once('value',snap=>{
+            var school = snap.val()
+       
+        if(school.public && school.public.start_date){
+        
+        console.log(school.stats)
+        
+        for (var i = 1; i < 40; i++) { 
+
+            var week = moment(school.public.start_date).subtract(i, 'week').format("YYYY-WW");
+           
+            var count = 0
+            if(school.stats.start[week])
+               count =  school.stats.start[week]
+            start.push(count)
+
+            var count = 0
+            if(school.stats.submit[week])
+               count =  school.stats.submit[week]
+            submit.push(count)
+           
+            var count = 0
+            if(school.stats.accepted[week])
+               count =  school.stats.accepted[week]
+            accepted.push(count)
+        
+          
+                  ctrl.labels.push( ' '+week_before +' wk.  ')
+                  week_before--
+            
+
+        }
+         
+            ctrl.data.push(start)
+            ctrl.data.push(submit)
+            ctrl.data.push(accepted)
+    
+  
+}
+           
+          
+           
+
+           
 
           })
          
-  ctrl.series = ['submited apps'];
+  ctrl.series = ['Started Apps','Submited apps','Accepted Apps'];
   ctrl.options = {
         
         elements : { 
          line : { 
                     // tension : .8,
-                    fill:false },
+                    // fill:false 
+                  },
          point:{
            radius: 0
          }           
@@ -55,7 +86,7 @@ class SchoolStatsController {
          },
         scales: {
             yAxes: [{
-                display: false,
+                // display: false,
                  
                
             }],

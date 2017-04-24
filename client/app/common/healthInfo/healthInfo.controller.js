@@ -1,4 +1,5 @@
 class HealthInfoController {
+   /* @ngInject */
   constructor() {
       var ctrl = this
 
