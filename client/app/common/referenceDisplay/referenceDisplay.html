@@ -18,30 +18,26 @@
 
                 <md-menu-content>
                     <md-menu-item>
-                        <md-button ng-click="ctrl.redial($event)">
-                        
-                        Redial
-                        </md-button>
+                        <md-button ng-click="$ctrl.editRefernceRequestDialog()">edit Reference/resend Email</md-button>
                     </md-menu-item>
-                        <md-menu-item>
-                        <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">
-                       
-                        Check voicemail
-                        </md-button>
-                        </md-menu-item>
-                        <md-menu-divider></md-menu-divider>
-                        <md-menu-item>
+<!--
+                    <md-menu-item>
+                        <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">l</md-button>
+                    </md-menu-item>
+                    <md-menu-divider></md-menu-divider>
+                    <md-menu-item>
                         <md-button ng-click="ctrl.toggleNotifications()">
                         
                         {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
                         </md-button>
-                        </md-menu-item>
+                    </md-menu-item>
                     <md-menu-item>
                         <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
                             Find and replace...
-                            <!-- <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> -->
+                             <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> 
                         </md-button>
                     </md-menu-item>
+-->
                 </md-menu-content>
             </md-menu> 
             
@@ -51,7 +47,7 @@
     
     <md-card-content>
         
-        {{$ctrl.form}}
+<!--        {{$ctrl.form}}-->
 
         <p ng-if="$ctrl.reference.form.how_well">
             <span class="question">How well does reference know Applicant?:</span>

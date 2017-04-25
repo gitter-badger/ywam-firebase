@@ -8,7 +8,7 @@ let profileModule = angular.module('profile', [
 .config(($stateProvider) => {
   "ngInject";
   $stateProvider
-    .state('profile', {
+    .state('apply.profile', {
       url: '/profile/:user_id',
       component: 'profile'
     });
