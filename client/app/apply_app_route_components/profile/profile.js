@@ -9,6 +9,14 @@ let profileModule = angular.module('profile', [
   "ngInject";
   $stateProvider
     .state('apply.profile', {
+      url: '/applyProfile/:user_id',
+      component: 'profile'
+    });
+})
+.config(($stateProvider) => {
+  "ngInject";
+  $stateProvider
+    .state('profile', {
       url: '/profile/:user_id',
       component: 'profile'
     });

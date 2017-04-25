@@ -77,17 +77,13 @@
 <div layout="row">
 <span flex></span>
 <md-input-container flex>  
- <label> School Start Date:</label>
- <datepicker  date-format="yyyy-MM-dd" ng-if="public">
-  <input ng-model="public.start_date" type="text"/>
-</datepicker>
+  <label> School Start Date:</label>
+  <md-datepicker ng-model="$ctrl.dates.start_date"  ng-change="$ctrl.changeDate('start_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
 </md-input-container>
 
 <md-input-container flex>  
-<label> School End Date: </label>
- <datepicker date-format="yyyy-MM-dd" ng-if="public">
-<input ng-model="public.end_date"  type="text">
- </datepicker>
+  <label> School End Date: </label>
+  <md-datepicker ng-model="$ctrl.dates.end_date"  ng-change="$ctrl.changeDate('end_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
 </md-input-container>
 
 </div>
@@ -96,17 +92,13 @@
   <md-checkbox flex ng-model="public.mini_outreach" ng-change="$ctrl.toggle_mini_outreach()">Mini Outreach?</md-checkbox>
 
 <md-input-container flex>
-<label> Mini Outreach Start Date:</label>
-<datepicker date-format="yyyy-MM-dd">
-<input ng-model="public.mini_outreach_start_date"  type="text" ng-disabled="!public.mini_outreach">
-</datepicker>
+  <label> Mini Outreach Start Date:</label>
+  <md-datepicker ng-disabled="!public.mini_outreach" ng-model="$ctrl.dates.mini_outreach_start_date"  ng-change="$ctrl.changeDate('mini_outreach_start_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
 </md-input-container>
 
 <md-input-container flex>
   <label>Mini Outreach End Date:</label>
-<datepicker date-format="yyyy-MM-dd">
-<input ng-model="public.mini_outreach_end_date"  type="text" ng-disabled="!public.mini_outreach">
-</datepicker>
+  <md-datepicker ng-disabled="!public.mini_outreach" ng-model="$ctrl.dates.mini_outreach_end_date"  ng-change="$ctrl.changeDate('mini_outreach_end_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
 </md-input-container>
 
 </div>
@@ -117,16 +109,13 @@
 
 <md-input-container flex >
   <label> Outreach Start Date:</label>
-  <datepicker date-format="yyyy-MM-dd">
-<input ng-model="public.outreach_start_date"  type="text" ng-disabled="!public.outreach">
-  </datepicker>
+  <md-datepicker ng-disabled="!public.outreach" ng-model="$ctrl.dates.outreach_start_date"  ng-change="$ctrl.changeDate('outreach_start_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
 </md-input-container>
 
 <md-input-container flex>
   <label>Outreach End Date:</label>
-  <datepicker date-format="yyyy-MM-dd">
-<input ng-model="public.outreach_end_date"  type="text" ng-disabled="!public.outreach">
-  </datepicker>
+    <md-datepicker ng-disabled="!public.outreach" ng-model="$ctrl.dates.outreach_end_date"  ng-change="$ctrl.changeDate('outreach_end_date')" md-current-view="year" md-placeholder="Enter date" md-open-on-focus>
+
 </md-input-container>
 
 </div>
@@ -221,7 +210,7 @@
           <div flex>
         {{item.label.en}} {{item.label.de}}
           </div>
-          <md-checkbox ng-model="public.questions_index[key]"></md-checkbox>
+          <md-checkbox ng-model="public.questions_index[key]" aria-label="question"></md-checkbox>
        
         </div>
         <md-divider></md-divider>

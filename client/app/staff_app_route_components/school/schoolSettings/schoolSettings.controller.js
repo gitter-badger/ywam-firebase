@@ -1,6 +1,6 @@
 class SchoolSettingsController {
   /* @ngInject */
-  constructor(School, $stateParams, $scope , $timeout, Site, $firebaseObject) {
+  constructor(School, $stateParams, $scope , $timeout, Site, $firebaseObject,moment) {
     var ctrl = this;
         ctrl.savePhoto = savePhoto
         ctrl.toggle_mini_outreach  = toggle_mini_outreach
@@ -8,14 +8,42 @@ class SchoolSettingsController {
         ctrl.myImage= '';//$firebaseObject(avatar_ref)
         ctrl.myCroppedImage='';
         ctrl.location = Site.location
+        ctrl.dates ={}
+        ctrl.changeDate = changeDate
        
+  
 
         ctrl.school_id = $stateParams.school_id
 
        School.getSchool(ctrl.school_id).$bindTo($scope, "public");
       
-      var ref = firebase.database().ref('/schools/'+ctrl.school_id )
-        ctrl.school = $firebaseObject(ref)
+      var ref = firebase.database().ref('/schools/'+ctrl.school_id ).on('value',function(snap){
+          ctrl.school = snap.val()
+         //Set up all of the dates with UTC00
+          if(ctrl.school.public.start_date)
+          ctrl.dates.start_date =  new Date(ctrl.school.public.start_date + ' ')//be sure to add space to be timezone nutural
+
+          if(ctrl.school.public.outreach_start_date)
+          ctrl.dates.outreach_start_date =  new Date(ctrl.school.public.outreach_start_date + ' ')//be sure to add space to be timezone nutural
+
+          if(ctrl.school.public.outreach_end_date)
+          ctrl.dates.outreach_end_date =  new Date(ctrl.school.public.outreach_end_date + ' ')//be sure to add space to be timezone nutural
+
+          if(ctrl.school.public.mini_outreach_start_date)
+          ctrl.dates.mini_outreach_start_date =  new Date(ctrl.school.public.mini_outreach_start_date + ' ')//be sure to add space to be timezone nutural
+          
+          if(ctrl.school.public.mini_outreach_end_date)
+          ctrl.dates.mini_outreach_end_date =  new Date(ctrl.school.public.mini_outreach_end_date + ' ')//be sure to add space to be timezone nutural
+  
+
+      })
+         
+       function changeDate(ref){
+  
+            $scope.public[ref] =  moment(ctrl.dates[ref]).format("YYYY-MM-DD");
+          
+        }  
+
       var questionsRef = firebase.database().ref('/questions_for_applications/' )
         ctrl.questions = $firebaseObject(questionsRef)  
 
@@ -33,6 +61,7 @@ class SchoolSettingsController {
             $scope.public.outreach_end_date = null;
           }        }  
 
+       
 
         function handleFileSelect(evt) {
           var file=evt.currentTarget.files[0];
@@ -93,6 +122,11 @@ class SchoolSettingsController {
         });
         }//end savePhoto function
 
+
+function createDateAsUTC(date) {
+    date = new Date(date )
+    return new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate(), 0, 0,0));
+}
 
   }
 }
