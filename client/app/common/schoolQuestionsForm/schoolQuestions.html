@@ -3,12 +3,15 @@
 
 <form name="QuestionsForm">
 
-<div ng-repeat="(key,item) in $ctrl.school_questions" ng-if="item" layout="row">
+<div ng-repeat="(key,item) in $ctrl.school_questions" ng-if="item" >
 
-<md-input-container flex="100">
+<label for="key" >
+{{$ctrl.questions[key].label[$ctrl.site.language] }}* 
+</label>
 
-  <label> {{$ctrl.questions[key].label[$ctrl.site.language] }}  </label>
-  <input required ng-model="answers[key]">
+<md-input-container style="width:100%" >
+
+  <input id="key" required ng-model="answers[key]">
 
 </md-input-container>
 

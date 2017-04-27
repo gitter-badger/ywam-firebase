@@ -13,7 +13,7 @@
         <div flex ></div>
      </div>-->
   
-      <div ng-repeat="(key, question) in $ctrl.questions">
+      <div ng-repeat="(key, question) in $ctrl.questions" ng-if="question.active">
        <div class="table" layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
         <div flex  >{{question.label.en}}<br><i>{{question.label.de}}</i></div>
         <div ><md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox></div>
@@ -22,6 +22,15 @@
        <md-divider></md-divider>
       </div>
    
+Inactive
+       <div ng-repeat="(key, question) in $ctrl.questions" ng-if="!question.active">
+       <div  layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
+        <div flex  >{{question.label.en}}<br><i>{{question.label.de}}</i></div>
+        <div ><md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox></div>
+        <div ><md-checkbox ng-model="default_school_questions[key]" >New Schools</md-checkbox></div>
+       </div>
+       <md-divider></md-divider>
+      </div>
 
 
 </md-card>

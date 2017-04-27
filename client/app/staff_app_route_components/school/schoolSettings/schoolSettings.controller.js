@@ -50,7 +50,7 @@ class SchoolSettingsController {
           
         }  
 
-      var questionsRef = firebase.database().ref('/questions_for_applications/' )
+      var questionsRef = firebase.database().ref('/questions_for_applications/' ).orderByChild('active').equalTo(true)
         ctrl.questions = $firebaseObject(questionsRef)  
 
       angular.element(document.querySelector('#fileInput')).on('change',handleFileSelect);
