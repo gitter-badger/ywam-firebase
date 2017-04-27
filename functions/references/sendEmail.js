@@ -120,7 +120,7 @@ function emailStep2(data){
         var schoolDate="";
         if(data.school){
         var date=new Date(data.school.start_date);
-        schoolDate=data.school.name+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear()
+        schoolDate=data.school.name+" am "+date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
         var appFor="für eine Schule";
         var school="<p>Schule:<br>"+schoolDate+"</p>";
         }
@@ -134,10 +134,10 @@ function emailStep2(data){
                 var school="";
             }
         
-     data.html=`Guten Tag, ${data.refData.user_set.name},<br><br> `+
+     data.html=`Guten Tag ${data.refData.user_set.name},<br><br> `+
          `Sie haben diese Email erhalten, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
          `${school}`+
-         `Um ${data.userData.first_name}‘s Bewerbung besser verstehen zu können, bitten wir Sie, dieses Online - Empfehlungsschreiben auszufüllen. Klicken Sie auf den folgenden Link:<br>`+
+         `Um ${data.userData.first_name}‘s Bewerbung besser verstehen zu können, bitten wir Sie, dieses Online - Empfehlungsschreiben auszufüllen. <br>Klicken Sie auf den folgenden Link:<br>`+
         `<a href="${data.url}">${data.url}</a>`
      
      
@@ -153,6 +153,13 @@ function emailStep3(data){
        
          var auth = { auth: snap.val().mailgun }
         var nodemailerMailgun = nodemailer.createTransport(mg(auth));
+       
+       if(data.refData.user_set.language=="en"){
+           data.subject="Reference Request";
+       }
+       if(data.refData.user_set.language=="de"){
+           data.subject="Ausfüllen eines Empfehlungsschreibens";
+       }
     
         
       return nodemailerMailgun.sendMail({
@@ -160,7 +167,7 @@ function emailStep3(data){
            to: data.refData.user_set.email, // An array if you have multiple recipients.
            //cc:'second@domain.com',
            //bcc:'secretagent@company.gov',
-           subject: 'Reference Request',
+           subject: data.subject,
            //'h:Reply-To': 'reply2this@company.com',
            //You can use "html:" to send HTML email content. It's magic!
            html: data.html,
