@@ -108,10 +108,36 @@ function emailStep2(data){
                  var appFor="Missionbuilder";
             }
         
-     data.html=`Dear ${data.refData.user_set.name},<br> `+
+     data.html=`Dear ${data.refData.user_set.name},<br><br> `+
          `We are sending you this email because ${data.userData.first_name} ${data.userData.last_name} has applied for ${appFor} at Youth with a Mission ${data.location.name}. `+
          `<p>School:<br>${schoolDate}</p>`+
          `To better understand ${data.userData.first_name}'s application, we ask that you complete our online reference form. <br>Please click the link below to continue: <br>`+
+        `<a href="${data.url}">${data.url}</a>`
+     
+     
+    }
+    else if(data.refData.user_set.language=="de"){
+        var schoolDate="";
+        if(data.school){
+        var date=new Date(data.school.start_date);
+        schoolDate=data.school.name+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear()
+        var appFor="für eine Schule";
+        var school="<p>Schule:<br>"+schoolDate+"</p>";
+        }
+        if(data.appData.type==1){
+            var appFor="als Mitarbeiter";
+            var school="";
+        }
+        else if(data.appData.type==2)
+            {
+                var appFor="als Missionbuilder";
+                var school="";
+            }
+        
+     data.html=`Guten Tag, ${data.refData.user_set.name},<br><br> `+
+         `Sie haben diese Email erhalten, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
+         `${school}`+
+         `Um ${data.userData.first_name}‘s Bewerbung besser verstehen zu können, bitten wir Sie, dieses Online - Empfehlungsschreiben auszufüllen. Klicken Sie auf den folgenden Link:<br>`+
         `<a href="${data.url}">${data.url}</a>`
      
      

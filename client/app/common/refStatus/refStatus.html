@@ -1,28 +1,31 @@
 
 <div  ng-if="!$ctrl.status.recieved ">
+    
 
 <div ng-if="!$ctrl.status.accessed "> 
-        <div class="ref-status-box" ng-if="$ctrl.status.email.current =='delivered' "  style="background-color:#49afcd"  >sent 
-            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.delivered | date}}  </span> 
-        </div> 
-        <div class="ref-status-box" ng-if="$ctrl.status.email.current == 'dropped' "  style="background-color:#d9534f" > failed 
-            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.dropped | date}}  </span> 
+        <div class="ref-status-box" ng-if="!$ctrl.status.email.current"  style="background-color:#BEBFBF"  ><span translate="185">none</span>
         </div>
-        <div class="ref-status-box" ng-if="$ctrl.status.email.current =='opened' "  style="background-color:#FFCC00"  > email opened
-            <span ng-if="$ctrl.date" >on {{$ctrl.status.email.opened | date}}  </span>
+    <div class="ref-status-box" ng-if="$ctrl.status.email.current =='delivered' "  style="background-color:#33789D"  ><span translate="186">sent </span>
+            (<span am-time-ago="$ctrl.status.email.delivered" ng-if="$ctrl.date" ></span>) 
+        </div> 
+    <div class="ref-status-box" ng-if="$ctrl.status.email.current == 'dropped' "  style="background-color:#F16667" > <span translate="failed">failed </span>
+            (<span am-time-ago="$ctrl.status.email.dropped" ng-if="$ctrl.date" ></span>)
+        </div>
+    <div class="ref-status-box" ng-if="$ctrl.status.email.current =='opened' "  style="background-color:#F3E274"  > <span translate="188">email opened</span>
+            (<span am-time-ago="$ctrl.status.email.opened" ng-if="$ctrl.date" ></span>)
         </div> 
 </div>
 
 
-<div class="ref-status-box" ng-if="$ctrl.status.accessed "  style="background-color:#FF6600"  > form accessed 
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.accessed | date}}  </span>
+    <div class="ref-status-box" ng-if="$ctrl.status.accessed "  style="background-color:#F79568"  ><span translate="189"> form accessed</span> 
+    (<span am-time-ago="$ctrl.status.accessed" ng-if="$ctrl.date" ></span>)
 </div> 
 
 
 </div>
 
-<div class="ref-status-box" ng-if="$ctrl.status.recieved" style="background-color:#5cb85c"   > received 
-    <span ng-if="$ctrl.date" >on {{$ctrl.status.recieved | date}}  </span>
+<div class="ref-status-box" ng-if="$ctrl.status.recieved" style="background-color:#44BDA4"   > <span translate="190">received</span> 
+    (<span am-time-ago="$ctrl.status.recieved" ng-if="$ctrl.date" ></span>)
 </div> 
 
 

@@ -1,8 +1,8 @@
 <div layout="row" layout-wrap>
-<md-card flex="100" flex-gt-xs="45" ng-repeat="app in $ctrl.applicationList" >
+<md-card flex="100" flex-gt-xs="45" ng-repeat="app in $ctrl.applicationList |orderBy:id:true" >
 
-    <img firebase-src="{{app.school.banner_100}}" ng-if="$ctrl.banner" style="width:100%;">
-    <img src="img/default_banner.jpg" ng-if="$ctrl.banner && !app.school.banner_100" style="width:100%;">
+    <img firebase-src="{{app.school.banner_1080}}" ng-if="$ctrl.banner" style="width:100%;">
+    <img src="img/default_banner.jpg" ng-if="$ctrl.banner && !app.school.banner_1080" style="width:100%;">
     <md-card-content style=" padding:10px;">        
         <app-for app-id="app.id"></app-for>
         <md-card-actions  style="margin:0;">
@@ -13,12 +13,14 @@
             <div flex></div>
             <md-button class="md-raised" ng-if="app.status<10" ng-click="$ctrl.contiueApplication(app)">{{45|translate}}</md-button>
         </div>
-        <div layout="row" layout-align="start center">
-            <span translate="36">Reference</span> 1: <ref-status key="app.id +'/reference1' " ></ref-status>
+            <div ng-hide="app.status>12">
+        <div>
+            <span translate="36">Reference</span><span> 1: </span><ref-status key="app.id +'/reference1' " date="true" ></ref-status>
         </div>   
-          <div layout="row" layout-align="start center">    
-            <span translate="36">Reference</span> 2: <ref-status key="app.id +'/reference2' "></ref-status>
-        </div>    
+          <div>    
+            <span translate="36">Reference</span><span> 2: </span><ref-status key="app.id +'/reference2' " date="true"></ref-status>
+        </div>   
+                </div>
 
         </md-card-actions>
     </md-card-content>

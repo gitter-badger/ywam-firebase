@@ -9,10 +9,10 @@ class RefStatusController {
           
       function onInit()
       {
-        var refRef =  firebase.database().ref('applications/'+ ctrl.key) 
+        var refRef =  firebase.database().ref('applications/'+ ctrl.key+'/status') 
             refRef.on('value', function(snap){
                 if(snap.val()){
-                ctrl.status = snap.val().status
+                ctrl.status = snap.val()
                 $timeout()
                 }
             })

@@ -2,7 +2,7 @@ class ApplyDashboardController {
    /* @ngInject */
   constructor(Site) {
     var ctrl = this;
-        
+        ctrl.user_id=Site.user.id;
         
         if(Site.isStaff)
            Site.hideSideNav = false

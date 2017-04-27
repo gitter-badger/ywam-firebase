@@ -1,5 +1,5 @@
 <h1 class="md-title" >
 {{ $ctrl.school.name }}
 {{ $ctrl.school.start_date | date:"yyyy" }}
-{{$ctrl.for.type==1?"staff":""}}
+{{$ctrl.for.type==1?"staff":""|translate}}
 </h1>
