@@ -10,6 +10,7 @@ class SchoolsPageController {
           ctrl.now = moment().format("YYYY-MM-DD");
           ctrl.in30days = moment().add(30, 'days').format("YYYY-MM-DD");
           ctrl.$mdMedia = $mdMedia
+          ctrl.inWeeks = Site.inWeeks
       
        ref.on('value', function(snapshot) {
            // console.log('got school index')
@@ -80,6 +81,7 @@ function getLeaders(index,school){
 
 
 }
+
 
 
   }

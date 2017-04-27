@@ -1,11 +1,12 @@
 
 /* @ngInject */
-let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, $state) {
+let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, $state,moment) {
 
   const site = { location_id: null,
                  location : {} ,
                  user: {},
                  showDialog: showDialog,
+                 inWeeks : inWeeks,
                  language:null,
                  hideSideNav : true,
                  isStaff :false
@@ -20,6 +21,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
            
            if(firebaseUser){
 
+            site.firebaseUser = firebaseUser;
              var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
 
               .once('value').then(function(snap){
@@ -70,6 +72,29 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
             site.location = $firebaseObject(Ref)
 
 
+
+          
+           
+
+          function inWeeks(fromDate) {
+             var now = moment();
+             var toDate = now
+             
+                var days    = toDate.diff(fromDate, 'days');    
+                var weeks   = toDate.diff(fromDate, 'weeks');
+
+                if (weeks === 0) {
+
+                    return   (days < 0 ? 'in ' : '') + Math.abs(days) + ' ' + (Math.abs(days) > 1 ? 'days' : 'day');
+               
+               } else {
+
+                    return (weeks < 0 ? 'in ' : '')+ Math.abs(weeks) + ' ' + (Math.round(Math.abs(days) / 7) > 1 ? 'weeks' : 'week');
+                }
+
+            }
+
+           
 
 
 

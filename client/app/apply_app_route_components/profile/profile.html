@@ -99,6 +99,20 @@
       </md-card-content>
     </md-card>
 
+    <md-card flex="100" flex-gt-xs="70"  ng-if="$ctrl.site.firebaseUser.uid == $ctrl.user_id">
+        <md-card-content>
+           Connected Accounts: 
+           
+            <div ng-repeat="item in $ctrl.site.firebaseUser.providerData "  ng-if="item.providerId!= 'password'" >
+                {{item.providerId}}
+                 <a ng-click="$ctrl.unlinkProvider(item)">Unlink Provider</a>
+                </div> 
+           
+        </md-card-content>
+    </md-card>
+
+
+
 </div>
 
 

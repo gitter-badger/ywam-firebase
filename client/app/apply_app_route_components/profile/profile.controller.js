@@ -2,23 +2,27 @@ class ProfileController {
    /* @ngInject */
   constructor($stateParams, $firebaseObject ,$mdDialog, $mdMedia , $timeout,Site) {
       var ctrl = this;
-            ctrl.user_id = $stateParams.user_id    
+            ctrl.user_id = $stateParams.user_id  
+            ctrl.site = Site  
       var contactRef = firebase.database().ref('profiles/'+ctrl.user_id+'/contact')
 
           ctrl.contact = $firebaseObject(contactRef);
           ctrl.editPostalDialog = editPostalDialog
           ctrl.editPhotoDialog = editPhotoDialog
           ctrl.editPassportDialog = editPassportDialog
-           ctrl.calculateAge = calculateAge
-
+          ctrl.calculateAge = calculateAge
+          ctrl.unlinkProvider = unlinkProvider
+          
         
-firebase.database().ref('profiles/'+ctrl.user_id+'/passport/').on('value',function (snap){
-  ctrl.passport=snap.val()
-  firebase.database().ref('phrases/nations/'+Site.language+'/'+ctrl.passport.nation_id).once('value',function (snap){
-  ctrl.nationality= snap.val()
-  $timeout()
-})
-})
+          
+        
+      firebase.database().ref('profiles/'+ctrl.user_id+'/passport/').on('value',function (snap){
+        ctrl.passport=snap.val()
+        firebase.database().ref('phrases/nations/'+Site.language+'/'+ctrl.passport.nation_id).once('value',function (snap){
+        ctrl.nationality= snap.val()
+        $timeout()
+      })
+      })
           
       function editPostalDialog($event) {
        var parentEl = angular.element(document.body);
@@ -76,7 +80,20 @@ firebase.database().ref('profiles/'+ctrl.user_id+'/passport/').on('value',functi
             var ageDate = new Date(ageDifMs); // miliseconds from epoch
             return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
+     function unlinkProvider(provider){
+       
+       
+        firebase.auth().currentUser.unlink(provider.providerId).then(function() {
+          // Auth provider unlinked from account
+          console.log('sucessful un link of '+provider.providerId )
+        }).catch(function(error) {
+          // An error happened
+          console.log(error)
+        });
 
+
+
+     }
   }
 }
 

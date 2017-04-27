@@ -74,7 +74,7 @@
 <md-card-content >
 <h1 class="md-title">School Dates</h1>
 
-<div layout="row">
+<div layout-gt-xs="row" layout="column" >
 <span flex></span>
 <md-input-container flex>  
   <label> School Start Date:</label>
@@ -88,7 +88,7 @@
 
 </div>
 
-<div layout="row" layout-align="center center">
+<div layout-gt-xs="row" layout="column" layout-align-gt-xs="center center">
   <md-checkbox flex ng-model="public.mini_outreach" ng-change="$ctrl.toggle_mini_outreach()">Mini Outreach?</md-checkbox>
 
 <md-input-container flex>
@@ -104,7 +104,7 @@
 </div>
 
 
-<div layout="row" layout-align="center center">
+<div layout-gt-xs="row" layout="column" layout-align-gt-xs="center center">
   <md-checkbox flex ng-model="public.outreach" ng-change="$ctrl.toggle_outreach()">Outreach?</md-checkbox>
 
 <md-input-container flex >

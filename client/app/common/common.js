@@ -30,6 +30,7 @@ import emergencyContactForm from './emergencyContactForm/emergencyContactForm';
 
 //mostly used in staffapp
 import appAdminNotes from './appAdminNotes/appAdminNotes';
+import applicationQuestionAdminEdit from './applicationQuestionAdminEdit/applicationQuestionAdminEdit';
 import referenceDisplay from './referenceDisplay/referenceDisplay';
 import healthInfo from './healthInfo/healthInfo';
 import siteTaskList from './siteTaskList/siteTaskList';
@@ -65,6 +66,7 @@ let commonModule = angular.module('app.common', [
   emergencyContactForm,
 
   appAdminNotes,
+  applicationQuestionAdminEdit,
   healthInfo,
   referenceDisplay,
   siteTaskList,

@@ -82,39 +82,40 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
 			<div    flex="100" 
 					flex-gt-xs="35"  
-					layout="row"
-					layout-wrap
 					flex-order-gt-xs="3" 
 					style="font-size:100%; padding-left:10px;" >
 							
 
-							<span flex-gt-xs="100" flex="60" class="md-caption" > 
+							<div  class="md-caption" > 
 								{{ sch.public.start_date | date :'MMM d yyyy'}}
-							  - {{sch.public.end_date | date :'MMM d yyyy'}}</span>
+							  - {{sch.public.end_date | date :'MMM d yyyy'}}</div>
 							
 							<!-- if start is in future -->
-							<span flex ng-if="sch.public.start_date > $ctrl.now" 
+							<div flex ng-if="sch.public.start_date > $ctrl.now" 
 								style="background-color:#FFE082;padding:2px;" 
 								class="md-caption"> Starts 
-							<span am-time-ago="sch.public.start_date"></span>
-							</span>
+							<!--<div am-time-ago="sch.public.start_date" ></div>-->
+							{{$ctrl.inWeeks(sch.public.start_date)}}
+							</div>
 							
-							<!-- If currently running  -->
-							<div flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now 
-											&& !(sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now)" 
+							<!-- If currently running 	&& !(sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now) -->
+							<div flex ng-if="sch.public.start_date < $ctrl.now && sch.public.end_date > $ctrl.now " 
 								style="background-color:#A5D6A7;padding:2px; "
-								class="md-caption" > Running 
-								<span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span>
+								class="md-caption" > Running {{$ctrl.inWeeks(sch.public.start_date)}}
+
+								<!--<span am-time-ago="sch.public.start_date"  am-without-suffix="true"  ></span>-->
 								
 									<!-- If  outreach soon  -->
 									<div ng-if="sch.public.outreach_start_date < $ctrl.in30days &&sch.public.outreach_start_date > $ctrl.now " 
-										>Outreach in
-										<span am-time-ago="sch.public.outreach_start_date"  am-without-suffix="true"  ></span></div>	 
+										>Outreach {{$ctrl.inWeeks(sch.public.outreach_start_date)}}
+								
+										</div>	 
 
 										<!-- If currently on outreach  -->
 									<div ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
-										> Return from Outreach in
-										<span am-time-ago="sch.public.outreach_end_date"  am-without-suffix="true"  ></span></div>	  
+										> Back from Outreach {{$ctrl.inWeeks(sch.public.outreach_end_date)}}
+										
+										</div>	  
 
 							</div>	
 

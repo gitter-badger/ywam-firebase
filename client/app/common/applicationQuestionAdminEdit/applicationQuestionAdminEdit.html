@@ -1,0 +1,19 @@
+<div layout="column">
+{{$ctrl.question}}
+
+<md-input-container flex>
+  <label>English Question</label>
+  <input ng-model="$ctrl.question.label.en">
+</md-input-container>
+
+<md-input-container flex>
+  <label>German Question</label>
+  <input ng-model="$ctrl.question.label.de">
+</md-input-container>
+
+<md-switch ng-model="ctrl.question.active">Active</md-switch>
+
+
+<md-button ng-click="$ctrl.save()">Save</md-button>
+
+</div>

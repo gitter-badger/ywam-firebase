@@ -94,7 +94,15 @@ class TranslateSectionController {
       function newPhrase(){
           //here we just see how long the array already is and go one higher. 
           var newKey = ctrl.keys.length + 1
+           if(!ctrl.index[key])
            ctrl.index = newKey; 
+           else{
+               //go one higher
+               newKey++
+               ctrl.index = newKey
+
+
+           }
       }
 
 

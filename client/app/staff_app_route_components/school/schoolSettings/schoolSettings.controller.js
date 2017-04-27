@@ -19,21 +19,27 @@ class SchoolSettingsController {
       
       var ref = firebase.database().ref('/schools/'+ctrl.school_id ).on('value',function(snap){
           ctrl.school = snap.val()
-         //Set up all of the dates with UTC00
+         //Set up all of the dates with adjusted time zone using.. moment for cross browser ...safai does not parse using new Date()
+        
           if(ctrl.school.public.start_date)
-          ctrl.dates.start_date =  new Date(ctrl.school.public.start_date + ' ')//be sure to add space to be timezone nutural
+          ctrl.dates.start_date =  moment(ctrl.school.public.start_date)
+          console.log(ctrl.dates.start_date)
+
+          if(ctrl.school.public.end_date)
+          ctrl.dates.end_date =  moment(ctrl.school.public.end_date)
+
 
           if(ctrl.school.public.outreach_start_date)
-          ctrl.dates.outreach_start_date =  new Date(ctrl.school.public.outreach_start_date + ' ')//be sure to add space to be timezone nutural
+          ctrl.dates.outreach_start_date =  moment(ctrl.school.public.outreach_start_date)
 
           if(ctrl.school.public.outreach_end_date)
-          ctrl.dates.outreach_end_date =  new Date(ctrl.school.public.outreach_end_date + ' ')//be sure to add space to be timezone nutural
+          ctrl.dates.outreach_end_date =  moment(ctrl.school.public.outreach_end_date)
 
           if(ctrl.school.public.mini_outreach_start_date)
-          ctrl.dates.mini_outreach_start_date =  new Date(ctrl.school.public.mini_outreach_start_date + ' ')//be sure to add space to be timezone nutural
+          ctrl.dates.mini_outreach_start_date =  moment(ctrl.school.public.mini_outreach_start_date)
           
           if(ctrl.school.public.mini_outreach_end_date)
-          ctrl.dates.mini_outreach_end_date =  new Date(ctrl.school.public.mini_outreach_end_date + ' ')//be sure to add space to be timezone nutural
+          ctrl.dates.mini_outreach_end_date =  moment(ctrl.school.public.mini_outreach_end_date)
   
 
       })

@@ -1,16 +1,42 @@
 class LoginButtonsController {
   /* @ngInject */
-  constructor(Auth,$mdMedia,$stateParams,$mdMenu,$state) {
-      var ctrl = this
-      //  ctrl.auth = Auth;
-       ctrl.login = login;
-       ctrl.emailPassLogin = emailPassLogin;
-      ctrl.app_for = $stateParams.app_for;
-      ctrl.hideSignUp= $state.is('start')
+  constructor(Auth,$mdMedia,$stateParams,$mdMenu,$state, $timeout) {
+        var ctrl = this
+            ctrl.login = login;
+            ctrl.emailPassLogin = emailPassLogin;
+            ctrl.app_for = $stateParams.app_for;
+            ctrl.hideSignUp= $state.is('start')
 
-       function login(provider){
+function login(provider){
          if($mdMedia('gt-sm'))
-          Auth.$signInWithPopup(provider).catch(function(error) {
+             Auth.$signInWithPopup(provider)// popup is faster onf desktop
+                 .then(function(result){handleProviderLogin(result)})
+                 .catch(function(error){handleProviderLoginError(error)});
+
+         else //for mobiles it works better to do Redirect
+         
+         Auth.$signInWithRedirect(provider) 
+             .then(function(result){handleProviderLogin(result)})
+             .catch(function(error){handleProviderLoginError(error)});
+
+
+function handleProviderLogin(result){
+            
+            console.log(result.user)
+            var uid = result.user.uid
+            var displayName = result.user.providerData[0].displayName
+            //check if user has first name.. if not we set it using the display name from the provider
+           var contactRef =  firebase.database().ref('profiles/'+uid+'/contact/')
+               contactRef.once('value',function(snap){
+                if(!snap.val().first_name && displayName){
+                    contactRef.child('first_name').set(displayName)
+                }
+            })
+
+
+}
+
+function handleProviderLoginError(error) {
                           
                           console.log(error)
                           // Handle Errors here.
@@ -18,38 +44,40 @@ class LoginButtonsController {
                           var errorMessage = error.message;
                           // The email of the user's account used.
                           var email = error.email;
+                          firebase.auth().fetchProvidersForEmail(email).then(function(providers) {
+                              console.log(providers)
+                              if(providers[0]=='google.com')
+                                var service = 'Google'
+                              
+                               ctrl.error_key = 'Email already associated with '+service+ ', try signin with ' + service
+                               $timeout()
+                          })
+
                           // The firebase.auth.AuthCredential type that was used.
                           var credential = error.credential;
                           // ...
-                        });// popup is faster onf desktop
+                        }
 
-         else //for mobiles it works better to do Redirect
-         Auth.$signInWithRedirect(provider);
+
+}
       
+function emailPassLogin(){
     
-   }
-      
-      function emailPassLogin(){
-    
-       Auth.$signInWithEmailAndPassword(ctrl.email, ctrl.password).then(function(result){
-
-         ctrl.email = ''
-         ctrl.password = ''
-$mdMenu.hide()
-        // console.log(result)
-       })
-        .catch
-            (
-                function(error)
-                {
-                    console.log(error)
-                    ctrl.error_key = error.code.replace(/[/[\]'.]/g, "");
-                    console.log('error_key for translation:'+ ctrl.error_key)
-
-                }
-            )
-      }
+             Auth.$signInWithEmailAndPassword(ctrl.email, ctrl.password)
+                 .then(function(result){
+                                ctrl.email = ''
+                                ctrl.password = ''
+                                $mdMenu.hide()
+                                
+                       })
+                .catch(function(error){
+                                console.log(error)
+                                ctrl.error_key = error.code.replace(/[/[\]'.]/g, "");
+                                console.log('error_key for translation:'+ ctrl.error_key)
+                        })
+        }//end function
        
+
 
 
   }

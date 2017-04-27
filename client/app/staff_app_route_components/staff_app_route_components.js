@@ -10,6 +10,7 @@ import StudentList from './school/studentList/studentList';
 import StudentPhotos from './school/studentPhotos/studentPhotos';
 import SchoolSettings from './school/schoolSettings/schoolSettings';
 import schoolStats from './school/schoolStats/schoolStats';
+import schoolOutreach from './school/schoolOutreach/schoolOutreach';
 import SchoolStaff from './school/schoolStaff/schoolStaff';
 import schoolRoleCalls from './school/schoolRoleCalls/schoolRoleCalls';
 import schoolRoleCall from './school/schoolRoleCall/schoolRoleCall';
@@ -50,6 +51,7 @@ let componentModule = angular.module('app.components', [
   StudentList,
   StudentPhotos,
   schoolStats,
+  schoolOutreach,
   SchoolSettings,
   SchoolStaff,
   schoolRoleCalls,

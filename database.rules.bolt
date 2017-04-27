@@ -12,7 +12,9 @@ path /phrases { read() { true }  write() { canEditPhrases() } }
 //list of languages at this path
 path /languages { read() { auth != null }   }
 
-path /questions_for_applications { read(){auth != null} }
+path /questions_for_applications { read(){auth != null}
+                                   write(){canEditLocationInfo()}
+                                 }
 
  
 
@@ -60,6 +62,9 @@ path /applications/{id}/{ref_key}/user_set  {
                                   write() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key) }
                                   read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
                                 }  
+path /applications/{id}/{ref_key}/status  {  
+                                  read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
+                                }                                 
 path /applications/{id}/{ref_key}/meta {  
                                   read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
                                     }   
