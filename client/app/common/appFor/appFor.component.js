@@ -4,7 +4,7 @@ import './appFor.styl';
 
 let appForComponent = {
   restrict: 'E',
-  bindings: {appId:'='},
+  bindings: {appId:'=', link:'='},
   template,
   controller
 };

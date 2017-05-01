@@ -3,32 +3,40 @@
 <div layout="row" layout-align="center">
 <md-card  flex-gt-md="60" flex>
 
-<md-card-content>
+
 <md-input-container>
 <label>Search</label>
 <input ng-model="$ctrl.site.searchString">
 </md-input-container>
 <!--{{$ctrl.results}}-->
 <md-progress-linear  ng-if="$ctrl.searching && $ctrl.site.searchString" md-mode="indeterminate"  ></md-progress-linear>
-{{$ctrl.results.length}}
+
  <md-list ng-if="$ctrl.site.searchString">   
  <!--<md-list-item ng-repeat="item  in $ctrl.results | filter:$ctrl.site.searchString "  > -->
  <md-list-item ng-repeat="item  in $ctrl.results "  > 
 
 
  <div flex="50" ui-sref="profile({user_id:item.objectID})" style="cursor:pointer">
- <!--<img height="35px" firebase-src="{{$ctrl.site.avatars[item.id]}}" > -->
-
+ <img height="50px" ng-if="!item.avatar" src="img/default_avatar.png" > 
+ <img height="50px" ng-if="item.avatar" firebase-src="{{item.avatar}}" > 
+<h1 class="md-title" style="display:inline-block">
 {{item.first_name}} {{item.last_name}}
+</h1>
 </div>
 <div flex="50">
-<div ng-repeat="app in item.applications | orderBy:'type_text'" ><a href="{{API_URL}}/applications/view/{{app.id}}" > {{app.type_text}}</a></div>
+
+<div ng-repeat="(key, app) in item.app_index" >
+ <app-for app-id="key" link="true"></app-for>
+  </div>
 </div>
 <md-divider flex="100"></md-divider>
   </md-list-item>
+
+  Results {{$ctrl.results.length}}
 </md-list>
 
-</md-card-content>
+
+
 
 
 </md-card>

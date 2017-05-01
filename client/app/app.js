@@ -189,6 +189,13 @@ angular.module('app', [
         
         Site.language = $translate.proposedLanguage();
         moment.locale(Site.language);
+        var data = {language:Site.language,
+                   referrer: document.referrer,
+                    time: firebase.database.ServerValue.TIMESTAMP}
+        if(Site.user.id)
+        data.user_id = Site.user.id
+        firebase.database().ref('app_log').push(data)
+
     });
 
 

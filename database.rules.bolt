@@ -9,6 +9,9 @@ path /location_private {read(){ false}
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
 
+path /app_log {write() {true}
+               read() { isStaff() } }
+
 //list of languages at this path
 path /languages { read() { auth != null }   }
 

@@ -1,5 +1,12 @@
-<h1 class="md-title" >
+
+<a ng-if="$ctrl.link">
 {{ $ctrl.school.name }}
 {{ $ctrl.school.start_date | date:"yyyy" }}
 {{$ctrl.for.type==1?"staff":""|translate}}
-</h1>
+</a>
+
+<span ng-if="!$ctrl.link"> 
+{{ $ctrl.school.name }}
+{{ $ctrl.school.start_date | date:"yyyy" }}
+{{$ctrl.for.type==1?"staff":""|translate}}
+</span>

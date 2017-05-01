@@ -1,6 +1,5 @@
 import angular from 'angular';
 import Home from './home/home';
-import About from './about/about';
 import Translation from './translation/translation';
 import translateSection from './translateSection/translateSection';
 
@@ -23,6 +22,8 @@ import staffAlumni from './staffAlumni/staffAlumni';
 import staffApps from './staffApps/staffApps';
 
 import siteSettings from './siteSettings/siteSettings';
+import siteStats from './siteStats/siteStats';
+
 
 import base from './base/base';
 import baseInfo from './baseInfo/baseInfo';
@@ -43,7 +44,7 @@ import prayerWall from './prayerWall/prayerWall';
 
 let componentModule = angular.module('app.components', [
   Home,
-  About,
+ 
   Translation,
   translateSection,
   SchoolsPage,
@@ -70,7 +71,7 @@ let componentModule = angular.module('app.components', [
   staffApps,
 
   siteSettings,
-
+  siteStats,
 
   base,
   baseInfo,

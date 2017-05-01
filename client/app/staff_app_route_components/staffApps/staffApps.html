@@ -3,15 +3,6 @@
 <div flex  flex-offset-gt-md="10" flex-gt-md="80">
 
 
-<md-card ng-show="$ctrl.selected.length">
-  <md-card-content>
-    Actions for selected:<br>
-    <!--<div ng-repeat="loc in $ctrl.location">
-        <a ng-click="$ctrl.transferSelected(loc.id)"> transfer to {{loc.name}}</a>
-    </div>-->
-
-  </md-card-content>
-</md-card>
 
 
 <md-card >
@@ -88,6 +79,13 @@
 
 </md-card>
 
+<md-card ng-show="$ctrl.selected.length">
+  <md-card-content>
+    Actions for selected:<br>
+Set Status as <app-status></app-status>
+
+  </md-card-content>
+</md-card>
 
 
 

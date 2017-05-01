@@ -42,25 +42,28 @@ class SearchController {
             //  snap.ref.remove();         // clear the queue
         
          
-           $timeout(()=>{
+         
               ctrl.results = snap.val().hits
                ctrl.searching = false;
-           })
-        // console.log(ctrl.results)
-          //    snap.forEach(function(snapshot){
-          //      var data = snapshot.val()
-          //       data.id = snapshot.key
+         
+      //  console.log(ctrl.results)
+             angular.forEach( ctrl.results, function(item, key){
+              
+              console.log(key)
+              console.log(item.objectID)
+              firebase.database().ref('profiles/'+item.objectID+'/contact/avatar_200').once('value',function(snap){
+                ctrl.results[key].avatar = snap.val()
+                $timeout()
+              })
+              firebase.database().ref('profiles/'+item.objectID+'/app_index').once('value',function(snap){
+                ctrl.results[key].app_index = snap.val()
+                $timeout()
+              })
              
-          //           var filter =  $filter('filter')(ctrl.results, {id: data.id}, true);
-          //  var index = ctrl.results.indexOf(filter[0])
-            
-          //   if(index == -1){
-          //     ctrl.results.push(data);
-          //     // Site.getAvatar(snapshot.key)
-          //   }
              
-          //    })
+             })
 
+            
            
            
 
