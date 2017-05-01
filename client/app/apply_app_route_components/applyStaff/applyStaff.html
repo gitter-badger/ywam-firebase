@@ -4,7 +4,8 @@
 <div flex="100" flex-gt-xs="50"  flex-gt-sm="30" >
   
   <md-card >
-    <img src="img/default_banner.jpg">
+    <img ng-if="!$ctrl.location.application_types.staff.banner" src="img/default_banner.jpg">
+    <img ng-if="$ctrl.location.application_types.staff.banner" firebase-src="{{$ctrl.location.application_types.staff.banner}}">
 
      <md-card-title>
           <md-card-title-text>
