@@ -29,6 +29,8 @@
     "firebase": "3.3.0",
     "font-awesome": "^4.6.3",
     "font-awesome-webpack": "0.0.4",
+    "gulp": "^3.9.1",
+    "gulp-install": "^1.1.0",
     "json-loader": "^0.5.4",
     "less": "^2.7.1",
     "masonry-layout": "^4.1.1",

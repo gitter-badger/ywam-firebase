@@ -3,11 +3,10 @@
     <md-toolbar class="md-hue-2">
         <div layout="row" layout-align="start center">
 
-            <div class="md-toolbar-tools" style="width:143px;">
-                <h2>Reference {{$ctrl.id }}</h2>
-            </div>
-
-            <ref-status key="$ctrl.key" date="true" ></ref-status>    
+            <div class="md-toolbar-tools">
+                <h2>Reference {{$ctrl.id }} ({{$ctrl.reference.user_set.relation}})</h2>&nbsp;
+                <ref-status key="$ctrl.key" date="true" ></ref-status>  
+            </div>             
 
             <div flex></div>
 
@@ -20,24 +19,7 @@
                     <md-menu-item>
                         <md-button ng-click="$ctrl.editRefernceRequestDialog()">edit Reference/resend Email</md-button>
                     </md-menu-item>
-<!--
-                    <md-menu-item>
-                        <md-button disabled="disabled" ng-click="ctrl.checkVoicemail()">l</md-button>
-                    </md-menu-item>
-                    <md-menu-divider></md-menu-divider>
-                    <md-menu-item>
-                        <md-button ng-click="ctrl.toggleNotifications()">
-                        
-                        {{ctrl.notificationsEnabled ? 'Disable' : 'Enable' }} notifications
-                        </md-button>
-                    </md-menu-item>
-                    <md-menu-item>
-                        <md-button ng-click="ctrl.sampleAction('Find and replace', $event)">
-                            Find and replace...
-                             <span class="md-alt-text">{{ 'M-S-H' | keyboardShortcut }}</span> 
-                        </md-button>
-                    </md-menu-item>
--->
+                    
                 </md-menu-content>
             </md-menu> 
             
@@ -47,8 +29,34 @@
     
     <md-card-content>
         
-<!--        {{$ctrl.form}}-->
+      {{$ctrl.reference.form}}
+        <!--{{$ctrl.reference.user_set}}-->
 
+         
+        <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">Name:</span>
+            <br>
+            {{$ctrl.reference.user_set.name}}
+        </p>
+        
+        <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">Language:</span>
+            <br>
+            {{$ctrl.reference.user_set.language}}
+        </p>
+        
+        <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">Email:</span>
+            <br>
+            {{$ctrl.reference.user_set.email}}
+        </p>
+        
+        <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">Relationship to Applicant:</span>
+            <br>
+            {{$ctrl.reference.form.relation}}
+        </p>
+        
         <p ng-if="$ctrl.reference.form.how_well">
             <span class="question">How well does reference know Applicant?:</span>
             <br>
@@ -79,10 +87,10 @@
             {{$ctrl.reference.form.church_life}}
         </p>
 
-        <p ng-if="$ctrl.reference.form.weaknesses">
+        <p ng-if="$ctrl.reference.form.weakness">
             <span class="question">Weaknesses:</span>
             <br>
-            {{$ctrl.reference.form.weaknesses}}
+            {{$ctrl.reference.form.weakness}}
         </p>
 
         <p ng-if="$ctrl.reference.form.strengths">
