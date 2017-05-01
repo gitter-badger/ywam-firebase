@@ -1,0 +1,10 @@
+<div layout="row" class="appStatusesSelector" layout-align="center center">
+<div ng-repeat="(key,item) in $ctrl.statuses"  class="box"  
+     ng-click="item.active = !item.active "
+     ng-class="{active: item.active}">
+
+ {{item.text}} 
+
+</div>
+</div>
+Hello{{$ctrl.statuses}}

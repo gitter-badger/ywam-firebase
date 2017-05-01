@@ -9,6 +9,7 @@ import LoginDialog from './loginDialog/loginDialog';
 import signUp from './signUp/signUp';
 
 import appStatus from './appStatus/appStatus';
+import appStatusesSelector from './appStatusesSelector/appStatusesSelector';
 import appFor from './appFor/appFor';
 import refStatus from './refStatus/refStatus';
 import contactInfo from './contactInfo/contactInfo';
@@ -51,6 +52,7 @@ let commonModule = angular.module('app.common', [
   signUp,
 
   appStatus,
+  appStatusesSelector,
   appFor,
   refStatus,
   contactInfo,
