@@ -40,6 +40,12 @@
         </p>
         
         <p ng-if="$ctrl.reference.form.how_well">
+            <span class="question">Phone:</span>
+            <br>
+            {{$ctrl.reference.form.phone}}
+        </p>
+        
+        <p ng-if="$ctrl.reference.form.how_well">
             <span class="question">Language:</span>
             <br>
             {{$ctrl.reference.user_set.language}}
@@ -85,18 +91,18 @@
             <span class="question">Involvement with Church:</span>
             <br>
             {{$ctrl.reference.form.church_life}}
-        </p>
-
-        <p ng-if="$ctrl.reference.form.weakness">
-            <span class="question">Weaknesses:</span>
-            <br>
-            {{$ctrl.reference.form.weakness}}
-        </p>
+        </p>        
 
         <p ng-if="$ctrl.reference.form.strengths">
             <span class="question">Strengths:</span>
             <br>
             {{$ctrl.reference.form.strengths}}
+        </p>
+        
+        <p ng-if="$ctrl.reference.form.weakness">
+            <span class="question">Weaknesses:</span>
+            <br>
+            {{$ctrl.reference.form.weakness}}
         </p>
 
         <p ng-if="$ctrl.reference.form.other">

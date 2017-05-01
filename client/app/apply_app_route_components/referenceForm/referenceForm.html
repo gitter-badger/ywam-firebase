@@ -394,6 +394,16 @@
                     </md-input-container>
                 </div>
                 
+                <div layout="row">
+                    <md-input-container flex="100">
+                        <label>
+                            <span translate="97">Phone</span>: (optional)
+                            <span translate="187">(for more questions)</span>
+                        </label>
+                        <input ng-model="form.phone" type="text">
+                    </md-input-container>
+                </div>
+                
                 <div style="text-align:right">
                     <md-button ng-click="$ctrl.submit(refForm)" type="submit" class="md-raised md-primary" translate="167">Submit</md-button>
                 </div>
