@@ -1,5 +1,9 @@
 
 
+![Screenshot](docs/images/ScreenShot1.png)
+
+
+
 # Table of Contents
 * [Angular Material Color Theming](#angular-material-color-theming)
 * [Walkthrough](#walkthrough)
