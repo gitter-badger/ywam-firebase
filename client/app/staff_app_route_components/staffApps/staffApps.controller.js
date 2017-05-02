@@ -71,7 +71,7 @@ class StaffAppsController {
 
       function filterList(item){
           var show = false;
-         if(ctrl.statuses &&  ctrl.statuses[item.meta.status] && ctrl.statuses[item.meta.status].active)
+         if(ctrl.statuses &&  item.meta && ctrl.statuses[item.meta.status] && ctrl.statuses[item.meta.status].active)
            show =  true;
           return show;
         };

@@ -7,31 +7,23 @@
 
 <md-card >
 
-
-<div>
-
-<md-toolbar class="md-table-toolbar md-default" >
-  <div class="md-toolbar-tools">
-   
+  <md-card-content>
+  <div layout="row" layout-wrap layout-align="start center">
+   <h1 class="md-title" flex >
     <span ng-hide="$ctrl.selected.length"> Staff</span>
-    <span ng-show="$ctrl.selected.length">{{$ctrl.selected.length}} Staff{{$ctrl.selected.length > 1 ? 's':''}}  selected</span>
-
-    <md-input-container>
+    <span ng-show="$ctrl.selected.length">{{$ctrl.selected.length}} Selected</span>
+    </h1>
+ 
+    <md-input-container flex class="no-md-error" style="margin-right:15px">
+      <label>Filter List</label>
       <input ng-model="$ctrl.filterText">
     </md-input-container>
+   
+    <app-statuses-selector statuses="$ctrl.statuses"></app-statuses-selector>
 
 
-
-  </div>
-</md-toolbar>
-</div>
-
-<app-statuses-selector statuses="$ctrl.statuses"></app-statuses-selector>
-{{$ctrl.statuses}}
-<div  style="padding:20px">
-
-
-</div>
+    </div>
+  </md-card-content>
 
 <!--{{$ctrl.apps}}-->
   <md-table-container>
@@ -63,10 +55,17 @@
 
 </md-card>
 
-<md-card ng-show="$ctrl.selected.length">
+<md-card>
   <md-card-content>
+       <span class="md-title">
+    {{$ctrl.selected.length}} Selected 
+    </span>
+    (<span ng-repeat="item in $ctrl.selected">{{item.user.first_name}}{{!$last?',':''}} </span>)
+   <br>
+   <div  ng-show="$ctrl.selected.length">
     Actions for selected:<br>
-Set Status as <app-status></app-status>
+Set Status as 
+   </div>
 
   </md-card-content>
 </md-card>

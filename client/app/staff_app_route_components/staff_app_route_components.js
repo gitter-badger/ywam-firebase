@@ -15,6 +15,7 @@ import schoolRoleCalls from './school/schoolRoleCalls/schoolRoleCalls';
 import schoolRoleCall from './school/schoolRoleCall/schoolRoleCall';
 
 import accounting from './accounting/accounting';
+import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
@@ -65,6 +66,7 @@ let componentModule = angular.module('app.components', [
   
   prayerWall,
   accounting,
+  accountingBrainTree,
   staff,
   staffCurrent,
   staffAlumni,

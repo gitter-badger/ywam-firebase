@@ -7,14 +7,15 @@ class AppStatusesSelectorController {
       
     function onInit(){
 
-     ctrl.statuses = {1 : {text: 'started'}, 
-                      8 : {text: 'cancelled'},
-                      10: {text:'submitted'},
-                      11: {text:'in review'},
-                      12: {text:'denied'},
-                      13: {text:'accepted'},
-                      30: {text:'arrived'},
-                      70: {text:'alumni'}
+     ctrl.statuses = {1 : {text: 'Started'}, 
+                      8 : {text: 'Cancelled'},
+                      9 : {text: 'Withdrawn'},
+                      10: {text:'Submitted'},
+                      11: {text:'In review'},
+                      12: {text:'Denied'},
+                      13: {text:'Accepted'},
+                      30: {text:'Arrived'},
+                      70: {text:'Alumni'}
                     };
      ctrl.statuses[10].active = true;
      ctrl.statuses[11].active = true;

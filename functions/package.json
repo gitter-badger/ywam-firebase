@@ -6,12 +6,13 @@
     "algoliasearch": "^3.10.2",
     "botkit": "^0.5.2",
     "child-process-promise": "^2.2.0",
-    "firebase-admin": "^4.1.2",
+    "firebase-admin": "^4.2.1",
     "firebase-functions": "^0.5.5",
     "nodemailer": "^3.1.8",
     "nodemailer-mailgun-transport": "^1.2.4",
      "cors": "^2.8.3",
-     "moment":"2.18.1"
+     "moment":"2.18.1",
+     "braintree":"^2.0.2"
   },
   "private": true
 }

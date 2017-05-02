@@ -33,8 +33,6 @@ import 'angular-dynamic-locale'; // for dynamic locale loading
 import 'angular-moment';
 import English from './en.json'; //include english translations by default so they don't have to load seperate 
 
-import Domains from './domains.json'
-
 
 //Firebase libraries
 import  firebase from 'firebase';
@@ -42,6 +40,9 @@ window.firebase = firebase //angularfire expects firebase as a global varible fo
 // import 'firebase-util'; // this will be useful once it supports the 3.0 SDK
 import 'angularfire';
 
+
+//Brain Tree Paymet gateway
+// import 'braintree-web'
 
 
 

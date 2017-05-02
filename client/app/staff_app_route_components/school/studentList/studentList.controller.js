@@ -18,18 +18,7 @@ class StudentListController {
     // ctrl.apps = []
     //ctrl.loading_promise = $q.defer();
         
-        ctrl.statuses = {1 : {text: 'started'}, 
-                      8 : {text: 'cancelled'},
-                      10: {text:'submitted'},
-                      11: {text:'in review'},
-                      12: {text:'denied'},
-                      13: {text:'accepted'},
-                      30: {text:'arrived'}
-                    };
-     ctrl.statuses[10].active = true;
-     ctrl.statuses[11].active = true;
-     ctrl.statuses[13].active = true;
-     ctrl.statuses[30].active = true;
+      
      
       function filterList(item){
           var show = false;

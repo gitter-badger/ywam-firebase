@@ -126,6 +126,9 @@ class SidenavController {
               {title: 'Accounting',
               state: 'accounting',
               fa_icon:'fa fa-eur'},
+              {title: 'BrainTree',
+              state: 'accountingBrainTree',
+              fa_icon:'fa fa-tree'},
               ]
             }, 
 

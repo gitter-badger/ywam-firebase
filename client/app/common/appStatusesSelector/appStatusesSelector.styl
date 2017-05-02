@@ -1,9 +1,37 @@
 .appStatusesSelector .box {
-  border:gray 1px solid;
+  
   cursor:pointer
+  border-right: solid #bebfbf 1px;
+   border-top: solid #bebfbf 1px;
+    border-bottom: solid #bebfbf 1px;
+    padding: 5px; 
+   
 }
 
-.appStatusesSelector .box.active {
- background-color:gray;
+.appStatusesSelector .box:focus{
+    outline: none;
+}
+
+.appStatusesSelector > .box:first-child{
+   border-left: solid #bebfbf 1px;
+       border-radius: 3px 0 0 3px;
+  
+
+}
+.appStatusesSelector > .box:last-child{
+    
+       border-radius: 0 3px 3px 0;
+  
+
+}
+.appStatusesSelector .box.active{
+   //box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125);
+ border-right: none;
+}
+
+.appStatusesSelector .box:not(.active) {
+background-color:white;
+color:#000;
+
 }
 
