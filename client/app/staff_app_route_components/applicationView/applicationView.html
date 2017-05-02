@@ -177,6 +177,7 @@ Invoices and base account statement.
 <section id="reference1"  >
     <reference-display  key="$ctrl.app_id + '/reference1'"></reference-display>
 </section>
+    
 <section id="reference2"  >
     <reference-display key="$ctrl.app_id + '/reference2'"></reference-display>
 </section>
@@ -188,6 +189,7 @@ Invoices and base account statement.
 
             <canvas  class="chart chart-bar" height="75"
               chart-data="$ctrl.ref_chart" 
+                    chart-type="horizontalBar"
               chart-labels="$ctrl.ref_chart_labels" 
               chart-series="$ctrl.ref_chart_series"
               chart-options="$ctrl.ref_chart_options">
@@ -196,7 +198,7 @@ Invoices and base account statement.
             <canvas  class="chart chart-pie" height="75"
               chart-data="$ctrl.ref_chart2" 
               chart-labels="$ctrl.ref_chart2_labels" 
-              chart-options="{legend: {display: true,position:'bottom'}}">
+              chart-options="{legend: {display: true,position:'right'}}">
             </canvas>
 
         </md-card-content>

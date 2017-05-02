@@ -52,6 +52,19 @@ class ApplicationViewController {
       ctrl.ref_chart_options = { scales: {
                                             yAxes: [{
                                                 display: false,
+                                                ticks:{
+                                                    beginAtZero: true
+                                                },
+                                                stacked:true
+                                        
+                                            }],
+          xAxes: [{
+                                                /*barThickness:15,*/
+              /*type:"Category",
+                                                barPercentage:0.8,*/
+                                                /*catergoryPercentage:0.4,*/
+              barPercentage: 0.5
+              /*categorySpacing: 0*/
                                         
                                             }]
                                 }  

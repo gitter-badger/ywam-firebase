@@ -1,11 +1,15 @@
 class ApplyDashboardController {
    /* @ngInject */
-  constructor(Site) {
+  constructor(Site,$state) {
     var ctrl = this;
         ctrl.user_id=Site.user.id;
         
         if(Site.isStaff)
            Site.hideSideNav = false
+      
+      if(!ctrl.user_id){
+          $state.go("apply.schoolList");
+      }
           
           
            console.log('isStaff: '+Site.isStaff)

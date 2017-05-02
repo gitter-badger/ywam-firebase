@@ -3,9 +3,15 @@
         <div ng-if="$ctrl.site.isStaff" hide-gt-sm ng-click="$ctrl.openLeftMenu()" flex style="height:50px; padding-top:10px; " >
          <i class="fa fa-bars"></i>
         </div>
+          
+          <img  alt="YWAM Sarasota"
+            ng-if="!$ctrl.site.isStaff"
+           style="height:70%; cursor:pointer;"
+           src="img/YWAMSarasotaLogo_White_horizontal.png"
+               ui-sref="apply.dashboard"
+           >
 
-
-        <!--<h1  style="cursor:pointer;">YWAM {{$ctrl.site.location.name}}</h1>-->
+<!--        <h1 style="cursor:pointer; padding-left:5px;">YWAM Sarasota{{$ctrl.site.location.name}}</h1>-->
         <span flex></span>
     <div layout="row" ng-hide="$ctrl.site.hideHeaderLinks">
     <md-menu aria-label="Change Language" >
