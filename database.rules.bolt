@@ -169,9 +169,16 @@ path /location/default_school_questions {write(){canEditLocationInfo()}}
 
 
 
-path /paypal_transactions { read() { canAccessPaypalTransactions() }
-                                          write() { canAccessPaypalTransactions() }
+path /paypal_payments { read() { canEditAccounting() }
+                        write() { canEditAccounting() }
                                           }
+path /designation_codes { read() { canEditAccounting() }
+                          write() { canEditAccounting() }
+                                          }   
+ path /designation_subscriptions { read() { canEditAccounting() }
+                          write() { canEditAccounting() }
+                                          }                                            
+                                                                                 
 
 path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }
@@ -213,8 +220,8 @@ isStaffAppAdmin(  )
 isSchoolAdmin(  root.applications[appID].for.school_id + '' ) 
 }
 
-canAccessPaypalTransactions(){
-    root.location.perms['access_paypal_transactions'][auth.uid] != null}
+canEditAccounting(){
+    root.location.perms['can_edit_accounting'][auth.uid] != null}
 canEditLocationInfo(){
     root.location.perms['can_edit_location_info'][auth.uid] != null}
 canEditLocationVisaReq(){

@@ -109,6 +109,10 @@ class SidenavController {
     state: 'translation',
     fa_icon:'fa fa-language'}, 
 
+    {title: 'Accounting',
+              state: 'accounting',
+              fa_icon:'fa fa-usd'},
+
      {title: 'In Development',
     // state: 'app.finance',
     fa_icon:'fa fa-flask',
@@ -123,9 +127,7 @@ class SidenavController {
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
-              {title: 'Accounting',
-              state: 'accounting',
-              fa_icon:'fa fa-eur'},
+              
               {title: 'BrainTree',
               state: 'accountingBrainTree',
               fa_icon:'fa fa-tree'},

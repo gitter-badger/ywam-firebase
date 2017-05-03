@@ -15,7 +15,10 @@ import schoolRoleCalls from './school/schoolRoleCalls/schoolRoleCalls';
 import schoolRoleCall from './school/schoolRoleCall/schoolRoleCall';
 
 import accounting from './accounting/accounting';
+import accountingPaypalPage from './accountingPaypalPage/accountingPaypalPage';
 import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
+import accountingDesignations from './accountingDesignations/accountingDesignations';
+import designationInfo from './designationInfo/designationInfo';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
@@ -66,7 +69,11 @@ let componentModule = angular.module('app.components', [
   
   prayerWall,
   accounting,
+  accountingPaypalPage,
   accountingBrainTree,
+  accountingDesignations,
+  designationInfo,
+
   staff,
   staffCurrent,
   staffAlumni,

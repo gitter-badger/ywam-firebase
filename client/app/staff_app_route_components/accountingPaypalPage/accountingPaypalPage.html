@@ -1,0 +1,65 @@
+<md-card>
+<style>
+
+.table {
+  width:100%;
+}
+
+.table tr{
+  border-bottom:solid gray 1px;
+}
+
+</style>
+<md-card-content>
+
+
+
+<table class="table" >
+
+  <tr>
+    <th>paypal ID</th>
+    <th>Time</th>
+    <th>From</th>
+    <th>For </th>
+    <th>Amount</th>
+
+    <th>QB</th>
+    <th>My Tribe</th>
+  </tr>
+
+<tr ng-repeat="item in $ctrl.transactions | orderBy:'-payment_date'">
+<td>{{item.txn_id}}</td>
+<td>{{item.payment_date | date: 'short'}}</td>
+<td>{{item.payer_email}}<br> {{item.first_name}} {{item.last_name}}</td>
+<td>{{item.memo}} 
+<i ng-if="$ctrl.designations[item.item_number]" style="background-color: lightgreen">Designation {{item.item_number}}</i> </td>
+<td align="right">
+  <i  ng-if="item.mc_fee>0">  {{item.mc_gross}} - {{item.mc_fee}}</i>
+    <b>{{item.mc_gross - item.mc_fee | number: 2}} </b></td>
+<td> 
+<md-checkbox ng-model="item.in_quickbooks"  ng-change="$ctrl.checkQB(item)" aria-label="in quickbooks" >
+
+</td>
+<td> 
+<md-checkbox ng-model="item.in_donation"  ng-change="$ctrl.checkDonation(item)" aria-label="in donations" >
+
+</td>
+
+
+
+
+</tr>
+
+
+
+
+</thead>
+
+
+
+
+</table>  
+
+
+</md-card-content>
+</md-card>

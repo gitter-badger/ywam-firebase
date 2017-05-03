@@ -5,6 +5,7 @@ import Common from './common/common';
 import services from './services/services';
 import staffComponents from './staff_app_route_components/staff_app_route_components';
 import applyComponents from './apply_app_route_components/apply_app_route_components';
+import donor_route_components from './donor_route_components/donor_route_components';
 import AppComponent from './app.component';
 
 import 'normalize.css';
@@ -58,7 +59,8 @@ angular.module('app', [
     Common,
     services,
     staffComponents,
-    applyComponents
+    applyComponents,
+    donor_route_components
   ])
   .config(($locationProvider, $translateProvider, $mdThemingProvider,$urlRouterProvider) => {
     "ngInject";

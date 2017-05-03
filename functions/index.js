@@ -8,6 +8,7 @@ exports.search = require('./search/index.js')
 exports.mailgun = require('./mailgun/index.js')
 exports.auth = require('./auth/index.js')
 exports.braintree = require('./braintree/index.js')
+exports.paypal = require('./paypal/index.js')
 
 var school_banner = require('./schools/banner.js')
 var profile_avatar = require('./profiles/avatar.js')

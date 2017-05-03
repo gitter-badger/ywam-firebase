@@ -12,7 +12,7 @@ let accountingModule = angular.module('accounting', [
   "ngInject";
   $stateProvider
     .state('accounting', {
-      url: '/accounting/',
+      url: '/accounting',
       component: 'accounting',
        data: {authRequired:true},
     });
