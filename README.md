@@ -5,6 +5,13 @@
 
 
 # Table of Contents
+* [Getting Started](#getting-started)
+    * [Dependencies](#dependencies)
+    * [Installing](#installing)
+    * [Running the App](#running-the-app)
+        * [Gulp Tasks](#gulp-tasks)
+        * [Testing](#testing)
+		* [Generating Components](#generating-components)
 * [Angular Material Color Theming](#angular-material-color-theming)
 * [Walkthrough](#walkthrough)
     * [Build System](#build-system)
@@ -18,6 +25,57 @@
         * [Testing](#testing)
 		* [Generating Components](#generating-components)		
 * [Starter Kit Support and Questions](#starter-kit-support-and-questions)
+
+
+# Getting Started
+## Dependencies
+Tools needed to run this app:
+* `node` and `npm` https://nodejs.org/
+Once you have these, install the following as globals:  
+`npm install -g gulp webpack firebase-tools`
+
+## Installing
+* `clone` or `fork`  this repo
+* `cd` to the root of the repository 
+* `npm install` to install dependencies
+
+## Running the App locally for development 
+we use Gulp to build and launch the development environment. Running `gulp serve` will launch a development server, and watch all file changes. The port will be displayed in the terminal.
+
+
+## Bundle for production
+runing `gulp webpack` will bundle the app and save the results in the `/dist` directory  
+Change the config in index.html to use your own firebase connection. 
+ 
+## Deploy to Firebase hosting
+if you did not previously install firebase tools do so now
+`install npm install -g firebase-tools`
+
+prepare firebase cloud functions for deploy
+cd into `functions/` directory and run `npm install`
+
+cd into your project directory and run the command:
+`firebase deploy`
+
+First time you will be asked to login with the firebase account. 
+This will push up all files in the /dist folder to firebase hosting, set the firebase database rules, and deploy all cloud functions. 
+
+________________________________________________________________
+ 
+### Gulp Tasks
+Here's a list of available tasks:
+* `webpack`
+  * runs Webpack, which will transpile, concatenate, and compress (collectively, "bundle") all assets and modules into `dist/bundle.js`. It also prepares `index.html` to be used as application entry point, links assets and created dist version of our application.
+* `serve`
+  * starts a dev server via `webpack-dev-server`, serving the client folder.
+* `watch`
+  * alias of `serve`
+* `default` (which is the default task that runs when typing `gulp` without providing an argument)
+	* runs `serve`.
+* `component`
+  * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
+  
+
 
 # Angular Material Color Theming
 ## Color Theme Generator
@@ -72,35 +130,6 @@ All tests are also written in ES6. We use Webpack to take care of the logistics 
 
 To run tests, type `npm test` or `karma start` in the terminal. Read more about testing [below](#testing).
 
-# Getting Started
-## Dependencies
-Tools needed to run this app:
-* `node` and `npm`
-Once you have these, install the following as globals:  
-`npm install -g gulp karma karma-cli webpack`
-
-## Installing
-* `fork` this repo
-* `clone` your fork
-* `npm install -g gulp karma karma-cli webpack` install global cli dependencies
-* `npm install` to install dependencies
-
-## Running the App
-NG6 uses Gulp to build and launch the development environment. After you have installed all dependencies, you may run the app. Running `gulp` will bundle the app with `webpack`, launch a development server, and watch all files. The port will be displayed in the terminal.
- 
-### Gulp Tasks
-Here's a list of available tasks:
-* `webpack`
-  * runs Webpack, which will transpile, concatenate, and compress (collectively, "bundle") all assets and modules into `dist/bundle.js`. It also prepares `index.html` to be used as application entry point, links assets and created dist version of our application.
-* `serve`
-  * starts a dev server via `webpack-dev-server`, serving the client folder.
-* `watch`
-  * alias of `serve`
-* `default` (which is the default task that runs when typing `gulp` without providing an argument)
-	* runs `serve`.
-* `component`
-  * scaffolds a new Angular component. [Read below](#generating-components) for usage details.
-  
 ### Testing
 To run the tests, run `npm test` or `karma start`.
 
