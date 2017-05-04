@@ -32,7 +32,7 @@
 Tools needed to run this app:
 * `node` and `npm` https://nodejs.org/
 Once you have these, install the following as globals:  
-`npm install -g gulp webpack firebase-tools`
+`npm install -g gulp webpack firebase-tools firebase-bolt`
 
 ## Installing
 * `clone` or `fork`  this repo
@@ -49,18 +49,23 @@ Change the config in index.html to use your own firebase connection.
  
 ## Deploy to Firebase hosting
 if you did not previously install firebase tools do so now
-`install npm install -g firebase-tools`
-
-prepare firebase cloud functions for deploy
-cd into `functions/` directory and run `npm install`
+`install npm install -g firebase-tools firebase-bolt`
 
 cd into your project directory and run the command:
-`firebase deploy`
+`firebase login` then
 
-First time you will be asked to login with the firebase account. 
-This will push up all files in the /dist folder to firebase hosting, set the firebase database rules, and deploy all cloud functions. 
+open `.firebaserc` and change the "default": value to be that of your firebase project name
 
-________________________________________________________________
+Ready cloud functions for deploy 
+cd into `functions/` directory and run `npm install`
+
+Finally run `firebase deploy` to push up all files in the /dist folder to firebase hosting, set the firebase database rules, and deploy all cloud functions. 
+
+
+
+_
+
+_______________________________________________________________
  
 ### Gulp Tasks
 Here's a list of available tasks:
