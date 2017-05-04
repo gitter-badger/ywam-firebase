@@ -13,13 +13,14 @@ import appStatusesSelector from './appStatusesSelector/appStatusesSelector';
 import appFor from './appFor/appFor';
 import refStatus from './refStatus/refStatus';
 import contactInfo from './contactInfo/contactInfo';
+import passportInfo from './passportInfo/passportInfo';
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
 import userApplicationsList from './userApplicationsList/userApplicationsList';
 
 
 //application form stuff
 import healthForm from './healthForm/healthForm';
-import passportInfoForm from './passportInfoForm/passportInfo';
+import passportInfoForm from './passportInfoForm/passportInfoForm';
 import postalAddressForm from './postalAddressForm/postalAddress';
 import languagesForm from './languagesForm/languages';
 import refRequest from './refRequest/refRequest';
@@ -56,6 +57,7 @@ let commonModule = angular.module('app.common', [
   appFor,
   refStatus,
   contactInfo,
+  passportInfo,
   userPhotoUpload,
   userApplicationsList,
 

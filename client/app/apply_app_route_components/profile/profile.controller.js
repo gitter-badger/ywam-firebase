@@ -9,9 +9,9 @@ class ProfileController {
           ctrl.contact = $firebaseObject(contactRef);
           ctrl.editPostalDialog = editPostalDialog
           ctrl.editPhotoDialog = editPhotoDialog
-          ctrl.editPassportDialog = editPassportDialog
+//          ctrl.editPassportDialog = editPassportDialog
           ctrl.calculateAge = calculateAge
-          ctrl.unlinkProvider = unlinkProvider
+//          ctrl.unlinkProvider = unlinkProvider
           
         
           
@@ -58,42 +58,39 @@ class ProfileController {
          controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
       });
     }  
-      function editPassportDialog($event) {
-       var parentEl = angular.element(document.body);
-       $mdDialog.show({
-         parent: parentEl,
-         targetEvent: $event,
-         clickOutsideToClose:true,
-         fullscreen: $mdMedia('xs'),
-         template:
-           '<md-dialog aria-label="dialog"> <md-dialog-content style="padding:15px">'+
-           '  <passport-info></passport-info>'+
-           '  </md-dialog-content><md-dialog-actions>' +
-           '    <md-button ng-click="closeDialog()" class="md-primary">' +
-           '      Close Dialog </md-button> </md-dialog-actions></md-dialog>',
-         controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
-      });
-    }  
+//      function editPassportDialog($event) {
+//       var parentEl = angular.element(document.body);
+//       $mdDialog.show({
+//         parent: parentEl,
+//         targetEvent: $event,
+//         clickOutsideToClose:true,
+//         fullscreen: $mdMedia('xs'),
+//         template:
+//           '<md-dialog aria-label="dialog"> <md-dialog-content style="padding:15px">'+
+//           '  <passport-info-form></passport-info-form>'+
+//           '  </md-dialog-content><md-dialog-actions>' +
+//           '    <md-button ng-click="closeDialog()" class="md-primary">' +
+//           '      Close Dialog </md-button> </md-dialog-actions></md-dialog>',
+//         controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
+//      });
+//    }  
 
     function calculateAge(birthday) { // birthday is a date
             var ageDifMs = Date.now() -  new Date(birthday).getTime();
             var ageDate = new Date(ageDifMs); // miliseconds from epoch
             return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
-     function unlinkProvider(provider){
-       
-       
-        firebase.auth().currentUser.unlink(provider.providerId).then(function() {
-          // Auth provider unlinked from account
-          console.log('sucessful un link of '+provider.providerId )
-        }).catch(function(error) {
-          // An error happened
-          console.log(error)
-        });
-
-
-
-     }
+      
+      
+//     function unlinkProvider(provider){      
+//        firebase.auth().currentUser.unlink(provider.providerId).then(function() {
+//          // Auth provider unlinked from account
+//          console.log('sucessful un link of '+provider.providerId )
+//        }).catch(function(error) {
+//          // An error happened
+//          console.log(error)
+//        });
+//     }
   }
 }
 

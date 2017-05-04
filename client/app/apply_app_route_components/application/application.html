@@ -139,7 +139,7 @@
 
         <md-card>
           <md-card-content>
-              <school-questions ng-if="$ctrl.school_id" school-id="$ctrl.school_id" app-id="$ctrl.app_id" is-valid="$ctrl.form.questions"></school-questions>
+              <school-questions ng-if="$ctrl.school_id" school-id="$ctrl.school_id" app-id="$ctrl.app_id" is-valid="$ctrl.forms.questions"></school-questions>
           </md-card-content> 
         </md-card>
 
@@ -160,13 +160,13 @@
 
         <md-card>
             <md-card-content>
-                <passport-info is-valid="$ctrl.form.passport"></passport-info>
+                <passport-info-form is-valid="$ctrl.forms.passport"></passport-info-form>
             </md-card-content>
         </md-card> 
 
         <md-card>
             <md-card-content>
-                <ref-request ng-if="$ctrl.app_id" app-id="$ctrl.app_id" is-valid="$ctrl.form.references"></ref-request>
+                <ref-request ng-if="$ctrl.app_id" app-id="$ctrl.app_id" is-valid="$ctrl.forms.references"></ref-request>
             </md-card-content>
         </md-card>
 

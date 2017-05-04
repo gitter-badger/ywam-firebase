@@ -1,226 +1,229 @@
 <div layout="row"  style=" height: 100%;">
 <div flex-gt-md="15"  class="no-print"  >
-
-<div  du-scroll-container="scroll-container-1" du-spy-context class="page-index " style="position:fixed; padding:15px; "  hide-xs hide-sm hide-md >
-
-<!--<a ui-sref="school.studentList({schoolId: $ctrl.app.school_id})">< back </a><br>-->
-<br>
-<a du-smooth-scroll="top" du-scrollspy  offset="50"  >Top </a><br>
-<a du-smooth-scroll="adminNote" du-scrollspy  offset="50"  >Admin Notes </a><br>
-<!--<a du-smooth-scroll="transport"  du-smooth-scroll du-scrollspy  offset="50" >Travel Info </a><br>-->
-<!--<a du-smooth-scroll="visa"  du-smooth-scroll du-scrollspy  offset="50" >Visa </a><br>-->
-<a du-smooth-scroll="contact"  du-smooth-scroll du-scrollspy  offset="50" >Contact </a><br>
-<a du-smooth-scroll="health"  du-smooth-scroll du-scrollspy  offset="50" >Health </a><br>
-<a du-smooth-scroll="questions" du-smooth-scroll du-scrollspy  offset="50" >Questions </a><br>
-<a du-smooth-scroll="reference1"  du-smooth-scroll du-scrollspy  offset="50" >Reference 1 </a><br>
-<a du-smooth-scroll="reference2"  du-smooth-scroll du-scrollspy  offset="50" >Reference 2 </a><br>
-
-</div>
+    <div  du-scroll-container="scroll-container-1" du-spy-context class="page-index " style="position:fixed; padding:15px; "  hide-xs hide-sm hide-md >
+        <!--<a ui-sref="school.studentList({schoolId: $ctrl.app.school_id})">< back </a><br>-->
+        <br>
+        <a du-smooth-scroll="top" du-scrollspy  offset="50"  >Top </a><br>
+        <a du-smooth-scroll="adminNote" du-scrollspy  offset="50"  >Admin Notes </a><br>
+        <!--<a du-smooth-scroll="transport"  du-smooth-scroll du-scrollspy  offset="50" >Travel Info </a><br>-->
+        <!--<a du-smooth-scroll="visa"  du-smooth-scroll du-scrollspy  offset="50" >Visa </a><br>-->
+        <a du-smooth-scroll="contact"  du-smooth-scroll du-scrollspy  offset="50" >Contact </a><br>
+        <a du-smooth-scroll="passport"  du-smooth-scroll du-scrollspy  offset="50" >Passport </a><br>
+        <a du-smooth-scroll="health"  du-smooth-scroll du-scrollspy  offset="50" >Health </a><br>
+        <a du-smooth-scroll="questions" du-smooth-scroll du-scrollspy  offset="50" >Questions </a><br>
+        <a du-smooth-scroll="reference1"  du-smooth-scroll du-scrollspy  offset="50" >Reference 1 </a><br>
+        <a du-smooth-scroll="reference2"  du-smooth-scroll du-scrollspy  offset="50" >Reference 2 </a><br>
+    </div>
 </div>
 
 <div flex="100" flex-gt-md="70" style=" height: 100%;" >
 
-<section id="top">
-<!-- <md-subheader  flex-offset-gt-md="15" flex-gt-md="70">Top</md-subheader> -->
-<md-card>
-<md-card-content layout="row">
-<div flex>
+    <section id="top">
+        <!-- <md-subheader  flex-offset-gt-md="15" flex-gt-md="70">Top</md-subheader> -->
+        <md-card>
+            <md-card-content layout="row">
+                <div flex>
+                    <h1 class="md-display-1">{{$ctrl.user.contact.first_name}} {{$ctrl.user.contact.last_name}}<br>
+                    <small class="md-subhead">
+                        {{$ctrl.user.passport.first_name | uppercase}} {{$ctrl.user.passport.middle_name | uppercase}} {{$ctrl.user.passport.last_name | uppercase}}
+                    </small>
+                    </h1>
 
-<h1 class="md-display-1">{{$ctrl.user.contact.first_name}} {{$ctrl.user.contact.last_name}}<br>
-<small class="md-subhead">{{$ctrl.user.passport.first_name | uppercase}} {{$ctrl.user.passport.middle_name | uppercase}} {{$ctrl.user.passport.last_name | uppercase}}
-</small>
-</h1>
+                    {{$ctrl.user.contact.nationality}}<br>
+                    {{$ctrl.user.contact.gender}} {{$ctrl.calculateAge($ctrl.user.contact.dob)}} 
+                    <span style=" text-transform: capitalize;">{{$ctrl.user.contact.marital_status}}</span><br>
+                    {{$ctrl.user.contact.dob | date}}  <br>
+                    
+                    <div ng-repeat="lang in $ctrl.languages">{{lang.text}}
+                        <span style="color:gray">  
+                            <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>{{lang.prof}}% 
+                        </span>
+                    </div>
 
-
-{{$ctrl.user.contact.nationality}}<br>
-    {{$ctrl.user.contact.gender}} {{$ctrl.calculateAge($ctrl.user.contact.dob)}} <span style=" text-transform: capitalize;">{{$ctrl.user.contact.marital_status}}</span><br>
-{{$ctrl.user.contact.dob | date}}  <br>
-<div ng-repeat="lang in $ctrl.languages">{{lang.text}}
-  <span style="color:gray">  
-    <span ng-if="lang.text !='English'" > ({{lang.en_text}}) </span>
-  {{lang.prof}}% </span>
-     </div>
-
-
-
-<br>
-<md-divider></md-divider>
-<br>
-<b>Application Status:</b><br>
-<app-status app-id="$ctrl.app_id" date="true" who="true" admin="true"></app-status><br>
-<b>Reference 1: </b>
-<div><ref-status key="$ctrl.app_id + '/reference1'"  date="true"></ref-status></div>
-<b>Reference 2:</b><br>
-<div><ref-status key="$ctrl.app_id + '/reference2'"  date="true"></ref-status></div>
-<!--
-visa status<br>
-<md-checkbox >PostCard Sent(not working yet)</md-checkbox>-->
-  
-
-</div>
-<div flex >
-<div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
+                    <br>
+                    <md-divider></md-divider>
+                    <br>
+                    
+                    <b>Application Status:</b><br>
+                    <app-status app-id="$ctrl.app_id" date="true" who="true" admin="true"></app-status><br>
+                    
+                    <b>Reference 1: </b>
+                    <div><ref-status key="$ctrl.app_id + '/reference1'"  date="true"></ref-status></div>
+                    
+                    <b>Reference 2:</b><br>
+                    <div><ref-status key="$ctrl.app_id + '/reference2'"  date="true"></ref-status></div>
+                    
+                    <!--
+                    visa status<br>
+                    <md-checkbox >PostCard Sent(not working yet)</md-checkbox>-->
+                </div>
+                
+                <div flex >
+                    <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;" ui-sref="changeUserPhoto({user_id:$ctrl.user_id})">
                         <img ng-if="$ctrl.user.contact.avatar_200" style="width:100%; height:100%"align="right" firebase-src="{{$ctrl.user.contact.avatar_1080}}" >
-                      
                         <img ng-if="!$ctrl.user.contact.avatar_200" style="width:100%; height:100%" align="right"  src="img/default_avatar.png" >
-                        
+
                         <div class="editButton" layout="row" layout-align="center center" > 
-                           
-                    <md-icon flex md-svg-icon="img/icons/edit_white.svg"></md-icon>
-     
-                        
+                            <md-icon flex md-svg-icon="img/icons/edit_white.svg"></md-icon>
                         </div>
                     </div>
-</div>
-
-</md-card-content>
-</md-card>
-
-</section>
+                </div>
+            </md-card-content>
+        </md-card>
+    </section>
 
 
-<!--Admin Notes Section-->
-<md-card id="adminNote">
-    <md-card-content>
-        <app-admin-notes app-id="$ctrl.app_id"></app-admin-notes>
-    </md-card-content>
-</md-card>
-<!--End of Admin Notes Section-->
-
-<!--
-<section id="transport">
-<md-card>
-<md-card-content class="in_dev">
-<h4 class="md-title" > Travel Info</h4>
-
-<md-button aria-label="Add Travel" class="pull-right md-fab md-mini" 
-    ng-click="$ctrl.travelEditDialog({user_id: $ctrl.user.contact.id})"
-
-><i class="fa-plus fa"></i> </md-button>
-
-<div ng-repeat="t in $ctrl.transports" layout="row" align="space-between center">
-<div flex="25" class="md-headline" style="text-align:right; padding:20px;">{{t.type == 'arr'?'Arrival':'Departure'}}  </div>	
-
-<div flex><b>{{t.station_name}}</b><br>
-{{t.time.format("MMM DD  h:mmA") }}<br>
-ride requested: {{t.ride_requested}}<br>
-flight: {{t.flight_num}}<br>
-notes: {{t.user_note}} <br>
-{{t.staff_note}}
-
-</div>
-
-</div>
-</md-card-content>
-</md-card>
-</section>-->
-<!--
-<section id="visa">
-<md-card>
-<md-card-content class="in_dev">
-<h4 class="md-title" > Visa Info</h4>
-
-{{$ctrl.visas|json}}
-
-</md-card-content>
-</md-card>
-</section>-->
-
-<!--<md-card>
-<md-card-content class="in_dev">
-
-
-Invoices and base account statement. 
-
-</md-card-content>
-</md-card>-->
-
-
-<md-card>
-    <md-card-content>
-        <h1 class="md-title" translate="10">Contact Information</h1>
-        <section id="contact">
-            <contact-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id"></contact-info>
-        </section>
-    </md-card-content>
-</md-card>
-
-<md-card>
-    <md-card-content>
-        <h1 class="md-title">Health Information</h1>
-        <section id="health">
-            <health-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id"></health-info>
-        </section>
-    </md-card-content>
-</md-card>
-
-
-
-<md-card>
-    <md-card-content >
-        <h1 class="md-title">Answers to questions</h1>  
-        <section id="questions">
-            <div ng-repeat="(key,item) in $ctrl.app.answers_to_questions">
-            <span class="question">{{$ctrl.app_questions[key].label.en }}<br>
-                <small>{{$ctrl.app_questions[key].label.de }}</small>
-            </span>
-            <div >{{item}}</div>
-            <br>
-          </div>
-        </section>
-    </md-card-content>
-</md-card>
-
-
-
-
-<section id="reference1"  >
-    <reference-display  key="$ctrl.app_id + '/reference1'"></reference-display>
-</section>
-    
-<section id="reference2"  >
-    <reference-display key="$ctrl.app_id + '/reference2'"></reference-display>
-</section>
-
-
-<section id="referenceCommon">
-    <md-card>
+    <!--Admin Notes Section-->
+    <md-card id="adminNote">
         <md-card-content>
-
-            <canvas  class="chart chart-bar" height="75"
-              chart-data="$ctrl.ref_chart" 
-                    chart-type="horizontalBar"
-              chart-labels="$ctrl.ref_chart_labels" 
-              chart-series="$ctrl.ref_chart_series"
-              chart-options="$ctrl.ref_chart_options">
-            </canvas>
-
-            <canvas  class="chart chart-pie" height="75"
-              chart-data="$ctrl.ref_chart2" 
-              chart-labels="$ctrl.ref_chart2_labels" 
-              chart-options="{legend: {display: true,position:'right'}}">
-            </canvas>
-
+            <app-admin-notes app-id="$ctrl.app_id"></app-admin-notes>
         </md-card-content>
     </md-card>
-</section>
+    <!--End of Admin Notes Section-->
+
+    <!--
+    <section id="transport">
+    <md-card>
+    <md-card-content class="in_dev">
+    <h4 class="md-title" > Travel Info</h4>
+
+    <md-button aria-label="Add Travel" class="pull-right md-fab md-mini" 
+        ng-click="$ctrl.travelEditDialog({user_id: $ctrl.user.contact.id})"
+
+    ><i class="fa-plus fa"></i> </md-button>
+
+    <div ng-repeat="t in $ctrl.transports" layout="row" align="space-between center">
+    <div flex="25" class="md-headline" style="text-align:right; padding:20px;">{{t.type == 'arr'?'Arrival':'Departure'}}  </div>	
+
+    <div flex><b>{{t.station_name}}</b><br>
+    {{t.time.format("MMM DD  h:mmA") }}<br>
+    ride requested: {{t.ride_requested}}<br>
+    flight: {{t.flight_num}}<br>
+    notes: {{t.user_note}} <br>
+    {{t.staff_note}}
+
+    </div>
+
+    </div>
+    </md-card-content>
+    </md-card>
+    </section>-->
+    <!--
+    <section id="visa">
+    <md-card>
+    <md-card-content class="in_dev">
+    <h4 class="md-title" > Visa Info</h4>
+
+    {{$ctrl.visas|json}}
+
+    </md-card-content>
+    </md-card>
+    </section>-->
+
+    <!--<md-card>
+    <md-card-content class="in_dev">
 
 
-<md-card>
-    <div ng-repeat="item in $ctrl.history">
-      {{item}}
-    </div>    
-</md-card> 
+    Invoices and base account statement. 
 
-<div class="no-print">
-<!--<pre> Application:
-{{$ctrl.app |json}}
- </pre>
+    </md-card-content>
+    </md-card>-->
 
-<pre> User:
-{{$ctrl.user |json}}
- </pre>-->
-</div>
+
+    <md-card>
+        <md-card-content>
+            <h1 class="md-title" translate="10">Contact Information</h1>
+            <section id="contact">
+                <contact-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id"></contact-info>
+            </section>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-content>
+            <section id="passport">
+                <!-- title inside component-->
+                <passport-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id" ></passport-info> 
+            </section>
+        </md-card-content>
+    </md-card>
+
+    <md-card>
+        <md-card-content>
+            <h1 class="md-title">Health Information</h1>
+            <section id="health">
+                <health-info user-id="$ctrl.user_id" ng-if="$ctrl.user_id"></health-info>
+            </section>
+        </md-card-content>
+    </md-card>
+
+
+
+    <md-card>
+        <md-card-content >
+            <h1 class="md-title">Answers to questions</h1>  
+            <section id="questions">
+                <div ng-repeat="(key,item) in $ctrl.app.answers_to_questions">
+                <span class="question">{{$ctrl.app_questions[key].label.en }}<br>
+                    <small>{{$ctrl.app_questions[key].label.de }}</small>
+                </span>
+                <div >{{item}}</div>
+                <br>
+              </div>
+            </section>
+        </md-card-content>
+    </md-card>
+
+
+
+
+    <section id="reference1"  >
+        <reference-display  key="$ctrl.app_id + '/reference1'"></reference-display>
+    </section>
+
+    <section id="reference2"  >
+        <reference-display key="$ctrl.app_id + '/reference2'"></reference-display>
+    </section>
+
+
+    <section id="referenceCommon">
+        <md-card>
+            <md-card-content>
+
+                <canvas  class="chart chart-bar" height="75"
+                  chart-data="$ctrl.ref_chart" 
+                        chart-type="horizontalBar"
+                  chart-labels="$ctrl.ref_chart_labels" 
+                  chart-series="$ctrl.ref_chart_series"
+                  chart-options="$ctrl.ref_chart_options">
+                </canvas>
+
+                <canvas  class="chart chart-pie" height="75"
+                  chart-data="$ctrl.ref_chart2" 
+                  chart-labels="$ctrl.ref_chart2_labels" 
+                  chart-options="{legend: {display: true,position:'right'}}">
+                </canvas>
+
+            </md-card-content>
+        </md-card>
+    </section>
+
+
+    <md-card>
+        <div ng-repeat="item in $ctrl.history">
+          {{item}}
+        </div>    
+    </md-card> 
+
+    <div class="no-print">
+    <!--<pre> Application:
+    {{$ctrl.app |json}}
+     </pre>
+
+    <pre> User:
+    {{$ctrl.user |json}}
+     </pre>-->
+    </div>
 
 </div>
 </div>

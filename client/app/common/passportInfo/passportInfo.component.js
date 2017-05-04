@@ -4,9 +4,7 @@ import './passportInfo.styl';
 
 let passportInfoComponent = {
   restrict: 'E',
-  bindings: { //PassportForm: '=isValid'
-             isValid:"=" 
-            },
+  bindings: { userId:"="},
   template,
   controller
 };

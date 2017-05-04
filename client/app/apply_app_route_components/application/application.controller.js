@@ -29,7 +29,7 @@ class ApplicationController {
          $firebaseObject(profile_contact_ref).$bindTo($scope, "profile_contact");
          profile_contact_ref.once('value', (snap)=>{
           if(snap.val().dob)
-          ctrl.dob =  new Date( snap.val().dob)
+          ctrl.dob =  moment( snap.val().dob)
          })
     
     

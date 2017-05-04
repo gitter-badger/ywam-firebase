@@ -10,7 +10,7 @@
     <span ng-show="$ctrl.health.on_medication">({{$ctrl.health.medications}})</span><br>
 </p>
 <p md-colors="$ctrl.health.allergies||$ctrl.health.other_allergies?{color:'warn'}:{}">
-    <span class="question">Allergies:</span><br> <span ng-repeat="(key ,item) in $ctrl.health.allergies "> {{key}}, </span>{{$ctrl.health.other_allergies}}
+    <span class="question">Allergies:</span><br> <span ng-repeat="(key ,item) in $ctrl.health.allergies " ng-if="item"> {{key}}, </span>{{$ctrl.health.other_allergies}}
 </p>
 <p md-colors="$ctrl.health.dietary_preferences?{color:'warn'}:{}">
     <span class="question">Dietary preferences:</span><br> {{$ctrl.health.dietary_preferences}}<br>

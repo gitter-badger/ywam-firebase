@@ -1,4 +1,4 @@
-class PassportInfoController {
+class PassportInfoFormController {
      /* @ngInject */
   constructor(Auth, $firebaseObject, $scope, $firebaseArray, $filter ,$translate,$timeout ,Site , moment) {
 
@@ -16,13 +16,16 @@ class PassportInfoController {
 
 
             $scope.$watch('$ctrl.PassportForm.$valid',function(v){
-                ctrl.PassportForm.$valid ? ctrl.isValid = true:  ctrl.isValid = false;
+                ctrl.PassportForm && ctrl.PassportForm.$valid ? ctrl.isValid = true:  ctrl.isValid = false;
             })
            
 
-         var lang_key = $translate.use();    
-         var user_id = Auth.$getAuth().uid
-         var profile_passport_ref =   firebase.database().ref('/profiles/' +user_id+'/passport' );
+         var lang_key = $translate.use(); 
+             
+             console.log(ctrl.userId)
+             if(!ctrl.userId)
+             ctrl.userId = Auth.$getAuth().uid
+         var profile_passport_ref =   firebase.database().ref('/profiles/' +ctrl.userId+'/passport' );
              $firebaseObject(profile_passport_ref).$bindTo($scope, "passport");
           
              
@@ -144,4 +147,4 @@ class PassportInfoController {
   }
 }
 
-export default PassportInfoController;
+export default PassportInfoFormController;
