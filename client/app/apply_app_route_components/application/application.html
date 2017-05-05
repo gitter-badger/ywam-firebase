@@ -41,8 +41,22 @@
     </div>
 
     <div flex="100" flex-gt-sm="50">
-
-        <app-for app-id="$ctrl.app_id"></app-for> 
+        
+        <md-card>
+            <md-card-content>
+                <div layout="row" layout-align="start center">
+                    <div style="height:50px; width:50px; overflow:hidden;border-radius: 50%;">
+                        <img firebase-src="{{$ctrl.school.banner_100}}" ng-if="$ctrl.school.banner_100" style="height:100%; position: relative; left: -20px;">
+                        <img src="img/default_banner.jpg" ng-if="!$ctrl.school.banner_100" style="height:100%; position: relative; left: -20px; ">
+                    </div>
+                    <div flex style="padding-left:15px; float:left;">
+                        <app-for app-id="$ctrl.app_id" class="md-headline"></app-for> 
+                    </div>
+                </div>   
+                
+            </md-card-content>
+        </md-card>
+        
         <md-card>
             <md-card-content>
                 <h1 class="md-title" translate="10">Contact Information:</h1>
@@ -64,7 +78,7 @@
                         </md-input-container>  
                     </div>
 
-                    <div layout="row" layout-wrap layout-align="space-between start">
+                    <div layout="row" layout-wrap layout-align="space-around center">
                         
                         <md-input-container flex flex-gt-xs="30" >
                             <label translate="25"></label>
@@ -86,7 +100,7 @@
                             </md-select>  
                         </md-input-container>
 
-                        <md-input-container flex="100" flex-gt-xs="30" >
+                        <md-input-container class="date" flex="100" flex-gt-xs="30" style="min-width:220px;" >
                             <label translate="13"></label>
                             <md-datepicker ng-model="$ctrl.dob"
                                    ng-change="$ctrl.changeDOB()"
@@ -125,7 +139,9 @@
 
 
         <md-card>
-            <user-photo-upload user-id="$ctrl.user_id"></user-photo-upload>
+            <md-card-content>
+                <user-photo-upload user-id="$ctrl.user_id"></user-photo-upload>
+            </md-card-content>
         </md-card>
 
 

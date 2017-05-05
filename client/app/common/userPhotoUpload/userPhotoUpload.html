@@ -1,19 +1,20 @@
 
 <div ng-show="$ctrl.avatar" layout="row">
-<span flex></span>
-<md-button ng-click="$ctrl.avatar = false" translate="78">change photo</md-button>
-<!--<img ng-src="{{$ctrl.avatar_200}}" alt="" height="100px">-->
-
- <img  alt=""
-          ng-if="$ctrl.avatar && !$ctrl.processing"
-         
-           height="100px"
-           firebase-src="{{$ctrl.avatar}}"
-           >
     
+    
+    <!--<img ng-src="{{$ctrl.avatar_200}}" alt="" height="100px">-->
 
-      
+    <img  alt=""
+        ng-if="$ctrl.avatar && !$ctrl.processing"         
+        height="100px"
+        style=" border-radius: 50%;"
+        firebase-src="{{$ctrl.avatar}}"
+               >  
+    
+    <md-button ng-click="$ctrl.avatar = false" translate="78">change photo</md-button>
+    <span flex></span>
 </div>
+
 <div ng-hide="$ctrl.avatar || $ctrl.processing">
 
 <md-progress-linear md-mode="{{$ctrl.upload_progress < 10 && $ctrl.upload_progress  ? 'indeterminate': 'determinate'}}" 
@@ -24,21 +25,20 @@ value="{{$ctrl.upload_progress}}"></md-progress-linear>
 <h1 class="md-title" translate="100">Photo Upload:</h1>
     
 <span translate="77">Please upload a portrait Photo where your face is clearly visible.</span>
+    <br><br>
 
 <div class="cropArea" ng-hide="!$ctrl.file_selected"  >
-  
-
-
-<img-crop 
-        image="$ctrl.myImage" 
-        result-blob="$ctrl.myCroppedImage"
-        result-image=""
-        area-min-size="200"
-        result-image-quality="1"
-        result-image-size="1080"
-        result-image-format="image/jpeg"
-        area-type="square"></img-crop>
-   </div>  
+    <img-crop 
+            image="$ctrl.myImage" 
+            result-blob="$ctrl.myCroppedImage"
+            result-image=""
+            area-min-size="200"
+            result-image-quality="1"
+            result-image-size="1080"
+            result-image-format="image/jpeg"
+            area-type="square">
+    </img-crop>
+</div>  
 
 <div layout="row">
 <span flex> </span>
@@ -55,7 +55,7 @@ value="{{$ctrl.upload_progress}}"></md-progress-linear>
 
 
 </div>
-</div>
+    </div>
 
 <div layout="row" layout-align="center " ng-if="$ctrl.processing" style="padding: 25px">
    <span flex></span>     

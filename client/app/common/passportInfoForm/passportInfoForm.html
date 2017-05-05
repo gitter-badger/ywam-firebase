@@ -43,7 +43,7 @@
             <input  required ng-model="passport.number">
         </md-input-container>
         
-        <md-input-container flex="100" flex-gt-xs="30">
+        <md-input-container class="date" flex="100" flex-gt-xs="30" style="min-width:220px;" >
             <label translate="18">issue_date:</label>
             <md-datepicker ng-model="$ctrl.issue_date"
                          ng-change="$ctrl.changeIssueDate()"
@@ -52,7 +52,7 @@
             </md-datepicker>
         </md-input-container>
         
-        <md-input-container flex="100" flex-gt-xs="30">
+        <md-input-container class="date" flex="100" flex-gt-xs="30" style="min-width:220px;" >
             <label translate="19">expire_date:</label>
             <md-datepicker ng-model="$ctrl.expire_date"
                          ng-change="$ctrl.changeExpireDate()"
