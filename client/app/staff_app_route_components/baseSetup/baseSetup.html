@@ -1,0 +1,128 @@
+<div layout="row" layout-align="center">
+
+  <div flex-gt-xs="75">
+ 
+    <md-card ng-if="!$ctrl.roles.site_admin">
+      <md-card-content>
+        <h1 class="md-title">Welcome to the YWAM Web App</h1>
+        Here are s few things requried to get stated with this app and firebase. <br>
+        Please set your self as site_admin in firebase database console. Add a node called "site_roles" and paste in this value: 
+        <pre>
+
+          {"site_admin": { "{{$ctrl.site.user.id}}" : true } }
+        </pre>
+
+      </md-card-content>
+    </md-card>
+
+     <md-card ng-if="$ctrl.roles.site_admin[$ctrl.site.user.id]">
+      <md-card-content>
+        <h1 class="md-title">Site Set up</h1>
+
+       If you are seeing this you are in the site_admin list (only site admins can see or change this)<br>
+       
+       <h1 >Services:</h1>
+         <md-divider></md-divider>
+       <div layout="row">
+
+            <div flex>
+            <b>Mailgun</b> <br>
+            Email sending service <a  href="https://www.mailgun.com/">mailgun.com</a><br>
+            </div>
+            <div flex layout="column">
+            <md-input-container flex="100">
+              <label> Domain</label>
+              <input ng-model="$ctrl.location_private.mailgun.domain">
+            </md-input-container>
+
+            <md-input-container flex="100">
+              <label> API Key</label>
+              <input ng-model="$ctrl.location_private.mailgun.api_key">
+            </md-input-container>
+
+            
+            </div>
+
+       </div>
+       <md-divider></md-divider>
+      <div layout="row">
+
+            <div flex>
+            <b>Slack</b> <br>
+            Used to post notifcations <a  href="https://slack.com/">slack.com</a><br>
+            </div>
+            <div flex layout="column">
+            <md-input-container flex="100">
+              <label> Token</label>
+              <input ng-model="$ctrl.location_private.slack.token">
+            </md-input-container>
+
+            </div>
+
+       </div>
+
+         <md-divider></md-divider>
+      <div layout="row">
+
+            <div flex>
+            <b>Algolia</b> <br>
+            Search indexing <a  href="https://www.algolia.com/">algolia.com</a><br>
+            </div>
+            <div flex layout="column">
+            <md-input-container flex="100">
+              <label>App ID</label>
+              <input ng-model="$ctrl.location_private.algolia.app_id">
+            </md-input-container>
+            <md-input-container flex="100">
+              <label>API key</label>
+              <input ng-model="$ctrl.location_private.algolia.api_key">
+            </md-input-container>
+
+            </div>
+
+       </div>
+
+      <md-divider></md-divider>
+      <div layout="row">
+
+            <div flex>
+            <b>Paypal</b> <br>
+            payment processing <br>
+            </div>
+            <div flex layout="column">
+           
+              IPN listener URL : <br>
+                
+                https://us-central1-staffapp-95f17.cloudfunctions.net/paypal-ipn  
+
+
+            </div>
+
+       </div>
+
+       <md-divider></md-divider>
+      <div layout="row">
+
+            <div flex>
+            <b>Stripe</b> <br>
+            payment processing <br>
+            </div>
+            <div flex layout="column">
+           
+              webhook listener URL : <br>
+                
+                https://us-central1-< firebase project id >.cloudfunctions.net/stripe-webhook
+
+
+            </div>
+
+       </div>
+
+
+       <!--{{$ctrl.location_private}}-->
+
+      </md-card-content>
+    </md-card>
+
+  </div>
+</div>

@@ -17,7 +17,7 @@ class AccountingDesignationsController {
         })
 
         function addbtn($event){
-          var template =`<designation-edit in-dialog="true"></designation-edit>`;
+          var template =`<designation-edit></designation-edit>`;
 
           Site.showDialog($event, template )
 

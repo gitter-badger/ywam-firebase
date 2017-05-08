@@ -31,6 +31,7 @@ import siteStats from './siteStats/siteStats';
 
 import base from './base/base';
 import baseInfo from './baseInfo/baseInfo';
+import baseSetup from './baseSetup/baseSetup';
 import baseNotices from './baseNotices/baseNotices';
 import basePermissions from './basePermissions/basePermissions';
 import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
@@ -84,6 +85,7 @@ let componentModule = angular.module('app.components', [
 
   base,
   baseInfo,
+  baseSetup,
   baseNotices,
   basePermissions,
   baseProjects,

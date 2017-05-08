@@ -2,8 +2,8 @@ path / {read(){ false}
         write(){false}
         }
 
-path /location_private {read(){ false}
-                         write(){false}
+path /location_private { read(){ isSiteAdmin() }
+                         write(){isSiteAdmin()}
                          }        
 
 //All language phrases TODO change write level to isStaff()
@@ -179,11 +179,15 @@ path /designation_codes/{id} { read() { true }
  path /designation_subscriptions { read() { canEditAccounting() }
                           write() { canEditAccounting() }
                                           }                                            
+
+ 
                                                                                  
 
 path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }
 
+path /site_roles { read() { auth != null}
+                   write() { root.site_roles.site_admin[auth.uid] != null } }
 
 // Access Controll Function 
 
@@ -201,7 +205,7 @@ isStaff() {
 
 //Can this user access Staff Applications at this location? 
 isStaffAppAdmin() {  
-    prior(root.location.perms.access_staff_apps[ auth.uid ] ) != null 
+    prior(root.roles.access_staff_apps[ auth.uid ] ) != null 
         }
 
 // Is this user a school admin of this school?
@@ -221,16 +225,18 @@ isStaffAppAdmin(  )
 isSchoolAdmin(  root.applications[appID].for.school_id + '' ) 
 }
 
+isSiteAdmin(){
+    root.site_roles['site_admin'][auth.uid] != null}
 canEditAccounting(){
-    root.location.perms['can_edit_accounting'][auth.uid] != null}
+    root.site_roles['can_edit_accounting'][auth.uid] != null}
 canEditLocationInfo(){
-    root.location.perms['can_edit_location_info'][auth.uid] != null}
+    root.site_roles['can_edit_location_info'][auth.uid] != null}
 canEditLocationVisaReq(){
-    root.location.perms['can_edit_location_visa_requirements'][auth.uid] != null}
+    root.site_roles['can_edit_location_visa_requirements'][auth.uid] != null}
 
 
 //Can Edit Translation phrases
-canEditPhrases(){root.location.perms['access_translation'][auth.uid] != null}
+canEditPhrases(){root.site_roles['access_translation'][auth.uid] != null}
 // Returns true if the value is intialized to init, or if it retains it's prior
 // value, otherwise.
 initial(value, init) { value == (prior(value) == null ? init : prior(value)) }

@@ -4,7 +4,7 @@ class BasePermissionsController {
   
     var ctrl = this; 
         ctrl.perms= {};
-    var Ref  =  firebase.database().ref('location/perms');
+    var Ref  =  firebase.database().ref('site_roles');
 
         Ref.on('child_added', function(snap){ 
 

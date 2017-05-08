@@ -13,7 +13,9 @@ class DesignationEditController {
         var Ref = firebase.database().ref('/designation_codes')
 
         if(ctrl.code){
-          Ref.child(ctrl.code).on('value')
+          Ref.child(ctrl.code).on('value', function(snap){
+            ctrl.form = snap.val()
+          })
 
         }
         // Ref.on('value',function(snap){
