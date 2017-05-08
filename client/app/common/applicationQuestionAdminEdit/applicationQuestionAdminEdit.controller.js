@@ -15,6 +15,7 @@ class ApplicationQuestionAdminEditController {
       }
 
       function save(){
+        
           ctrl.ref.set(ctrl.question)
 
       }

@@ -149,11 +149,8 @@ type ProfileContact {
     mobile_phone: String | Null
     occupations: String | Null
     skype: String | Null
-    ywam_experience: String | Null
+    ywam_experience: String | Null}
 
-
-  //  modified: CurrentTimestamp
-}
 path /profiles_search {read() {isStaff()}
                        index() {["string"] } }
 
@@ -173,8 +170,12 @@ path /paypal_payments { read() { canEditAccounting() }
                         write() { canEditAccounting() }
                                           }
 path /designation_codes { read() { canEditAccounting() }
-                          write() { canEditAccounting() }
-                                          }   
+                          write() { canEditAccounting() } }
+
+path /designation_codes/{id} { read() { true }
+                                                     
+                                          }  
+
  path /designation_subscriptions { read() { canEditAccounting() }
                           write() { canEditAccounting() }
                                           }                                            
@@ -229,24 +230,7 @@ canEditLocationVisaReq(){
 
 
 //Can Edit Translation phrases
-canEditPhrases(){
-
-   root.location.perms['access_translation'][auth.uid] != null
-  }
-
-
-
-
-
-type CurrentTimestamp extends Number {
-  validate() { this == now }
-}
-
-type InitialTimestamp extends Number {
-  validate() { initial(this, now) }
-}
-
+canEditPhrases(){root.location.perms['access_translation'][auth.uid] != null}
 // Returns true if the value is intialized to init, or if it retains it's prior
 // value, otherwise.
 initial(value, init) { value == (prior(value) == null ? init : prior(value)) }
-

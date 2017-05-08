@@ -9,7 +9,8 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  inWeeks : inWeeks,
                  language:null,
                  hideSideNav : true,
-                 isStaff :false
+                 isStaff :false,
+                 hideDialog: hideDialog, 
 
                
 
@@ -63,9 +64,15 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
          targetEvent: $event,
          clickOutsideToClose:true,
          fullscreen: $mdMedia('xs'),
-         template,
+         template :   '<md-dialog aria-label="dialog"> <md-dialog-content style="padding:15px">'+
+                        template +
+                      '  </md-dialog-content></md-dialog>',
          controller: function ($scope, $mdDialog) { $scope.closeDialog = function() { $mdDialog.hide();} }
       });
+    }
+
+    function hideDialog(){
+      $mdDialog.hide()
     } 
 
  var Ref = firebase.database().ref('location_public')

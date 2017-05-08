@@ -4,9 +4,11 @@
 
 <md-card flex-gt-xs="75">
   <md-card-content>
-  designations:
+    <div layout="row">
+      <span flex  class="md-title">designations:</span> <md-button ng-click="$ctrl.addbtn($event)">Add</md-button>
+    </div>
 <div layout="row" >
-  <b flex="5">Code</b>
+  <b flex="10">Code</b>
   <b flex>Name</b>
   <b flex>Donation Link</b>
 </div>
@@ -14,7 +16,7 @@
 
 <div ng-repeat="(key,item) in $ctrl.designations">
  <div layout="row">
-  <div flex="5"> {{key}}</div>
+  <div flex="10"> {{key}}</div>
    <div flex ><a ui-sref="accounting.designationInfo({code:key})"> {{item.name}}</a> </div>
    <div flex> <a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" >{{$ctrl.base_url}}/support/{{key}}</a></div>
  </div>

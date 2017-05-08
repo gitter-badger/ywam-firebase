@@ -8,7 +8,7 @@ class HealthFormController {
          $firebaseObject(ref).$bindTo($scope, "health");
 
     $scope.$watch('$ctrl.healthForm.$valid',()=>{
-             ctrl.healthForm.$valid? ctrl.isValid = true : ctrl.isValid = false
+             ctrl.healthForm.$valid ? ctrl.isValid = true : ctrl.isValid = false
              $timeout()
           })
 

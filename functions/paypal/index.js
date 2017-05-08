@@ -10,26 +10,27 @@ exports.ipn = functions.https.onRequest((req, res) => {
 
   console.log('Body: ',req.body)
   var p = []
+  var data = req.body      
+      data.payment_date = new Date(data.payment_date).getTime()
 
-  var txn_id = req.body.txn_id;
-//   if( ['web_accept', 'subscr_payment', 'send_money'].indexOf(req.body.txn_type) >= 0  ){
-      
-        if(txn_id)
-       p[p.length]  = admin.database().ref('paypal_payments').child(txn_id).update(req.body)
+      if(data.txn_id)
+       p[p.length]  = admin.database().ref('paypal_payments').child(data.txn_id).update(data)
 
-        if(req.body.subscr_id && req.body.item_number){
-            var subscr = {payer_id : req.body.payer_id,
-                          payer_email: req.body.email,
-                          designation_code: req.body.item_number,
-                         body: req.body }
+        if(data.subscr_id && data.item_number){
+            var subscr = {payer_id : data.payer_id,
+                          payer_email: data.payer_email,
+                          designation_code: data.item_number,
+                          amount: data.mc_amount3,
+                          fee: data.mc_fee? data.mc_fee:'',
+                          body: data }
 
-         p[p.length] =  admin.database().ref('designation_subscriptions').child(req.body.subscr_id).update(subscr)                
+         p[p.length] =  admin.database().ref('designation_subscriptions').child(data.subscr_id).update(subscr)                
         }
 
 
 //   }else{
 
-//      admin.database().ref('paypal_other').push(req.body)
+//      admin.database().ref('paypal_other').push(data)
 //   } 
 
 p[p.length] = res.status(200).send('Thanks for the update');

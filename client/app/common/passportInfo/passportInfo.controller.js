@@ -18,13 +18,9 @@ class PassportInfoController {
     }//end on init
        
     function editPassportDialog($event) {
-        var template=
-           '<md-dialog aria-label="dialog"> <md-dialog-content style="padding:15px">'+
-           '  <passport-info-form user-id="'+ctrl.userId+'"></passport-info-form>'+
-           '  </md-dialog-content><md-dialog-actions>' +
-           '    <md-button ng-click="closeDialog()" class="md-primary">' +
-           '      Close Dialog </md-button> </md-dialog-actions></md-dialog>'
-         Site.showDialog($event, template)
+        var template= '<passport-info-form user-id="'+ctrl.userId+'"></passport-info-form>'
+           
+         Site.showDialog($event, template, 'save_changes' )
       
     }  
       

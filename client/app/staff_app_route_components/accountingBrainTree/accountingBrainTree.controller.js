@@ -1,5 +1,5 @@
 
-import dropin from './dropin.min.js';
+// import dropin from './dropin.min.js';
 
 class AccountingBrainTreeController {
    /* @ngInject */

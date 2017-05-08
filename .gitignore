@@ -5,12 +5,5 @@ node_modules/
 .settings
 *.log
 dist/
-
 .vscode/settings.json
-.publish/
-.publish2/
-
-
-.publish3/
-
-functions/staffapp-35bae404b4bf.json
+functions/service-account-private-key.json

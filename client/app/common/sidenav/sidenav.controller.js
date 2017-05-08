@@ -110,7 +110,7 @@ class SidenavController {
     fa_icon:'fa fa-language'}, 
 
     {title: 'Accounting',
-              state: 'accounting',
+              state: 'accounting.designations',
               fa_icon:'fa fa-usd'},
 
      {title: 'In Development',

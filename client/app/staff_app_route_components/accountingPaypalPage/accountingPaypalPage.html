@@ -17,7 +17,7 @@
 <table class="table" >
 
   <tr>
-    <th>paypal ID</th>
+    <th>Txn ID</th>
     <th>Time</th>
     <th>From</th>
     <th>For </th>
@@ -29,10 +29,12 @@
 
 <tr ng-repeat="item in $ctrl.transactions | orderBy:'-payment_date'">
 <td>{{item.txn_id}}</td>
-<td>{{item.payment_date | date: 'short'}}</td>
+<td>{{item.payment_date | date:'short'}}</td>
 <td>{{item.payer_email}}<br> {{item.first_name}} {{item.last_name}}</td>
 <td>{{item.memo}} 
-<i ng-if="$ctrl.designations[item.item_number]" style="background-color: lightgreen">Designation {{item.item_number}}</i> </td>
+<i ng-if="$ctrl.designations[item.item_number]" style="background-color: lightgreen">Designation {{item.item_number}}</i> 
+<i ng-if="item.item_number && !$ctrl.designations[item.item_number]" style="background-color: orange">item number{{item.item_number}}</i> </td>
+
 <td align="right">
   <i  ng-if="item.mc_fee>0">  {{item.mc_gross}} - {{item.mc_fee}}</i>
     <b>{{item.mc_gross - item.mc_fee | number: 2}} </b></td>

@@ -3,6 +3,8 @@
 const functions = require('firebase-functions');
 const admin = require('../config.js').admin;
 
+
+if(functions.config().algolia){
 // Authenticate to Algolia Database.
 // TODO: Make sure you configure the `algolia.app_id` and `algolia.apiKey` Google Cloud environment variables.
 const algoliasearch = require('algoliasearch');
@@ -45,3 +47,5 @@ exports.queries = functions.database.ref('/search/queries/{queryid}').onWrite(ev
     return admin.database().ref().update(updates);
   });
 });
+
+}

@@ -47,6 +47,7 @@ function handleProviderLoginError(error) {
                           var errorMessage = error.message;
                           // The email of the user's account used.
                           var email = error.email;
+                          if(email){
                           firebase.auth().fetchProvidersForEmail(email).then(function(providers) {
                               console.log(providers)
                               if(providers[0]=='google.com')
@@ -55,7 +56,8 @@ function handleProviderLoginError(error) {
                                ctrl.error_key = 'Email already associated with '+service+ ', try signin with ' + service
                                $timeout()
                           })
-
+                            }//end if email exists
+                            
                           // The firebase.auth.AuthCredential type that was used.
                           var credential = error.credential;
                           // ...

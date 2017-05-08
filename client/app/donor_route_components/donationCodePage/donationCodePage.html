@@ -5,42 +5,52 @@
   <md-card-content>
 
 <div>
-  <h1>Donation Code {{ $ctrl.donationCode }}</h1>
+  <h1>Donation {{$ctrl.donation.name}} {{ $ctrl.donationCode }}</h1>
 </div>
 
+
+
+
+
+
+<div layout="row" layout-align="start center">
+<md-input-container>
+  <label>Amount</label>
+<input ng-model="$ctrl.form.amount" type="number">
+</md-input-container>
+<md-input-container>
+<md-checkbox ng-model="$ctrl.form.monthly">Monthy</md-checkbox>
+
+
+</md-input-container>
+
+
+</div>
 
 <FORM action="https://www.paypal.com/cgi-bin/webscr" method="post">
 
 <!--<INPUT TYPE="hidden" name="cmd" value="_donations">-->
-<input type="hidden" name="cmd" value="_xclick-subscriptions">
-<input type="hidden" name="item_name" value="Support Tim Scholten {{$ctrl.donationCode}} ">
+
+<input type="hidden" name="item_name" value="Support {{$ctrl.donation.name}} {{$ctrl.donationCode}} ">
 <input type="hidden" name="item_number" value="{{$ctrl.donationCode}}">
-<input type="hidden" name="custom" value=" as 'custom'' variable {{$ctrl.donationCode}}"> 
+<!--<input type="hidden" name="custom" value=" as 'custom'' variable {{$ctrl.donationCode}}"> -->
 <input type="hidden" name="business" value="paypal@ywamsarasota.com">
 <input type="hidden" name="currency_code" value="USD">
 <input type="hidden" name="no_shipping" value="1">
 <input type="hidden" name="p3" value="1">
 <input type="hidden" name="src" value="1">
 <input type="hidden" name="sra" value="1">
+<input type="hidden" name="a3" value="{{$ctrl.form.amount}}">
+<input type="hidden" name="t3" value="M" ng-if="$ctrl.form.monthly" >
+<input type="hidden" name="cmd" value="_xclick-subscriptions" ng-if="$ctrl.form.monthly" >
+<input type="hidden" name="cmd" value="_donations" ng-if="!$ctrl.form.monthly" >
 
-<div layout="row" layout-align="start start">
-<md-input-container>
-  <label>Amount</label>
-<input name="a3" value="5.00">
-</md-input-container>
-<md-input-container>
-  <label>Reocuring</label>
-<md-select name="t3" ng-model="$ctrl.reocuring" >
-  <md-option value="M">Monthly</md-option>
-   <md-option value="D">Daily </md-option>
-    <md-option value="A">Yearly  </md-option>
-</md-select>
-</md-input-container>
+
 
 <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-34px.png" 
         border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
 
-</div>
+
 
 </FORM>
 
