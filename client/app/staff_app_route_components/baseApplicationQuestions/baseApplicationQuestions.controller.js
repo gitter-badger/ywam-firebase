@@ -20,14 +20,17 @@ class BaseApplicationQuestionsController {
 
         function editQuestion($event,question_id  ) {
             console.log(question_id)
+            
+//            if(question_id==undefined || question_id=="undefined")
+//                question_id=null;
+            
             var template=
-                  '<md-dialog aria-label="dialog"> <md-dialog-content >'+
-                  '  <application-question-admin-edit question-id="' +  question_id + '" ></application-question-admin-edit>'+
-                  '  </md-dialog-content><md-dialog-actions>' +
-                  '    <md-button ng-click="closeDialog()" class="md-primary">' +
-                  '      Close Dialog </md-button> </md-dialog-actions></md-dialog>';
+                 
+                  '  <application-question-admin-edit question-id="' +  question_id + '" ></application-question-admin-edit>';
+                 
               Site.showDialog($event, template)
               console.log(template)
+            ctrl.questionIdForm=null;
       }  
         
   }

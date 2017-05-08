@@ -1,37 +1,47 @@
 <div layout="row" layout-align="center">
-  <div  flex flex-gt-md="90">
-<md-card>
-  <md-card-content>
-    <h1>Staff and Default School Application Questions</h1>
-     Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_info"</a>
+    <div  flex flex-gt-md="90">
+        <md-card>
+            <md-card-content>
+                <div layout="row" layout-align="space-between center">
+                    <h1 class="md-title">Staff and Default School Application Questions</h1>
+                    <md-button class="md-raised" ng-click="$ctrl.editQuestion($event)">add</md-button>
+                </div>
+                Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_info"</a>
+                <br>
+                <br> 
+                <br>
+                <br> 
 
-</md-card-content>
+                <div ng-repeat="(key, question) in $ctrl.questions" ng-if="question.active" class="questions">
+                    <div class="table" layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
+                        <div flex >
+                            {{question.label.en}}<br>
+                            <i>{{question.label.de}}</i>
+                        </div>
+                        <div >
+                            <md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox>
+                        </div>
+                        <div >
+                            <md-checkbox ng-model="default_school_questions[key]" >New Schools</md-checkbox>
+                        </div>
+                    </div>
+                    <md-divider></md-divider>
+                </div>
 
-     <!--<div layout="row">
-        <div flex >Question</div>
-        <div flex ></div>
-        <div flex ></div>
-     </div>-->
-  
-      <div ng-repeat="(key, question) in $ctrl.questions" ng-if="question.active">
-       <div class="table" layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
-        <div flex  >{{question.label.en}}<br><i>{{question.label.de}}</i></div>
-        <div ><md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox></div>
-        <div ><md-checkbox ng-model="default_school_questions[key]" >New Schools</md-checkbox></div>
-       </div>
-       <md-divider></md-divider>
-      </div>
-   
-Inactive
-       <div ng-repeat="(key, question) in $ctrl.questions" ng-if="!question.active" style="color:gray">
-       <div  layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
-        <div flex  >{{question.label.en}}<br><i>{{question.label.de}}</i></div>
-        <!--<div ><md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox></div>
-        <div ><md-checkbox ng-model="default_school_questions[key]" >New Schools</md-checkbox></div>-->
-       </div>
-       <md-divider></md-divider>
-      </div>
+                Inactive
+                <div ng-repeat="(key, question) in $ctrl.questions" ng-if="!question.active" style="color:gray">
+                    <div  layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
+                        <div flex  >
+                            {{question.label.en}}<br>
+                            <i>{{question.label.de}}</i>
+                        </div>
+                        <!--<div ><md-checkbox ng-model="staff_questions[key]" >Staff App</md-checkbox></div>
+                        <div ><md-checkbox ng-model="default_school_questions[key]" >New Schools</md-checkbox></div>-->
+                    </div>
+                    <md-divider></md-divider>
+                </div>
 
-
-</md-card>
+            </md-card-content>
+        </md-card>
+    </div>
 </div>
