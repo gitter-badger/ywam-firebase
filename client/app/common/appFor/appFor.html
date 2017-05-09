@@ -2,7 +2,7 @@
 <a ng-if="$ctrl.link">
 {{ $ctrl.school.name }}
 {{ $ctrl.school.start_date | date:"yyyy" }}
-<span ng-if="!$ctrl.for.type=='school'">
+<span ng-if="$ctrl.for.type !='school'">
 {{$ctrl.for.type | translate}}
 </span>
 
@@ -12,7 +12,7 @@
 <span ng-if="!$ctrl.link"> 
 {{ $ctrl.school.name }}
 {{ $ctrl.school.start_date | date:"yyyy" }}
-<span ng-if="!$ctrl.for.type=='school'">
+<span ng-if="$ctrl.for.type !='school'">
 {{$ctrl.for.type | translate}}
 </span>
 </span>
