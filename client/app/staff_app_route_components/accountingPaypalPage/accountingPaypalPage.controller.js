@@ -14,7 +14,7 @@ class AccountingPaypalPageController {
        ctrl.transactions = $firebaseArray(RefOrdered);
 
 
-       firebase.database().ref('/designation_codes')
+       firebase.database().ref('/funds')
        .on('value',function(snap){
           ctrl.designations = snap.val()
         })

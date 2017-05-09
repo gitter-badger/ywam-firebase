@@ -5,7 +5,7 @@ class AccountingDesignationsController {
         ctrl.addbtn = addbtn  
       
 
-        var Ref = firebase.database().ref('/designation_codes')
+        var Ref = firebase.database().ref('/funds')
          ctrl.designations = $firebaseObject(Ref)
         // Ref.on('value',function(snap){
         //   ctrl.designations = snap.val()

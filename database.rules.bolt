@@ -169,10 +169,10 @@ path /location/default_school_questions {write(){canEditLocationInfo()}}
 path /paypal_payments { read() { canEditAccounting() }
                         write() { canEditAccounting() }
                                           }
-path /designation_codes { read() { canEditAccounting() }
+path /funds { read() { canEditAccounting() }
                           write() { canEditAccounting() } }
 
-path /designation_codes/{id} { read() { true }
+path /funds/{id} { read() { true }
                                                      
                                           }  
 

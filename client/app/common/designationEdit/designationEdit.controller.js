@@ -10,7 +10,7 @@ class DesignationEditController {
         console.log(ctrl.code)
       
 
-        var Ref = firebase.database().ref('/designation_codes')
+        var Ref = firebase.database().ref('/funds')
 
         if(ctrl.code){
           Ref.child(ctrl.code).on('value', function(snap){

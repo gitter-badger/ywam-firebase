@@ -95,7 +95,7 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
                             for: appfor }
                 console.log('updating app indexes', app_id, status);
 
-             if(appfor.type ==1){
+             if(appfor.type =='staff'){
                
                 
                 // //All staff Ever index

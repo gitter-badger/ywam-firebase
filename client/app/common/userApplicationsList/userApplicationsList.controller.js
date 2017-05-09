@@ -39,7 +39,7 @@ class UserApplicationsListController {
     
         if(app.for.school_id)
      $state.go('start',{app_for:'school_' + app.for.school_id});
-        if(app.for.type==1)
+        if(app.for.type=='staff')
      $state.go('start',{app_for:'staff'});
 
     }

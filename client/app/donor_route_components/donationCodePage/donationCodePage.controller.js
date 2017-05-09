@@ -6,7 +6,7 @@ class DonationCodePageController {
         ctrl.donationCode = $stateParams.donationCode;
         ctrl.reocuring='M'//default value set as Montly
 
-        var Ref = firebase.database().ref('/designation_codes/'+ ctrl.donationCode)
+        var Ref = firebase.database().ref('/funds/'+ ctrl.donationCode)
         
         ctrl.donation = $firebaseObject(Ref);
         // Ref.on('value',function(snap){

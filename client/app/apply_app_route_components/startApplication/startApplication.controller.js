@@ -22,7 +22,7 @@ class StartApplicationController {
                   //todo make a check if they are trying to start multible DTS.. have them cancelle one before starting another
                 
                 meta_data.school_id = school_id;
-                meta_data.type = 0; //type 0 is school
+                meta_data.type = 'school'; //type 0 is school
 
            }
            else
@@ -43,7 +43,7 @@ class StartApplicationController {
         { 
 
           console.log('looks like a staff App')
-          meta_data.type = 1; //type 1 is staff
+          meta_data.type = 'staff'; //type is staff
            nextStep()
     
         }//end staff 

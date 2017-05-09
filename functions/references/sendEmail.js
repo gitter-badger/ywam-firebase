@@ -100,10 +100,10 @@ function emailStep2(data){
         schoolDate=data.school.name+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear()
         var appFor="a school"
         }
-        if(data.appData.type==1){
+        if(data.appData.type=='staff'){
             var appFor="Staff";
         }
-        else if(data.appData.type==2)
+        else if(data.appData.type=='missionbuilder')
             {
                  var appFor="Missionbuilder";
             }
@@ -124,11 +124,11 @@ function emailStep2(data){
         var appFor="für eine Schule";
         var school="<p>Schule:<br>"+schoolDate+"</p>";
         }
-        if(data.appData.type==1){
+        if(data.appData.type=='staff'){
             var appFor="als Mitarbeiter";
             var school="";
         }
-        else if(data.appData.type==2)
+        else if(data.appData.type=='missionbuilder')
             {
                 var appFor="als Missionbuilder";
                 var school="";
