@@ -1,6 +1,6 @@
 class UserApplicationsListController {
    /* @ngInject */
- constructor(Auth,$timeout,$state) 
+ constructor(Auth,$timeout,$state,$firebaseObject) 
     {
       var ctrl=this;
         ctrl.applicationList=[];
@@ -35,6 +35,11 @@ class UserApplicationsListController {
 
           })
       }
+        
+         var refLoc= firebase.database().ref("location_public/application_types/")
+         ctrl.appTypes=$firebaseObject(refLoc)
+        
+        
     function applyNow(app){
     
         if(app.for.school_id)

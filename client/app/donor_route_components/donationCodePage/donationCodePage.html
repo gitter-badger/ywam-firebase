@@ -1,60 +1,90 @@
 <div layout="row" layout-align="center">
 
 
-<md-card flex-gt-xs="50">
-  <md-card-content>
+    <md-card flex-gt-xs="50">
+        <md-card-content>
 
-<div>
-  <h1>Donation {{$ctrl.donation.name}} {{ $ctrl.donationCode }}</h1>
-</div>
+            
+            
+            
+            <div layout="row" layout-align="start center">
+<!--
+                <div style="height:70px;" >
+               
+                    <img  style="border-radius: 50%; height:100%"  ng-src="{{$ctrl.avatar}}" >
+                <br>
+                </div>
+-->
+                <div flex >
+                    <h1 class="md-title" translate="donation">Donation for</h1>
+                    <h1 class="md-display-1">{{$ctrl.donation.name}}</h1>
+                    <h1 class="md-subhead">
+                        <span translate="doncode">Donationcode</span>: {{ $ctrl.donationCode }}
+                    </h1>
+                    <p>
+                        <i>
+                        {{$ctrl.donation.description}}
+                        </i>
+                    </p>
+                </div>
+                <div flex >
+                    <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;">                      
+                        <img  style="width:100%; height:100%" align="right"  ng-src="{{$ctrl.avatar}}" >   
+                    </div>
+                </div>
+            </div>   
+            
+            <br>
+            <br>
 
+            <div>
+                <b>
+                    <span translate="give">I want to give</span>:
+                </b>
+                <div layout="row" layout-align="start center">
+                    <md-input-container>
+                        <label><span translate="amount">Amount</span> in {{$ctrl.locationPublic.currencySym}}</label>
+                        <input ng-model="$ctrl.form.amount" type="number">
+                    </md-input-container>
 
+                    <md-input-container style="padding-left:10px;">
+                        <md-checkbox ng-model="$ctrl.form.monthly"><span translate="monthly">Monthly</span></md-checkbox>
+                    </md-input-container>
+                </div>
+            </div>
 
+            <div layout="row" layout-align="start center">
+                <b style="padding-right:10px;">
+                    <span translate="pay">Pay with</span>:
+                </b>
+                
+                <FORM action="https://www.paypal.com/cgi-bin/webscr" method="post">
+                    <!--<INPUT TYPE="hidden" name="cmd" value="_donations">-->
 
+                    <input type="hidden" name="item_name" value="Support {{$ctrl.donation.name}} {{$ctrl.donationCode}} ">
+                    <input type="hidden" name="item_number" value="{{$ctrl.donationCode}}">
+                    <!--<input type="hidden" name="custom" value=" as 'custom'' variable {{$ctrl.donationCode}}"> -->
+                    <input type="hidden" name="business" value="paypal@ywamsarasota.com">
+                    <input type="hidden" name="currency_code" value="USD">
+                    <input type="hidden" name="no_shipping" value="1">
+                    <input type="hidden" name="p3" value="1">
+                    <input type="hidden" name="src" value="1">
+                    <input type="hidden" name="sra" value="1">
+                    <input type="hidden" name="a3" value="{{$ctrl.form.amount}}">
+                    <input type="hidden" name="t3" value="M" ng-if="$ctrl.form.monthly" >
+                    <input type="hidden" name="cmd" value="_xclick-subscriptions" ng-if="$ctrl.form.monthly" >
+                    <input type="hidden" name="cmd" value="_donations" ng-if="!$ctrl.form.monthly" >
 
+                    <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-34px.png" 
+                        border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
+                </FORM>
+            </div>
+                
+                <br>
+                <br>
+            <span>Youth With A Mission Sarasota, Inc. is a 501(c)(3) nonprofit organization. No goods or services are received in consideration of monetary gifts. Per IRS guidelines, all contributions to Youth With A Mission NSI are income tax-deductible and made with the understanding that Youth With A Mission NSI has complete discretion and control over the use of all donated funds</span>
 
-<div layout="row" layout-align="start center">
-<md-input-container>
-  <label>Amount</label>
-<input ng-model="$ctrl.form.amount" type="number">
-</md-input-container>
-<md-input-container>
-<md-checkbox ng-model="$ctrl.form.monthly">Monthy</md-checkbox>
-
-
-</md-input-container>
-
-
-</div>
-
-<FORM action="https://www.paypal.com/cgi-bin/webscr" method="post">
-
-<!--<INPUT TYPE="hidden" name="cmd" value="_donations">-->
-
-<input type="hidden" name="item_name" value="Support {{$ctrl.donation.name}} {{$ctrl.donationCode}} ">
-<input type="hidden" name="item_number" value="{{$ctrl.donationCode}}">
-<!--<input type="hidden" name="custom" value=" as 'custom'' variable {{$ctrl.donationCode}}"> -->
-<input type="hidden" name="business" value="paypal@ywamsarasota.com">
-<input type="hidden" name="currency_code" value="USD">
-<input type="hidden" name="no_shipping" value="1">
-<input type="hidden" name="p3" value="1">
-<input type="hidden" name="src" value="1">
-<input type="hidden" name="sra" value="1">
-<input type="hidden" name="a3" value="{{$ctrl.form.amount}}">
-<input type="hidden" name="t3" value="M" ng-if="$ctrl.form.monthly" >
-<input type="hidden" name="cmd" value="_xclick-subscriptions" ng-if="$ctrl.form.monthly" >
-<input type="hidden" name="cmd" value="_donations" ng-if="!$ctrl.form.monthly" >
-
-
-
-<input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-34px.png" 
-        border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
-
-
-
-</FORM>
-
-  </md-card-content>
-</md-card>
+        </md-card-content>
+    </md-card>
 
 </div>
