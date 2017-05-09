@@ -46,12 +46,15 @@
             <md-card-content>
                 <div layout="row" layout-align="start center">
                     <div style="height:50px; width:50px; overflow:hidden;border-radius: 50%;">
-                        <img firebase-src="{{$ctrl.school.banner_100}}" ng-if="$ctrl.school.banner_100" style="height:100%; position: relative; left: -20px;">
-                        <img src="img/default_banner.jpg" ng-if="!$ctrl.school.banner_100" style="height:100%; position: relative; left: -20px; ">
+                        <div style="width:200px; margin-left:-75px; height:50px; text-align:center;">
+                            <img firebase-src="{{$ctrl.school.banner_100}}" ng-if="$ctrl.school.banner_100" style="height:100%;">
+                            <img src="img/default_banner.jpg" ng-if="!$ctrl.school.banner_100" style="height:100%;">
+                        </div>
                     </div>
                     <div flex style="padding-left:15px; float:left;">
                         <app-for app-id="$ctrl.app_id" class="md-headline"></app-for> 
                     </div>
+                    
                 </div>   
                 
             </md-card-content>

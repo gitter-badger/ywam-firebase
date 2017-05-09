@@ -30,14 +30,15 @@
             
             <!--{{school.description}}-->
          
-        </md-card-content>
-         <md-card-actions layout="row" layout-align="end center">
+        
+         <md-card-actions layout="row" layout-align="end center" style="margin:0;S">
           <!--<md-button>More Info</md-button>-->
          <app-status ng-if="school.user_has_app" date="true" app-id="school.user_has_app" ></app-status>
              <div flex></div>
-          <md-button ng-if="school.user_has_app_status<10 || !school.user_has_app_status " ng-click="$ctrl.applyNow(school.id)">{{school.user_has_app ?  45: 4|translate}}</md-button>
+          <md-button class="md-raised" ng-if="school.user_has_app_status<10 || !school.user_has_app_status " ng-click="$ctrl.applyNow(school.id)">{{school.user_has_app ?  45: 4|translate}}</md-button>
         
         </md-card-actions>
+            </md-card-content>
    </md-card>
 
 
