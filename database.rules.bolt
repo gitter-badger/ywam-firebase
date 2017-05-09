@@ -169,10 +169,21 @@ path /location/default_school_questions {write(){canEditLocationInfo()}}
 path /paypal_payments { read() { canEditAccounting() }
                         write() { canEditAccounting() }
                                           }
+path /paypal_events { read() { canEditAccounting() }
+                        write() { canEditAccounting() }
+                                          }
+
+path /stripe_transactions { read() { canEditAccounting() }
+                        write() { canEditAccounting() }
+                                          }
+path /stripe_events { read() { canEditAccounting() }
+                        write() { canEditAccounting() }
+                                          }
+
 path /funds { read() { canEditAccounting() }
                           write() { canEditAccounting() } }
 
-path /funds/{id} { read() { true }
+path /funds/{id}/meta { read() { root.funds[id].meta.public }
                                                      
                                           }  
 

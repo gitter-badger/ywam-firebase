@@ -1,16 +1,16 @@
-import AccountingDesignationsModule from './accountingDesignations'
-import AccountingDesignationsController from './accountingDesignations.controller';
-import AccountingDesignationsComponent from './accountingDesignations.component';
-import AccountingDesignationsTemplate from './accountingDesignations.html';
+import FundEditModule from './fundEdit'
+import FundEditController from './fundEdit.controller';
+import FundEditComponent from './fundEdit.component';
+import FundEditTemplate from './fundEdit.html';
 
-describe('AccountingDesignations', () => {
+describe('FundEdit', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(AccountingDesignationsModule));
+  beforeEach(window.module(FundEditModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new AccountingDesignationsController();
+      return new FundEditController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('AccountingDesignations', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(AccountingDesignationsTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(FundEditTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = AccountingDesignationsComponent;
+      let component = FundEditComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(AccountingDesignationsTemplate);
+        expect(component.template).to.equal(FundEditTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(AccountingDesignationsController);
+        expect(component.controller).to.equal(FundEditController);
       });
   });
 });

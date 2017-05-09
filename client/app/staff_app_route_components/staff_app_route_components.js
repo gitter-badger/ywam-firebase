@@ -16,9 +16,12 @@ import schoolRoleCall from './school/schoolRoleCall/schoolRoleCall';
 
 import accounting from './accounting/accounting';
 import accountingPaypalPage from './accountingPaypalPage/accountingPaypalPage';
+import accountingPaypalEvents from './accountingPaypalEvents/accountingPaypalEvents';
+import accountingStripeTransactions from './accountingStripeTransactions/accountingStripeTransactions';
+import accountingStripeEvents from './accountingStripeEvents/accountingStripeEvents';
 import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
-import accountingDesignations from './accountingDesignations/accountingDesignations';
-import designationInfo from './designationInfo/designationInfo';
+import accountingFunds from './accountingFunds/accountingFunds';
+import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
@@ -71,9 +74,12 @@ let componentModule = angular.module('app.components', [
   prayerWall,
   accounting,
   accountingPaypalPage,
+  accountingPaypalEvents,
+  accountingStripeTransactions,
+  accountingStripeEvents,
   accountingBrainTree,
-  accountingDesignations,
-  designationInfo,
+  accountingFunds,
+  accountingFundInfo,
 
   staff,
   staffCurrent,

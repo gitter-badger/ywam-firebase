@@ -1,16 +1,16 @@
-import DesignationInfoModule from './designationInfo'
-import DesignationInfoController from './designationInfo.controller';
-import DesignationInfoComponent from './designationInfo.component';
-import DesignationInfoTemplate from './designationInfo.html';
+import AccountingStripeEventsModule from './accountingStripeEvents'
+import AccountingStripeEventsController from './accountingStripeEvents.controller';
+import AccountingStripeEventsComponent from './accountingStripeEvents.component';
+import AccountingStripeEventsTemplate from './accountingStripeEvents.html';
 
-describe('DesignationInfo', () => {
+describe('AccountingStripeEvents', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(DesignationInfoModule));
+  beforeEach(window.module(AccountingStripeEventsModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new DesignationInfoController();
+      return new AccountingStripeEventsController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('DesignationInfo', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(DesignationInfoTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(AccountingStripeEventsTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = DesignationInfoComponent;
+      let component = AccountingStripeEventsComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(DesignationInfoTemplate);
+        expect(component.template).to.equal(AccountingStripeEventsTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(DesignationInfoController);
+        expect(component.controller).to.equal(AccountingStripeEventsController);
       });
   });
 });

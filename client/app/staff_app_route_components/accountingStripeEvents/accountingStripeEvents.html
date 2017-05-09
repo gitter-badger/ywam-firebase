@@ -1,0 +1,17 @@
+<div>
+  <h1>{{ $ctrl.name }}</h1>
+</div>
+
+
+<div ng-repeat="event in $ctrl.events">
+<div layout="row">
+  <div flex="20">
+{{event.created * 1000 | date}}
+  </div><div flex>
+    <pre>
+{{event|json}}
+    </pre>
+</div>
+</div>
+<md-divider></md-divider>
+</div>

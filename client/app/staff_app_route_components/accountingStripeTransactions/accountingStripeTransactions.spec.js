@@ -1,16 +1,16 @@
-import DesignationEditModule from './designationEdit'
-import DesignationEditController from './designationEdit.controller';
-import DesignationEditComponent from './designationEdit.component';
-import DesignationEditTemplate from './designationEdit.html';
+import AccountingStripeTransactionsModule from './accountingStripeTransactions'
+import AccountingStripeTransactionsController from './accountingStripeTransactions.controller';
+import AccountingStripeTransactionsComponent from './accountingStripeTransactions.component';
+import AccountingStripeTransactionsTemplate from './accountingStripeTransactions.html';
 
-describe('DesignationEdit', () => {
+describe('AccountingStripeTransactions', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(DesignationEditModule));
+  beforeEach(window.module(AccountingStripeTransactionsModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new DesignationEditController();
+      return new AccountingStripeTransactionsController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('DesignationEdit', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(DesignationEditTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(AccountingStripeTransactionsTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = DesignationEditComponent;
+      let component = AccountingStripeTransactionsComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(DesignationEditTemplate);
+        expect(component.template).to.equal(AccountingStripeTransactionsTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(DesignationEditController);
+        expect(component.controller).to.equal(AccountingStripeTransactionsController);
       });
   });
 });

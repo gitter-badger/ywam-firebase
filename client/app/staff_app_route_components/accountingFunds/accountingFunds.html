@@ -5,7 +5,10 @@
 <md-card flex-gt-xs="75">
   <md-card-content>
     <div layout="row">
-      <span flex  class="md-title">designations:</span> <md-button ng-click="$ctrl.addbtn($event)">Add</md-button>
+      <span flex class="md-title">Funds:
+         <small class="md-caption">(Projects, Classes, Designations)</small>
+        </span>  <md-button ng-click="$ctrl.addbtn($event)">Add</md-button>
+     
     </div>
 <div layout="row" >
   <b flex="10">Code</b>
@@ -14,10 +17,10 @@
 </div>
 <md-divider></md-divider>
 
-<div ng-repeat="(key,item) in $ctrl.designations">
+<div ng-repeat="(key,item) in $ctrl.funds">
  <div layout="row">
   <div flex="10"> {{key}}</div>
-   <div flex ><a ui-sref="accounting.designationInfo({code:key})"> {{item.name}}</a> </div>
+   <div flex ><a ui-sref="accounting.fund({code:key})"> {{item.meta.name}}</a> </div>
    <div flex> <a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" >{{$ctrl.base_url}}/support/{{key}}</a></div>
  </div>
   <md-divider></md-divider>

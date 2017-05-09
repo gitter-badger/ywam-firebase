@@ -1,12 +1,12 @@
-class AccountingDesignationsController {
+class AccountingFundsController {
    /* @ngInject */
-  constructor($firebaseObject, Site ) {
+ constructor($firebaseObject, Site ) {
     var ctrl = this;
         ctrl.addbtn = addbtn  
       
 
         var Ref = firebase.database().ref('/funds')
-         ctrl.designations = $firebaseObject(Ref)
+         ctrl.funds = $firebaseObject(Ref)
         // Ref.on('value',function(snap){
         //   ctrl.designations = snap.val()
         // })
@@ -17,7 +17,7 @@ class AccountingDesignationsController {
         })
 
         function addbtn($event){
-          var template =`<designation-edit></designation-edit>`;
+          var template =`<fund-edit></fund-edit>`;
 
           Site.showDialog($event, template )
 
@@ -25,4 +25,4 @@ class AccountingDesignationsController {
   }
 }
 
-export default AccountingDesignationsController;
+export default AccountingFundsController;

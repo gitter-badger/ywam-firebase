@@ -39,7 +39,7 @@ import siteTaskList from './siteTaskList/siteTaskList';
 import roleCallsList from './roleCallsList/roleCallsList';
 import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
-import designationEdit from './designationEdit/designationEdit';
+import fundEdit from './fundEdit/fundEdit';
 
 
 
@@ -78,7 +78,7 @@ let commonModule = angular.module('app.common', [
   roleCallsList,
   roleCallMemberList,
   baseProjectTaskEdit,
-  designationEdit
+  fundEdit
 
 
 ])
