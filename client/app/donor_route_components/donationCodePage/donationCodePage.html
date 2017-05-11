@@ -29,7 +29,7 @@
                 </div>
                 <div flex >
                     <div class="profilePhoto" style="float:right; text-align:center; max-height:300px;   max-width:240px;">                      
-                        <img  style="width:100%; height:100%" align="right"  ng-src="{{$ctrl.avatar}}" >   
+                        <!--<img  style="width:100%; height:100%" align="right"  ng-src="{{$ctrl.avatar}}" >   -->
                     </div>
                 </div>
             </div>   
@@ -72,6 +72,7 @@
                     <input type="hidden" name="p3" value="1">
                     <input type="hidden" name="src" value="1">
                     <input type="hidden" name="sra" value="1">
+                    <input type="hidden" name="amount" value="{{$ctrl.form.amount}}">
                     <input type="hidden" name="a3" value="{{$ctrl.form.amount}}">
                     <input type="hidden" name="t3" value="M" ng-if="$ctrl.form.monthly" >
                     <input type="hidden" name="cmd" value="_xclick-subscriptions" ng-if="$ctrl.form.monthly" >
@@ -80,7 +81,7 @@
                     <input type="image" src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/silver-pill-paypal-34px.png" 
                         border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!">
                 </FORM>
-                <span>&nbsp;&nbsp;(<span translate="card">also possible to pay with card</span>)</span>
+                <span ng-if="!$ctrl.form.monthly" >&nbsp;&nbsp;(<span translate="card">also possible to pay with card</span>)</span>
             </div>
                 
                 <br>

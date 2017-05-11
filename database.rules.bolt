@@ -151,9 +151,6 @@ type ProfileContact {
     skype: String | Null
     ywam_experience: String | Null}
 
-path /profiles_search {read() {isStaff()}
-                       index() {["string"] } }
-
 
 path /location_public { read() { true}
                         write() {canEditLocationInfo()} }
