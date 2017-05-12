@@ -48,8 +48,8 @@ runing `gulp webpack` will bundle the app and save the results in the `/dist` di
 Change the config in index.html to use your own firebase connection. 
  
 ## Deploy to Firebase hosting
-if you did not previously install firebase tools do so now
-`install npm install -g firebase-tools firebase-bolt`
+if you did not previously install firebase tools do so now.
+`sudo npm install -g firebase-tools firebase-bolt`
 
 cd into your project directory and run the command:
 `firebase login` then
