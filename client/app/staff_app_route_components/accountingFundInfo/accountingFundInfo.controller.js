@@ -11,6 +11,7 @@ class AccountingFundInfoController {
         firebase.database().ref('/designation_subscriptions').orderByChild('designation_code').equalTo(ctrl.code)
           .on('value',function(snap){
           ctrl.subscriptions = snap.val()
+          $timeout()
         })
 
         firebase.database().ref('/paypal_payments').orderByChild('item_number').equalTo(ctrl.code)

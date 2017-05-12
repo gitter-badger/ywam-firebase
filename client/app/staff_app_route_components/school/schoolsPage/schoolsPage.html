@@ -113,6 +113,10 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
 										<!-- If currently on outreach  -->
 									<div ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
+										> On Outreach {{$ctrl.inWeeks(sch.public.outreach_start_date)}}
+										
+										</div>	
+									<div ng-if="sch.public.outreach_start_date < $ctrl.now && sch.public.outreach_end_date > $ctrl.now " 
 										> Back from Outreach {{$ctrl.inWeeks(sch.public.outreach_end_date)}}
 										
 										</div>	  

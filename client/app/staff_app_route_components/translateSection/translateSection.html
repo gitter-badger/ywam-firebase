@@ -94,7 +94,7 @@ Context: {{$ctrl.phrases.meta}}
 
 <div layout="row">
 <!--  <md-button class="" ng-click="$ctrl.newPhrase()">New Phrase</md-button>-->
-  <span ng-show="$ctrl.index" style="padding:15px; color:gray"> code: <code >{{ '{'+'{ '+  $ctrl.index + '| translate }\}' }} </code > <br><a ng-click="$ctrl.alternitive = !$ctrl.alternitive">alternitive</a> </span>
+  <span ng-show="$ctrl.index" style="padding:15px; color:gray"> code: <code >{{ '{'+'{ "'+  $ctrl.index + '"| translate }\}' }} </code > <br><a ng-click="$ctrl.alternitive = !$ctrl.alternitive">alternitive</a> </span>
   <!--<input ng-model="$ctrl.new" />-->
   <span flex></span>
 <md-button class="md-primary md-raised " ng-click="$ctrl.next()" ng-show="$ctrl.index">Next</md-button>

@@ -1,0 +1,24 @@
+
+<div layout="row" layout-align="center">
+<md-card flex flex-gt-xs="75">
+  <md-card-content>
+<div>
+  <h1>{{ $ctrl.name }} {{$ctrl.contacts.length}}</h1>
+</div>
+A big list of all contacts <br>
+TODOs:<br> tie into Mailchimp API to show what mailing lists contacts are on<br>
+
+<div ng-repeat="item in $ctrl.contacts">
+  <div layout="row">
+    <div flex ><a ui-sref="profile({user_id:item.id})">
+  {{item.contact.first_name}} {{item.contact.last_name}} </a>
+    </div>
+    <div flex>
+      {{item.contact.email}}
+    </div>
+  </div>
+  <md-divider></md-divider></div> 
+
+  </md-card-content>
+</md-card>
+</div>

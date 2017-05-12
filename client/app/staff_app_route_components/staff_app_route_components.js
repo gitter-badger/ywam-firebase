@@ -40,6 +40,7 @@ import basePermissions from './basePermissions/basePermissions';
 import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
 import baseApplicationQuestions from './baseApplicationQuestions/baseApplicationQuestions';
 import baseProjects from './baseProjects/baseProjects';
+import baseContacts from './baseContacts/baseContacts';
 
 
 import Search from './search/search';
@@ -97,6 +98,7 @@ let componentModule = angular.module('app.components', [
   baseProjects,
   baseVisaRequirements,
   baseApplicationQuestions,
+  baseContacts,
 
 
 ])

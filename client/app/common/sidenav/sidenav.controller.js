@@ -127,7 +127,9 @@ class SidenavController {
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
-              
+              {title: 'All Base Contacts',
+              state: 'baseContacts',
+              fa_icon:'fa fa-tree'},
               {title: 'BrainTree',
               state: 'accountingBrainTree',
               fa_icon:'fa fa-tree'},
