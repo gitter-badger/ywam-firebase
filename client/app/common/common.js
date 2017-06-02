@@ -26,6 +26,7 @@ import languagesForm from './languagesForm/languages';
 import refRequest from './refRequest/refRequest';
 import schoolQuestionsForm from './schoolQuestionsForm/schoolQuestionsForm';
 import emergencyContactForm from './emergencyContactForm/emergencyContactForm';
+import contactInfoForm from './contactInfoForm/contactInfoForm';
 
 
 
@@ -47,38 +48,39 @@ let commonModule = angular.module('app.common', [
   
  
 
-   Header,
-  Sidenav,
-  LoginButtons,
-  LoginDialog,
-  signUp,
+    Header,
+    Sidenav,
+    LoginButtons,
+    LoginDialog,
+    signUp,
 
-  appStatus,
-  appStatusesSelector,
-  appFor,
-  refStatus,
-  contactInfo,
-  passportInfo,
-  userPhotoUpload,
-  userApplicationsList,
+    appStatus,
+    appStatusesSelector,
+    appFor,
+    refStatus,
+    contactInfo,
+    passportInfo,
+    userPhotoUpload,
+    userApplicationsList,
 
-  healthForm,
-  languagesForm,
-  passportInfoForm,
-  postalAddressForm,
-  refRequest,
-  schoolQuestionsForm,
-  emergencyContactForm,
+    healthForm,
+    languagesForm,
+    passportInfoForm,
+    postalAddressForm,
+    refRequest,
+    schoolQuestionsForm,
+    emergencyContactForm,
+    contactInfoForm,
 
-  appAdminNotes,
-  applicationQuestionAdminEdit,
-  healthInfo,
-  referenceDisplay,
-  siteTaskList,
-  roleCallsList,
-  roleCallMemberList,
-  baseProjectTaskEdit,
-  fundEdit
+    appAdminNotes,
+    applicationQuestionAdminEdit,
+    healthInfo,
+    referenceDisplay,
+    siteTaskList,
+    roleCallsList,
+    roleCallMemberList,
+    baseProjectTaskEdit,
+    fundEdit
 
 
 ])

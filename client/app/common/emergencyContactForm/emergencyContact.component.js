@@ -4,7 +4,8 @@ import './emergencyContact.styl';
 
 let emergencyContactComponent = {
   restrict: 'E',
-  bindings: {isValid :'='},
+  bindings: {isValid :'=?',
+                userId:"@"},
   template,
   controller
 };

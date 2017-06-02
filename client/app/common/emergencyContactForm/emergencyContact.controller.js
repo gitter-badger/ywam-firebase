@@ -3,10 +3,12 @@ class EmergencyContactController {
   constructor(Auth,$firebaseObject, $scope, $timeout, $translate, $filter) {
     var ctrl = this;
         ctrl.nations = []
+      
+      if(!ctrl.userId)
+        ctrl.userId = Auth.$getAuth().uid
+   
 
-    var user_id = Auth.$getAuth().uid
-
-    var ref =   firebase.database().ref('/profiles/' +user_id+'/emergency_contact' );
+    var ref =   firebase.database().ref('/profiles/' +ctrl.userId+'/emergency_contact' );
          $firebaseObject(ref).$bindTo($scope, "emergency_contact");
            
           $scope.$watch('$ctrl.EMForm.$valid',function(v){

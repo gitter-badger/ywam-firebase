@@ -1,26 +1,27 @@
-<div >
+<div>
+    <div layout="row" layout-align="center">
+        <md-card flex="100" flex-gt-xs="50" >
+            <md-card-content>
+                <fund-edit code="{{$ctrl.code}}"></fund-edit>
+            </md-card-content>
+        </md-card>
+    </div>
 
-<div layout="row" layout-align="center">
-  <md-card flex="100" flex-gt-xs="50" >
-    <md-card-content>
-      <fund-edit code="{{$ctrl.code}}"></fund-edit>
-    </md-card-content>
-  </md-card>
-</div>
-
-
-  <md-card>
-    <md-card-content>
-      subscriptions
-      <div ng-repeat="item in $ctrl.subscriptions">{{item}}</div>
-    </md-card-content> 
-  </md-card>
-
-  <md-card>
-    <md-card-content>
-      Paypal Transactions
-      <div ng-repeat="item in $ctrl.paypal_payments"> {{item}}</div>
-    </md-card-content> 
-  </md-card>
-
+    <div layout="row" layout-align="center">
+        <md-card flex="100" flex-gt-xs="50" >
+            <md-card-content>
+                <h1 class="md-title">Subscriptions</h1>
+                <div ng-repeat="item in $ctrl.subscriptions">{{item}}</div>
+            </md-card-content> 
+        </md-card>
+    </div>
+    
+    <div layout="row" layout-align="center">
+        <md-card flex="100" flex-gt-xs="50" >
+            <md-card-content>
+                <h1 class="md-title">Paypal Transactions</h1>
+                <div ng-repeat="item in $ctrl.paypal_payments"> {{item}}</div>
+            </md-card-content> 
+        </md-card>
+    </div>
 </div>

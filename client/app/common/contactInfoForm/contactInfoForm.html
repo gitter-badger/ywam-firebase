@@ -1,0 +1,77 @@
+<div>
+  <h1 class="md-title" translate="10">Contact Information:</h1>
+
+                <form name="$ctrl.forms.contact" >
+                    <div layout>
+                        <md-input-container flex>
+                            <label translate="7"></label>
+                            <input ng-model="profile_contact.first_name" required  >                            
+                            <div ng-messages="projectForm.description.$error">
+                                <div ng-message="required">This is required.</div>
+                                <div ng-message="md-maxlength">The name has to be less than 30 characters long.</div>
+                            </div>
+                        </md-input-container>  
+                        
+                        <md-input-container flex>
+                            <label translate="8"></label>
+                            <input ng-model="profile_contact.last_name" required >
+                        </md-input-container>  
+                    </div>
+
+                    <div layout="row" layout-wrap layout-align="space-around center">
+                        
+                        <md-input-container flex flex-gt-xs="30" >
+                            <label translate="25"></label>
+                            <md-select ng-model="profile_contact.gender" required >
+                                <md-option value="male" translate="male"></md-option>
+                                <md-option value="female" translate="female" ></md-option>
+                            </md-select>  
+                        </md-input-container> 
+
+                        <md-input-container  flex>
+                            <label translate="28">marital_status </label>
+                            <md-select ng-model="profile_contact.marital_status" required >
+                                <md-option value="single" translate="single">Single</md-option>
+                                <md-option value="engaged" translate="engaged">Engaged</md-option>
+                                <md-option value="married" translate="married">Married</md-option>
+                                <md-option value="widowed" translate="widowed">Widowed</md-option>
+                                <md-option value="divorced" translate="divorced">Divorced</md-option>
+                                <md-option value="separated" translate="separated">Separated</md-option>
+                            </md-select>  
+                        </md-input-container>
+
+                        <md-input-container class="date" flex="100" flex-gt-xs="30" style="min-width:220px;" >
+                            <label translate="13"></label>
+                            <md-datepicker ng-model="$ctrl.dob"
+                                   ng-change="$ctrl.changeDOB()"
+                                   required
+                                   md-open-on-focus	
+                                   md-current-view="year"
+                                   md-max-date="$ctrl.maxDate"
+                                   md-min-date="$ctrl.minDate"	>
+                            </md-datepicker>
+                        </md-input-container>              
+
+                    </div>
+                    
+                    <div layout="row">
+                        <md-input-container flex>
+                            <label translate="106">home_phone</label>
+                            <input required ng-model="profile_contact.home_phone" ng-required="!profile_contact.mobile_phone" >
+                        <div class="hint" >+1 555 555 5555 </div>
+                        </md-input-container>
+
+                        <md-input-container flex>
+                            <label translate="107">mobile_phone</label>
+                            <input ng-model="profile_contact.mobile_phone" ng-required="!profile_contact.home_phone" >
+                            <div class="hint" >+1 555 555 5555 </div>
+                        </md-input-container>
+<!--                        Skype: {{emergency_contact.skype}}<br>-->
+                    </div>
+
+                </form>
+
+                <postal-address is-valid="$ctrl.forms.address" ></postal-address>
+                
+ 
+</div>

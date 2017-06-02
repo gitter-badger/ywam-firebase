@@ -5,20 +5,22 @@
 <div layout="row" layout-xs="column" >
     <div flex style="border-left: 2px solid #F3E274; padding-left:4px">
 
-        {{$ctrl.passport.first_name | uppercase}} {{$ctrl.passport.middle_name | uppercase}} {{$ctrl.passport.last_name | uppercase}}<br>
+        <b>Name: </b>{{$ctrl.passport.first_name | uppercase}} {{$ctrl.passport.middle_name | uppercase}} {{$ctrl.passport.last_name | uppercase}}<br>
         
-        <u translate="17">passport number:</u><u>:</u>   {{$ctrl.passport.number}}<br>     
+        <b translate="17">passport number:</b><b>:</b>   {{$ctrl.passport.number}}<br>     
         
-        <u translate="18">issue_date:</u><u>:</u>        {{$ctrl.passport.issue_date}}<br>
+        <b translate="18">issue_date:</b><b>:</b>        {{$ctrl.passport.issue_date}}<br>
         
-        <u translate="19">expire_date:</u><u>:</u>        {{$ctrl.passport.expire_date}}<br>
+        <b translate="19">expire_date:</b><b>:</b>        {{$ctrl.passport.expire_date}}<br>
+        <b translate="14">nation:</b><b>:</b>        {{$ctrl.passport.nation_id}}<br>
+    </div>
+    <div flex style="border-left: 2px solid #F3E274; padding-left:4px">
         
-        <u translate="14">nation:</u><u>:</u>        {{$ctrl.passport.nation_id}}<br>
-        <u translate="20">authority:</u><u>:</u>        {{$ctrl.passport.authority}}<br>
+        <b translate="20">authority:</b><b>:</b>        {{$ctrl.passport.authority}}<br>
         <div ng-show="$ctrl.passport.address">
-        <u translate="21">Address:</u><u>:</u><br>
+        <b translate="21">Address:</b><b>:</b><br>
         {{$ctrl.passport.address}}<br> {{$ctrl.passport.city}}<br>
-        {{$ctrl.passport.state}}<br>  {{$ctrl.passport.zip}}
+        {{$ctrl.passport.state}}, {{$ctrl.passport.zip}}
         </div>
     </div>
 </div> 
