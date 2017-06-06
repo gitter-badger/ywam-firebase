@@ -64,22 +64,23 @@ return admin.database().ref('/reference_tokens/').push({ref:refRef,created: new 
 
     data.hash = snap.key
     //  console.log(data);
-    if(data.appData.school_id){
+
+ return admin.database().ref('/location_public/meta/').once('value').then(function(snap){
+        
+        data.location=snap.val()
+        //get school info
+        if(data.appData.school_id){
        
-       return admin.database().ref('/schools/'+data.appData.school_id+'/public/').once('value').then(function(snap){
-            data.school=snap.val()
-           return admin.database().ref('/location_public/meta/').once('value').then(function(snap){
-             data.location=snap.val()
-             
-          
-           return emailStep2(data);
-           
+        return admin.database().ref('/schools/'+data.appData.school_id+'/public/').once('value').then(function(snap){
+                data.school=snap.val()
+                return emailStep2(data);
         })
-        })
-       }
-    else{
-        return emailStep2(data);
-    }
+       }//end if school
+        else{
+            return emailStep2(data);
+        }
+
+     })
     
 })
 
