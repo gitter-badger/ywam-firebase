@@ -45,11 +45,11 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
                                                 var text = ''
                                                 
                                                  switch(appfor.type) {
-                                                        case 0:
+                                                        case 'school':
                                                             text += 'School'
                                                             url += '/school/'+appfor.school_id
                                                             break;
-                                                        case 1:
+                                                        case 'staff':
                                                             text += 'Staff'
                                                             url += '/staff'
                                                             break;

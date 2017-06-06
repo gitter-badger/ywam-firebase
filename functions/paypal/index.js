@@ -11,7 +11,9 @@ exports.ipn = functions.https.onRequest((req, res) => {
   console.log('Body: ',req.body)
   var p = []
   var processed = false
-  var data = req.body      
+  var data = req.body    
+
+        if(data.payment_date)
       data.payment_date = new Date(data.payment_date).getTime()
 
       if(data.txn_id){//If this is an update on a transaciton

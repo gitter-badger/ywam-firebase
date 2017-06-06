@@ -25,14 +25,21 @@ function handleProviderLogin(result){
             console.log(result.user)
             var uid = result.user.uid
             var displayName = result.user.providerData[0].displayName
+            var email = result.user.providerData[0].email
             //check if user has first name.. if not we set it using the display name from the provider
            var contactRef =  firebase.database().ref('profiles/'+uid+'/contact/')
                contactRef.once('value',function(snap){
-                   
+                
                 if(snap.val() && snap.val().first_name){
                     //first name exists
                 }else if(displayName){
                     contactRef.child('first_name').set(displayName)
+                }
+
+                if(snap.val() && snap.val().email){
+                    //email exists
+                }else if(email){
+                    contactRef.child('email').set(email)
                 }
             })
 

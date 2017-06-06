@@ -174,11 +174,17 @@
             </md-card-content>
         </md-card> 
         
-        <md-card>
+        <!--<md-card>
           <md-card-content>
               <school-questions ng-if="$ctrl.school_id" school-id="$ctrl.school_id" app-id="$ctrl.app_id" is-valid="$ctrl.forms.questions"></school-questions>
           </md-card-content> 
-        </md-card>       
+        </md-card>       -->
+
+         <md-card>
+          <md-card-content>
+              <application-questions-form ng-if="$ctrl.app_for" app-type="$ctrl.app_for.type" school-id="$ctrl.school_id" app-id="$ctrl.app_id" is-valid="$ctrl.forms.questions"></application-questions-form>
+          </md-card-content> 
+        </md-card>
 
         <md-card>
             <md-card-content>
@@ -199,8 +205,7 @@
         School/public
         <pre>{{ $ctrl.school | json }}</pre>
 
-        Application/for/
-         <pre>{{app_for | json}}</pre>
+       
 
          Profile/
          <pre>{{profile | json}}</pre>

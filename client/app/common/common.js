@@ -24,7 +24,7 @@ import passportInfoForm from './passportInfoForm/passportInfoForm';
 import postalAddressForm from './postalAddressForm/postalAddress';
 import languagesForm from './languagesForm/languages';
 import refRequest from './refRequest/refRequest';
-import schoolQuestionsForm from './schoolQuestionsForm/schoolQuestionsForm';
+import applicationQuestionsForm from './applicationQuestionsForm/applicationQuestionsForm';
 import emergencyContactForm from './emergencyContactForm/emergencyContactForm';
 import contactInfoForm from './contactInfoForm/contactInfoForm';
 
@@ -48,6 +48,7 @@ let commonModule = angular.module('app.common', [
   
  
 
+<<<<<<< Updated upstream
     Header,
     Sidenav,
     LoginButtons,
@@ -81,6 +82,40 @@ let commonModule = angular.module('app.common', [
     roleCallMemberList,
     baseProjectTaskEdit,
     fundEdit
+=======
+   Header,
+  Sidenav,
+  LoginButtons,
+  LoginDialog,
+  signUp,
+
+  appStatus,
+  appStatusesSelector,
+  appFor,
+  refStatus,
+  contactInfo,
+  passportInfo,
+  userPhotoUpload,
+  userApplicationsList,
+
+  healthForm,
+  languagesForm,
+  passportInfoForm,
+  postalAddressForm,
+  refRequest,
+  applicationQuestionsForm,
+  emergencyContactForm,
+
+  appAdminNotes,
+  applicationQuestionAdminEdit,
+  healthInfo,
+  referenceDisplay,
+  siteTaskList,
+  roleCallsList,
+  roleCallMemberList,
+  baseProjectTaskEdit,
+  fundEdit
+>>>>>>> Stashed changes
 
 
 ])

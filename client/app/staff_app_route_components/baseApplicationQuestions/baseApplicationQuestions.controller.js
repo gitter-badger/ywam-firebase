@@ -14,7 +14,7 @@ class BaseApplicationQuestionsController {
         $firebaseObject(defaultRef).$bindTo($scope,'default_school_questions')
        
 
-        var staffAppRef = firebase.database().ref('location_public/staff_application_questions') 
+        var staffAppRef = firebase.database().ref('location_public/application_types/staff/questions') 
         $firebaseObject(staffAppRef).$bindTo($scope,'staff_questions')
         
 

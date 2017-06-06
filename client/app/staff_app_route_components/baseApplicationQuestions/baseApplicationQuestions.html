@@ -13,8 +13,8 @@
                 <br> 
 
                 <div ng-repeat="(key, question) in $ctrl.questions" ng-if="question.active" class="questions">
-                    <div class="table" layout="row"  ng-click="$ctrl.editQuestion($event,key)" >
-                        <div flex >
+                    <div class="table" layout="row"  >
+                        <div flex   ng-click="$ctrl.editQuestion($event,key)">
                             {{question.label.en}}<br>
                             <i>{{question.label.de}}</i>
                         </div>

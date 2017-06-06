@@ -1,4 +1,4 @@
-class SchoolQuestionsController {
+class ApplicationQuestionsFormController {
    /* @ngInject */
   constructor($firebaseObject,$translate,$scope, Site ) {
     var ctrl = this;
@@ -6,13 +6,20 @@ class SchoolQuestionsController {
        function onInit(){
             ctrl.site = Site
 
+            console.log(ctrl.appType)
+
       var answersRef= firebase.database().ref('applications/'+ctrl.appId+'/answers_to_questions')
          $firebaseObject(answersRef).$bindTo($scope, "answers");
 
-
+      if(ctrl.schoolId){   
       var schoolRef= firebase.database().ref('schools/'+ctrl.schoolId+'/public/questions_index')
-          ctrl.school_questions= $firebaseObject(schoolRef)
-          
+          ctrl.questions_index= $firebaseObject(schoolRef)
+      }
+      if(ctrl.appType){   
+      var qRef= firebase.database().ref('location_public/application_types/'+ctrl.appType +'/questions')
+          ctrl.questions_index= $firebaseObject(qRef)
+      }
+
            
       var questionsRef = firebase.database().ref('questions_for_applications')  
           ctrl.questions = $firebaseObject(questionsRef)
@@ -25,4 +32,4 @@ class SchoolQuestionsController {
   }
 }
 
-export default SchoolQuestionsController;
+export default ApplicationQuestionsFormController;

@@ -34,7 +34,7 @@ class ApplicationController {
     
     
      var app_for_ref =   firebase.database().ref('/applications/' +ctrl.app_id + '/for');
-      $firebaseObject(app_for_ref).$bindTo($scope, "app_for");
+      // $firebaseObject(app_for_ref).$bindTo($scope, "app_for");
     
     var app_private_ref =   firebase.database().ref('/applications/' +ctrl.app_id + '/private');
       $firebaseObject(app_private_ref).$bindTo($scope, "app_private");
@@ -42,12 +42,12 @@ class ApplicationController {
 
      
       app_for_ref.on('value', function(snapshot) {
-          var app = snapshot.val();
+          
+          ctrl.app_for = snapshot.val();
 
-
-          if(app.school_id){
-              ctrl.school_id=app.school_id;
-              var school_ref =   firebase.database().ref('/schools/'+ app.school_id+ '/public/');
+          if(ctrl.app_for.school_id){
+              ctrl.school_id=ctrl.app_for.school_id;
+              var school_ref =   firebase.database().ref('/schools/'+ ctrl.app_for.school_id+ '/public/');
               ctrl.school = $firebaseObject(school_ref);    
           }
      })

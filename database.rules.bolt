@@ -213,7 +213,7 @@ isStaff() {
 
 //Can this user access Staff Applications at this location? 
 isStaffAppAdmin() {  
-    prior(root.roles.access_staff_apps[ auth.uid ] ) != null 
+    prior(root.site_roles.access_staff_apps[ auth.uid ] ) != null 
         }
 
 // Is this user a school admin of this school?
