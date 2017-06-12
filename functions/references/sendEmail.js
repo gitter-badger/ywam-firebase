@@ -1,6 +1,7 @@
 var functions = require('firebase-functions');
 const admin = require('../config.js').admin;
  var nodemailer = require('nodemailer');
+var moment = require('moment');
 const mg = require('nodemailer-mailgun-transport');
 const gcs = require('@google-cloud/storage')();
 
@@ -97,8 +98,8 @@ function emailStep2(data){
     if(data.refData.user_set.language=="en"){
         var schoolDate="";
         if(data.school){
-        var date=new Date(data.school.start_date);
-        schoolDate=data.school.name+" "+date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear()
+       
+        schoolDate=data.school.name+" "+moment(data.school.start_date).format("MM/DD/YYYY")
         var appFor="a school"
         }
         if(data.appData.type=='staff'){
@@ -120,8 +121,7 @@ function emailStep2(data){
     else if(data.refData.user_set.language=="de"){
         var schoolDate="";
         if(data.school){
-        var date=new Date(data.school.start_date);
-        schoolDate=data.school.name+" am "+date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear()
+        schoolDate=data.school.name+" am "+moment(data.school.start_date).format("DD.MM.YYYY")
         var appFor="für eine Schule";
         var school="<p>Schule:<br>"+schoolDate+"</p>";
         }
@@ -136,9 +136,9 @@ function emailStep2(data){
             }
         
      data.html=`Guten Tag ${data.refData.user_set.name},<br><br> `+
-         `Sie haben diese Email erhalten, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
+         `Diese E-Mail wurde versandt, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
          `${school}`+
-         `Um ${data.userData.first_name}‘s Bewerbung besser verstehen zu können, bitten wir Sie, dieses Online - Empfehlungsschreiben auszufüllen. <br>Klicken Sie auf den folgenden Link:<br>`+
+         `Um ${data.userData.first_name}‘s Bewerbung besser zu verstehen, bitten wir, dieses Online - Empfehlungsschreiben auszufüllen. <br>Das Empfehlungsschreiben kann über den folgenden Link abgerufen werden:<br>`+
         `<a href="${data.url}">${data.url}</a>`
      
      
