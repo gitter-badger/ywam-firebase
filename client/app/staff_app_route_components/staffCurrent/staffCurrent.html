@@ -11,7 +11,8 @@
 .photo{
 /*width:120px; */
 /*height:300px; */
-float:left;
+/*float:left;*/
+display:inline-block;
 /*margin:5px;*/
 }
 </style>
@@ -29,48 +30,51 @@ float:left;
 
 <div  hide-xs style="width:200px; margin-top: 4px;">    
 
-<md-slider   flex min="90" max="200" ng-model="$ctrl.photo_size" aria-label="photo size" >
+<md-slider   flex min="10" max="100" ng-model="$ctrl.photo_size" aria-label="photo size" >
 
 </div>
 {{$ctrl.photo_size}}
-<a ng-click="$ctrl.photo_size = 110 " >print size</a>
-<!--
+<!--<a ng-click="$ctrl.photo_size = 110 " >print size</a>-->
+<div flex></div>
+
+
  <md-menu>
       <md-button aria-label="Open menu" ng-click="$mdOpenMenu($event)">
         <i md-menu-origin class="fa fa-print"></i>
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button ng-click="print('letter')" >
-         Print Selected Photos (Letter) 
+          <md-button ng-click="$ctrl.print('25')" >
+          Row of 4 photos
           </md-button>
         </md-menu-item>
          <md-menu-item>
-          <md-button  ng-click="print('A4')">
-         Print Selected Photos (A4) 
+          <md-button  ng-click="$ctrl.print('20')">
+            Row of 5 photos
           </md-button>
         </md-menu-item>
          <md-menu-item>
-          <md-button  ng-click="print('A3')">
-         Print Selected Photos (A3) 
+          <md-button  ng-click="$ctrl.print('16.6')">
+           Row of 6 photos
           </md-button>
         </md-menu-item>
 
       </md-menu-content>
-    </md-menu>-->
+    </md-menu>
 
 </div>
 <div  >
 
 
-<div ng-repeat="staff in $ctrl.staff | filter:$ctrl.search" class="photo" ui-sref="profile({user_id:staff.id})"  style="cursor: pointer;">
+<div ng-repeat="staff in $ctrl.staff | filter:$ctrl.search"  ui-sref="profile({user_id:staff.id})" 
+ style="cursor: pointer; width:{{$ctrl.photo_size}}%;  display:inline-block;  break-before: always;">
 
-<md-card  style="width:{{$ctrl.photo_size}}px;" >  
-<div style="height:{{$ctrl.photo_size}}px; overflow:hidden; " >
+<md-card    >  
 
-<img firebase-src="{{staff.avatar_200}}" width="100%" ng-if="staff.avatar_200" >
 
-</div>
+<img  firebase-src="{{staff.avatar_200}}" width="100%" ng-if="staff.avatar_200" >
+
+
 
 
 <div style="padding:5px">

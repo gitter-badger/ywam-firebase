@@ -1,5 +1,33 @@
 
-<a ui-sref="accounting.paypalEvents">All Paypal Events</a>
+<a ui-sref="accounting.paypalEvents">All Paypal Events</a> | 
+<a ng-click="showQB = !showQB" >Quickbooks booking helper </a>
+
+<md-card ng-if="showQB">
+ 
+<table border="1" >
+<thead>
+  <tr>
+  <th>RECEIVED FROM</th>
+  <th>FROM ACCOUNT</th>
+  <th>MEMO</th>
+  <th>CHK NO.</th>
+  <th>PMT METH.</th>
+  <th>CLASS</th>
+  <th>AMOUNT</th>
+  </tr>
+</thead>
+<tr ng-repeat="item in $ctrl.transactions | orderBy:'-payment_date'" ng-if="!item.in_quickbooks">
+  <td></td>
+  <td> </td>
+  <td></td>
+  <td>{{item.txn_id}} </td>
+  <td>Paypal</td>
+  <td>{{item.fund_id}}</td>
+  <td>{{item.mc_gross - item.mc_fee | number: 2}} </td>
+
+</tr> 
+</table>  
+</md-card>
 
 <md-card>
 <style>
@@ -19,10 +47,11 @@
 <table class="table" >
 
   <tr>
-    <th>Txn ID</th>
-    <th>Time</th>
+    <th>Transaction</th>
     <th>From</th>
-    <th>For </th>
+    <th>Fund / For </th>
+    <th>Donation<br>
+    (tax deductable)</th>
     <th>Amount</th>
 
     <th>QB</th>
@@ -30,12 +59,18 @@
   </tr>
 
 <tr ng-repeat="item in $ctrl.transactions | orderBy:'-payment_date'">
-<td>{{item.txn_id}}</td>
-<td>{{item.payment_date | date:'short'}}</td>
+<td>
+{{item.payment_date | date:'short'}}<br>
+{{item.txn_id}}</td>
 <td>{{item.payer_email}}<br> {{item.first_name}} {{item.last_name}}</td>
-<td>{{item.memo}} 
-<i ng-if="$ctrl.designations[item.item_number]" style="background-color: lightgreen">Designation {{item.item_number}}</i> 
-<i ng-if="item.item_number && !$ctrl.designations[item.item_number]" style="background-color: orange">item number{{item.item_number}}</i> </td>
+<td>
+<select ng-model="item.fund_id" ng-change="$ctrl.setFund(item)"><option ng-repeat="(key,item) in $ctrl.funds" value="{{key}}">{{key}} "{{item.meta.name}}"</option> </select>
+<br>
+  {{item.memo}}
+<i ng-if="$ctrl.funds[item.item_number]" style="background-color: lightgreen">Designation {{item.item_number}}</i> 
+<i ng-if="item.item_number && !$ctrl.funds[item.item_number]" style="background-color: orange">item number{{item.item_number}}</i> </td>
+
+<td><a ng-click="$ctrl.toggleDonation(item)"> {{item.donation_tax_deduct ? 'Yes': 'No'}}</a> </td>
 
 <td align="right">
   <i  ng-if="item.mc_fee>0">  {{item.mc_gross}} - {{item.mc_fee}}</i>
@@ -45,7 +80,7 @@
 
 </td>
 <td> 
-<md-checkbox ng-model="item.in_donation"  ng-change="$ctrl.checkDonation(item)" aria-label="in donations" >
+<md-checkbox ng-if="item.donation_tax_deduct" ng-model="item.in_donation"  ng-change="$ctrl.checkDonation(item)" aria-label="in donations" >
 
 </td>
 

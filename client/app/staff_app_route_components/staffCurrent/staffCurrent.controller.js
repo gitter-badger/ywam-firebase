@@ -36,35 +36,19 @@ class StaffCurrentController {
                 },function(error){console.error(error)});
 
 
-        ctrl.photo_size = 150;
+        ctrl.photo_size = 20;
         if($mdMedia('xs'))
         ctrl.photo_size = 90;
 
 ctrl.print = print;
 
-  function print(size) {
-            
-                myWindow = window.open(Site.api + '/staff/print_photos/'+size+'/'+ Site.location.id,
-                       "_blank");
-                myWindow.focus();
+function print(size){
 
-            
-        }
-    // function getAvatar(index){
-    //   //once Angular Fire supports Storage https://github.com/firebase/angularfire/issues/785
-    //       //this can be changed till then:
-    //     var index = index - 1
-    //       // console.log(ctrl.staff[index])
-    //         var av =   ctrl.staff[index].avatar_200
+      ctrl.photo_size = size;
+      $timeout(function(){  window.print();})
+     
 
-              
-    //           firebase.storage().refFromURL(av)
-    //           .getDownloadURL().then(function(url){
-    //            $timeout(function(){})
-    //            ctrl.staff[index].avatar =  url 
-    //             }).catch(function(error){console.log('not valid file')})
-          
-    // }
+}
 
 
 }

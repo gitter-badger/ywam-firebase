@@ -1,0 +1,43 @@
+<div>
+    <h1 class="md-title">Fund Commitment</h1>
+    <br>
+    
+    {{$ctrl.fundId}}
+    
+    <div layout="row">   
+        <md-input-container flex>
+            <label>Name</label>
+            <input ng-model="$ctrl.form.name"> 
+        </md-input-container>
+    </div>
+    
+    <div layout="row">
+        <md-input-container flex>
+            <label>Fixed Amount</label>
+            <input ng-model="$ctrl.form.fixed_amount"> 
+        </md-input-container>
+    </div>
+    or
+    <div layout="row">
+        <md-input-container flex>
+            <label>Low Amount</label>
+            <input ng-model="$ctrl.form.low_amount"> 
+        </md-input-container>
+        <md-input-container flex>
+            <label>High Amount</label>
+            <input ng-model="$ctrl.form.high_amount"> 
+        </md-input-container>
+    </div>
+  <div layout="row">
+        <md-input-container flex>
+            <label>Due by</label>
+            <md-select ng-model="$ctrl.form.due_by">
+                <md-option ng-repeat="n in $ctrl.daysOfMonth" ng-value="n"> {{n}}</md-option>
+                </md-select> 
+        </md-input-container>
+    </div>
+    <div layout="row">
+      <span flex></span>
+      <md-button ng-click="$ctrl.save()" class="md-primary" > {{$ctrl.code? 'Save':'Add'}}</md-button> 
+    </div> 
+</div>

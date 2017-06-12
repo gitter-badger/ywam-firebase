@@ -22,11 +22,13 @@ import accountingStripeEvents from './accountingStripeEvents/accountingStripeEve
 import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
 import accountingFunds from './accountingFunds/accountingFunds';
 import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
+import accountingFundExpenses from './accountingFundExpenses/accountingFundExpenses';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
 import staffAlumni from './staffAlumni/staffAlumni';
 import staffApps from './staffApps/staffApps';
+import staffGroups from './staffGroups/staffGroups';
 
 import siteSettings from './siteSettings/siteSettings';
 import siteStats from './siteStats/siteStats';
@@ -81,11 +83,13 @@ let componentModule = angular.module('app.components', [
   accountingBrainTree,
   accountingFunds,
   accountingFundInfo,
+  accountingFundExpenses,
 
   staff,
   staffCurrent,
   staffAlumni,
   staffApps,
+  staffGroups,
 
   siteSettings,
   siteStats,

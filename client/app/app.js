@@ -42,10 +42,6 @@ window.firebase = firebase //angularfire expects firebase as a global varible fo
 import 'angularfire';
 
 
-//Brain Tree Paymet gateway
-// import 'braintree-web'
-
-
 
 angular.module('app', [
     uiRouter,

@@ -1,0 +1,78 @@
+
+<div layout="row" layout-align="center">
+
+<div flex-gt-xs="90">
+<md-card  ng-repeat="(fund_id,fund) in $ctrl.funds" ng-if="fund.commitments" >
+  <md-card-content>
+    <h1 class="md-title">{{fund.meta.name}}</h1>
+
+Commitments 
+<md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>
+<div layout="row" >
+ 
+<div flex>
+Yet to be paid this month: <b> {{$ctrl.currencySym }} 
+  <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
+  {{fund.stats[$ctrl.this_month].amount_topay_low}} or
+   {{fund.stats[$ctrl.this_month].amount_topay_high}}
+  </span>
+  </b>
+<div ng-repeat="(commitment_id,item) in fund.commitments" ng-if="!item.fulfillments[$ctrl.this_month].compleated">
+ <div layout="row" ng-class="{'overdue':item.due_by < $ctrl.day_of_month}">
+  <div > <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" ></md-checkbox></div>
+   <div flex="50" ><a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
+   
+   <div flex > {{item.due_by}}</div>
+   <div flex> {{item.reocurr}}</div>
+   <b flex ng-if="item.fixed_amount"> {{item.fixed_amount}}   </b>
+  <b flex ng-if="!item.fixed_amount"> {{item.low_amount |number:0}} ~ {{item.high_amount |number:0}}  </b>
+
+   
+ </div>
+  <md-divider></md-divider>
+</div>
+
+
+</div>
+<div style="border-left:2px solid black; margin-left:20px; width:20px;" ></div>
+
+<div flex>
+Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month].commitments_paid_amount}}</b>
+
+<div ng-repeat="item in fund.commitments" ng-if="item.fulfillments[$ctrl.this_month].compleated">
+ <div layout="row">
+  <div > <md-checkbox ng-checked="true" disabled></md-checkbox></div>
+   <div flex="50" ><a ui-sref="accounting.fund({code:key})"> {{item.name}}</a> </div>
+  
+   <div flex> {{item.due_by}}</div>
+   <div flex> {{item.reocurr}}</div>
+   <!--<div flex> {{item.fulfillments}}</div>-->
+   <b flex> {{item.fixed_amount}}</b>
+ </div>
+  <md-divider></md-divider>
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+  </md-card-content>
+</md-card>
+
+<md-card>
+  <md-card-content>
+    <b>
+All Funds yet to paid: {{$ctrl.currencySym }} 
+  <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
+  {{$ctrl.total_low}} or
+   {{$ctrl.total_high}}
+  </span>
+    </b>
+  </md-card-content>
+</md-card>
+</div>
+</div>

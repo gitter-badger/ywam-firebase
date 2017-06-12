@@ -30,7 +30,7 @@ class FundEditController {
           ctrl.form.$save()
 
           if(!ctrl.code)
-          Ref.child(ctrl.code+'/meta').set(ctrl.form)
+          Ref.child(ctrl.form.code+'/meta').set(ctrl.form)
    
          Site.hideDialog()
        }

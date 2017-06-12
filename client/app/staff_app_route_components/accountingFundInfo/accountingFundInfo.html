@@ -6,6 +6,14 @@
             </md-card-content>
         </md-card>
     </div>
+    <div layout="row" layout-align="center">
+        <md-card flex="100" flex-gt-xs="50" >
+            <md-card-content>
+                <h1 class="md-title">Expense Commitments</h1>
+                <div ng-repeat="item in $ctrl.fund.commitments">{{item}}</div>
+            </md-card-content> 
+        </md-card>
+    </div>
 
     <div layout="row" layout-align="center">
         <md-card flex="100" flex-gt-xs="50" >

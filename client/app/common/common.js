@@ -41,14 +41,12 @@ import roleCallsList from './roleCallsList/roleCallsList';
 import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 import fundEdit from './fundEdit/fundEdit';
+import fundCommitmentEdit from './fundCommitmentEdit/fundCommitmentEdit';
 
 
 
 let commonModule = angular.module('app.common', [
-  
- 
 
-<<<<<<< Updated upstream
     Header,
     Sidenav,
     LoginButtons,
@@ -69,7 +67,7 @@ let commonModule = angular.module('app.common', [
     passportInfoForm,
     postalAddressForm,
     refRequest,
-    schoolQuestionsForm,
+    applicationQuestionsForm,
     emergencyContactForm,
     contactInfoForm,
 
@@ -81,41 +79,9 @@ let commonModule = angular.module('app.common', [
     roleCallsList,
     roleCallMemberList,
     baseProjectTaskEdit,
-    fundEdit
-=======
-   Header,
-  Sidenav,
-  LoginButtons,
-  LoginDialog,
-  signUp,
+    fundEdit,
+    fundCommitmentEdit
 
-  appStatus,
-  appStatusesSelector,
-  appFor,
-  refStatus,
-  contactInfo,
-  passportInfo,
-  userPhotoUpload,
-  userApplicationsList,
-
-  healthForm,
-  languagesForm,
-  passportInfoForm,
-  postalAddressForm,
-  refRequest,
-  applicationQuestionsForm,
-  emergencyContactForm,
-
-  appAdminNotes,
-  applicationQuestionAdminEdit,
-  healthInfo,
-  referenceDisplay,
-  siteTaskList,
-  roleCallsList,
-  roleCallMemberList,
-  baseProjectTaskEdit,
-  fundEdit
->>>>>>> Stashed changes
 
 
 ])

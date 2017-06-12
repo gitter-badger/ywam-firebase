@@ -14,7 +14,15 @@
             <input ng-model="$ctrl.form.code"> 
         </md-input-container>
     </div>
-    
+    <div layout="row">   
+        <md-input-container flex>
+            <label>Type</label>
+            <md-select ng-model="$ctrl.form.type">
+                <md-option value="staff support">Staff Support</md-option>
+                <md-option value="ministry">Ministry</md-option>
+                </md-select> 
+        </md-input-container>
+    </div>
     <div layout="row">   
         <md-input-container flex>
             <label>Name</label>

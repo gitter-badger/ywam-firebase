@@ -1,6 +1,7 @@
 var functions = require('firebase-functions');
 
 exports.applications = require('./applications/index.js')
+exports.funds = require('./funds/index.js')
 exports.schools = require('./schools/index.js')
 exports.references = require('./references/index.js')
 exports.reference_tokens = require('./reference_tokens/index.js')

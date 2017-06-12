@@ -29,7 +29,13 @@ class SidenavController {
     state: 'staff.current',
     fa_icon:'fa fa-tree',
     },
-    
+     {title: 'Groups',
+    state: 'staffGroups',
+    fa_icon:'fa fa-users'}, 
+
+    {title: 'Accounting',
+              state: 'accounting.funds',
+              fa_icon:'fa fa-usd'},
 
     {title: 'Base Info',
     state: 'base.info',
@@ -59,9 +65,7 @@ class SidenavController {
     //  fa_icon:' fa fa-bus'},
 
    
-    // {title: 'Groups',
-    // state: 'app.groups',
-    // fa_icon:'fa fa-users'}, 
+   
 
     
 
@@ -109,9 +113,7 @@ class SidenavController {
     state: 'translation',
     fa_icon:'fa fa-language'}, 
 
-    {title: 'Accounting',
-              state: 'accounting.funds',
-              fa_icon:'fa fa-usd'},
+   
 
      {title: 'In Development',
     // state: 'app.finance',

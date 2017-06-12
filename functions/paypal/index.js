@@ -26,11 +26,11 @@ exports.ipn = functions.https.onRequest((req, res) => {
             var subscr = {payer_id : data.payer_id,
                           payer_email: data.payer_email,
                           designation_code: data.item_number,
-                          amount: data.mc_amount3,
+                          amount: data.mc_amount3 ? data.mc_amount3 :'',
                           fee: data.mc_fee? data.mc_fee:'',
                           body: data }
 
-         p[p.length] =  admin.database().ref('designation_subscriptions').child(data.subscr_id).update(subscr)
+         p[p.length] =  admin.database().ref('fund_subscriptions').child(data.subscr_id).update(subscr)
           processed = true                
         }
 
