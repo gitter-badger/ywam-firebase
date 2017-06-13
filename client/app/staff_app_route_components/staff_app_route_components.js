@@ -23,6 +23,7 @@ import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
 import accountingFunds from './accountingFunds/accountingFunds';
 import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
 import accountingFundExpenses from './accountingFundExpenses/accountingFundExpenses';
+import accountingAccounts from './accountingAccounts/accountingAccounts';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
@@ -83,6 +84,7 @@ let componentModule = angular.module('app.components', [
   accountingBrainTree,
   accountingFunds,
   accountingFundInfo,
+  accountingAccounts,
   accountingFundExpenses,
 
   staff,

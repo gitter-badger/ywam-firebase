@@ -1,5 +1,7 @@
 import angular from 'angular';
 import uiRouter from 'angular-ui-router';
+import angularLoad from 'angular-load';
+
 
 import Common from './common/common';
 import services from './services/services';
@@ -45,6 +47,7 @@ import 'angularfire';
 
 angular.module('app', [
     uiRouter,
+    angularLoad, //Dynamically load scripts and CSS stylesheets in your Angular.JS app.
     'ngMaterial',
     DataTable,
     'pascalprecht.translate',//ngTranslate

@@ -14,7 +14,7 @@
   <b flex="10">Code</b>
   <b flex="15">Type</b>
   <b flex>Name</b>
-  <b flex>Donation Link</b>
+  <b flex>Balance</b>
 </div>
 <md-divider></md-divider>
 
@@ -23,8 +23,13 @@
   <div flex="10"> {{key}}</div>
   <div flex="15"> {{item.meta.type}}</div>
    <div flex ><a ui-sref="accounting.fund({code:key})"> {{item.meta.name}}</a> </div>
-   <div flex> <a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" ng-if="item.meta.public">{{$ctrl.base_url}}/support/{{key}}</a>
-              <span ng-if="!item.meta.public"> Disabled</span></div>
+   <div flex> 
+     
+     {{item.current_balance}} ({{item.current_balance_timestamp |date}} )
+     <!--<a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" ng-if="item.meta.public">{{$ctrl.base_url}}/support/{{key}}</a>
+              <span ng-if="!item.meta.public"> Disabled</span>-->
+              
+  </div>
  </div>
   <md-divider></md-divider>
 </div>

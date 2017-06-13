@@ -83,6 +83,54 @@
        </div>
 
       <md-divider></md-divider>
+
+<div layout="row">
+
+            <div flex>
+            <b>Plaid</b> <br>
+            US Bank integration <a  href="https://www.plaid.com/">plaid.com</a><br>
+            </div>
+            <div flex layout="column">
+            <md-input-container flex="100">
+              <label>client_id</label>
+              <input ng-model="$ctrl.location_private.plaid.client_id">
+            </md-input-container>
+            <md-input-container flex="100">
+              <label>public_key</label>
+              <input ng-model="$ctrl.location_private.plaid.public_key">
+            </md-input-container>
+            <md-input-container flex="100">
+              <label>Secret</label>
+              <input ng-model="$ctrl.location_private.plaid.secret">
+            </md-input-container>
+
+            </div>
+</div>
+<md-divider></md-divider>
+<div layout="row">
+
+            <div flex>
+            <b>Linked US Bank Account via Plaid</b> <br>
+             <a ng-click="$ctrl.linkBtn()" >Link</a>
+           <br>
+            </div>
+            <div flex>
+             
+           Bank Name: {{$ctrl.location_private.bank.name}} <br>
+           Public Token:   {{$ctrl.location_private.bank.public_token}} <br>
+              
+            </div>
+  
+
+   
+
+</div>
+
+
+    
+
+      <md-divider></md-divider>
+
       <div layout="row">
 
             <div flex>

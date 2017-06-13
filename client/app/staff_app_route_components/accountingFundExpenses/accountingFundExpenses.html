@@ -11,12 +11,7 @@ Commitments
 <div layout="row" >
  
 <div flex>
-Yet to be paid this month: <b> {{$ctrl.currencySym }} 
-  <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
-  {{fund.stats[$ctrl.this_month].amount_topay_low}} or
-   {{fund.stats[$ctrl.this_month].amount_topay_high}}
-  </span>
-  </b>
+
 <div ng-repeat="(commitment_id,item) in fund.commitments" ng-if="!item.fulfillments[$ctrl.this_month].compleated">
  <div layout="row" ng-class="{'overdue':item.due_by < $ctrl.day_of_month}">
   <div > <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" ></md-checkbox></div>
@@ -31,7 +26,35 @@ Yet to be paid this month: <b> {{$ctrl.currencySym }}
  </div>
   <md-divider></md-divider>
 </div>
+<div layout="row">
+  <div flex>
+Yet to be paid this month: 
+  </div>
+  <b> {{$ctrl.currencySym }} 
+  <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
+  {{fund.stats[$ctrl.this_month].amount_topay_low}} or
+   {{fund.stats[$ctrl.this_month].amount_topay_high}}
+  </span>
+  </b>
+</div>
 
+<div layout="row">
+<div flex>
+  Current Fund Balance
+</div>
+<div>
+  {{fund.current_balance}}
+</div>
+</div>
+
+<div layout="row">
+<div flex>
+  Estemate after all payments 
+</div>
+<div>
+  {{fund.current_balance - fund.stats[$ctrl.this_month].amount_topay_high }}
+</div>
+</div>
 
 </div>
 <div style="border-left:2px solid black; margin-left:20px; width:20px;" ></div>

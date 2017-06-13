@@ -21,7 +21,7 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
                   
                //now look at  this month's fulfillments 
                if(commitment.fulfillments && commitment.fulfillments[current_month] && commitment.fulfillments[current_month].compleated){
-                     amount_paid += commitment.high_amount//DO TO find a solution here
+                     amount_paid += +commitment.high_amount//DO TO find a solution here
                 }else{
                      if(commitment.fixed_amount){
                           amount_topay_low += +commitment.fixed_amount
