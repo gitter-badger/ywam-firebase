@@ -90,55 +90,65 @@ return admin.database().ref('/reference_tokens/').push({ref:refRef,created: new 
 
 // Compose the HTML in the language
 function emailStep2(data){
-     console.log('email step 2!')
-     data.html= `no language set`  
-     data.url=data.location.apply_url+"/referenceForm/"+data.hash
+    console.log('email step 2!')
+    data.html= `no language set`  
+    data.url=data.location.apply_url+"/referenceForm/"+data.hash
      
      
-    if(data.refData.user_set.language=="en"){
+    if(data.refData.user_set.language=="en")
+    {
         var schoolDate="";
-        if(data.school){
-       
-        schoolDate=data.school.name+" "+moment(data.school.start_date).format("MM/DD/YYYY")
-        var appFor="a school"
+        if(data.school)
+        {       
+            schoolDate=data.school.name+" "+moment(data.school.start_date).format("MM/DD/YYYY")
+            var appFor="a school";
+            var school="<p>School:<br>"+schoolDate+"</p>";
         }
-        if(data.appData.type=='staff'){
+        
+        if(data.appData.type=='staff')
+        {
             var appFor="Staff";
+            var school="<p></p>";
         }
         else if(data.appData.type=='missionbuilder')
-            {
-                 var appFor="Missionbuilder";
-            }
+        {
+            var appFor="Missionbuilder";
+            var school="<p></p>";
+        }
         
-     data.html=`Dear ${data.refData.user_set.name},<br><br> `+
-         `We are sending you this email because ${data.userData.first_name} ${data.userData.last_name} has applied for ${appFor} at Youth with a Mission ${data.location.name}. `+
-         `<p>School:<br>${schoolDate}</p>`+
-         `To better understand ${data.userData.first_name}'s application, we ask that you complete our online reference form. <br>Please click the link below to continue: <br>`+
+        data.html=`Dear ${data.refData.user_set.name},<br><br> `+
+        `We are sending you this email because ${data.userData.first_name} ${data.userData.last_name} has applied for ${appFor} at Youth with a Mission ${data.location.name}. `+
+        `${school}`+
+        `To better understand ${data.userData.first_name}'s application, we ask that you complete our online reference form. <br>Please click the link below to continue: <br>`+
         `<a href="${data.url}">${data.url}</a>`
      
      
     }
-    else if(data.refData.user_set.language=="de"){
+    else if(data.refData.user_set.language=="de")
+    {
         var schoolDate="";
-        if(data.school){
-        schoolDate=data.school.name+" am "+moment(data.school.start_date).format("DD.MM.YYYY")
-        var appFor="für eine Schule";
-        var school="<p>Schule:<br>"+schoolDate+"</p>";
+        if(data.school)
+        {
+            schoolDate=data.school.name+" am "+moment(data.school.start_date).format("DD.MM.YYYY")
+            var appFor="für eine Schule";
+            var school="<p>Schule:<br>"+schoolDate+"</p>";
         }
-        if(data.appData.type=='staff'){
+        
+        if(data.appData.type=='staff')
+        {
             var appFor="als Mitarbeiter";
-            var school="";
+            var school="<p></p>";
         }
         else if(data.appData.type=='missionbuilder')
-            {
-                var appFor="als Missionbuilder";
-                var school="";
-            }
+        {
+            var appFor="als Missionbuilder";
+            var school="<p></p>";
+        }
         
-     data.html=`Guten Tag ${data.refData.user_set.name},<br><br> `+
-         `Diese E-Mail wurde versandt, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
-         `${school}`+
-         `Um ${data.userData.first_name}‘s Bewerbung besser zu verstehen, bitten wir, dieses Online - Empfehlungsschreiben auszufüllen. <br>Das Empfehlungsschreiben kann über den folgenden Link abgerufen werden:<br>`+
+        data.html=`Guten Tag ${data.refData.user_set.name},<br><br> `+
+        `Diese E-Mail wurde versandt, weil ${data.userData.first_name} ${data.userData.last_name} sich ${appFor} bei Jugend mit einer Mission ${data.location.name} beworben hat.`+
+        `${school}`+
+        `Um ${data.userData.first_name}‘s Bewerbung besser zu verstehen, bitten wir, dieses Online - Empfehlungsschreiben auszufüllen. <br>Das Empfehlungsschreiben kann über den folgenden Link abgerufen werden:<br>`+
         `<a href="${data.url}">${data.url}</a>`
      
      
