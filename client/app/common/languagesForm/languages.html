@@ -3,26 +3,26 @@
 <span translate="72">Select any languages you know:</span>
 <br><br>
 
-<div>
-    <md-button ng-repeat="(key,item) in  $ctrl.languages" 
-               ng-click="$ctrl.addLang(key)"
-               ng-if="!user_lang[key]"> {{item.text}}
-    </md-button>
-</div>
+
+<!--
 <br>
 <md-divider></md-divider>
 <br>
+-->
+<!--{{user_lang}}-->
 <form name="$ctrl.LangForm">
-    <div layout="row" layout-align="center">
+    <div >
 
-        <div flex-gt-xs="50">
+        <div>
             <div ng-repeat="(key,item) in user_lang" 
               layout="row" layout-align="space-between center" 
-              style="margin-bottom:0px">
+              style="margin-bottom:0px"  flex="100">
+                
                 <div flex>   
-                    <a ng-click="$ctrl.removeLang(key)" >X</a>  
+                   
                     <strong>{{$ctrl.languages[key].text}}</strong>
                     <em ng-hide="key == 'en'">{{$ctrl.languages[key].en_text}}</em>
+                     
                 </div> 
                 
                 <md-input-container flex>
@@ -33,12 +33,42 @@
                         <md-option value="40" translate="75">Conversational</md-option>
                         <md-option value="15" translate="76">Basic</md-option>
                     </md-select>  
-                </md-input-container>  
-
+                </md-input-container> 
+                
+<!--                <a ng-click="$ctrl.removeLang(key)" >X</a>  -->
+                <md-button class="md-icon-button" aria-label="Settings" ng-click="$ctrl.removeLang(key)">
+                    <md-icon md-svg-icon="img/icons/delete_black.svg"></md-icon>
+                </md-button>
             </div>
         </div>
     </div>
 </form>
+
+<div>
+    
+     <md-input-container>
+          <label translate="66">Language</label>
+          <md-select ng-model="$ctrl.langKey">
+            <md-option><em translate="191">Please select English first!</em></md-option>
+            <md-option ng-repeat="(key,item) in  $ctrl.languages" ng-value="key">
+              {{item.text}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+    
+    
+    <md-button 
+               ng-click="$ctrl.addLang($ctrl.langKey)"
+               ng-if="!user_lang[$ctrl.langKey]"> ADD
+    </md-button>
+    
+<!--
+    <md-button ng-repeat="(key,item) in  $ctrl.languages" 
+               ng-click="$ctrl.addLang(key)"
+               ng-if="!user_lang[key]"> {{item.text}}
+    </md-button>
+-->
+</div>
 
 <!--	$pro[1]='Native';
         $pro[2]='Fluent';

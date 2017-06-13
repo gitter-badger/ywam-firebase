@@ -5,6 +5,7 @@ class LanguagesController {
    var user_id = Auth.$getAuth().uid
        ctrl.removeLang = removeLang;
        ctrl.addLang = addLang
+      ctrl.langKey;
 
        //Watch for form validity 
         $scope.$watch('$ctrl.LangForm.$valid',() => {
