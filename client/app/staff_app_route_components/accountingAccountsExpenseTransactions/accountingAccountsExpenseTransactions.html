@@ -1,0 +1,77 @@
+
+
+<md-card>
+<style>
+
+.table {
+  width:100%;
+}
+
+.table tr{
+  border-bottom:solid gray 1px;
+}
+
+</style>
+<md-card-content>
+
+
+<table class="table" >
+
+  <tr>
+    <th>Transaction</th>
+    <!--<th>To Contact</th>-->
+    <th>Subject </th>
+    <th>Amount</th>
+
+    <th>Booked</th>
+
+  </tr>
+
+<tr ng-repeat="item in $ctrl.transactions | orderBy:'-date'">
+<td>
+{{item.date | date}}<br>
+<span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>
+<!--{{item.type}}
+<i ng-if="item.status == 'pending'" style="background-color: orange">pending</i>
+<i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
+</td>
+<!--<td>{{ item.payer_name}}<br> 
+<a ng-if="!item.firebase_user_id" >Match</a>
+
+</td>-->
+<td>
+<!--<select ng-if="!item.fund_id" ng-model="item.fund_id" ng-change="$ctrl.setFund(item)"><option ng-repeat="(key,item) in $ctrl.funds" value="{{key}}">{{key}} "{{item.meta.name}}"</option> </select>-->
+<i ng-if="$ctrl.funds[item.fund_id]" style="background-color: lightgreen">Fund {{item.fund_id}}</i> 
+<i ng-if="item.fund_id && !$ctrl.funds[item.fund_id]" style="background-color: orange">item number{{item.fund_id}}</i> 
+<br>
+  {{item.memo}} <a ng-if="item.original" ng-click="item.show_original = !item.show_original"> more</a>
+  <pre ng-if="item.show_original">{{item.original|json}} </pre>
+</td>
+
+<td align="right">
+  <i  ng-if="item.fee>0">  {{item.gross}} - {{item.fee}}</i>
+    <b>{{item.gross - item.fee | number: 2}} </b></td>
+<td> 
+<md-checkbox ng-model="item.booked" style="margin-bottom:0" ng-change="$ctrl.markBooked(item)" aria-label="in quickbooks" >
+{{item.booked_by_name}}
+</td>
+
+
+
+
+
+</tr>
+
+
+
+
+</thead>
+
+
+
+
+</table>  
+
+
+</md-card-content>
+</md-card>

@@ -18,7 +18,32 @@ exports.ipn = functions.https.onRequest((req, res) => {
 
       if(data.txn_id){//If this is an update on a transaciton
           p[p.length]  = admin.database().ref('paypal_payments').child(data.txn_id).update(data)
+        
+          var transaciton = {
+            date:data.payment_date, 
+            status: data.payment_status.toLowerCase(),
+            type: data.payment_type?data.payment_type:null,
+            status_reason : data.pending_reason? data.pending_reason:null,
+            fee: data.mc_fee?data.mc_fee:null , 
+            gross: data.mc_gross,
+            memo: data.memo ?data.memo :null,
+            item_number: data.item_number ? data.item_number : null,
+            payer_meta: {
+              first_name: data.first_name,
+              last_name: data.last_name,
+              email: data.payer_email,
+              paypal_id:data.payer_id,
+              residence_country : data.residence_country
+            }
+          }
+           p[p.length]  = admin.database().ref('finance_accounts/paypal_'+data.receiver_id+'/transactions').child(data.txn_id).update(transaciton)
+          
+          
+          
           processed = true
+
+
+
       }
      
 

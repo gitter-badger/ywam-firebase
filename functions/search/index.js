@@ -14,7 +14,7 @@ const client = algoliasearch(functions.config().algolia.app_id, functions.config
 const ALGOLIA_POSTS_INDEX_NAME = 'profiles';
 
 // Updates the search index when new blog entries are created or updated.
-exports.indexProfile = functions.database.ref('/profiles/{userId}/com').onWrite(event => {
+exports.indexProfile = functions.database.ref('/profiles/{userId}/contact').onWrite(event => {
   const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
   const firebaseObject = {}
     firebaseObject.first_name = event.data.val().first_name;

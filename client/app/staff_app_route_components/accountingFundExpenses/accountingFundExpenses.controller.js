@@ -14,6 +14,7 @@ class AccountingFundExpensesController {
          var Ref = firebase.database().ref('/funds').on('value',function(snap){
             ctrl.total_high=0
             ctrl.total_low=0  
+            ctrl.total_balances = 0;
             ctrl.funds = snap.val()
             
             snap.forEach(function(item){
@@ -22,6 +23,11 @@ class AccountingFundExpensesController {
               ctrl.total_high += +stats[ctrl.this_month].amount_topay_high
               ctrl.total_low += +stats[ctrl.this_month].amount_topay_low
              }
+             var balance=item.val().current_balance
+             if(balance){
+               ctrl.total_balances += +balance
+             }
+
             })
             $timeout()
 

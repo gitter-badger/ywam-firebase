@@ -1,9 +1,10 @@
 class AccountingFundInfoController {
    /* @ngInject */
-   constructor($stateParams,$firebaseObject) {
+   constructor($stateParams,$firebaseObject, Site) {
     var ctrl = this;
         
         ctrl.code = $stateParams.code;
+        ctrl.addCommitment = addCommitment
         
          var  fundRef = firebase.database().ref('/funds').child(ctrl.code)
               ctrl.fund = $firebaseObject(fundRef)
@@ -18,6 +19,12 @@ class AccountingFundInfoController {
           .on('value',function(snap){
           ctrl.paypal_payments = snap.val()
         })
+
+        function addCommitment($event, fund_id){
+          var template =`<fund-commitment-edit fund-id="${fund_id}"></fund-commitment-edit>`;
+          Site.showDialog($event, template )
+
+        }
   }
 }
 

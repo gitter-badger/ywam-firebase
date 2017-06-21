@@ -1,0 +1,88 @@
+
+
+<md-card>
+<style>
+
+
+.highlight-fund{
+  background-color: yellow;
+}
+.highlight-donation{
+  background-color: lightgreen;
+}
+
+</style>
+<md-card-content>
+
+
+<div layout="row" >
+
+  
+    <div flex="15">Transaction</div>
+    <div flex="15">From Contact</div>
+    <div flex>Fund / For </div>
+    <div  style="border-left:1px solid lightgray; width:50px">Donation</div>
+    <div flex="5" align="right">Booked</div>
+    <div style="border-right:1px solid lightgray; width:70px">My Tribe</div>
+     <div flex="10" align="right">Amount</div>
+  </div>
+<md-divider></md-divider>
+<div 
+    ng-repeat="item in $ctrl.transactions | orderBy:'-date'" 
+    ng-hide="(item.memo.includes('PAYPAL TRANSFER') && $ctrl.settings.hide_income_paypal_transfer)">
+    <div layout="row" >
+<div flex="15">
+{{item.date | date:'short'}}<br>
+<span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>
+<!--{{item.type}}
+<i ng-if="item.status == 'pending'" style="background-color: orange">pending</i>
+<i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
+</div>
+<div flex="15">{{ item.payer_name}}
+<span ng-if="!item.firebase_user_id"  style="background-color:lightsalmon">Not Found...
+<!--<input ng-model="$ctrl.searchString" ng-change="$ctrl.searchContact()">
+<span ng-repeat="item in $ctrl.results"><a> {{item.first_name}} {{item.last_name}} {{item.email}} </a><br></span>-->
+
+</span>
+<!--<pre ng-if="!item.firebase_user_id"> System could not match user..
+  {{item.payer_meta |json}} 
+</pre>-->
+</div>
+<div flex>
+<select ng-if="!item.booked" ng-model="item.fund_id" ng-change="$ctrl.setFund(item)"><option ng-repeat="(key,item) in $ctrl.funds" value="{{key}}">{{key}} "{{item.meta.name}}"</option> </select>
+<span ng-if="item.booked">{{item.fund_id}}</span> |
+
+  <span ng-bind-html="item.memo"></span>
+  <a ng-if="item.original" ng-click="item.show_original = !item.show_original"> more</a>
+  <pre ng-if="item.show_original">{{item.original|json}} </pre>
+</div>
+
+<div style="border-left:1px solid lightgray; width:50px; text-align:center">
+  <a ng-click="$ctrl.toggleType(item)"> {{item.donation ? 'Donation': ''}}
+                                        {{item.payment ? 'Payment': ''}}
+                                        {{!item.payment && !item.donation ? 'unknown': ''}}</a> </div>
+
+
+<div flex="5" align="right"> 
+<md-checkbox ng-model="item.booked" style="margin-bottom:0" ng-change="$ctrl.markBooked(item)" aria-label="in quickbooks" >
+{{item.booked_by_name}}
+</div>
+<div  align="right" style="border-right:1px solid lightgray; width:70px"> 
+<md-checkbox ng-if="item.donation" ng-model="item.in_donation"  style="margin-bottom:0" ng-change="$ctrl.checkDonation(item)" aria-label="in donations" >
+
+</div>
+
+<div flex="10" align="right">
+  <i  ng-if="item.fee>0">  {{item.gross}} - {{item.fee}}</i><br>
+    <b>{{item.gross - item.fee | number: 2}} </b></div>
+
+
+</div>
+<md-divider></md-divider>
+</div>
+
+
+
+
+</md-card-content>
+</md-card>

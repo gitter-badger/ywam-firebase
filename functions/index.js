@@ -1,6 +1,7 @@
 var functions = require('firebase-functions');
 
 exports.applications = require('./applications/index.js')
+exports.profiles = require('./profiles/index.js')
 exports.funds = require('./funds/index.js')
 exports.schools = require('./schools/index.js')
 exports.references = require('./references/index.js')
@@ -11,6 +12,8 @@ exports.auth = require('./auth/index.js')
 // exports.braintree = require('./braintree/index.js')
 exports.paypal = require('./paypal/index.js')
 exports.stripe = require('./stripe/index.js')
+exports.plaid = require('./plaid/index.js')
+exports.finance_accounts = require('./finance_accounts/index.js')
 
 var school_banner = require('./schools/banner.js')
 var profile_avatar = require('./profiles/avatar.js')

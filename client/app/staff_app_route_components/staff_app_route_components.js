@@ -24,6 +24,10 @@ import accountingFunds from './accountingFunds/accountingFunds';
 import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
 import accountingFundExpenses from './accountingFundExpenses/accountingFundExpenses';
 import accountingAccounts from './accountingAccounts/accountingAccounts';
+import accountingAccountsView from './accountingAccountsView/accountingAccountsView';
+import accountingAccountsIncomeTransactions from './accountingAccountsIncomeTransactions/accountingAccountsIncomeTransactions';
+import accountingAccountsExpenseTransactions from './accountingAccountsExpenseTransactions/accountingAccountsExpenseTransactions';
+import accountingAccountsSettings from './accountingAccountsSettings/accountingAccountsSettings';
 
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
@@ -86,6 +90,10 @@ let componentModule = angular.module('app.components', [
   accountingFundInfo,
   accountingAccounts,
   accountingFundExpenses,
+  accountingAccountsView,
+  accountingAccountsIncomeTransactions,
+  accountingAccountsExpenseTransactions,
+  accountingAccountsSettings,
 
   staff,
   staffCurrent,

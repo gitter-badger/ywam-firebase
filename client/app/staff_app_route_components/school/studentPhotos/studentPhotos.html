@@ -63,6 +63,8 @@ float:left;
 
       </md-menu-content>
     </md-menu>
+
+    <!--<a ng-click="$ctrl.add(29)">add</a>-->
 </div>
 <div class="print-only">
 
@@ -77,6 +79,7 @@ float:left;
 
 
 <div ng-repeat="(index,app) in $ctrl.apps | filter:$ctrl.search | orderBy: 'user.first_name'" class="photo" ui-sref="profile({user_id:app.for.user_id})"  style="cursor: pointer;">
+
 
 <md-card  style="width:{{$ctrl.photo_size}}px;  
                  height:{{$ctrl.photo_size*1.5}}px;

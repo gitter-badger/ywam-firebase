@@ -1,10 +1,28 @@
 
 
+
+<md-nav-bar md-selected-nav-item="$ctrl.current" nav-bar-aria-label="navigation links">
+       <md-nav-item ng-repeat="(key,item) in $ctrl.accounts" 
+                    md-nav-sref="accounting.accounts.view.income({account_id:'{{key}}'})" 
+                    name="accounting.accounts.view_{{key}}"  >
+        <img height="30" ng-src="{{item.logo}}" ng-if="item.logo"> 
+        {{item.name}}
+       </md-nav-item>
+
+</md-nav-bar>
+
+<ui-view></ui-view>
+
+
+
+
 <div layout="row" layout-align="center">
 
 
 <md-card flex-gt-xs="75">
   <md-card-content>
+
+
     Bank accounts 
     <a ng-click="$ctrl.linkBtn()" >Link</a>
 
@@ -15,3 +33,4 @@
 </md-card>
 
 </div>
+

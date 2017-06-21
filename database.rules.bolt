@@ -106,7 +106,8 @@ path /reference_tokens/{hash}/token_requested {write(){ true}}
 
 
 // Profiles Node
-path /profiles {read() {isStaff() }}
+path /profiles {read() {isStaff() }
+                index() { ["contact/email"] } }
 path /profiles/{id}/contact {read() {isStaff() }}
 path /profiles/{id}/postal {read() {isStaff() }}
 path /profiles/{id}/emergency_contact {read() {isStaff() }}
@@ -161,7 +162,9 @@ path /location  { read() { isStaff() }}
 path /location/default_school_questions {write(){canEditLocationInfo()}}
 
 
-
+path /finance_accounts { read() { canEditAccounting() }
+                        write() { canEditAccounting() }
+                                          }
 
 path /paypal_payments { read() { canEditAccounting() }
                         write() { canEditAccounting() }

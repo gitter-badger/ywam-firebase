@@ -1,4 +1,5 @@
 import angular from 'angular';
+import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
 import angularLoad from 'angular-load';
 
@@ -46,6 +47,7 @@ import 'angularfire';
 
 
 angular.module('app', [
+    ngSanitize, //used by ng-bind-html but is not included in angular core. 
     uiRouter,
     angularLoad, //Dynamically load scripts and CSS stylesheets in your Angular.JS app.
     'ngMaterial',

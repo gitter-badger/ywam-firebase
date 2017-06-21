@@ -6,16 +6,22 @@
   <md-card-content>
     <h1 class="md-title">{{fund.meta.name}}</h1>
 
-Commitments 
-<md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>
+<!--Commitments 
+<md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>-->
 <div layout="row" >
  
 <div flex>
-
+<div layout="row">
+  <div flex="50">Item </div>
+  <div flex>Due by </div>
+  <div flex>Amount</div>
+</div>
 <div ng-repeat="(commitment_id,item) in fund.commitments" ng-if="!item.fulfillments[$ctrl.this_month].compleated">
  <div layout="row" ng-class="{'overdue':item.due_by < $ctrl.day_of_month}">
-  <div > <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" ></md-checkbox></div>
-   <div flex="50" ><a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
+
+   <div flex="50" >
+     <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" ></md-checkbox>
+     <a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
    
    <div flex > {{item.due_by}}</div>
    <div flex> {{item.reocurr}}</div>
@@ -49,10 +55,10 @@ Yet to be paid this month:
 
 <div layout="row">
 <div flex>
-  Estemate after all payments 
+  Estimate after all payments 
 </div>
 <div>
-  {{fund.current_balance - fund.stats[$ctrl.this_month].amount_topay_high }}
+  {{fund.current_balance - fund.stats[$ctrl.this_month].amount_topay_high |number:2 }}
 </div>
 </div>
 
@@ -94,7 +100,13 @@ All Funds yet to paid: {{$ctrl.currencySym }}
   {{$ctrl.total_low}} or
    {{$ctrl.total_high}}
   </span>
-    </b>
+    </b><br>
+    All Funds Current Balances: {{$ctrl.total_balances | number:2}} <br>
+    Estimate After All payments:  {{$ctrl.total_balances - $ctrl.total_high | number:2}}
+
+
+
+
   </md-card-content>
 </md-card>
 </div>

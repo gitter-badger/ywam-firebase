@@ -10,6 +10,7 @@
         <md-card flex="100" flex-gt-xs="50" >
             <md-card-content>
                 <h1 class="md-title">Expense Commitments</h1>
+                <md-button ng-click="$ctrl.addCommitment($event,$ctrl.code)" >Add</md-button>
                 <div ng-repeat="item in $ctrl.fund.commitments">{{item}}</div>
             </md-card-content> 
         </md-card>
@@ -19,6 +20,7 @@
         <md-card flex="100" flex-gt-xs="50" >
             <md-card-content>
                 <h1 class="md-title">Subscriptions</h1>
+
                 <div ng-repeat="item in $ctrl.subscriptions">{{item}}</div>
             </md-card-content> 
         </md-card>
