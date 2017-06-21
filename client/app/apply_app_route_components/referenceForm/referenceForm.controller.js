@@ -26,7 +26,7 @@ class ReferenceFormController {
                               tokenRef.child("token_requested").set(true) 
                             }
                         else{
-                             console.log(token)
+                             console.log('Token:  '+token)
                                //get ref 
                                tokenRef.child('ref').once('value',function(snap){ 
                                     
@@ -58,7 +58,7 @@ class ReferenceFormController {
 
 
 function startUpReference(){
-
+        console.log('starting up Reference')
         var metaRef = firebase.database().ref(ctrl.ref).child('meta')
        var formRef= firebase.database().ref(ctrl.ref).child('form')
            $firebaseObject(formRef).$bindTo($scope, "form")
@@ -81,10 +81,15 @@ function startUpReference(){
 
                    ctrl.school = snap.val();
                    console.log(ctrl.school);
-                   $timeout();
+                   
                    ctrl.loading=false;
                    formRef.child('accessed').set(new Date().getTime())
+                   $timeout();
                }) 
+                }else{
+                    ctrl.loading=false;
+                   formRef.child('accessed').set(new Date().getTime())
+                   $timeout();
                 }
                 console.log(ctrl.meta);
                 
