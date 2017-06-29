@@ -4,9 +4,16 @@
          <i class="fa fa-bars"></i>
         </div>
           
-          <img  alt="YWAM Sarasota"
+          <img hide-xs alt="YWAM Sarasota"
             ng-if="!$ctrl.site.isStaff"
            style="height:70%; cursor:pointer;"
+           src="img/YWAMSarasotaLogo_White_horizontal.png"
+               ui-sref="apply.dashboard"
+           >
+          
+          <img hide-gt-xs alt="YWAM Sarasota"
+            ng-if="!$ctrl.site.isStaff"
+           style="height:35%; cursor:pointer;"
            src="img/YWAMSarasotaLogo_White_horizontal.png"
                ui-sref="apply.dashboard"
            >
