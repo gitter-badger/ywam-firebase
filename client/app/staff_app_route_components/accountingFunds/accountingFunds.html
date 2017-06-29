@@ -25,7 +25,7 @@
    <div flex ><a ui-sref="accounting.fund({code:key})"> {{item.meta.name}}</a> </div>
    <div flex> 
      
-     {{item.current_balance}} ({{item.current_balance_timestamp |date}} )
+     {{item.balance.current}} ( as of {{item.balance.last_update |date: 'short'}} )
      <!--<a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" ng-if="item.meta.public">{{$ctrl.base_url}}/support/{{key}}</a>
               <span ng-if="!item.meta.public"> Disabled</span>-->
               

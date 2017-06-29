@@ -49,9 +49,13 @@
             </div>
         </md-card-content>
     </md-card>    
-    <!--<div layout="row" layout-wrap>   -->   
-   
-    <!--</div>   -->
+  
+    <md-card flex="100" flex-gt-xs="70" ng-if="$ctrl.site.user_roles.contact_management">
+        <md-card-content>
+            <contact-management-card user-id="$ctrl.user_id" >{{$ctrl.user_id}}</contact-management-card>
+        </md-card-content>
+    </md-card>
+
     <md-card flex="100" flex-gt-xs="70">
         <md-card-content>
         <h1 class="md-title" translate="10">Contact Information</h1>

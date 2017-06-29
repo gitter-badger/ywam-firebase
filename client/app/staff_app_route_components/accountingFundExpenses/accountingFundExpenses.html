@@ -8,6 +8,7 @@
 
 <!--Commitments 
 <md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>-->
+
 <div layout="row" >
  
 <div flex>
@@ -20,10 +21,10 @@
  <div layout="row" ng-class="{'overdue':item.due_by < $ctrl.day_of_month}">
 
    <div flex="50" >
-     <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" ></md-checkbox>
+     <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" aria-label="checkbox" ></md-checkbox>
      <a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
    
-   <div flex > {{item.due_by}}</div>
+   <div flex >{{$ctrl.this_month_text }} {{item.due_by}}</div>
    <div flex> {{item.reocurr}}</div>
    <b flex ng-if="item.fixed_amount"> {{item.fixed_amount}}   </b>
   <b flex ng-if="!item.fixed_amount"> {{item.low_amount |number:0}} ~ {{item.high_amount |number:0}}  </b>
@@ -32,24 +33,49 @@
  </div>
   <md-divider></md-divider>
 </div>
+
+
+<div>
+
+
+<div ng-repeat="(commitment_id,item) in fund.commitments" ng-if="!item.fulfillments[$ctrl.next_month].compleated && item.due_by < $ctrl.look_out_days">
+ <div layout="row" >
+
+   <div flex="50" >
+     <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(fund_id, commitment_id)" aria-label="checkbox" ></md-checkbox>
+     <a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
+   
+   <div flex >{{$ctrl.next_month_text}}  {{item.due_by}}</div>
+   <div flex> {{item.reocurr}}</div>
+   <b flex ng-if="item.fixed_amount"> {{item.fixed_amount}}   </b>
+  <b flex ng-if="!item.fixed_amount"> {{item.low_amount |number:0}} ~ {{item.high_amount |number:0}}  </b>
+
+   
+ </div>
+  <md-divider></md-divider>
+ 
+</div>
+</div>
+<br>
 <div layout="row">
   <div flex>
-Yet to be paid this month: 
+Bills: {{$ctrl.this_month_text}} 1 - {{$ctrl.next_month_text}} {{$ctrl.look_out_days}}
   </div>
   <b> {{$ctrl.currencySym }} 
   <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
-  {{fund.stats[$ctrl.this_month].amount_topay_low}} or
-   {{fund.stats[$ctrl.this_month].amount_topay_high}}
+  {{fund.upcoming_bills_low | number:0}} ~
+   {{fund.upcoming_bills_high | number:0}}
   </span>
   </b>
 </div>
 
+
 <div layout="row">
 <div flex>
-  Current Fund Balance
+  Current Fund Balance (as of {{fund.balance.last_update | date:'short'}})
 </div>
 <div>
-  {{fund.current_balance}}
+  {{fund.balance.current}}
 </div>
 </div>
 
@@ -58,7 +84,7 @@ Yet to be paid this month:
   Estimate after all payments 
 </div>
 <div>
-  {{fund.current_balance - fund.stats[$ctrl.this_month].amount_topay_high |number:2 }}
+  {{fund.balance.current - fund.upcoming_bills_high |number:2 }}
 </div>
 </div>
 
@@ -66,12 +92,15 @@ Yet to be paid this month:
 <div style="border-left:2px solid black; margin-left:20px; width:20px;" ></div>
 
 <div flex>
-Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month].commitments_paid_amount}}</b>
-
-<div ng-repeat="item in fund.commitments" ng-if="item.fulfillments[$ctrl.this_month].compleated">
+<div layout="row">
+  <div flex="50">Item </div>
+  <div flex>Due by </div>
+  <div flex>Amount</div>
+</div>
+<div ng-repeat="(commitment_id,item) in fund.commitments" ng-if="item.fulfillments[$ctrl.this_month].compleated">
  <div layout="row">
-  <div > <md-checkbox ng-checked="true" disabled></md-checkbox></div>
-   <div flex="50" ><a ui-sref="accounting.fund({code:key})"> {{item.name}}</a> </div>
+  <div > <md-checkbox aria-label="checkbox" style="margin-bottom:2px" ng-checked="true" disabled></md-checkbox></div>
+   <div flex="50" ><a ng-click="$ctrl.editDialog($event, fund_id, commitment_id)"> {{item.name}}</a> </div>
   
    <div flex> {{item.due_by}}</div>
    <div flex> {{item.reocurr}}</div>
@@ -80,6 +109,7 @@ Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month]
  </div>
   <md-divider></md-divider>
 </div>
+Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month].commitments_paid_amount}}</b>
 
 
 </div>
@@ -94,15 +124,15 @@ Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month]
 
 <md-card>
   <md-card-content>
-    <b>
+    
 All Funds yet to paid: {{$ctrl.currencySym }} 
   <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
-  {{$ctrl.total_low}} or
+  {{$ctrl.total_low}} ~
    {{$ctrl.total_high}}
   </span>
-    </b><br>
+    <br>
     All Funds Current Balances: {{$ctrl.total_balances | number:2}} <br>
-    Estimate After All payments:  {{$ctrl.total_balances - $ctrl.total_high | number:2}}
+    <b >Estimate After All payments: {{$ctrl.currencySym }}  {{$ctrl.total_balances - $ctrl.total_high | number:2}}</b>
 
 
 

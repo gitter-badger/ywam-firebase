@@ -6,7 +6,8 @@ class AccountingAccountsIncomeTransactionsController {
           ctrl.transactions =[]
         ctrl.markBooked = markBooked
         ctrl.toggleType = toggleType;
-        ctrl.searchContact = searchContact
+        ctrl.setFund = setFund
+        ctrl.linkContact = linkContact
     
     var sound = ngAudio.load("sounds/1.mp3"); // returns NgAudioObject
        
@@ -29,7 +30,7 @@ class AccountingAccountsIncomeTransactionsController {
             //check if transaction is already in the array?
            var tran =  $filter('filter')(ctrl.transactions, {id: snap.key}, true);
            var index = ctrl.transactions.indexOf(tran[0])
-           console.log(index)
+          //  console.log(index)
 
             if(index >-1){ //an update
 
@@ -103,39 +104,25 @@ class AccountingAccountsIncomeTransactionsController {
           if(donation&&payment)//if both 
              payment = null
           
-           Transactions.child(item.id).child('donation').set(donation)
-           Transactions.child(item.id).child('payment').set(payment)
+          var updates ={donation: donation,
+                        payment:payment}
+           Transactions.child(item.id).update(updates)
           
         }
+          function setFund(item){
+          Transactions.child(item.id).child('fund_id').set(item.fund_id).then(function(){
+              sound.play()
+          })
+          // Transactions.child(item.id).child('log_fund_user').set(Site.user.id)
+        }
 
-        function searchContact(){
-            if(ctrl.searchString.length>2){
-            var string = ctrl.searchString.replace(/[/[\]'.]/g, "").toLowerCase()
-                 console.log(string)
-            
-            if(string){ 
-           
-             firebase.database().ref('search/queries').child(string).child('query').set(ctrl.searchString)
-        
-      
-      var ref = firebase.database().ref('search/results').child(string)
-        .on('value',  function fn(snap) { 
-           
-           if( snap.val() !== null ) {     // wait for data
-          
-              ctrl.results = snap.val().hits
-               ctrl.searching = false;
 
-          }
-    
-             
-        });
+        function linkContact($event,item){
+          var key = `/finance_accounts/${$stateParams.account_id}/income_transactions/${item.id}`  
+          var template = `<accounting-transaction-link-to-contact key="'${key}'"></accounting-transaction-link-to-contact>`
 
-     
-       }//if string
-
-    
-     }//if Site.searchString
+          Site.showDialog($event,template)
+   
      
 
  

@@ -37,7 +37,16 @@
         </md-input-container>
     </div>
     <div layout="row">
+        <md-input-container flex>
+            <label>Repeat</label>
+            <md-select ng-model="$ctrl.form.repeat">
+                <md-option value="monthly"> Monthly</md-option>
+                <md-option value=""> Monthly</md-option>
+                </md-select> 
+        </md-input-container>
+    </div>
+    <div layout="row">
       <span flex></span>
-      <md-button ng-click="$ctrl.save()" class="md-primary" > {{$ctrl.code? 'Save':'Add'}}</md-button> 
+      <md-button ng-click="$ctrl.save()" class="md-primary" > {{$ctrl.commitmentId? 'Save':'Add'}}</md-button> 
     </div> 
 </div>

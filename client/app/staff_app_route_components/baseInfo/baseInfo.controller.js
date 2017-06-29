@@ -6,7 +6,9 @@ class BaseInfoController {
         ref.on('value',function(snap){
           ctrl.meta = snap.val()
         })
-        // ctrl.location_public = $firebaseObject(ref)
+
+        var refSlack = firebase.database().ref('/slack') 
+        ctrl.slack = $firebaseObject(refSlack)
 
 
         //watch for changes and call $save on firebaseObject

@@ -29,6 +29,8 @@ import accountingAccountsIncomeTransactions from './accountingAccountsIncomeTran
 import accountingAccountsExpenseTransactions from './accountingAccountsExpenseTransactions/accountingAccountsExpenseTransactions';
 import accountingAccountsSettings from './accountingAccountsSettings/accountingAccountsSettings';
 
+import donors from './donors/donors';
+
 import staff from './staff/staff'
 import staffCurrent from './staffCurrent/staffCurrent'
 import staffAlumni from './staffAlumni/staffAlumni';
@@ -94,6 +96,8 @@ let componentModule = angular.module('app.components', [
   accountingAccountsIncomeTransactions,
   accountingAccountsExpenseTransactions,
   accountingAccountsSettings,
+
+  donors,
 
   staff,
   staffCurrent,

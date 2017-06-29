@@ -11,6 +11,7 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  hideSideNav : true,
                  isStaff :false,
                  hideDialog: hideDialog, 
+                 user_roles : {}
 
                
 
@@ -44,6 +45,18 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  }
                })
              
+             firebase.database().ref('site_roles/')
+               .once('value',function(snap){//if the logged in user is a current staff take them home!
+                
+                snap.forEach(function(role){
+                  role.forEach(function(item){
+                    if(item.key == site.user.id)
+                    site.user_roles[role.key] = true
+                  })
+                })
+               // console.log('user has some site roles ',site.user_roles)
+                
+               })
 
               }//if data
               })

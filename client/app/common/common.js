@@ -42,6 +42,8 @@ import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 import fundEdit from './fundEdit/fundEdit';
 import fundCommitmentEdit from './fundCommitmentEdit/fundCommitmentEdit';
+import accountingTransactionLinkToContact from './accountingTransactionLinkToContact/accountingTransactionLinkToContact';
+import contactManagementCard from './contactManagementCard/contactManagementCard';
 
 
 
@@ -80,7 +82,9 @@ let commonModule = angular.module('app.common', [
     roleCallMemberList,
     baseProjectTaskEdit,
     fundEdit,
-    fundCommitmentEdit
+    fundCommitmentEdit,
+    accountingTransactionLinkToContact,
+    contactManagementCard
 
 
 

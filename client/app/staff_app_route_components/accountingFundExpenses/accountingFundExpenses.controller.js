@@ -3,8 +3,13 @@ class AccountingFundExpensesController {
   constructor($firebaseObject,moment, Site, $timeout) {
     var ctrl = this;
         ctrl.this_month =  moment().format("YYYY-MM");
+        ctrl.this_month_text = moment().format('MMMM')
         ctrl.day_of_month = moment().format("D");
-    
+        ctrl.next_month =  moment().add(1,'months').format("YYYY-MM");
+        ctrl.next_month_text =  moment().add(1,'months').format('MMMM');
+        ctrl.look_out_days = moment().add(15,'days').format("D");
+
+       
         ctrl.addbtn = addbtn
         ctrl.editDialog = editDialog
         ctrl.fulfillCommitment = fulfillCommitment
@@ -17,15 +22,47 @@ class AccountingFundExpensesController {
             ctrl.total_balances = 0;
             ctrl.funds = snap.val()
             
-            snap.forEach(function(item){
-              var stats=item.val().stats
+            snap.forEach(function(fund){
+              
+              var stats=fund.val().stats
+              ctrl.funds[fund.key].upcoming_bills_high = 0
+              ctrl.funds[fund.key].upcoming_bills_low = 0
+            
+
+           //get next months amount to pay
+            angular.forEach(fund.val().commitments, function(item,key){
+          if(  ( !item.fulfillments[ctrl.next_month] || item.fulfillments[ctrl.next_month] && !item.fulfillments[ctrl.next_month].compleated)  && item.due_by < ctrl.look_out_days){
+              
+                  if(item.fixed_amount){
+                          ctrl.funds[fund.key].upcoming_bills_low += +item.fixed_amount
+                          ctrl.funds[fund.key].upcoming_bills_high += +item.fixed_amount
+                    }else{
+                          ctrl.funds[fund.key].upcoming_bills_low += +item.low_amount
+                          ctrl.funds[fund.key].upcoming_bills_high += +item.high_amount
+                    }
+             
+              
+               $timeout()
+            }
+
+
+           })
+
+
              if(stats){
-              ctrl.total_high += +stats[ctrl.this_month].amount_topay_high
-              ctrl.total_low += +stats[ctrl.this_month].amount_topay_low
-             }
-             var balance=item.val().current_balance
-             if(balance){
-               ctrl.total_balances += +balance
+             
+              ctrl.funds[fund.key].upcoming_bills_low += +stats[ctrl.this_month].amount_topay_low
+              ctrl.funds[fund.key].upcoming_bills_high += +stats[ctrl.this_month].amount_topay_high
+           }
+
+           //and add this to the total of all funds
+            ctrl.total_high += +ctrl.funds[fund.key].upcoming_bills_high
+            ctrl.total_low += +ctrl.funds[fund.key].upcoming_bills_low
+
+             
+             var balance=fund.val().balance
+             if(balance && balance.current){
+               ctrl.total_balances += +balance.current
              }
 
             })

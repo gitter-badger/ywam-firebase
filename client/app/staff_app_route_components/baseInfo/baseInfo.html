@@ -14,6 +14,18 @@ lease-->
 {{$ctrl.meta | json}}
 </pre>
 
+Slack Channels:
+<div ng-repeat="item in $ctrl.slack.bot_groups" >
+
+  {{item.id}} {{item.name}} 
+</div>
+
+Slack Channels:
+<div ng-repeat="item in $ctrl.slack.channels" ng-if="!item.is_archived &&  item.is_member">
+
+  {{item.id}} {{item.name}} 
+</div>
+
 </md-card-content>
 </md-card>
 </div>

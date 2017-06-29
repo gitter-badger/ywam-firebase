@@ -14,6 +14,7 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
        var amount_topay_high=0
        var date = new Date()
        var current_month = moment().format("YYYY-MM");
+       
         event.data.forEach(function(item){
                 var key = item._childPath //don't know what is up here.. perhaps they change it to be .key
                 var commitment = item.val()
@@ -31,6 +32,11 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
                           amount_topay_high += +commitment.high_amount
                     }
                 }
+
+                 
+
+
+
                 });//end foreach commitment
 
               
@@ -45,3 +51,32 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
           return Promise.all(promises);
 
     })
+
+
+//     exports.updateStats = functions.database.ref('/funds/{fundId}/bill_window')
+//     .onWrite(event => {
+//             const fund_id  = event.params.fundId
+//             const promises = []
+//             var start_date = event.data.val().start
+//             var end_date = event.data.val().end
+
+
+//             admin.database().ref('funds').child(fund_id).child('commitments/').once('value').then(function(snap){
+
+//                   snap.forEach(function(snapshot){
+                        
+//                         var commitment = snapshot.val()
+//                         if(commitment.repeat =='monthly'
+//                                ){
+
+//                            //repeat
+
+
+//                         }
+                        
+
+//                   })
+//             })
+
+
+//     })

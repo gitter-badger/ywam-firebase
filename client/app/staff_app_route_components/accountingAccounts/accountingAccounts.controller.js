@@ -49,7 +49,7 @@ class AccountingAccountsController {
 //   }
 // });
 
- ctrl.linkBtn =  function(){handler.open();}
+//  ctrl.linkBtn =  function(){handler.open();}
 
 
   }

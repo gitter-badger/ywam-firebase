@@ -1,0 +1,16 @@
+<div>
+
+
+<md-input-container>
+  <input ng-model="$ctrl.searchString" ng-change="$ctrl.searchContact()">
+ 
+</md-input-container>
+<div style="min-height:100px">
+ <a ng-repeat="item in $ctrl.results" ng-click="$ctrl.setContact(item.objectID)">{{item.first_name}} {{item.last_name}} ({{item.email}}) <br></a>
+</div>
+<br>
+What we know: 
+<pre>
+  {{$ctrl.transaction.payer_meta|json}}
+</pre>
+</div>

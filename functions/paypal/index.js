@@ -17,10 +17,11 @@ exports.ipn = functions.https.onRequest((req, res) => {
       data.payment_date = new Date(data.payment_date).getTime()
 
       if(data.txn_id){//If this is an update on a transaciton
-          p[p.length]  = admin.database().ref('paypal_payments').child(data.txn_id).update(data)
+          // p[p.length]  = admin.database().ref('paypal_payments').child(data.txn_id).update(data)
         
           var transaciton = {
             date:data.payment_date, 
+            method:'paypal',
             status: data.payment_status.toLowerCase(),
             type: data.payment_type?data.payment_type:null,
             status_reason : data.pending_reason? data.pending_reason:null,
@@ -34,9 +35,10 @@ exports.ipn = functions.https.onRequest((req, res) => {
               email: data.payer_email,
               paypal_id:data.payer_id,
               residence_country : data.residence_country
-            }
+            },
+            original: data
           }
-           p[p.length]  = admin.database().ref('finance_accounts/paypal_'+data.receiver_id+'/transactions').child(data.txn_id).update(transaciton)
+           p[p.length]  = admin.database().ref('finance_accounts/paypal_'+data.receiver_id+'/income_transactions').child(data.txn_id).update(transaciton)
           
           
           

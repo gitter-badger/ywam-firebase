@@ -1,0 +1,23 @@
+<div layout="row" layout-align="center">
+<md-card flex-gt-sm="75">
+<md-card-content>
+  <h2>Donors</h2>
+
+<div layout="row">
+  <div flex>Donor</div>
+  <div flex>Activity</div>
+</div>
+<div ng-repeat="donor in $ctrl.donors" >
+<div layout="row">
+<div flex> <a  ui-sref="profile({user_id:donor.user_id})">{{donor.first_name +' '+ donor.last_name}}</a></div>
+<div flex> 
+      <div ng-repeat="(key,item) in donor.years">{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} </div>     </div>
+
+
+</div>
+<md-divider></md-divider>
+</div>
+
+</md-card-content>
+</md-card>
+</div>

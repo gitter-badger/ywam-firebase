@@ -1,13 +1,14 @@
 const functions = require('firebase-functions');
 const admin = require('../config.js').admin;
-
+var moment = require('moment');
 
 
 exports.processIncome = functions.database.ref('/finance_accounts/{accountId}/income_transactions/{transactionId}').onWrite(event => {
 
+
    // Only edit data when it is first created.
       if (event.data.previous.exists()) {
-        return;
+        return processTransactionContactLink(event)
       }
       // Exit when the data is deleted.
       if (!event.data.exists()) {
@@ -116,3 +117,74 @@ exports.processIncome = functions.database.ref('/finance_accounts/{accountId}/in
     })
 
 })
+
+
+
+ function processTransactionContactLink(event) {
+
+      var transaction = event.data.val()
+
+      // Exit when the data is deleted.
+      if (!event.data.exists()) {
+        return;
+      }
+
+      // Exit when there is no firebase_user
+      if (!transaction.firebase_user_id) {
+        return;
+      }
+ 
+     
+      
+      var account_id = event.params.accountId;
+      var transaction_id = event.params.transactionId;
+
+      var p = []
+      
+      console.log('processing transaction updates '+transaction_id)
+       
+      
+      if(transaction.fund_id){
+        console.log('processing fund updates '+transaction.fund_id)
+
+       //find out if fund is a ministry or staff_support
+        p[p.length] =  admin.database().ref('/funds/'+transaction.fund_id+'/meta/').once('value').then(function(snap){
+          
+          var fund_meta = snap.val()
+           var updates ={}
+           
+           console.log(fund_meta)
+           console.log(transaction)
+           if(transaction.donation && fund_meta.type =='ministry')
+              updates.ministry_support = transaction.date
+
+            if(transaction.donation && fund_meta.type=='staff_support')
+              updates.staff_support = transaction.date   
+
+            if(transaction.payment )
+              updates.payment = transaction.date    
+
+         return admin.database().ref('/crm/'+transaction.firebase_user_id+'/last').update(updates)
+
+        })
+       
+        //now add or remove if it is a donation to the donnors transaction list
+         var year = moment().format('YYYY')  
+        if(transaction.donation){
+         var updates ={}
+             updates[transaction_id] = {fund_id:transaction.fund_id,
+                                             date: transaction.date,
+                                             amount: transaction.gross, 
+                                             method: transaction.method || null
+                                            }                                   
+
+          p[p.length] = admin.database().ref('/donors/'+transaction.firebase_user_id+'/years/'+year+'/transactions/').update(updates)
+        }else { //transaction was is not a donation make sure it is not in the list of donations for the donner
+          p[p.length] = admin.database().ref('/donors/'+transaction.firebase_user_id+'/years/'+year+'/transactions/'+transaction_id).remove()
+
+        }
+      }
+
+
+      return Promise.all(p)
+}

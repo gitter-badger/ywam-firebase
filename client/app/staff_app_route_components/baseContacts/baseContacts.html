@@ -6,15 +6,44 @@
   <h1>{{ $ctrl.name }} {{$ctrl.contacts.length}}</h1>
 </div>
 A big list of all contacts <br>
-TODOs:<br> tie into Mailchimp API to show what mailing lists contacts are on<br>
+TODOs:<br> 
+<ul>
+  <li> tie into Mailchimp API to show what mailing lists contacts are on</li>
+  <li> Add search functionality </li>
+  <li>Filter by: All Alumni, Student Alumni, Staff Alumni </li>
+</ul>  
 
-<div ng-repeat="item in $ctrl.contacts">
+<a ng-click="$ctrl.toggleFilter({name:'alumni_school_all' })">All School Alumni</a><br>
+<a ng-click="$ctrl.toggleFilter({name:'alumni_school_year',year:year})" ng-repeat="year in $ctrl.school_years">{{year}} School Alumni<br></a>
+
+    <br>   <br>
+    Active Filters:
+    <span ng-repeat="item in $ctrl.active_filters">{{item.name}}</span>
+    
+     <!--<md-chips ng-model="$ctrl.active_filters" name="fruitName" readonly="true"
+                md-removable="ctrl.removable" md-max-chips="5" placeholder="Enter a fruit...">
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>-->
+   <br>
+
+
+<div ng-repeat="item in $ctrl.contacts | filter: $ctrl.filterList">
   <div layout="row">
-    <div flex ><a ui-sref="profile({user_id:item.id})">
-  {{item.contact.first_name}} {{item.contact.last_name}} </a>
+    <div flex ><a ui-sref="profile({user_id:item.$id})">{{item.first_name}} {{item.last_name}}
+ </a>
     </div>
     <div flex>
-      {{item.contact.email}}
+      
+      <span ng-if="item.alumni.school" class="alumni-school"> 
+        <span ng-repeat="(year,school) in item.alumni.school">
+        Student Alumni {{year}} </span> </span>
+      
+      <span ng-if="item.last_payment">Last Payment: {{item.last_payment|date}} </span> 
+      <span ng-if="item.last_ministry_support">Last Ministry Donation: {{item.last_ministry_support|date}} </span> 
+      <span ng-if="item.last_staff_support">Last Staff Donation: {{item.last_staff_support|date}} </span> 
+
     </div>
   </div>
   <md-divider></md-divider></div> 

@@ -29,13 +29,19 @@ class SidenavController {
     state: 'staff.current',
     fa_icon:'fa fa-tree',
     },
-     {title: 'Groups',
-    state: 'staffGroups',
-    fa_icon:'fa fa-users'}, 
+    
 
     {title: 'Accounting',
               state: 'accounting.funds',
               fa_icon:'fa fa-usd'},
+
+    {title: 'All Base Contacts',
+    state: 'baseContacts',
+    fa_icon:'fa fa-address-book-o'},
+
+    {title: 'Donors',
+    state: 'donors',
+    fa_icon:'fa fa-heart-o'},          
 
     {title: 'Base Info',
     state: 'base.info',
@@ -86,7 +92,7 @@ class SidenavController {
     state: 'prayer',
     fa_icon:'fa fa-bolt'}, 
 
-    
+  
 
     // {title: 'Budget System',
     // state: 'app.finance',
@@ -120,6 +126,9 @@ class SidenavController {
     fa_icon:'fa fa-flask',
 
     sub_nav: [  
+               {title: 'Groups',
+              state: 'staffGroups',
+              fa_icon:'fa fa-users'}, 
              {title: 'Projects',
               state: 'projects',
               fa_icon:'fa fa-star-o'},
@@ -129,9 +138,7 @@ class SidenavController {
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
-              {title: 'All Base Contacts',
-              state: 'baseContacts',
-              fa_icon:'fa fa-tree'},
+              
               {title: 'BrainTree',
               state: 'accountingBrainTree',
               fa_icon:'fa fa-tree'},

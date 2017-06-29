@@ -37,8 +37,20 @@
         </md-input-container>
     </div>
 
+      
+
     <div layout="row">
       <span flex></span>
       <md-button ng-click="$ctrl.save()" class="md-primary" > {{$ctrl.code? 'Save':'Add'}}</md-button> 
     </div> 
+
+
+      <div layout="column" style="background-color: lightblue">
+        <md-input-container flex>
+            <label>Current Balance</label>
+            <input ng-model="$ctrl.balance.current"  ng-change="$ctrl.updateBalance()"> 
+        </md-input-container>
+        last update: {{$ctrl.balance.last_update| date :'short'}} <br>
+        by {{$ctrl.balance.update_by}}
+    </div>
 </div>

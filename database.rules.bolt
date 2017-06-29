@@ -6,6 +6,9 @@ path /location_private { read(){ isSiteAdmin() }
                          write(){isSiteAdmin()}
                          }        
 
+path /crm { read() { contactManagment() }   
+            write() { contactManagment() }  }
+
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
 
@@ -18,6 +21,7 @@ path /languages { read() { auth != null }   }
 path /questions_for_applications { read(){auth != null}
                                    write(){canEditLocationInfo()}
                                  }
+
 
  
 
@@ -187,6 +191,10 @@ path /funds/{id}/meta { read() { root.funds[id].meta.public }
                                                      
                                           }  
 
+path /donors { read() { canEditAccounting() || contactManagment() }
+                write() { canEditAccounting()  }
+                                          }  
+
  path /designation_subscriptions { read() { canEditAccounting() }
                           write() { canEditAccounting() }
                                           }                                            
@@ -200,6 +208,9 @@ path /role_calls/{id} { read() { isStaff() }
 path /site_roles { read() { auth != null}
                    write() { root.site_roles.site_admin[auth.uid] != null } }
 
+
+path /slack { read() {isStaff()}
+            }
 // Access Controll Function 
 
 
@@ -240,6 +251,8 @@ isSiteAdmin(){
     root.site_roles['site_admin'][auth.uid] != null}
 canEditAccounting(){
     root.site_roles['can_edit_accounting'][auth.uid] != null}
+contactManagment(){
+    root.site_roles['contact_management'][auth.uid] != null}
 canEditLocationInfo(){
     root.site_roles['can_edit_location_info'][auth.uid] != null}
 canEditLocationVisaReq(){

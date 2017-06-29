@@ -5,10 +5,10 @@ class BasePartnersController {
         
         ctrl.name = 'basePartners';
 
-        //var Ref = firebase.database().ref('/')
-        // Ref.on('value',function(snap){
-        //   ctrl.basePartners = snap.val()
-        // })
+        var Ref = firebase.database().ref('/donors')
+        Ref.on('value',function(snap){
+          ctrl.donors = snap.val()
+        })
   }
 }
 

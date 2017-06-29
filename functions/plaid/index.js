@@ -49,35 +49,32 @@ exports.pull_transactions = functions.database.ref('/location_private/bank/pull_
 
     if(event.data.val()) {
         var p = []
-        var public_token = event.data.val()
- return admin.database().ref('/location_private/plaid').once('value').then(function(snap){
+      
+        return admin.database().ref('/location_private/plaid').once('value').then(function(snap){
 
+                var client = new plaid.Client(
+                        snap.val().client_id,
+                        snap.val().secret,
+                        snap.val().public_key,
+                        plaid.environments['development']
+                        );
 
-       var client = new plaid.Client(
-            snap.val().client_id,
-            snap.val().secret,
-            snap.val().public_key,
-           plaid.environments['development']
-            );
+            return admin.database().ref('/location_private/bank').once('value').then(function(snap){
 
-return admin.database().ref('/location_private/bank').once('value').then(function(snap){
+                var access_token = snap.val().access_token
 
-
-
-            var access_token = snap.val().access_token
-
-            // Pull transactions for the Item for the last 30 days
-                var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
-                var endDate = moment().format('YYYY-MM-DD');
-            return    client.getTransactions(access_token, startDate, endDate, {
-                    count: 250,
-                    offset: 0,
-                }, function(error, transactionsResponse) {
-                    if (error != null) {
-                    console.log(JSON.stringify(error));
-                    return
-                    
-                }
+                    // Pull transactions for the Item for the last 30 days
+                        var startDate = moment().subtract(30, 'days').format('YYYY-MM-DD');
+                        var endDate = moment().format('YYYY-MM-DD');
+                    return    client.getTransactions(access_token, startDate, endDate, {
+                            count: 250,
+                            offset: 0,
+                        }, function(error, transactionsResponse) {
+                            if (error != null) {
+                            console.log(JSON.stringify(error));
+                            return
+                            
+                        }
                 
 
                     console.log('pulled ' + transactionsResponse.transactions.length + ' transactions');
@@ -85,12 +82,18 @@ return admin.database().ref('/location_private/bank').once('value').then(functio
 
                     transactionsResponse.transactions.forEach(function(item){
 
+                        //now if this transaction is an update to a pending transaction
+                        if(item.pending_transaction_id)
+                         var transaction_id = item.pending_transaction_id
+                         else
+                         var transaction_id = item.transaction_id   
                         // console.log(item)
                         if(item.amount < 0){//(income is shown as negitive value)
 
                           var transaciton = {
                               original : item,
                             date:item.date, 
+                            pending: item.pending,
                             // status: data.payment_status.toLowerCase(),
                             // type: data.payment_type?data.payment_type:null,
                             // status_reason : data.pending_reason? data.pending_reason:null,
@@ -106,11 +109,12 @@ return admin.database().ref('/location_private/bank').once('value').then(functio
                             // residence_country : data.residence_country
                             // }
                         }
-                        p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/income_transactions').child(item.transaction_id).update(transaciton)
+                        p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/income_transactions').child(transaction_id).update(transaciton)
                     }else{ //this is an expense
                          var transaciton = {
                               original : item,
-                            date:item.date, 
+                            date:item.date,
+                             pending: item.pending, 
                             // status: data.payment_status.toLowerCase(),
                             // type: data.payment_type?data.payment_type:null,
                             // status_reason : data.pending_reason? data.pending_reason:null,
@@ -126,14 +130,25 @@ return admin.database().ref('/location_private/bank').once('value').then(functio
                             // residence_country : data.residence_country
                             // }
                         }
-                        p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/expense_transactions').child(item.transaction_id).update(transaciton)
+                        p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/expense_transactions').child(transaction_id).update(transaciton)
                     
 
                     }
 
 
 
-                    })
+                })
+                
+                // console.log(transactionsResponse.accounts)
+                
+                  transactionsResponse.accounts.forEach(function(item){
+                     var balances = item.balances
+                         balances.last_update = moment().format('x');
+                        p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/balances').update(balances)
+
+                  })
+
+
 
                     return Promise.all(p).then(function(){
                        return admin.database().ref('/location_private/bank/pull_transactions_now').remove() 

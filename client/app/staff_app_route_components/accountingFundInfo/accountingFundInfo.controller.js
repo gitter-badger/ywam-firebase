@@ -1,6 +1,6 @@
 class AccountingFundInfoController {
    /* @ngInject */
-   constructor($stateParams,$firebaseObject, Site) {
+   constructor($stateParams,$firebaseObject, Site, $timeout) {
     var ctrl = this;
         
         ctrl.code = $stateParams.code;

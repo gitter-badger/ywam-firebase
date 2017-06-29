@@ -21,9 +21,9 @@
     <div flex="15">Transaction</div>
     <div flex="15">From Contact</div>
     <div flex>Fund / For </div>
-    <div  style="border-left:1px solid lightgray; width:50px">Donation</div>
-    <div flex="5" align="right">Booked</div>
-    <div style="border-right:1px solid lightgray; width:70px">My Tribe</div>
+    <div  style="border-left:1px solid lightgray; width:70px">Type</div>
+    <div flex="5" >Booked</div>
+    <div style="border-right:1px solid lightgray; width:70px; text-align:right" >My Tribe</div>
      <div flex="10" align="right">Amount</div>
   </div>
 <md-divider></md-divider>
@@ -38,8 +38,8 @@
 <i ng-if="item.status == 'pending'" style="background-color: orange">pending</i>
 <i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
 </div>
-<div flex="15">{{ item.payer_name}}
-<span ng-if="!item.firebase_user_id"  style="background-color:lightsalmon">Not Found...
+<div flex="15"> <a ui-sref="profile({user_id:item.firebase_user_id})">{{ item.payer_name}}</a>
+<span ng-if="!item.firebase_user_id"  style="background-color:lightsalmon; cursor:pointer" ng-click="$ctrl.linkContact($event,item)">Not Found...
 <!--<input ng-model="$ctrl.searchString" ng-change="$ctrl.searchContact()">
 <span ng-repeat="item in $ctrl.results"><a> {{item.first_name}} {{item.last_name}} {{item.email}} </a><br></span>-->
 
@@ -57,10 +57,10 @@
   <pre ng-if="item.show_original">{{item.original|json}} </pre>
 </div>
 
-<div style="border-left:1px solid lightgray; width:50px; text-align:center">
+<div style="border-left:1px solid lightgray; width:70px; text-align:center">
   <a ng-click="$ctrl.toggleType(item)"> {{item.donation ? 'Donation': ''}}
                                         {{item.payment ? 'Payment': ''}}
-                                        {{!item.payment && !item.donation ? 'unknown': ''}}</a> </div>
+                                        {{!item.payment && !item.donation ? ' ? ': ''}}</a> </div>
 
 
 <div flex="5" align="right"> 

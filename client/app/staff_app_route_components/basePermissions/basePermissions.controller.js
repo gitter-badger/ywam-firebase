@@ -4,6 +4,9 @@ class BasePermissionsController {
   
     var ctrl = this; 
         ctrl.perms= {};
+        ctrl.addDialog = addDialog
+        ctrl.remove = remove
+        ctrl.site = Site
     var Ref  =  firebase.database().ref('site_roles');
 
         Ref.on('child_added', function(snap){ 
@@ -43,8 +46,17 @@ class BasePermissionsController {
                                                      
                 },function(error){console.error(error)});
 
-     
+     function addDialog($event, permission_id){
 
+      var template = `<base-permissions-add-dialog permission-id="'${permission_id}'"></base-permissions-add-dialog>`
+      // console.log(template)
+       Site.showDialog($event, template)
+     }
+
+     function remove(permission_id, user_id){
+       console.log('removing'+ user_id , permission_id)
+        firebase.database().ref('/site_roles/'+permission_id +'/'+user_id).remove()
+     }
 
   }
 }

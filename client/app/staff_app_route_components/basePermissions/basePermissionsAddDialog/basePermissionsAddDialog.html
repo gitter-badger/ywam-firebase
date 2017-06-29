@@ -1,0 +1,19 @@
+<div>
+  <h1>Add User to {{ $ctrl.permissionId }}</h1>
+
+
+         
+    <md-autocomplete 
+                     md-selected-item-change="$ctrl.selectedItemChange(item)"
+                     md-search-text="searchText" 
+                     md-items="item in $ctrl.getMatches(searchText)" 
+                     md-item-text="item.name"
+                     placeholder="Add Staff Member"
+                     >
+        <span md-highlight-text="searchText">{{item.name}}</span>
+    </md-autocomplete>
+
+
+
+
+</div>

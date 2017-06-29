@@ -1,0 +1,36 @@
+ <h1 class="md-title">Partnership Development</h1>
+
+<form ng-submit="$ctrl.addNote()" layout="row" class="no-print">
+<md-input-container md-no-float flex class="no-md-error" style="margin:0px">
+<input  ng-model="$ctrl.new_note" placeholder="New note..." autocomplete="off">
+</md-input-container>
+<md-button  class="md-primary " style=" padding:0px" type="submit">add</md-button>
+</form>
+
+<div ng-repeat="(key,note) in $ctrl.contact.notes " > 
+<div  style="color:grey; float:right; " >- {{note.first_name}} {{note.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
+<i class="fa fa-times no-print" ng-click="$ctrl.deleteNote(key)"></i>  </div>  
+{{note.text}} 
+
+<md-divider> </md-divider>
+</div>
+
+<br>
+<br>
+<div ng-if="$ctrl.contact.last.payment"> <b>Last Payment Received</b> {{$ctrl.contact.last.payment|date}} </div>
+<div ng-if="$ctrl.contact.last.ministry_support"> <b>Last Ministry Support</b> {{$ctrl.contact.last.ministry_support|date}} </div>
+<div ng-if="$ctrl.contact.last.staff_support"> <b>Last Staff Support</b> {{$ctrl.contact.last.staff_support|date}} </div>
+
+<br><br>
+<a ng-click="show_more = !show_more">Show all info</a>
+<pre ng-if="show_more">
+{{ $ctrl.contact| json}}
+</pre>
+
+
+ <h1 class="md-title">Donations</h1>
+
+<div ng-repeat="(key,item) in $ctrl.donor.years">{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} 
+    <md-divider></md-divider>
+    <div ng-repeat="tran in item.transactions">{{tran.date|date}} {{tran.fund_id}} {{tran.method}} {{tran.amount}} </div>
+    </div>    

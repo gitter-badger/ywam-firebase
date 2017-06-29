@@ -1,6 +1,6 @@
 class AccountingAccountsViewController {
    /* @ngInject */
-  constructor($firebaseArray,$stateParams,$filter,$timeout, Site,ngAudio, $rootScope, $state) {
+  constructor($scope,$stateParams,$firebaseObject,  $rootScope, $state) {
     var ctrl = this;
         
            $rootScope.$on('$viewContentLoaded',function(){
@@ -8,7 +8,8 @@ class AccountingAccountsViewController {
           //  console.log(ctrl.current)
           })
        
-        
+        var Ref = firebase.database().ref('/finance_accounts/'+$stateParams.account_id+'/balances')
+         $firebaseObject(Ref).$bindTo($scope, "$ctrl.balances");
       
        
   }
