@@ -2,16 +2,32 @@
     <div layout="row" layout-align="center">
         <md-card flex="100" flex-gt-xs="50" >
             <md-card-content>
-                <fund-edit code="{{$ctrl.code}}"></fund-edit>
+                
+                <h1 st>{{ $ctrl.fund.meta.name }}</h1>
+                <pre>{{ $ctrl.code }}</pre>
+                <a ng-click="$ctrl.editDialog($event)"> edit</a>
+                  <br>
+                  Type: {{$ctrl.fund.meta.type}} <br> 
+                 Donation link:   <a href="{{$ctrl.base_url}}/support/{{$ctrl.code}}"  target="_blank" ng-if="$ctrl.fund.meta.public">{{$ctrl.base_url}}/support/{{$ctrl.code}}</a>
+
+                
             </md-card-content>
         </md-card>
     </div>
     <div layout="row" layout-align="center">
         <md-card flex="100" flex-gt-xs="50" >
             <md-card-content>
-                <h1 class="md-title">Expense Commitments</h1>
+                <h1 class="md-title">Reoccuring Bills</h1>
                 <md-button ng-click="$ctrl.addCommitment($event,$ctrl.code)" >Add</md-button>
-                <div ng-repeat="item in $ctrl.fund.commitments">{{item}}</div>
+                <div ng-repeat="(key, item) in $ctrl.fund.commitments">
+                    <div layout="row">
+                        <div flex><a ng-click="$ctrl.editCommitmentDialog($event, $ctrl.code, key)"> {{item.name}}</a></div>
+                        <div flex> {{item.repeat}} on the {{item.due_by}} </div>
+                        <div flex="20" ng-if="item.fixed_amount"> {{item.fixed_amount}}</div>
+                        <div flex="20" ng-if="!item.fixed_amount"> {{item.low_amount}} ~ {{item.high_amount}}</div>
+                    </div>
+                    <md-divider></md-divider>
+                    </div>
             </md-card-content> 
         </md-card>
     </div>
@@ -21,7 +37,14 @@
             <md-card-content>
                 <h1 class="md-title">Subscriptions</h1>
 
-                <div ng-repeat="item in $ctrl.subscriptions">{{item}}</div>
+                <div ng-repeat="item in $ctrl.subscriptions">
+                    <div layout="row">
+                        <div flex></div>
+                        <div> {{item.gross}} - {{item.fee}}<br>{{item.gross - item.fee | number:2}}</div>
+                    </div>
+                    {{item}}
+                    <md-divider></md-divider>
+                    </div>
             </md-card-content> 
         </md-card>
     </div>

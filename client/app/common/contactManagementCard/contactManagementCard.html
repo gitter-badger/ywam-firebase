@@ -15,22 +15,34 @@
 <md-divider> </md-divider>
 </div>
 
-<br>
+
 <br>
 <div ng-if="$ctrl.contact.last.payment"> <b>Last Payment Received</b> {{$ctrl.contact.last.payment|date}} </div>
 <div ng-if="$ctrl.contact.last.ministry_support"> <b>Last Ministry Support</b> {{$ctrl.contact.last.ministry_support|date}} </div>
 <div ng-if="$ctrl.contact.last.staff_support"> <b>Last Staff Support</b> {{$ctrl.contact.last.staff_support|date}} </div>
 
-<br><br>
-<a ng-click="show_more = !show_more">Show all info</a>
-<pre ng-if="show_more">
-{{ $ctrl.contact| json}}
-</pre>
+
+ <h1 class="md-title" ng-if="$ctrl.contact.mailing_lists">Mailing Lists</h1>
+<div ng-repeat="(key,item) in $ctrl.contact.mailing_lists">{{item.name}} : {{item.status}} ({{item.signup_date|date}}) {{item.stats}}
+  
+    <md-divider></md-divider>
+</div>     
 
 
- <h1 class="md-title">Donations</h1>
+
+ <h1 class="md-title" ng-if="$ctrl.donor.years">Donations</h1>
 
 <div ng-repeat="(key,item) in $ctrl.donor.years">{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} 
     <md-divider></md-divider>
     <div ng-repeat="tran in item.transactions">{{tran.date|date}} {{tran.fund_id}} {{tran.method}} {{tran.amount}} </div>
     </div>    
+
+
+
+
+
+
+<a ng-click="show_more = !show_more">Show all info</a>
+<pre ng-if="show_more">
+{{ $ctrl.contact| json}}
+</pre>

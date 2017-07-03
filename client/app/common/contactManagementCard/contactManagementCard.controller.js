@@ -9,11 +9,13 @@ class ContactManagementCardController {
         var Ref = firebase.database().ref('crm/'+ctrl.userId)
         Ref.on('value',function(snap){
           ctrl.contact = snap.val()
+            $timeout()
         })
 
            var DonorRef = firebase.database().ref('donors/'+ctrl.userId)
         DonorRef.on('value',function(snap){
           ctrl.donor = snap.val()
+          $timeout()
         })
 
         }

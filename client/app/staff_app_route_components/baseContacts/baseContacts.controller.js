@@ -7,6 +7,7 @@ class BaseContactsController {
         ctrl.filterList = filterList
         ctrl.toggleFilter = toggleFilter
         ctrl.active_filters = {};
+        ctrl.filter_active = false;
         ctrl.school_years = ['2014','2015','2016','2017'];//todo .. get this from looking at range of school start dates ? 
      
 
@@ -60,6 +61,9 @@ class BaseContactsController {
 
         function toggleFilter(obj){
    
+          
+          // if(obj.active)
+
           var key =  JSON.stringify(obj);
           if(ctrl.active_filters[key])
             delete  ctrl.active_filters[key] 

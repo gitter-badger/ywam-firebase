@@ -5,6 +5,7 @@ class AccountingAccountsIncomeTransactionsController {
         
           ctrl.transactions =[]
         ctrl.markBooked = markBooked
+        ctrl.markDonationProcessed = markDonationProcessed
         ctrl.toggleType = toggleType;
         ctrl.setFund = setFund
         ctrl.linkContact = linkContact
@@ -116,16 +117,20 @@ class AccountingAccountsIncomeTransactionsController {
           // Transactions.child(item.id).child('log_fund_user').set(Site.user.id)
         }
 
+        function markDonationProcessed(item){
+          Transactions.child(item.id).child('in_donation').set(item.in_donation)
+          // Transactions.child(item.txn_id).child('donation_user').set(Auth.$getAuth().uid)
+         if(item.in_donation){
+         sound.play()
+        //  Transactions.child(item.txn_id).child('donation_time').set(firebase.database.ServerValue.TIMESTAMP)
+        }
+       }
 
         function linkContact($event,item){
           var key = `/finance_accounts/${$stateParams.account_id}/income_transactions/${item.id}`  
           var template = `<accounting-transaction-link-to-contact key="'${key}'"></accounting-transaction-link-to-contact>`
 
           Site.showDialog($event,template)
-   
-     
-
- 
         }
 
 

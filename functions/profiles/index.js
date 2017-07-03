@@ -12,7 +12,7 @@ exports.updateCRM = functions.database.ref('/profiles/{userId}/contact/email').o
    var data ={email:email,
              firebase_id: userId}
 
-return  admin.database().ref('crm/'+key).set(data)
+return  admin.database().ref('email_user_index/'+key).set(data)
           
 
 })

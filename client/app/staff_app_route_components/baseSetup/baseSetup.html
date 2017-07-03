@@ -45,6 +45,27 @@
 
        </div>
        <md-divider></md-divider>
+       <div layout="row">
+
+            <div flex>
+            <b>MailChimp</b> <br>
+            Mass Email sending service <a  href="https://www.mailchimp.com/">mailchimp.com</a><br><br>
+
+            <a ng-click="$ctrl.location_private.mailchimp.getlistsnow=true">Get list of lists now</a>
+            </div>
+            <div flex layout="column">
+            
+
+            <md-input-container flex="100">
+              <label> API Key</label>
+              <input ng-model="$ctrl.location_private.mailchimp.api_key">
+            </md-input-container>
+
+            
+            </div>
+
+       </div>
+       <md-divider></md-divider>
       <div layout="row">
 
             <div flex>

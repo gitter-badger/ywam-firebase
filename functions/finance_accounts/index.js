@@ -149,24 +149,29 @@ exports.processIncome = functions.database.ref('/finance_accounts/{accountId}/in
 
        //find out if fund is a ministry or staff_support
         p[p.length] =  admin.database().ref('/funds/'+transaction.fund_id+'/meta/').once('value').then(function(snap){
-          
-          var fund_meta = snap.val()
+           var fund_meta = snap.val()
+        //get the previous last values so that we don't put an older date over top of a newer one
+        return   admin.database().ref('/crm/'+transaction.firebase_user_id+'/last').once('value').then(function(last){
+           
+           var current_last = last.val()
            var updates ={}
            
+           console.log(current_last)
            console.log(fund_meta)
            console.log(transaction)
-           if(transaction.donation && fund_meta.type =='ministry')
+           if(transaction.donation && fund_meta.type =='ministry' && current_last.ministry_support < transaction.date)
               updates.ministry_support = transaction.date
 
-            if(transaction.donation && fund_meta.type=='staff_support')
+            if(transaction.donation && fund_meta.type == 'staff support' && current_last.staff_support < transaction.date)
               updates.staff_support = transaction.date   
 
-            if(transaction.payment )
+            if(transaction.payment && current_last.payment < transaction.date )
               updates.payment = transaction.date    
 
          return admin.database().ref('/crm/'+transaction.firebase_user_id+'/last').update(updates)
 
-        })
+           })
+         })
        
         //now add or remove if it is a donation to the donnors transaction list
          var year = moment().format('YYYY')  

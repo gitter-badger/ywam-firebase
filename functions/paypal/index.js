@@ -52,9 +52,11 @@ exports.ipn = functions.https.onRequest((req, res) => {
         if(data.subscr_id && data.item_number){
             var subscr = {payer_id : data.payer_id,
                           payer_email: data.payer_email,
-                          designation_code: data.item_number,
-                          amount: data.mc_amount3 ? data.mc_amount3 :'',
+                          fund_id: data.item_number,
+                          gross: data.mc_gross ||'',
                           fee: data.mc_fee? data.mc_fee:'',
+                          memo: data.transaction_subject || '',
+                          service: 'paypal',
                           body: data }
 
          p[p.length] =  admin.database().ref('fund_subscriptions').child(data.subscr_id).update(subscr)

@@ -195,12 +195,16 @@ path /donors { read() { canEditAccounting() || contactManagment() }
                 write() { canEditAccounting()  }
                                           }  
 
- path /designation_subscriptions { read() { canEditAccounting() }
+ path /fund_subscriptions { read() { canEditAccounting() }
                           write() { canEditAccounting() }
                                           }                                            
 
- 
-                                                                                 
+ path /fund_subscriptions/{fund_id} { read() { canViewFund(fund_id) }
+                                        
+                                    }  
+ path /fund_scheduled_bills {read(){ isStaff()}
+                             write() { canEditAccounting()}
+                            }                                                                                    
 
 path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }
@@ -245,6 +249,10 @@ isStaffAppAdmin(  )
  //or we check if they are a school admin
 ||
 isSchoolAdmin(  root.applications[appID].for.school_id + '' ) 
+}
+
+canViewFund(fund_id){
+    root.funds[fund_id].users[auth.uid] != null
 }
 
 isSiteAdmin(){

@@ -34,9 +34,9 @@
 <div flex="15">
 {{item.date | date:'short'}}<br>
 <span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>
-<!--{{item.type}}
-<i ng-if="item.status == 'pending'" style="background-color: orange">pending</i>
-<i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
+
+<i ng-if="item.pending" style="background-color: orange">pending</i>
+<!--<i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
 </div>
 <div flex="15"> <a ui-sref="profile({user_id:item.firebase_user_id})">{{ item.payer_name}}</a>
 <span ng-if="!item.firebase_user_id"  style="background-color:lightsalmon; cursor:pointer" ng-click="$ctrl.linkContact($event,item)">Not Found...
@@ -68,7 +68,7 @@
 {{item.booked_by_name}}
 </div>
 <div  align="right" style="border-right:1px solid lightgray; width:70px"> 
-<md-checkbox ng-if="item.donation" ng-model="item.in_donation"  style="margin-bottom:0" ng-change="$ctrl.checkDonation(item)" aria-label="in donations" >
+<md-checkbox ng-if="item.donation" ng-model="item.in_donation"  style="margin-bottom:0" ng-change="$ctrl.markDonationProcessed(item)" aria-label="in donations" >
 
 </div>
 

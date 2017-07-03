@@ -9,12 +9,22 @@ class AccountingFundExpensesController {
         ctrl.next_month_text =  moment().add(1,'months').format('MMMM');
         ctrl.look_out_days = moment().add(15,'days').format("D");
 
+        ctrl.today = moment().format("YYYY-MM-DD")
+        ctrl.start_of_month = moment().format("YYYY-MM-01")
+
        
         ctrl.addbtn = addbtn
         ctrl.editDialog = editDialog
         ctrl.fulfillCommitment = fulfillCommitment
         
-        
+
+        var start_date = moment().subtract(45,'days').format("YYYY-MM-DD")
+        var end_date = moment().add(45,'days').format("YYYY-MM-DD")
+        firebase.database().ref('/fund_scheduled_bills').orderByKey().startAt(start_date).endAt(end_date).on('value',function(snap){
+
+          ctrl.scheduled_bills = snap.val()
+
+        })
 
          var Ref = firebase.database().ref('/funds').on('value',function(snap){
             ctrl.total_high=0
@@ -89,20 +99,21 @@ class AccountingFundExpensesController {
 
         }
         
-        function fulfillCommitment(fund_id, commitment_id){
+        function fulfillCommitment(date, commitment_id){
 
 
           //maybe show dialog to ask for amount
 
-          console.log(fund_id, commitment_id) 
+       
           // if(!item.fixed_amount){
           //   console.log('we should ask for amount since this was not a fixed amount commitment')
           // }
+            
               var data ={compleated:true,
                          compleated_by:Site.user.id }
 
-            var Ref = firebase.database().ref('/funds/'+fund_id+'/commitments/'+commitment_id)
-                Ref.child('fulfillments/'+ctrl.this_month).update(data)
+        
+            firebase.database().ref('/fund_scheduled_bills/'+date+'/'+commitment_id).update(data)
 
         }
 
