@@ -174,7 +174,7 @@ function emailStep3(data){
     
         
       return nodemailerMailgun.sendMail({
-           from: 'info@ywamsarasota.com',
+           from:'"YWAM Sarasota" <info@ywamsarasota.com>',
            to: data.refData.user_set.email, // An array if you have multiple recipients.
            //cc:'second@domain.com',
            //bcc:'secretagent@company.gov',

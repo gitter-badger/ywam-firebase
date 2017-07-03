@@ -9,7 +9,7 @@
     "child-process-promise": "^2.2.0",
     "cors": "^2.8.3",
     "firebase-admin": "^5.0.0",
-    "firebase-functions": "^0.5.7",
+    "firebase-functions": "^0.5.8",
     "moment": "2.18.1",
     "nodemailer": "^3.1.8",
     "nodemailer-mailgun-transport": "^1.2.4",
