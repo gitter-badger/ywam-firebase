@@ -14,6 +14,7 @@ class PostalAddressController {
                $timeout()
                
             })
+     
 
          //load the list of nations... also in german if that is the language. 
         var nations_ref =  firebase.database().ref('/phrases/nations')   

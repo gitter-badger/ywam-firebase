@@ -4,9 +4,8 @@ import './passportInfoForm.styl';
 
 let passportInfoComponent = {
   restrict: 'E',
-  bindings: { //PassportForm: '=isValid'
-                isValid:"=?" ,
-                userId:"@"
+  bindings: { isValid :'=?',
+                userId:"="
             },
   template,
   controller

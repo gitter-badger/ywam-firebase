@@ -12,12 +12,8 @@ class PassportInfoFormController {
               ctrl.nations = []
              ctrl.updateNation = updateNation
              ctrl.changeIssueDate = changeIssueDate
-             ctrl.changeExpireDate = changeExpireDate
-
-
-            $scope.$watch('$ctrl.PassportForm.$valid',function(v){
-                ctrl.PassportForm && ctrl.PassportForm.$valid ? ctrl.isValid = true:  ctrl.isValid = false;
-            })
+             ctrl.changeExpireDate = changeExpireDate       
+             
            
 
          var lang_key = $translate.use(); 
@@ -28,6 +24,10 @@ class PassportInfoFormController {
          var profile_passport_ref =   firebase.database().ref('/profiles/' +ctrl.userId+'/passport' );
              $firebaseObject(profile_passport_ref).$bindTo($scope, "passport");
           
+              $scope.$watch('$ctrl.PassportForm.$valid',function(v){
+              ctrl.noPassportForm.$valid && ctrl.PassportForm.$valid ? ctrl.isValid = true:  ctrl.isValid = false;
+           $timeout
+            })
              
              profile_passport_ref.once('value', (snap)=>{
                 if(snap.val().issue_date)
@@ -37,8 +37,10 @@ class PassportInfoFormController {
                 ctrl.expire_date =  new Date( snap.val().expire_date)
                 
             })
-          
-      
+         
+             
+       
+             
         //load location visa settings
             var settings_ref =  firebase.database().ref('/location_public/settings')   
                 settings_ref.once('value', function(snap){

@@ -1,6 +1,6 @@
 class ContactInfoFormController {
    /* @ngInject */
-  constructor(Auth,$stateParams,$firebaseObject,$scope, moment,Site,$state) {
+  constructor(Auth,$stateParams,$firebaseObject,$scope, moment,Site,$state,$timeout) {
     var ctrl = this;
         
         var ctrl = this;
@@ -25,6 +25,13 @@ class ContactInfoFormController {
               });
 
       }
+      
+       $scope.$watch('$ctrl.forms.contact.$valid',function(v){
+              ctrl.forms.contact.$valid ? ctrl.isValid = true : ctrl.isValid = false
+              $timeout()
+           
+          })
+
 
      var profile_contact_ref =   firebase.database().ref('/profiles/' +ctrl.userId+'/contact' );
          $firebaseObject(profile_contact_ref).$bindTo($scope, "profile_contact");

@@ -4,7 +4,7 @@ import './postalAddress.styl';
 
 let postalAddressComponent = {
   restrict: 'E',
-  bindings: {isValid :'='},
+  bindings: {isValid :'=?'},
   template,
   controller
 };

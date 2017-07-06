@@ -4,10 +4,10 @@
         
         <div  du-scroll-container="scroll-container-1" du-spy-context style="position:fixed; padding:15px;"  hide-xs hide-sm layout="column"  >
 
-            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="$ctrl.forms.contact.$valid  && $ctrl.form.address">
+            <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="$ctrl.forms.contact  && $ctrl.forms.address">
                 <span translate="10">Contact Information</span>
             </md-checkbox>
-
+            
             <md-checkbox ng-disabled="true" aria-label="Disabled checkbox" ng-checked="profile_contact.avatar_1080">
                 <span translate="100">Photo</span>
             </md-checkbox>
@@ -62,7 +62,9 @@
         
         <md-card>
             <md-card-content>
-                <contact-info-form is-valid="$ctrl.forms.contact.$valid  && $ctrl.form.address"></contact-info-form>
+                <contact-info-form is-valid="$ctrl.forms.contact"></contact-info-form>
+                <postal-address is-valid="$ctrl.forms.address" ></postal-address>
+
 <!--
                 <h1 class="md-title" translate="10">Contact Information:</h1>
 
@@ -170,7 +172,7 @@
         
         <md-card>
             <md-card-content>
-                <passport-info-form is-valid="$ctrl.forms.passport"></passport-info-form>
+                <passport-info-form is-valid="$ctrl.forms.passport" user-id="$ctrl.user_id"></passport-info-form>
             </md-card-content>
         </md-card> 
         
@@ -212,4 +214,15 @@
         </md-card>-->
     </div>
 
+    <div style="visibility: hidden">
+        <div class="md-dialog-container" id="myDialog">
+            <md-dialog layout-padding >
+                <h2 md-colors="{color:'warn', 'border-color':'warn'}"><span translate="192">Not all required fields are valid!</span></h2>
+                <p>
+                    <span translate="193">Please fill all required fields and upload a Photo of you before you submit your application! </span><br>
+                    <span translate="194">Your data is autosaved. You can also come back later to submit your application.</span>
+                </p>
+            </md-dialog>
+        </div>
+    </div>
 </div>

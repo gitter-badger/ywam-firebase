@@ -1,71 +1,79 @@
 <md-toolbar  md-whiteframe="1">
-      <div class="md-toolbar-tools">
+    <div class="md-toolbar-tools">
         <div ng-if="$ctrl.site.isStaff" hide-gt-sm ng-click="$ctrl.openLeftMenu()" flex style="height:50px; padding-top:10px; " >
-         <i class="fa fa-bars"></i>
+            <i class="fa fa-bars"></i>
         </div>
-          
-          <img hide-xs alt="YWAM Sarasota"
-            ng-if="!$ctrl.site.isStaff"
-           style="height:70%; cursor:pointer;"
-           src="img/YWAMSarasotaLogo_White_horizontal.png"
-               ui-sref="apply.dashboard"
-           >
-          
-          <img hide-gt-xs alt="YWAM Sarasota"
-            ng-if="!$ctrl.site.isStaff"
-           style="height:35%; cursor:pointer;"
-           src="img/YWAMSarasotaLogo_White_horizontal.png"
-               ui-sref="apply.dashboard"
-           >
+        
+        
+        <img hide-xs alt="YWAM Sarasota"
+        ng-if="!$ctrl.site.isStaff"
+        style="height:70%; cursor:pointer;"
+        src="img/YWAMSarasotaLogo_White_horizontal.png"
+        ui-sref="apply.dashboard"
+        >
 
-<!--        <h1 style="cursor:pointer; padding-left:5px;">YWAM Sarasota{{$ctrl.site.location.name}}</h1>-->
+        <img hide-gt-xs alt="YWAM Sarasota"
+        ng-if="!$ctrl.site.isStaff"
+        style="height:35%; cursor:pointer;"
+        src="img/YWAMSarasotaLogo_White_horizontal.png"
+        ui-sref="apply.dashboard"
+        >
+
+        <!--        <h1 style="cursor:pointer; padding-left:5px;">YWAM Sarasota{{$ctrl.site.location.name}}</h1>-->
         <span flex></span>
-    <div layout="row" ng-hide="$ctrl.site.hideHeaderLinks">
-    <md-menu aria-label="Change Language" >
-        <md-button ng-click="$mdMenu.open($event)" >
-        {{$ctrl.langKey}}
-        </md-button>
-        <md-menu-content>
-            <md-menu-item ><md-button ng-click="$ctrl.changeLanguage('de')">Deutsch</md-button></md-menu-item>
-            <md-menu-item ><md-button ng-click="$ctrl.changeLanguage('en')"> English</md-button></md-menu-item>
-            <md-menu-item ><md-button ng-click="$ctrl.changeLanguage('es')" > Español</md-button></md-menu-item>
-    </md-menu-content>
-    </md-menu>
-    <!--If not logged in show login button-->
-    <md-menu ng-hide="$ctrl.firebaseUser" > 
-    <md-button  class="md-raised"  ng-click="$mdMenu.open($event)" translate="56">Sign In</md-button>
-  <md-menu-content  md-offset="20 0" width="4" md-position-mode="target-right target" style="padding:20px">
-<login-buttons></login-buttons>
-   </md-menu-content>  
+        <div layout="row" ng-hide="$ctrl.site.hideHeaderLinks">
+            <md-menu aria-label="Change Language" >
+                <md-button ng-click="$mdMenu.open($event)" >
+                    {{$ctrl.langKey}}
+                </md-button>
+                <md-menu-content>
+                    <md-menu-item>
+                        <md-button ng-click="$ctrl.changeLanguage('de')">Deutsch</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="$ctrl.changeLanguage('en')"> English</md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="$ctrl.changeLanguage('es')" > Español</md-button>
+                    </md-menu-item>
+                </md-menu-content>
+            </md-menu>
+            <!--If not logged in show login button-->
+            <md-menu ng-hide="$ctrl.firebaseUser" > 
+                <md-button  class="md-raised"  ng-click="$mdMenu.open($event)" translate="56">Sign In</md-button>
+                <md-menu-content  md-offset="20 0" width="4" md-position-mode="target-right target" style="padding:20px">
+                    <login-buttons></login-buttons>
+                </md-menu-content>  
+            </md-menu>
 
+            <!--if logged in show avatar and menu with logout button-->
+            <md-menu ng-show="$ctrl.firebaseUser"  md-offset="40 0"  >
+                <div  ng-click="$mdOpenMenu($event)" style="height:48px; cursor:pointer;">
+                    <img  alt=" "
+                    ng-if="$ctrl.user.contact.avatar_200"
+                    style="border-radius: 50%; height:100%"
+                    firebase-src="{{$ctrl.user.contact.avatar_200}}"
+                    >
+                    <img  alt=" "
+                    ng-if="!$ctrl.user.contact.avatar_200"
+                    style="border-radius: 50%; height:100%"
+                    src="img/default_avatar.png"
+                    >
+                </div>     
+                <md-menu-content  width="3" >
+                    <md-menu-item>
+                        <md-button ui-sref="apply.profile({user_id:$ctrl.user.id })" translate="55"> Your Profile </md-button>
+                    </md-menu-item>
+                    <md-menu-item>
+                        <md-button ng-click="$ctrl.logout()" translate="54">Sign Out</md-button>
+                    </md-menu-item>
+                </md-menu-content>  
+            </md-menu>
 
-    </md-menu>
+        </div>
 
-<!--if logged in show avatar and menu with logout button-->
-    <md-menu ng-show="$ctrl.firebaseUser"  md-offset="40 0"  >
-     <div  ng-click="$mdOpenMenu($event)" style="height:48px; cursor:pointer;">
-      
-       <img  alt=" "
-            ng-if="$ctrl.user.contact.avatar_200"
-           style="border-radius: 50%; height:100%"
-           firebase-src="{{$ctrl.user.contact.avatar_200}}"
-           >
-         <img  alt=" "
-            ng-if="!$ctrl.user.contact.avatar_200"
-           style="border-radius: 50%; height:100%"
-           src="img/default_avatar.png"
-           >
-      </div>     
-      <md-menu-content  width="3" >
-          <md-menu-item><md-button ui-sref="apply.profile({user_id:$ctrl.user.id })" translate="55"> Your Profile </md-button> </md-menu-item>
-         <md-menu-item><md-button ng-click="$ctrl.logout()" translate="54">Sign Out</md-button></md-menu-item>
-      </md-menu-content>  
-
-    </md-menu>
-
-      </div>
-  </md-toolbar>
-   <div ng-hide="$ctrl.presence.$value">
-     <md-progress-linear md-mode="indeterminate"></md-progress-linear>
- </div>
-</div>
+        <div ng-hide="$ctrl.presence.$value">
+            <md-progress-linear md-mode="indeterminate"></md-progress-linear>
+        </div>
+    </div>
+</md-toolbar>

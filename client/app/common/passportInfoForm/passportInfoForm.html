@@ -4,8 +4,9 @@
     <!--<span translate="109">
         This helps us to prepare the documents for your residence permit.<br>
     </span>-->
+<form name="$ctrl.noPassportForm">   
     <br><br>
-    <md-checkbox aria-label="Disabled checkbox" ng-model="passport.no_passport">
+    <md-checkbox aria-label="Disabled checkbox" ng-model="passport.no_passport" ng-required='!$ctrl.PassportForm'>
         <span translate="108">I do not have a passport</span>
     </md-checkbox>
     <br>
@@ -14,6 +15,7 @@
     </span>
     <br>
     <br>
+</form>
     
 <form name="$ctrl.PassportForm" ng-if="!passport.no_passport">   
     <span translate="16" style="padding-left:2px;">Names_as printed in passport</span>
