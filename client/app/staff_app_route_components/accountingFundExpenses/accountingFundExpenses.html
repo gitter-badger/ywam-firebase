@@ -4,47 +4,69 @@
 <div flex-gt-xs="90" flex>
 
 <md-card>
-  <md-card-content layout="row">
+  <md-card-content layout-gt-md="row">
 
 <div flex>
-<div  ng-repeat="(date ,bills) in $ctrl.scheduled_bills">
+ <b> Bills To Be Paid {{$ctrl.start_date |date :'MMMM d'}} - {{$ctrl.end_date |date : 'MMMM d'}}</b>
+
+<div layout="row">
+<div flex="50">Item</div>
+<div flex>Due Date</div>
+<div flex="10" >Fund </div>
+<div flex="15">Amount</div>
+</div>  
+<div  ng-repeat="(date ,bills) in $ctrl.scheduled_bills" ng-class="{'redbar':date < $ctrl.today}" >
+  
  <div ng-repeat="(key,bill) in bills"  ng-if="!bill.compleated">
    <div layout="row"  ng-class="{'overdue':date < $ctrl.today}"> 
-      <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(date, key)" aria-label="checkbox" ></md-checkbox>
-      <div flex>{{bill.name}}</div>
+      <div flex="50"><md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(date, key)" aria-label="checkbox" ></md-checkbox>
+        {{bill.name}}</div>
       <div flex>{{date | date:'MMMM d'}}</div>
-      <div>{{bill.fund_id}}</div>
-      <div>{{bill.fixed_amount}} <span ng-if="!bill.fixed_amount">{{bill.low_amount}} ~ {{bill.high_amout}}</span> </div>
+      <div flex="15">{{bill.fund_id}}</div>
+      <div flex="15" style="text-align:right ;">{{bill.fixed_amount | number:0}} <span ng-if="!bill.fixed_amount">{{bill.low_amount |number:0}} ~ {{bill.high_amount |number:0}}</span> </div>
    </div>
    <md-divider></md-divider>
  </div>
   </div>
+
+
+
 </div>
 
 <div style="border-left:2px solid black; margin-left:20px; width:20px;" ></div>
 
 
 <div flex>
+ <b> Bills Paid</b>
+ <div layout="row">
+<div flex="50">Item</div>
+<div flex>Due Date</div>
+<div flex="10" >Fund </div>
+<div flex="15">Amount</div>
+</div>  
 <div flex ng-repeat="(date ,bills) in $ctrl.scheduled_bills" >
- <div ng-repeat="(key,bill) in bills" layout="row" ng-if="bill.compleated && date >= $ctrl.start_of_month"> 
-   <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(date, key)" ng-checked="true" aria-label="checkbox" ></md-checkbox>
-   <div flex>{{bill.name}}</div>
-   <div flex>{{date | date:'MMMM d'}}</div>
-   <div>{{bill.fund_id}}</div>
-   <div>{{bill.fixed_amount}} <span ng-if="!bill.fixed_amount">{{bill.low_amount}} ~ {{bill.high_amout}}</span> </div>
+ <div ng-repeat="(key,bill) in bills"  ng-if="bill.compleated && date >= $ctrl.start_of_month"> 
+   <div layout="row"> 
+      <md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(date, key)" ng-checked="true" aria-label="checkbox" ></md-checkbox>
+      <div flex="50">{{bill.name}}</div>
+      <div flex>{{date | date:'MMMM d'}}</div>
+      <div flex="15">{{bill.fund_id}}</div>
+      <div flex="15" style="text-align:right ;">{{bill.fixed_amount |number:0}} <span ng-if="!bill.fixed_amount">{{bill.low_amount |number:0}} ~ {{bill.high_amount |number:0}}</span> </div>
+   </div>
+   <md-divider></md-divider>   
  </div>
   </div>
 </div>
 
   </md-card-content>
 </md-card>
-  
+<!--  
 <md-card  ng-repeat="(fund_id,fund) in $ctrl.funds" ng-if="fund.commitments" >
   <md-card-content>
     <h1 class="md-title">{{fund.meta.name}}</h1>
 
 <!--Commitments 
-<md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>-->
+<md-button ng-click="$ctrl.addbtn($event,fund_id)" >Add</md-button>
 
 <div layout="row" >
  
@@ -141,7 +163,7 @@ Bills: {{$ctrl.this_month_text}} 1 - {{$ctrl.next_month_text}} {{$ctrl.look_out_
   
    <div flex> {{item.due_by}}</div>
    <div flex> {{item.reocurr}}</div>
-   <!--<div flex> {{item.fulfillments}}</div>-->
+   <!--<div flex> {{item.fulfillments}}</div>
    <b flex> {{item.fixed_amount}}</b>
  </div>
   <md-divider></md-divider>
@@ -157,19 +179,38 @@ Already paid this month: <b>{{$ctrl.currencySym }}{{fund.stats[$ctrl.this_month]
 
 
   </md-card-content>
-</md-card>
+</md-card>-->
 
-<md-card>
+<md-card flex="50">
   <md-card-content>
-    
-All Funds yet to paid: {{$ctrl.currencySym }} 
+ <div layout="row"><div flex >All Bills: </div><div> {{$ctrl.currencySym }} 
   <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">
   {{$ctrl.total_low | number:0}} ~
    {{$ctrl.total_high | number:0}}
   </span>
-    <br>
-    All Funds Current Balances: {{$ctrl.total_balances | number:2}} <br>
-    <b >Estimate After All payments: {{$ctrl.currencySym }}  {{$ctrl.total_balances - $ctrl.total_high | number:2}}</b>
+  </div>
+ </div>
+ <md-divider></md-divider>
+  <br>
+    <div ng-repeat="fund in $ctrl.funds"  ng-if="fund.balance.current">
+      <div layout="row">
+      <div flex >{{fund.meta.name}}</div> 
+      <div flex style="font-size:80%"> last update {{fund.balance.last_update |  date:'short'}} </div> 
+      <div flex="15" style="text-align:right"> {{fund.balance.current}}</div> 
+       </div>
+<md-divider></md-divider>
+     </div>  
+    <div layout="row">
+      <div flex > 
+    All Funds Current Balances: </div>
+    <div flex="15" style="text-align:right"> {{$ctrl.total_balances | number:2}} </div>
+    </div>
+      
+      <br>
+   <div layout="row">
+      <div flex > 
+    <b >Estimate After All payments: </b></div>
+    <div flex style="text-align:right"> <b> {{$ctrl.currencySym }}  {{$ctrl.total_balances - $ctrl.total_high | number:2}}</b></div>
 
 
 

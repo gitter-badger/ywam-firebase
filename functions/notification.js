@@ -1,42 +1,56 @@
 const functions = require('firebase-functions');
-var Botkit = require('botkit');
+// var Botkit = require('botkit');
+// var Slack = require('slack-node');
+var WebClient = require('@slack/client').WebClient;
+
 const admin = require('./config.js').admin;
 
 
 function sendToChannel(channel, message_text){
+     
+     console.log('recived message '+message_text)
+// if(1==1)
+// return
 
-var slackController = Botkit.slackbot({
- debug: false,
- log: false
-  //or a "logLevel" integer from 0 to 7 to adjust logging verbosity
-});
+// var slackController = Botkit.slackbot({
+//  debug: false,
+//  log: false
+//   //or a "logLevel" integer from 0 to 7 to adjust logging verbosity
+// });
+return   new Promise(function(resolve, reject) {
 
-
-    var slack =  slackController.spawn({
-    token: functions.config().slack.token,
-    })    
+    var token = functions.config().slack.token;
+    var web = new WebClient(token);
+ 
+    // var slack =  slackController.spawn({
+    // token: functions.config().slack.token,
+    // })    
 
     // channel = '#systemlog';C246YD6LU
-    console.log('recived message '+message_text)
+    
 
-    return   new Promise(function(resolve, reject) {
+    
 
-        slack.say( {
-                    channel:channel,
+        web.chat.postMessage( channel,{
                     // text:message_text
+                    username: "srqbot",
                     attachments: [{
                         //  author_name: user_name,
                         //  author_icon:response.user.profile.image_24,
                         //  thumb_url:response.user.profile.image_72,
                           text:   message_text,
-                          color:'#0099e6'
+                          color:'#44bda4'
                         }
                     ]
                     },function(err,res) {
                     if (err) {
+                         console.log(err)
                     reject(err);
-                    } else {
+                   
+                     } else {
+                    console.log(res)
                     resolve(res);
+                    
                     }
                 });
             

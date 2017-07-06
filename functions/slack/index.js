@@ -1,5 +1,5 @@
 const functions = require('firebase-functions');
-var Botkit = require('botkit');
+// var Botkit = require('botkit');
 const admin = require('../config.js').admin;
 
 

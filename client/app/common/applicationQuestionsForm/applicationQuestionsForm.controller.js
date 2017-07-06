@@ -6,16 +6,18 @@ class ApplicationQuestionsFormController {
        function onInit(){
             ctrl.site = Site
 
-            console.log(ctrl.appType)
+            // console.log('ApplicationQuestionsFormController: '+ctrl.appType)
+            //  console.log('ApplicationQuestionsFormController: '+ctrl.schoolId)
 
       var answersRef= firebase.database().ref('applications/'+ctrl.appId+'/answers_to_questions')
          $firebaseObject(answersRef).$bindTo($scope, "answers");
 
       if(ctrl.schoolId){   
+          
       var schoolRef= firebase.database().ref('schools/'+ctrl.schoolId+'/public/questions_index')
           ctrl.questions_index= $firebaseObject(schoolRef)
       }
-      if(ctrl.appType){   
+      if(ctrl.appType !='school'){   
       var qRef= firebase.database().ref('location_public/application_types/'+ctrl.appType +'/questions')
           ctrl.questions_index= $firebaseObject(qRef)
       }
