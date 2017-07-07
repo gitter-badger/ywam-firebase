@@ -11,10 +11,12 @@ class UserApplicationsListController {
            ctrl.userId = Auth.$getAuth().uid;
             
             
-            firebase.database().ref("profiles/"+ctrl.userId+"/app_index").on("child_added",function(snap)
+            firebase.database().ref("profiles/"+ctrl.userId+"/app_index").on("value",function(snap)
             {
-              var app=snap.val();
-                  app.id=snap.key;
+              ctrl.applicationList=[];
+              snap.forEach(function(appsnap){
+              var app=appsnap.val();
+                  app.id=appsnap.key;
                 
                  if(app.for.school_id )
                  {
@@ -31,7 +33,7 @@ class UserApplicationsListController {
                 }
 
 
-
+              })
 
           })
       }

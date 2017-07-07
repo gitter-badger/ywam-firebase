@@ -1,12 +1,8 @@
 <div layout="row" layout-wrap>
 <md-card flex="100" flex-gt-sm="45"  flex-gt-xs="70" ng-repeat="app in $ctrl.applicationList |orderBy:id:true" >
 
-<!--
-    <img firebase-src="{{app.school.banner_1080}}" ng-if="$ctrl.banner" style="width:100%;">
-    <img src="img/default_banner.jpg" ng-if="$ctrl.banner && !app.school.banner_1080" style="width:100%;">
--->
     <md-card-content>   
-        
+        <!--{{app.id}}-->
         <div layout="row" layout-align="start center" style="margin-bottom:12px;">
             <div style="height:50px; width:50px; overflow:hidden;border-radius: 50%;">
                 <div style="width:200px; margin-left:-75px; height:50px; text-align:center;">
@@ -20,10 +16,7 @@
                 <app-for app-id="app.id" class="md-title"></app-for> 
             </div>
         </div>
-<!--        <md-divider></md-divider>-->
-        
-        
-<!--        <app-for app-id="app.id" class="md-title"></app-for>-->
+
         <md-card-actions  style="margin:0;">
         
             <div layout="row" layout-align="end center">

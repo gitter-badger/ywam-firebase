@@ -32,9 +32,15 @@
 
  <h1 class="md-title" ng-if="$ctrl.donor.years">Donations</h1>
 
-<div ng-repeat="(key,item) in $ctrl.donor.years">{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} 
+<div ng-repeat="(key,item) in $ctrl.donor.years"><b> {{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} </b>
     <md-divider></md-divider>
-    <div ng-repeat="tran in item.transactions">{{tran.date|date}} {{tran.fund_id}} {{tran.method}} {{tran.amount}} </div>
+    <div ng-repeat="tran in item.transactions" layout="row">
+        <div flex></div> 
+        <div flex>{{tran.date|date}}</div>
+        <div flex>{{tran.fund_id}} </div>
+        <div flex> {{tran.method}}</div> 
+        <div flex> {{tran.amount}} </div>
+    </div>
     </div>    
 
 

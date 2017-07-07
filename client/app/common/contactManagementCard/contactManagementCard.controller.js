@@ -1,6 +1,6 @@
 class ContactManagementCardController {
    /* @ngInject */
-  constructor(Site) {
+  constructor(Site, $timeout) {
     var ctrl = this;
         ctrl.addNote = addNote
         ctrl.deleteNote = deleteNote

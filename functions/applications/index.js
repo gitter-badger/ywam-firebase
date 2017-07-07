@@ -6,14 +6,24 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
     .onWrite(event => {
       // Grab the current value of what was written to the Realtime Database.
     const original = event.data.val();
-    // Only edit data when it is first created.
-      if (event.data.previous.exists()) {
-          console.log('nothing new')
-        return;
-      }
+   
       // Exit when the data is deleted.
       if (!event.data.exists()) {
-          console.log('data is being deleted ')
+          console.log('data is being deleted.. removing from indexes')
+          var user_id = event.data.previous.val()
+          var app_id = event.params.appId
+          var p = []
+           p[p.length] = admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove()
+           p[p.length] = admin.database().ref('location' ).child('current_staff_index').child(user_id).remove()
+           p[p.length] = admin.database().ref('location' ).child('staff_app_index').child(user_id).remove()
+           p[p.length] = admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).remove()
+
+        return Promise.all(p)
+      }
+
+       // Only edit data when it is first created.
+      if (event.data.previous.exists()) {
+          console.log('nothing new')
         return;
       }
 
@@ -82,14 +92,18 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
 
 exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/status')
     .onWrite(event => {
+    
+    
       // Grab the current value of what was written to the Realtime Database.
        const status = event.data.val();
        const app_id  = event.params.appId
        const promises = [];
    
+
    return   admin.database().ref('applications/'+app_id+'/for' ).on('value',function(snap){
                 
                 var appfor = snap.val();
+              
                 var user_id = appfor.user_id
                 var data = {status: status,
                             for: appfor }
@@ -124,6 +138,9 @@ exports.updateIndexes = functions.database.ref('/applications/{appId}/meta/statu
              promises.push(admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).set(data))
               console.log(promises.length + ' promises to resolve')
               return Promise.all(promises);
+           
+         
+
 
        })
 
