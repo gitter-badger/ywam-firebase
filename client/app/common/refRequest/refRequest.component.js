@@ -4,7 +4,7 @@ import './refRequest.styl';
 
 let refRequestComponent = {
   restrict: 'E',
-  bindings: {appId: '=', isValid:'='},
+  bindings: {appId: '=', isValid:'=', userId:"="},
   template,
   controller
 };
