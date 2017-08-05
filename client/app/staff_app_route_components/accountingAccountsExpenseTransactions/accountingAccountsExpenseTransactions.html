@@ -27,7 +27,9 @@
 
   </tr>
 
-<tr ng-repeat="item in $ctrl.transactions | orderBy:'-date'">
+<tr ng-repeat="item in $ctrl.transactions | orderBy:'-date'" 
+  ng-hide="(item.memo.includes('CHECK') && $ctrl.settings.hide_expense_check) ||
+           (item.memo.includes('PAYPAL INST XFER') && $ctrl.settings.hide_expense_paypal_xfer)">
 <td>
 {{item.date | date}}<br>
 <span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>

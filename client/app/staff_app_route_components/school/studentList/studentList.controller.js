@@ -13,8 +13,8 @@ class StudentListController {
       
   
 
-    var school_id = $stateParams.school_id;
-        ctrl.apps =  School.getApps(school_id)
+    ctrl.school_id = $stateParams.school_id;
+        ctrl.apps =  School.getApps(ctrl.school_id)
     // ctrl.apps = []
     //ctrl.loading_promise = $q.defer();
         

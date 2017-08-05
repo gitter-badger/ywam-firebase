@@ -13,9 +13,10 @@ exports.onCreate = functions.database.ref('/applications/{appId}/for/user_id')
           var user_id = event.data.previous.val()
           var app_id = event.params.appId
           var p = []
-           p[p.length] = admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove()
-           p[p.length] = admin.database().ref('location' ).child('current_staff_index').child(user_id).remove()
-           p[p.length] = admin.database().ref('location' ).child('staff_app_index').child(user_id).remove()
+          //This is not the best way, as cleaning up of a school application of a current staff will remove that userid from staff indexes
+          // p[p.length] = admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove()
+          // p[p.length] = admin.database().ref('location' ).child('current_staff_index').child(user_id).remove()
+          // p[p.length] = admin.database().ref('location' ).child('staff_app_index').child(user_id).remove()
            p[p.length] = admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).remove()
 
         return Promise.all(p)

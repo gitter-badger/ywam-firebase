@@ -3,18 +3,21 @@ class AccountingAccountsIncomeTransactionsController {
   constructor($filter,ngAudio, $stateParams, $timeout, Site) {
     var ctrl = this;
         
-          ctrl.transactions =[]
+        ctrl.transactions =[]
         ctrl.markBooked = markBooked
         ctrl.markDonationProcessed = markDonationProcessed
         ctrl.toggleType = toggleType;
         ctrl.setFund = setFund
         ctrl.linkContact = linkContact
+        ctrl.reprocess= reprocess
+
+        ctrl.account_id = $stateParams.account_id
     
     var sound = ngAudio.load("sounds/1.mp3"); // returns NgAudioObject
        
 
-        var Transactions = firebase.database().ref('/finance_accounts/'+$stateParams.account_id+'/income_transactions')
-        var Settings = firebase.database().ref('/finance_accounts/'+$stateParams.account_id+'/settings')
+        var Transactions = firebase.database().ref('/finance_accounts/'+ctrl.account_id+'/income_transactions')
+        var Settings = firebase.database().ref('/finance_accounts/'+ctrl.account_id+'/settings')
 
         Transactions.on('child_added',function(snap){
             processTransaction(snap)
@@ -59,9 +62,9 @@ class AccountingAccountsIncomeTransactionsController {
         // })
 
         function getPayerName(index){
-         var uid = ctrl.transactions[index].firebase_user_id
+         var uid = ctrl.transactions[index].contact_id
           if(uid){
-          firebase.database().ref('profiles/'+uid+'/contact').once('value',(snap)=>{
+          firebase.database().ref('crm/'+uid +'/name').once('value',(snap)=>{
               ctrl.transactions[index].payer_name = snap.val().first_name +' '+ snap.val().last_name
           }) }}
 
@@ -82,6 +85,7 @@ class AccountingAccountsIncomeTransactionsController {
          }
 
             memo =  memo.replace(/D-/i, '<span class="highlight-donation" >D-</span>');
+            memo =  memo.replace(/P-/i, '<span class="highlight-donation" >P-</span>');
          
             ctrl.transactions[index].memo = memo
          $timeout()
@@ -133,7 +137,12 @@ class AccountingAccountsIncomeTransactionsController {
           Site.showDialog($event,template)
         }
 
-
+         function reprocess(item){
+          Transactions.child(item.id).child('reprocess').set(true).then(function(){
+              sound.play()
+          })
+         
+        }
   }
 }
 

@@ -2,6 +2,7 @@ class AccountingFundExpensesController {
    /* @ngInject */
   constructor($firebaseObject,moment, Site, $timeout) {
     var ctrl = this;
+        ctrl.site = Site
         ctrl.this_month =  moment().format("YYYY-MM");
         ctrl.today = moment().format("YYYY-MM-DD")
         ctrl.start_of_month = moment().format("YYYY-MM-01")
@@ -12,19 +13,25 @@ class AccountingFundExpensesController {
         ctrl.addbtn = addbtn
         ctrl.editDialog = editDialog
         ctrl.fulfillCommitment = fulfillCommitment
+        ctrl.editFundBalanceDialog = editFundBalanceDialog
         
 
         ctrl.start_date = moment().subtract(45,'days').format("YYYY-MM-DD")
         ctrl.end_date = moment().add(30,'days').format("YYYY-MM-DD")
 
         firebase.database().ref('/fund_scheduled_bills').orderByKey().startAt(ctrl.start_date).endAt(ctrl.end_date).on('value',function(snap){
-
+           ctrl.total_high=0
+          ctrl.total_low=0 
           ctrl.scheduled_bills = snap.val()
 
           snap.forEach(function(day){
+
               day.forEach(function(bill){
               var item = bill.val()
-              if(!item.compleated){
+              
+               if(!item.compleated){
+                 if(!ctrl.first_unpaid_bill_date)
+                 ctrl.first_unpaid_bill_date = day.key
               if(item.fixed_amount){
                           ctrl.total_low += +item.fixed_amount
                           ctrl.total_high += +item.fixed_amount
@@ -32,11 +39,11 @@ class AccountingFundExpensesController {
                           ctrl.total_low += +item.low_amount
                           ctrl.total_high += +item.high_amount
                     }
-
+                    // console.log(ctrl.total_high)
               }       
           })
            })
-
+            $timeout()
         })
 
          var Ref = firebase.database().ref('/funds').on('value',function(snap){
@@ -46,42 +53,7 @@ class AccountingFundExpensesController {
             
             snap.forEach(function(fund){
               
-              // var stats=fund.val().stats
-              // ctrl.funds[fund.key].upcoming_bills_high = 0
-              // ctrl.funds[fund.key].upcoming_bills_low = 0
-            
 
-           //get next months amount to pay
-          //   angular.forEach(fund.val().commitments, function(item,key){
-          // if(  ( !item.fulfillments[ctrl.next_month] || item.fulfillments[ctrl.next_month] && !item.fulfillments[ctrl.next_month].compleated)  && item.due_by < ctrl.look_out_days){
-              
-          //         if(item.fixed_amount){
-          //                 ctrl.funds[fund.key].upcoming_bills_low += +item.fixed_amount
-          //                 ctrl.funds[fund.key].upcoming_bills_high += +item.fixed_amount
-          //           }else{
-          //                 ctrl.funds[fund.key].upcoming_bills_low += +item.low_amount
-          //                 ctrl.funds[fund.key].upcoming_bills_high += +item.high_amount
-          //           }
-             
-              
-          //      $timeout()
-          //   }
-
-
-          //  })
-
-
-          //    if(stats){
-             
-          //     ctrl.funds[fund.key].upcoming_bills_low += +stats[ctrl.this_month].amount_topay_low
-          //     ctrl.funds[fund.key].upcoming_bills_high += +stats[ctrl.this_month].amount_topay_high
-          //  }
-
-           //and add this to the total of all funds
-            // ctrl.total_high += +ctrl.funds[fund.key].upcoming_bills_high
-            // ctrl.total_low += +ctrl.funds[fund.key].upcoming_bills_low
-
-             
              var balance=fund.val().balance
              if(balance && balance.current){
                ctrl.total_balances += +balance.current
@@ -108,6 +80,10 @@ class AccountingFundExpensesController {
         function editDialog($event, fund_id, commitment_id){
           var template =`<fund-commitment-edit fund-id="${fund_id}" commitment-id="${commitment_id}"></fund-commitment-edit>`;
           Site.showDialog($event, template )
+        }
+         function editFundBalanceDialog($event, fund_id){
+          var template =`<fund-edit-balance-dialog fund-id="${fund_id}"></fund-edit-balance-dialog>`;
+          Site.showDialog($event, template )
 
         }
         
@@ -121,7 +97,7 @@ class AccountingFundExpensesController {
           //   console.log('we should ask for amount since this was not a fixed amount commitment')
           // }
             
-              var data ={compleated:true,
+              var data ={compleated: !ctrl.scheduled_bills[date][commitment_id].compleated,
                          compleated_by:Site.user.id }
 
         

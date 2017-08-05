@@ -1,7 +1,19 @@
 <div layout="row" layout-align="center">
   <div flex="70">
   <md-card >
-
+    
+    <md-input-container>
+      <label>
+    Account Name
+      </label>
+      <input ng-model="$ctrl.settings.name">
+    </md-input-container>
+ <md-input-container>
+      <label>
+       Add Transaction form (For Cash & Checks)
+      </label>
+      <md-switch ng-model="$ctrl.settings.add_transactions_form">
+    </md-input-container>
     <md-input-container>
       <label>
     Hide Transaction ID (sometimes they are supper long)
@@ -14,6 +26,25 @@
       </label>
       <md-switch ng-model="$ctrl.settings.hide_income_paypal_transfer">
     </md-input-container>
+    <md-input-container>
+      <label>
+    Hide income "DEPOSIT"
+      </label>
+      <md-switch ng-model="$ctrl.settings.hide_income_deposit">
+    </md-input-container>
+     <md-input-container>
+      <label>
+    Hide expense "CHECK"
+      </label>
+      <md-switch ng-model="$ctrl.settings.hide_expense_check">
+    </md-input-container>
+      <md-input-container>
+      <label>
+    Hide expense "PAYPAL INST XFER"
+      </label>
+      <md-switch ng-model="$ctrl.settings.hide_expense_paypal_xfer">
+    </md-input-container>
+    
   </md-card>
   </div>
 </div>

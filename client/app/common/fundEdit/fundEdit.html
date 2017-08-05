@@ -1,8 +1,5 @@
 <div>
-    <h1 class="md-title">Fund</h1>
-    <h1 style="text-transform: uppercase;">{{ $ctrl.code }}</h1>
-    <br>
-    
+   
     <div layout="row">    
         <md-checkbox ng-model="$ctrl.form.public"> Public Donation Page?</md-checkbox>
     </div>
@@ -45,12 +42,5 @@
     </div> 
 
 
-      <div layout="column" style="background-color: lightblue">
-        <md-input-container flex>
-            <label>Current Balance</label>
-            <input ng-model="$ctrl.balance.current"  ng-change="$ctrl.updateBalance()"> 
-        </md-input-container>
-        last update: {{$ctrl.balance.last_update| date :'short'}} <br>
-        by {{$ctrl.balance.update_by}}
-    </div>
+
 </div>

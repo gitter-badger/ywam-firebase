@@ -71,6 +71,7 @@
             <div flex>
             <b>Slack</b> <br>
             Used to post notifcations <a  href="https://slack.com/">slack.com</a><br>
+            <a ng-click="$ctrl.location_private.slack.get_channel_list=true">Get channel list</a>
             </div>
             <div flex layout="column">
             <md-input-container flex="100">
@@ -110,6 +111,7 @@
             <div flex>
             <b>Plaid</b> <br>
             US Bank integration <a  href="https://www.plaid.com/">plaid.com</a><br>
+            
             </div>
             <div flex layout="column">
             <md-input-container flex="100">
@@ -132,7 +134,8 @@
 
             <div flex>
             <b>Linked US Bank Account via Plaid</b> <br>
-             <a ng-click="$ctrl.linkBtn()" >Link</a>
+             <a ng-click="$ctrl.linkBtn()" >Link</a><br>
+             <a ng-click="$ctrl.location_private.bank.pull_transactions_now = true">Pull Transactions now</a>
            <br>
             </div>
             <div flex>

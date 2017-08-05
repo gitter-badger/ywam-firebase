@@ -3,16 +3,37 @@
 <md-card-content>
   <h2>Donors</h2>
 
+<div>
+  Filter by Designation:<br>
+  <a ng-repeat="(key,fund) in $ctrl.funds" ng-click="$ctrl.toggleFilter(key)" ng-class="{active: $ctrl.fund_filter == key}">{{key}} | </a>
+</div>
+
 <div layout="row">
   <div flex>Donor</div>
-  <div flex>Activity</div>
+  <div flex="33">Activity</div>
+  <div flex="33">Last Interaction</div>
 </div>
-<div ng-repeat="donor in $ctrl.donors" >
+<div ng-repeat="(key,donor) in $ctrl.donors | filter: $ctrl.filterList"  >
 <div layout="row">
-<div flex> <a  ui-sref="profile({user_id:donor.user_id})">{{donor.first_name +' '+ donor.last_name}}</a></div>
-<div flex> 
-      <div ng-repeat="(key,item) in donor.years">{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total}} </div>     </div>
+<div flex> <a  ui-sref="profile({user_id:donor.user_id})">{{donor.name.first_name +' '+ donor.name.last_name}}</a></div>
 
+
+
+<div flex="33"> 
+ 
+      <div ng-repeat="(key,item) in donor.years">
+        <!--{{key}} : donations {{item.transaction_count}},  year to date: ${{item.year_to_date_total | number:2}}  <br>-->
+        Funds: 
+       <span ng-repeat="(fund,time) in item.funds"> {{fund}}  </span>
+        </div>     </div>
+
+<div flex="33" > 
+<span ng-if="donor.last_interaction_note.postcard"  class="contactinteraction"> <i class="fa fa-picture-o" aria-hidden="true"></i> Postcard Sent</span>
+<span ng-if="donor.last_interaction_note.video_email" class="contactinteraction"> <i class="fa fa-video-camera" aria-hidden="true"></i> video_email</span>
+<span ng-if="donor.last_interaction_note.phone" class="contactinteraction"> <i class="fa fa-phone" aria-hidden="true"></i>
+ phone</span>
+  {{donor.last_interaction_note.time | date }}      
+</div>
 
 </div>
 <md-divider></md-divider>

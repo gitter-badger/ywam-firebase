@@ -49,7 +49,8 @@ exports.pull_transactions = functions.database.ref('/location_private/bank/pull_
 
     if(event.data.val()) {
         var p = []
-      
+       
+        //get plaid connection info
         return admin.database().ref('/location_private/plaid').once('value').then(function(snap){
 
                 var client = new plaid.Client(
@@ -59,6 +60,7 @@ exports.pull_transactions = functions.database.ref('/location_private/bank/pull_
                         plaid.environments['development']
                         );
 
+             //get bank info           
             return admin.database().ref('/location_private/bank').once('value').then(function(snap){
 
                 var access_token = snap.val().access_token
@@ -88,16 +90,14 @@ exports.pull_transactions = functions.database.ref('/location_private/bank/pull_
                          else
                          var transaction_id = item.transaction_id   
                         // console.log(item)
-                        if(item.amount < 0){//(income is shown as negitive value)
+                        if(item.amount < 0  && !item.pending){//(income is shown as negitive value)
 
                           var transaciton = {
-                              original : item,
+                            original : item,
                             date:item.date, 
-                            pending: item.pending,
+                            // pending: item.pending,
                             // status: data.payment_status.toLowerCase(),
-                            // type: data.payment_type?data.payment_type:null,
-                            // status_reason : data.pending_reason? data.pending_reason:null,
-                            // fee: data.mc_fee?data.mc_fee:null , 
+                            type: 'bank',
                             gross: Math.abs(item.amount),
                             memo: item.name || null,
                             // item_number: data.item_number ? data.item_number : null,
@@ -110,25 +110,15 @@ exports.pull_transactions = functions.database.ref('/location_private/bank/pull_
                             // }
                         }
                         p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/income_transactions').child(transaction_id).update(transaciton)
-                    }else{ //this is an expense
+                    }
+
+                    if(item.amount > 0 && !item.pending){ //this is an expense
                          var transaciton = {
                               original : item,
                             date:item.date,
-                             pending: item.pending, 
-                            // status: data.payment_status.toLowerCase(),
-                            // type: data.payment_type?data.payment_type:null,
-                            // status_reason : data.pending_reason? data.pending_reason:null,
-                            // fee: data.mc_fee?data.mc_fee:null , 
                             gross: item.amount,
                             memo: item.name || null,
-                            // item_number: data.item_number ? data.item_number : null,
-                            // payer_meta: {
-                            // first_name: data.first_name,
-                            // last_name: data.last_name,
-                            // email: data.payer_email,
-                            // paypal_id:data.payer_id,
-                            // residence_country : data.residence_country
-                            // }
+                           
                         }
                         p[p.length]  = admin.database().ref('finance_accounts/'+item.account_id+'/expense_transactions').child(transaction_id).update(transaciton)
                     

@@ -10,13 +10,14 @@ let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment,
 let getApps = (school_id, accepted_only ) => {
         console.log('calling getApps for '+school_id)
      
-          school.apps = []
+         school.apps = []
 
       var appIndexRef = firebase.database().ref('/schools/'+school_id +'/app_index')
           appIndexRef.on('value', function(indexSnap){
 
  //console.log(indexSnap.numChildren())
-             
+              
+
             indexSnap.forEach(function(appSnap){
                   
                if(!accepted_only || appSnap.val() >= 13 ){
@@ -27,11 +28,6 @@ let getApps = (school_id, accepted_only ) => {
                   
                     getAppFor(index)
                     getAppMeta(index)
-
-                    // if(index ==  indexSnap.numChildren()){
-                    //   console.log('this is the last ')
-
-                    // }
 
                }//end if accepted only 
             })//end foreach appindex  
@@ -74,14 +70,13 @@ let getApps = (school_id, accepted_only ) => {
       }
 
       function getProfileCom(user_id, index){
-                      //get avatar as well
-                    //  Site.getAvatar(user_id)
-                   
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/contact' )
                       userRef.once('value',function(snapshot) { 
+                                                  if(snapshot.val()){
                                                   school.apps[index].user  = snapshot.val()
-                                                  //  $timeout(function() {  });
+                                                   $timeout();
                                                      getNationality(user_id, index)
+                                                  }
                                                 })
       }
 
@@ -89,11 +84,13 @@ let getApps = (school_id, accepted_only ) => {
                      
                    var userRef =   firebase.database().ref('/profiles/'+ user_id +'/passport/nation_id' )
                       userRef.once('value',function(snapshot) { 
+                            if(snapshot.val()){
                             school.apps[index].user.nation_id  = snapshot.val()
                             firebase.database().ref('phrases/nations/'+Site.language+'/'+snapshot.val()).once('value',function (snap){
                                     school.apps[index].user.nationality = snap.val()                      
                                                    $timeout();
                                                 })
+                             }                    
                                                 })
       }
 

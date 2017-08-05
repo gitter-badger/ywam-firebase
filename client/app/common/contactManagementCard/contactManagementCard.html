@@ -1,25 +1,46 @@
  <h1 class="md-title">Partnership Development</h1>
 
-<form ng-submit="$ctrl.addNote()" layout="row" class="no-print">
-<md-input-container md-no-float flex class="no-md-error" style="margin:0px">
-<input  ng-model="$ctrl.new_note" placeholder="New note..." autocomplete="off">
-</md-input-container>
-<md-button  class="md-primary " style=" padding:0px" type="submit">add</md-button>
-</form>
 
-<div ng-repeat="(key,note) in $ctrl.contact.notes " > 
-<div  style="color:grey; float:right; " >- {{note.first_name}} {{note.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
+
+<div ng-repeat="(key,note) in $ctrl.contact.notes "  > 
+
+
+<div layout="row">
+<div flex>
+{{note.text}}
+</div>
+<span ng-if="note.postcard"  class="contactinteraction"> <i class="fa fa-picture-o" aria-hidden="true"></i> Postcard Sent</span>
+<span ng-if="note.video_email" class="contactinteraction"> <i class="fa fa-video-camera" aria-hidden="true"></i> video_email</span>
+<span ng-if="note.phone" class="contactinteraction"> <i class="fa fa-phone" aria-hidden="true"></i>
+ phone</span>
+
+<div  style="color:grey; " >- {{note.first_name}} {{note.last_name|limitTo:1}}. [<span am-time-ago="note.time" ></span>]  
 <i class="fa fa-times no-print" ng-click="$ctrl.deleteNote(key)"></i>  </div>  
-{{note.text}} 
+
+</div>
 
 <md-divider> </md-divider>
 </div>
 
+<form ng-submit="$ctrl.addNote()" layout="column"  class="no-print" style="background-color:rgba(50,50,50,0.025)">
+<md-input-container md-no-float flex class="no-md-error" style="margin:0px">
+<input  ng-model="$ctrl.new_note.text" placeholder="Interaction note... (optional)" autocomplete="off">
+</md-input-container>
+<div layout-gt-xs="row"  layout="column" layout-align-gt-xs="start center">
+ <md-checkbox  ng-model="$ctrl.new_note.postcard">Sent Postcard</md-checkbox> 
+ <md-checkbox  ng-model="$ctrl.new_note.video_email">Sent VideoEmail</md-checkbox> 
+ <md-checkbox  ng-model="$ctrl.new_note.phone">Phone Call</md-checkbox>
+ <div flex></div>
+<md-button  class="md-primary " style=" padding:0px" type="submit">add</md-button>
+</div>
+</form>
 
 <br>
 <div ng-if="$ctrl.contact.last.payment"> <b>Last Payment Received</b> {{$ctrl.contact.last.payment|date}} </div>
 <div ng-if="$ctrl.contact.last.ministry_support"> <b>Last Ministry Support</b> {{$ctrl.contact.last.ministry_support|date}} </div>
 <div ng-if="$ctrl.contact.last.staff_support"> <b>Last Staff Support</b> {{$ctrl.contact.last.staff_support|date}} </div>
+
+
 
 
  <h1 class="md-title" ng-if="$ctrl.contact.mailing_lists">Mailing Lists</h1>

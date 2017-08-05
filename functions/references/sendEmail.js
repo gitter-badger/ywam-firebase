@@ -200,7 +200,7 @@ function emailStep3(data){
                             meta: {applicant_first_name: data.userData.first_name,
                                                        applicant_last_name: data.userData.last_name,
                                                        applicant_gender: data.userData.gender,
-                                                       applicant_avatar: data.userData.avatar_200,
+                                                       applicant_avatar: data.userData.avatar_200 || null,
                                                       for: data.appData,
                                                       reference_name: data.refData.user_set.name,
                                                       language: data.refData.user_set.language,

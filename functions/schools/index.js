@@ -9,16 +9,19 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
       // Grab the current value of what was written to the Realtime Database.
      // const app_index = event.data.val();
         var school_id = event.params.schoolId
+        var p = []
 
             // update app counts
             var started_count =0;
             var submited_count =0;
+            var in_review =0
             var cancelled_count =0;
+            var withdrawn_count = 0
             var accepted_count = 0;
             var denied_count = 0;
             var arrived_count = 0;
             var total_count = 0;
-            var promises = []
+          
             var stats = {start:[],
                         submit:[],
                         accepted:[]}
@@ -27,7 +30,7 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
             event.data.forEach(function(item){
                 var key = item._childPath //don't know what is up here.. perhaps they change it to be .key
 
-           var promise = admin.database().ref('applications/'+key+'/meta/statuses').once('value').then(function(snap){
+           p[p.length] = admin.database().ref('applications/'+key+'/meta/statuses').once('value').then(function(snap){
                var statuses = snap.val()
             //    console.log(statuses)
                  
@@ -59,7 +62,7 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
 
            })
 
-           promises.push(promise)
+           
 
             var status = item.val()
             // console.log(status)   
@@ -69,8 +72,14 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
             if(status == 8)
             cancelled_count++
 
+            if(status == 9)
+            withdrawn_count++
+
             if(status == 10)
             submited_count++
+
+             if(status == 11)
+            in_review_count++
 
             if(status == 12)
             denied_count++
@@ -89,18 +98,36 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
         
             var updates =   {started : started_count,
                             denied : denied_count,
+                            cancelled: cancelled_count,
+                            withdrawn:withdrawn_count,
                             submited : submited_count,
+                            process: in_review_count,
                             accepted : accepted_count,
                             arrived : arrived_count,
                             total : total_count }
 
-        var promise = admin.database().ref('/schools/'+school_id+'/count').update(updates)
-         promises.push(promise) 
+        p[p.length] = admin.database().ref('/schools/'+school_id+'/count').update(updates)
+        
 
-          console.log(promises.length + ' promises to resolve')
-          return Promise.all(promises).then(function(){
+          console.log(p.length + ' promises to resolve')
+          return Promise.all(p).then(function(){
              return admin.database().ref('/schools/'+school_id+'/stats/').set(stats)
           }) 
 
            
+    })
+
+
+    exports.updateAppsOnline = functions.database.ref('/schools/{schoolId}/public/online')
+    .onWrite(event => {
+      // Grab the current value of what was written to the Realtime Database.
+        const online = event.data.val();
+        const school_id = event.params.schoolId
+        var p = []
+        if(online)
+        return admin.database().ref('/location_public/online_schools/'+school_id).set(true)
+        else
+        return admin.database().ref('/location_public/online_schools/'+school_id).remove()    
+
+
     })

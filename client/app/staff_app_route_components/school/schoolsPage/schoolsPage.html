@@ -123,6 +123,14 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 
 							</div>	
 
+				<div ng-if="sch.count.submited>0" style=" color:orange">
+					<b>{{sch.count.submited}} Submitted Application{{sch.count.submited>1?'s':''}}!</b>
+					</div>			
+				<div ng-if="sch.count.process>0" style=" color:orange">
+					<b>{{sch.count.process}} In Review!</b>
+					</div>		
+
+
 				</div>
 
 			</div>
@@ -148,7 +156,7 @@ Total Secondary Students: {{$ctrl.total_secondary_students}}
 							{{sch.count.denied}} Denied
 							</md-menu-item>
 							<md-menu-item>
-							{{sch.count.submited}} Submited
+							{{sch.count.submited}} Submitted
 							</md-menu-item>
 							<md-menu-item>{{sch.count.process}} In Review
 							</md-menu-item>

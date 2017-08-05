@@ -16,9 +16,9 @@
 </md-nav-bar>
 
 <div layout="row" layout-align="center">
-  <md-card flex="50">
+  <md-card flex="50" ng-if="$ctrl.balances.available">
     <md-card-content>
-<span ng-if="$ctrl.balances">Available: ${{$ctrl.balances.available}}  Current Posted: ${{$ctrl.balances.current}}  Last Updated: {{$ctrl.balances.last_update | date:"short"}}</span>
+<span >Available: ${{$ctrl.balances.available}}  Current Posted: ${{$ctrl.balances.current}}  Last Updated: {{$ctrl.balances.last_update | date:"short"}}</span>
     </md-card-content>
 </md-card>
 </div>

@@ -3,52 +3,65 @@ const admin = require('../config.js').admin;
 const moment = require('moment');
 
 
-exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
+exports.updateCommitmentSchedule = functions.database.ref('/funds/{fundId}/commitments/{commitmentId}')
     .onWrite(event => {
 
        const fund_id  = event.params.fundId
-       const promises = [];
+       const commitment_id = event.params.commitmentId
+       var bill = event.data.val()
+       const p = [];
 
-       var amount_paid =0
-       var amount_topay_low=0
-       var amount_topay_high=0
-       var date = new Date()
-       var current_month = moment().format("YYYY-MM");
-       
-        event.data.forEach(function(item){
-                var key = item._childPath //don't know what is up here.. perhaps they change it to be .key
-                var commitment = item.val()
-                  
-                  
-               //now look at  this month's fulfillments 
-               if(commitment.fulfillments && commitment.fulfillments[current_month] && commitment.fulfillments[current_month].compleated){
-                     amount_paid +=  +commitment.fixed_amount || +commitment.high_amount //DO TO find a solution here
-                }else{
-                     if(commitment.fixed_amount){
-                          amount_topay_low += +commitment.fixed_amount
-                          amount_topay_high += +commitment.fixed_amount
-                    }else{
-                          amount_topay_low += +commitment.low_amount
-                          amount_topay_high += +commitment.high_amount
-                    }
-                }
+       //find commitments on the schedule 
+       var start_date = moment().subtract(45,'days').format("YYYY-MM-DD")
+       var end_date = moment().add(2,'months').format("YYYY-MM-DD")
+       p[p.length] = admin.database().ref('/fund_scheduled_bills').orderByKey()
+       .startAt(start_date).endAt(end_date).once('value').then(function(snap){
+            
+            snap.forEach(function(daysnap){
+                  // console.log(daysnap.key)
+                  var day = daysnap.val()
+                  // console.log(day)
+                  if(day[commitment_id] && !day[commitment_id].compleated){
+                        
+                               var data = {fund_id:fund_id,
+                                          name: bill.name,
+                                          fixed_amount: bill.fixed_amount||null,
+                                          low_amount: bill.low_amount ||null,
+                                          high_amount: bill.high_amount||null,
+                                          }
+                      
+                        //if day is the right day update else remove from schedule 
+                       
+                       
+                        if(bill.repeat =='monthly'){
+                              
+                             var daystoadd = bill.due_by - 1
+                            var first_day =  moment(daysnap.key).format("YYYY-MM-01")
+                            var date_it_should_be =  moment(first_day).add(daystoadd,'days' ).format("YYYY-MM-DD")
+                            if(date_it_should_be == daysnap.key){
+                              console.log('bill is on the right scheduled day updating')
+                              
+                               p[p.length] = admin.database().ref('/fund_scheduled_bills/'+daysnap.key+'/'+commitment_id).update(data)
+                            }else{
+                                    console.log('bill is on the wrong scheduled day removing from '+daysnap.key)
+                                    console.log('commitment should be on '+ bill.due_by + ': '+date_it_should_be + 'adding there' )
+                                   p[p.length] = admin.database().ref('/fund_scheduled_bills/'+daysnap.key+'/'+commitment_id).remove()
+                                 p[p.length] = admin.database().ref('/fund_scheduled_bills/'+date_it_should_be+'/'+commitment_id).update(data)
 
-                 
+                         }
+
+                         }
 
 
+                  }
 
-                });//end foreach commitment
+            })
 
-              
-
-        //save it back
-        var data = {amount_topay_high:amount_topay_high,
-                    amount_topay_low:amount_topay_low,
-                     amount_paid:amount_paid }
-         promises.push(admin.database().ref('funds').child(fund_id).child('stats/'+current_month).set(data));
+      
+       })
 
 
-          return Promise.all(promises);
+          return Promise.all(p);
 
     })
 
@@ -66,7 +79,7 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
 //                   snap.forEach(function(snapshot){
                         
 //                         var commitment = snapshot.val()
-//                         if(commitment.repeat =='monthly'
+//                         if(bill.repeat =='monthly'
 //                                ){
 
 //                            //repeat
@@ -80,3 +93,5 @@ exports.updateStats = functions.database.ref('/funds/{fundId}/commitments/')
 
 
 //     })
+
+

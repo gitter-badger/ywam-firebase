@@ -30,7 +30,7 @@
                     </h1>
 
                     {{$ctrl.user.contact.nationality}}<br>
-                    {{$ctrl.user.contact.gender}} {{$ctrl.calculateAge($ctrl.user.contact.dob)}} 
+                    <span style=" text-transform: capitalize;">{{$ctrl.user.contact.gender}}</span> {{$ctrl.calculateAge($ctrl.user.contact.dob)}} 
                     <span style=" text-transform: capitalize;">{{$ctrl.user.contact.marital_status}}</span><br>
                     {{$ctrl.user.contact.dob | date}}  <br>
                     

@@ -6,8 +6,13 @@ path /location_private { read(){ isSiteAdmin() }
                          write(){isSiteAdmin()}
                          }        
 
+path /email_user_index {
+                        index(){"email"}
+}
+
 path /crm { read() { contactManagment() }   
-            write() { contactManagment() }  }
+            write() { contactManagment() }
+            index() {["paypal_id"]}  }
 
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
@@ -184,7 +189,7 @@ path /stripe_events { read() { canEditAccounting() }
                         write() { canEditAccounting() }
                                           }
 
-path /funds { read() { canEditAccounting() }
+path /funds { read() { isStaff() }
                           write() { canEditAccounting() } }
 
 path /funds/{id}/meta { read() { root.funds[id].meta.public }

@@ -46,7 +46,7 @@ class AccountingTransactionLinkToContactController {
 
     function setContact(uid){
       var Ref = firebase.database().ref(ctrl.key)
-          Ref.child('firebase_user_id').set(uid).then(function(){
+          Ref.child('contact_id').set(uid).then(function(){
             Site.hideDialog()
           })
 

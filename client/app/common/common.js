@@ -42,7 +42,9 @@ import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
 import fundEdit from './fundEdit/fundEdit';
 import fundCommitmentEdit from './fundCommitmentEdit/fundCommitmentEdit';
+import fundEditBalanceDialog from './fundEditBalanceDialog/fundEditBalanceDialog';
 import accountingTransactionLinkToContact from './accountingTransactionLinkToContact/accountingTransactionLinkToContact';
+import accountingTransactionForm from './accountingTransactionForm/accountingTransactionForm';
 import contactManagementCard from './contactManagementCard/contactManagementCard';
 
 
@@ -83,7 +85,9 @@ let commonModule = angular.module('app.common', [
     baseProjectTaskEdit,
     fundEdit,
     fundCommitmentEdit,
+    fundEditBalanceDialog,
     accountingTransactionLinkToContact,
+    accountingTransactionForm,
     contactManagementCard
 
 

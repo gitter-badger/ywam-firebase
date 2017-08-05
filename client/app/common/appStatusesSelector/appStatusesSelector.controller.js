@@ -1,6 +1,6 @@
 class AppStatusesSelectorController {
    /* @ngInject */
-  constructor() {
+  constructor($timeout) {
     var ctrl = this;
         ctrl.$onInit = onInit
         
@@ -23,6 +23,25 @@ class AppStatusesSelectorController {
      ctrl.statuses[30].active = false;
      ctrl.statuses[70].active = false;
     //  console.log( ctrl.statuses)
+
+
+    var ref = firebase.database().ref('schools/'+ctrl.schoolId+'/count').on('value',function(snap){
+
+     var count = snap.val()
+     if(count){
+     ctrl.statuses[1].count = count.started;
+     ctrl.statuses[8].count = count.cancelled;
+     ctrl.statuses[9].count = count.withdrawn;
+     ctrl.statuses[10].count = count.submited;
+     ctrl.statuses[11].count = count.process;
+     ctrl.statuses[12].count = count.denied;
+     ctrl.statuses[13].count = count.accepted;
+     ctrl.statuses[30].count = count.arrived;
+     ctrl.statuses[70].count = count.alumni;
+     $timeout()
+     }
+    })  
+   
      }
 
   }

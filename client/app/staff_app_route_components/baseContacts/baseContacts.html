@@ -31,7 +31,7 @@ TODOs:<br>
 
 <div ng-repeat="item in $ctrl.contacts | filter: $ctrl.filterList">
   <div layout="row">
-    <div flex ><a ui-sref="profile({user_id:item.$id})">{{item.first_name}} {{item.last_name}}
+    <div flex ><a ui-sref="profile({user_id:item.$id})">{{item.name.first_name}} {{item.name.last_name}}
  </a>
     </div>
     <div flex>

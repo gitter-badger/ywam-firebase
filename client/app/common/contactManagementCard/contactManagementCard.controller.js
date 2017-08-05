@@ -22,14 +22,13 @@ class ContactManagementCardController {
   
         function addNote(){
 
-            var note ={ text: ctrl.new_note,
-                            time: firebase.database.ServerValue.TIMESTAMP,
-                            user_id: Site.user.id,
-                            first_name: Site.user.contact.first_name,
-                            last_name: Site.user.contact.last_name
-                            }
-            var newKey=  firebase.database().ref('crm/'+ctrl.userId).child('notes').push(note)//push(note);
-                ctrl.new_note = '';
+             ctrl.new_note.time=  firebase.database.ServerValue.TIMESTAMP
+             ctrl.new_note.user_id = Site.user.id
+             ctrl.new_note.first_name= Site.user.contact.first_name
+             ctrl.new_note.last_name= Site.user.contact.last_name
+                            
+            var newKey=  firebase.database().ref('crm/'+ctrl.userId).child('notes').push(ctrl.new_note)
+                ctrl.new_note = {};
         }
 
       function deleteNote(id){

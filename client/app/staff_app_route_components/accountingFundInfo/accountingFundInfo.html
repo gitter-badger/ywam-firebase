@@ -5,11 +5,12 @@
                 
                 <h1 st>{{ $ctrl.fund.meta.name }}</h1>
                 <pre>{{ $ctrl.code }}</pre>
-                <a ng-click="$ctrl.editDialog($event)"> edit</a>
+                <!--<a ng-click="$ctrl.editDialog($event)"> edit</a>-->
                   <br>
                   Type: {{$ctrl.fund.meta.type}} <br> 
                  Donation link:   <a href="{{$ctrl.base_url}}/support/{{$ctrl.code}}"  target="_blank" ng-if="$ctrl.fund.meta.public">{{$ctrl.base_url}}/support/{{$ctrl.code}}</a>
 
+                 <fund-edit code="{{$ctrl.code}}"></fund-edit>
                 
             </md-card-content>
         </md-card>
@@ -49,12 +50,12 @@
         </md-card>
     </div>
     
-    <div layout="row" layout-align="center">
+    <!--<div layout="row" layout-align="center">
         <md-card flex="100" flex-gt-xs="50" >
             <md-card-content>
                 <h1 class="md-title">Paypal Transactions</h1>
                 <div ng-repeat="item in $ctrl.paypal_payments"> {{item}}</div>
             </md-card-content> 
         </md-card>
-    </div>
+    </div>-->
 </div>

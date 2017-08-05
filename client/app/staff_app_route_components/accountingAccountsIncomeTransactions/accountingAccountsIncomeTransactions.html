@@ -1,6 +1,3 @@
-
-
-<md-card>
 <style>
 
 
@@ -12,6 +9,16 @@
 }
 
 </style>
+
+<md-card ng-if="$ctrl.settings.add_transactions_form">
+<md-card-content>
+
+<accounting-transaction-form account-id="$ctrl.account_id"></accounting-transaction-form>
+</md-card-content>
+</md-card> 
+
+<md-card>
+
 <md-card-content>
 
 
@@ -29,22 +36,23 @@
 <md-divider></md-divider>
 <div 
     ng-repeat="item in $ctrl.transactions | orderBy:'-date'" 
-    ng-hide="(item.memo.includes('PAYPAL TRANSFER') && $ctrl.settings.hide_income_paypal_transfer)">
+    ng-hide="(item.memo.includes('PAYPAL TRANSFER') && $ctrl.settings.hide_income_paypal_transfer) ||
+            ( (item.memo.includes('DEPOSIT')  || item.memo.includes('eDeposit'))  && $ctrl.settings.hide_income_deposit)">
     <div layout="row" >
 <div flex="15">
-{{item.date | date:'short'}}<br>
+{{item.date | date:'short'}} {{item.notifications_sent}}<br>
 <span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>
 
 <i ng-if="item.pending" style="background-color: orange">pending</i>
 <!--<i ng-if="item.status == 'completed'" style="background-color: lightgreen">completed</i>  {{item.status_reason}}-->
 </div>
-<div flex="15"> <a ui-sref="profile({user_id:item.firebase_user_id})">{{ item.payer_name}}</a>
-<span ng-if="!item.firebase_user_id"  style="background-color:lightsalmon; cursor:pointer" ng-click="$ctrl.linkContact($event,item)">Not Found...
+<div flex="15"> <a ui-sref="profile({user_id:item.contact_id})">{{ item.payer_name}}</a>
+<span ng-if="!item.contact_id"  style="background-color:lightsalmon; cursor:pointer" ng-click="$ctrl.linkContact($event,item)">Not Found...
 <!--<input ng-model="$ctrl.searchString" ng-change="$ctrl.searchContact()">
 <span ng-repeat="item in $ctrl.results"><a> {{item.first_name}} {{item.last_name}} {{item.email}} </a><br></span>-->
 
 </span>
-<!--<pre ng-if="!item.firebase_user_id"> System could not match user..
+<!--<pre ng-if="!item.contact_id"> System could not match user..
   {{item.payer_meta |json}} 
 </pre>-->
 </div>
@@ -54,7 +62,10 @@
 
   <span ng-bind-html="item.memo"></span>
   <a ng-if="item.original" ng-click="item.show_original = !item.show_original"> more</a>
-  <pre ng-if="item.show_original">{{item.original|json}} </pre>
+  <div ng-if="item.show_original"> 
+    <a ng-click="$ctrl.reprocess(item)">reprocess</a>
+  <pre >{{item.original|json}} </pre>
+  </div>
 </div>
 
 <div style="border-left:1px solid lightgray; width:70px; text-align:center">

@@ -1,0 +1,12 @@
+      <div layout="column" >
+        <md-input-container flex>
+            <label>Current Balance</label>
+            <input ng-model="$ctrl.balance.current"  ng-change="$ctrl.updateBalance()"> 
+        </md-input-container>
+        <div>
+        last update: {{$ctrl.balance.last_update| date :'short'}} <br>
+        by {{$ctrl.balance.update_by_first_name}} {{$ctrl.balance.update_by_last_name | limitTo:1}}
+        </div>
+
+        <md-button ng-click="$ctrl.close()">Close</md-button>
+    </div>
