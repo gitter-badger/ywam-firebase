@@ -4,21 +4,25 @@
             <i class="fa fa-bars"></i>
         </div>
         
-        
-        <img hide-xs alt="YWAM Sarasota"
+        <div style="max-height:50px; max-width:250px; " >
+            
+        <img alt="YWAM Sarasota"
         ng-if="!$ctrl.site.isStaff"
-        style="height:70%; cursor:pointer;"
+        style="width:100%; cursor:pointer;"
         src="img/YWAMSarasotaLogo_White_horizontal.png"
         ui-sref="apply.dashboard"
         >
 
+<!--
         <img hide-gt-xs alt="YWAM Sarasota"
         ng-if="!$ctrl.site.isStaff"
         style="height:35%; cursor:pointer;"
         src="img/YWAMSarasotaLogo_White_horizontal.png"
         ui-sref="apply.dashboard"
         >
-
+-->
+        </div>    
+                
         <!--        <h1 style="cursor:pointer; padding-left:5px;">YWAM Sarasota{{$ctrl.site.location.name}}</h1>-->
         <span flex></span>
         <div layout="row" ng-hide="$ctrl.site.hideHeaderLinks">
