@@ -20,7 +20,7 @@ class AppStatusesSelectorController {
      ctrl.statuses[10].active = true;
      ctrl.statuses[11].active = true;
      ctrl.statuses[13].active = true;
-     ctrl.statuses[30].active = false;
+     ctrl.statuses[30].active = true;
      ctrl.statuses[70].active = false;
     //  console.log( ctrl.statuses)
 

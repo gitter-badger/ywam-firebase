@@ -10,13 +10,15 @@ let SchoolFactory = function ($timeout, $firebaseObject, $firebaseArray, moment,
 let getApps = (school_id, accepted_only ) => {
         console.log('calling getApps for '+school_id)
      
-         school.apps = []
+         
 
       var appIndexRef = firebase.database().ref('/schools/'+school_id +'/app_index')
           appIndexRef.on('value', function(indexSnap){
 
  //console.log(indexSnap.numChildren())
               
+            
+            school.apps = []
 
             indexSnap.forEach(function(appSnap){
                   
@@ -24,6 +26,7 @@ let getApps = (school_id, accepted_only ) => {
                   var data = {id: appSnap.key }
                   var index =  school.apps.push(data)
                      console.log(index)
+                     
                       index--
                   
                     getAppFor(index)

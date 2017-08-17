@@ -7,7 +7,7 @@
   <md-card-content layout-gt-md="row">
 
 <div flex>
- <b> Bills To Be Paid {{$ctrl.first_unpaid_bill_date |date :'MMMM d'}} - {{$ctrl.end_date |date : 'MMMM d'}}</b>
+ <h1 class="md-headline"> Bills to be paid {{$ctrl.first_unpaid_bill_date |date :'MMMM d'}} - {{$ctrl.end_date |date : 'MMMM d'}}</h1>
 
 <div layout="row">
 <div flex="50">Item</div>
@@ -39,7 +39,7 @@
 
 
 <div flex>
- <b> Bills Paid</b>
+  <h1 class="md-headline"> Bills paid</h1>
  <div layout="row">
 <div flex="50">Item</div>
 <div flex>Due Date</div>
@@ -64,7 +64,7 @@
 </md-card>
 
 
-<md-card flex-gt-md="50">
+<md-card flex-gt-md="60" flex-offset-gt-md="20" >
   <md-card-content>
  <div layout="row"><div flex >All Bills: </div><div> {{$ctrl.currencySym }} 
   <span style="background: linear-gradient(to right, rgba(0,0,255,0.5) , rgba(255,0,0,0.5));">

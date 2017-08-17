@@ -3,11 +3,14 @@
 <md-nav-bar md-selected-nav-item="$ctrl.current" nav-bar-aria-label="navigation links">
        <md-nav-item md-nav-sref="accounting.accounts.view.income" 
                     name="accounting.accounts.view.income"  >
-                    Income
+                    Income 
+                    <span ng-if="$ctrl.balances.unbookedIncomeCount > 0">[{{$ctrl.balances.unbookedIncomeCount}}] </span>
+                   
        </md-nav-item>
        <md-nav-item md-nav-sref="accounting.accounts.view.expense" 
                     name="accounting.accounts.view.expense"  >
-                    Expense
+                    Expense  <span ng-if="$ctrl.balances.unbookedExpenseCount > 0">[{{$ctrl.balances.unbookedExpenseCount}}] </span>
+
        </md-nav-item>
        <md-nav-item md-nav-sref="accounting.accounts.view.settings" 
                     name="accounting.accounts.view.settings"  >
@@ -16,9 +19,16 @@
 </md-nav-bar>
 
 <div layout="row" layout-align="center">
-  <md-card flex="50" ng-if="$ctrl.balances.available">
+  <md-card flex="50" ng-if="$ctrl.balances">
     <md-card-content>
-<span >Available: ${{$ctrl.balances.available}}  Current Posted: ${{$ctrl.balances.current}}  Last Updated: {{$ctrl.balances.last_update | date:"short"}}</span>
+<span ng-if="$ctrl.balances.current">Available: ${{$ctrl.balances.available | number:2}}  Current Posted: ${{$ctrl.balances.current | number:2 }}  Last Updated: {{$ctrl.balances.last_update | date:"short"}}</span>
+<div ng-if="$ctrl.balances.unbookedIncomeCount">
+   Unbooked Income  [{{$ctrl.balances.unbookedIncomeCount}}]  ${{$ctrl.balances.unbookedIncomeTotal | number:2}}
+    </div>   
+<div ng-if="$ctrl.balances.unbookedExpenseCount">
+   Unbooked Expense  [{{$ctrl.balances.unbookedExpenseCount}}]  ${{$ctrl.balances.unbookedExpenseTotal| number:2}}
+    </div>  
+
     </md-card-content>
 </md-card>
 </div>

@@ -39,11 +39,21 @@
                 <h1 class="md-title">Subscriptions</h1>
 
                 <div ng-repeat="item in $ctrl.subscriptions">
-                    <div layout="row">
-                        <div flex></div>
-                        <div> {{item.gross}} - {{item.fee}}<br>{{item.gross - item.fee | number:2}}</div>
+                    <div layout="row" >
+                        <div flex="50">{{item.payer_name}}<br>{{item.payer_meta.email}} </div>
+                        <div flex="40">{{item.service}}<br>
+                        
+                          every {{item.interval_count >0?item.interval_count:''}} {{item.interval}}<br>
+                          created: {{item.created|date }}
+                          <div ng-if="item.cancelled" >cancelled  {{item.cancelled|date }}</div>
+                          </div>
+                         
+                          
+                        <div flex style="text-align:right">
+                            <span ng-if="item.fee"> {{item.gross}} - {{item.fee}}</span>
+                                <br> <b>{{item.gross - item.fee | number:2}}</b></div>
                     </div>
-                    {{item}}
+                    <!--{{item}}-->
                     <md-divider></md-divider>
                     </div>
             </md-card-content> 

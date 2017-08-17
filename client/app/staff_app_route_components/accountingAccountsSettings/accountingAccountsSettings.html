@@ -1,6 +1,7 @@
 <div layout="row" layout-align="center">
-  <div flex="70">
+  <div flex-gt-sm="50">
   <md-card >
+    <md-card-content layout="column">
     
     <md-input-container>
       <label>
@@ -20,31 +21,24 @@
       </label>
       <md-switch ng-model="$ctrl.settings.hide_txn_id">
     </md-input-container>
-    <md-input-container>
-      <label>
-    Hide income "PAYPAL TRANSFER"
-      </label>
-      <md-switch ng-model="$ctrl.settings.hide_income_paypal_transfer">
-    </md-input-container>
-    <md-input-container>
-      <label>
-    Hide income "DEPOSIT"
-      </label>
-      <md-switch ng-model="$ctrl.settings.hide_income_deposit">
-    </md-input-container>
-     <md-input-container>
-      <label>
-    Hide expense "CHECK"
-      </label>
-      <md-switch ng-model="$ctrl.settings.hide_expense_check">
-    </md-input-container>
-      <md-input-container>
-      <label>
-    Hide expense "PAYPAL INST XFER"
-      </label>
-      <md-switch ng-model="$ctrl.settings.hide_expense_paypal_xfer">
-    </md-input-container>
-    
+
+    <b>Income Transactions, Keywords to hide</b>
+    <div ng-repeat="(key,item) in $ctrl.settings.hide_keywords_income" layout="row">
+      {{item}}  <span flex></span> <a ng-click="$ctrl.removeKeywordIncome(key)">remove</a>
+    </div>
+    <form layout="row" ng-submit="$ctrl.newKeywordIncome()">
+    <input ng-model="$ctrl.hide_keyword_income">
+    </form>
+
+ <b>Expense Transactions, Keywords to hide</b>
+    <div ng-repeat="(key,item) in $ctrl.settings.hide_keywords_expense" layout="row">
+      {{item}}  <span flex></span> <a ng-click="$ctrl.removeKeywordExpense(key)">remove</a>
+    </div>
+    <form layout="row" ng-submit="$ctrl.newKeywordExpense()">
+    <input ng-model="$ctrl.hide_keyword_expense">
+    </form>
+
+    </md-card-content>
   </md-card>
   </div>
 </div>

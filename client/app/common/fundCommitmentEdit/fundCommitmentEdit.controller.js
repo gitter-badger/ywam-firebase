@@ -3,6 +3,7 @@ class FundCommitmentEditController {
   constructor(Site,$firebaseObject) {
     var ctrl = this;
         ctrl.save = save
+        ctrl.delete = deleteItem
         ctrl.$onInit = onInit
         ctrl.daysOfMonth = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31]
 
@@ -31,6 +32,12 @@ class FundCommitmentEditController {
 
           if(!ctrl.commitmentId)
           firebase.database().ref('/funds/'+ctrl.fundId+'/commitments').push(ctrl.form)
+   
+         Site.hideDialog()
+       }
+
+       function deleteItem(){
+          firebase.database().ref('/funds/'+ctrl.fundId+'/commitments/'+ctrl.commitmentId).remove()
    
          Site.hideDialog()
        }

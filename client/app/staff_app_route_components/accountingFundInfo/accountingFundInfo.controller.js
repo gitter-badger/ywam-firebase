@@ -14,7 +14,16 @@ class AccountingFundInfoController {
         firebase.database().ref('/fund_subscriptions').orderByChild('fund_id').equalTo(ctrl.code)
           .on('value',function(snap){
           ctrl.subscriptions = snap.val()
-          $timeout()
+          snap.forEach(function(subscription){
+             var uid = subscription.val().contact_id
+             var subkey = subscription.key
+          if(uid){
+          firebase.database().ref('crm/'+uid +'/name').once('value',(snap)=>{
+              ctrl.subscriptions[subkey].payer_name = snap.val().first_name +' '+ snap.val().last_name
+               $timeout()
+          }) }
+          })
+         
         })
 
           firebase.database().ref('/location_public/meta/staff_url')
@@ -40,6 +49,9 @@ class AccountingFundInfoController {
         function editDialog($event){
           var template =`<fund-edit code="${ctrl.code}"></fund-edit>`;
           Site.showDialog($event, template )
+        }
+
+        function getPayerName(index){
         }
 
   }

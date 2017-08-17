@@ -36,11 +36,10 @@
 <md-divider></md-divider>
 <div 
     ng-repeat="item in $ctrl.transactions | orderBy:'-date'" 
-    ng-hide="(item.memo.includes('PAYPAL TRANSFER') && $ctrl.settings.hide_income_paypal_transfer) ||
-            ( (item.memo.includes('DEPOSIT')  || item.memo.includes('eDeposit'))  && $ctrl.settings.hide_income_deposit)">
+    ng-hide="item.hidden">
     <div layout="row" >
 <div flex="15">
-{{item.date | date:'short'}} {{item.notifications_sent}}<br>
+{{item.date | date:'short'}} <br>
 <span ng-hide="$ctrl.settings.hide_txn_id">{{item.id}}</span>
 
 <i ng-if="item.pending" style="background-color: orange">pending</i>

@@ -46,6 +46,7 @@
         </md-input-container>
     </div>
     <div layout="row">
+      <md-button ng-if="$ctrl.commitmentId" ng-click="$ctrl.delete()" > Delete</md-button> 
       <span flex></span>
       <md-button ng-click="$ctrl.save()" class="md-primary" > {{$ctrl.commitmentId? 'Save':'Add'}}</md-button> 
     </div> 

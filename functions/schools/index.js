@@ -14,7 +14,7 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
             // update app counts
             var started_count =0;
             var submited_count =0;
-            var in_review =0
+            var in_review_count =0
             var cancelled_count =0;
             var withdrawn_count = 0
             var accepted_count = 0;

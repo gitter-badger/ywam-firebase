@@ -3,8 +3,9 @@ class AccountingAccountsExpenseTransactionsController {
   constructor($filter,ngAudio, $stateParams, $timeout, Site) {
     var ctrl = this;
         
-          ctrl.transactions =[]
+        ctrl.transactions =[]
         ctrl.markBooked = markBooked
+        ctrl.reprocess= reprocess
     
     var sound = ngAudio.load("sounds/1.mp3"); // returns NgAudioObject
        
@@ -79,6 +80,12 @@ class AccountingAccountsExpenseTransactionsController {
          updates.booked_time ='firebase.database.ServerValue.TIMESTAMP'
         }
          Transactions.child(item.id).update(updates)
+       }
+
+       function reprocess(item){
+          Transactions.child(item.id).child('reprocess').set(true).then(function(){
+              sound.play()
+          })
        }
 
        
