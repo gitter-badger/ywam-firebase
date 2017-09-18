@@ -36,6 +36,7 @@ import staffCurrent from './staffCurrent/staffCurrent'
 import staffAlumni from './staffAlumni/staffAlumni';
 import staffApps from './staffApps/staffApps';
 import staffGroups from './staffGroups/staffGroups';
+import staffGroupDetail from './staffGroupDetail/staffGroupDetail';
 
 import siteSettings from './siteSettings/siteSettings';
 import siteStats from './siteStats/siteStats';
@@ -50,6 +51,7 @@ import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
 import baseApplicationQuestions from './baseApplicationQuestions/baseApplicationQuestions';
 import baseProjects from './baseProjects/baseProjects';
 import baseContacts from './baseContacts/baseContacts';
+import baseContactsImport from './baseContactsImport/baseContactsImport';
 import baseEmailTemplates from './baseEmailTemplates/baseEmailTemplates';
 
 
@@ -105,6 +107,7 @@ let componentModule = angular.module('app.components', [
   staffAlumni,
   staffApps,
   staffGroups,
+  staffGroupDetail,
 
   siteSettings,
   siteStats,
@@ -118,6 +121,7 @@ let componentModule = angular.module('app.components', [
   baseVisaRequirements,
   baseApplicationQuestions,
   baseContacts,
+  baseContactsImport,
   baseEmailTemplates,
 
 ])

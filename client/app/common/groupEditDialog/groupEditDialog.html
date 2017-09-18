@@ -1,0 +1,13 @@
+<form ng-submit="$ctrl.save()">
+<div>
+ <md-input-container>
+   <label>Group Name</label>
+   <input ng-model="$ctrl.group.name">
+ </md-input-container>
+</div>
+
+<div layout="row">
+    <span flex></span>
+    <md-button type="submit" class="md-primary" > {{$ctrl.groupId? 'Save':'Add'}}</md-button> 
+  </div> 
+</form>

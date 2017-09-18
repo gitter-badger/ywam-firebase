@@ -5,8 +5,11 @@
        <md-nav-item ng-repeat="(key,item) in $ctrl.accounts" 
                     md-nav-sref="accounting.accounts.view.income({account_id:'{{key}}'})" 
                     name="accounting.accounts.view_{{key}}"  >
-        <img height="30" ng-src="{{item.logo}}" ng-if="item.logo"> 
-        {{item.name}} 
+        <!-- <img height="30" ng-src="{{item.logo}}" ng-if="item.logo">  -->
+        {{item.settings.name}} 
+        <span ng-if="item.balances.unbookedIncomeCount + item.balances.unbookedExpenseCount > 0">
+          [{{item.balances.unbookedIncomeCount + item.balances.unbookedExpenseCount}}] </span>
+
        </md-nav-item>
        
 

@@ -1,0 +1,36 @@
+<div>
+  <h1>{{ $ctrl.name }}</h1>
+</div>
+<md-card>
+  <div ng-if="$ctrl.progress">
+    <md-progress-linear md-mode="determinate" class="md-warn" value="{{progress}}"></md-progress-linear>
+  </div>
+  
+<ng-csv-import content="$ctrl.csv.content"
+                material
+                md-button-class="md-icon-button md-raised md-accent"
+                
+                header="$ctrl.csv.header" 
+                header-visible="$ctrl.csv.headerVisible" 
+                separator="$ctrl.csv.separator"
+                separator-visible="$ctrl.csv.separatorVisible"
+                result="$ctrl.csv.result"
+                encoding="$ctrl.csv.encoding"
+                encoding-visible="$ctrl.csv.encodingVisible"
+                upload-button-label="$ctrl.csv.uploadButtonLabel"
+                progress-callback="$ctrl.csv.progressCallback"
+                streaming-callback="$ctrl.csv.streamingCallback"
+                streaming-error-callback="$ctrl.csv.streamingCallback"></ng-csv-import>
+
+               <input ng-model="$ctrl.csv.separator"> 
+
+{{$ctrl.csv.header | json }}
+<br>
+
+
+{{$ctrl.progress}}
+{{$ctrl.preview}}
+<pre>
+{{$ctrl.csv.result | json }}
+</pre>
+</md-card>

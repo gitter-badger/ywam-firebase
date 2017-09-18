@@ -46,6 +46,9 @@ import fundEditBalanceDialog from './fundEditBalanceDialog/fundEditBalanceDialog
 import accountingTransactionLinkToContact from './accountingTransactionLinkToContact/accountingTransactionLinkToContact';
 import accountingTransactionForm from './accountingTransactionForm/accountingTransactionForm';
 import contactManagementCard from './contactManagementCard/contactManagementCard';
+import contactManagementEditForm from './contactManagementEditForm/contactManagementEditForm';
+import groupEditDialog from './groupEditDialog/groupEditDialog';
+import staffGroupAddMemberDialog from './staffGroupAddMemberDialog/staffGroupAddMemberDialog';
 
 
 
@@ -88,7 +91,10 @@ let commonModule = angular.module('app.common', [
     fundEditBalanceDialog,
     accountingTransactionLinkToContact,
     accountingTransactionForm,
-    contactManagementCard
+    contactManagementCard,
+    contactManagementEditForm,
+    groupEditDialog,
+    staffGroupAddMemberDialog,
 
 
 

@@ -14,6 +14,8 @@ path /crm { read() { contactManagment() }
             write() { contactManagment() }
             index() {["paypal_id"]}  }
 
+path /crm/{id}/name { read() { isStaff() } }
+
 //All language phrases TODO change write level to isStaff()
 path /phrases { read() { true }  write() { canEditPhrases() } }
 
@@ -169,7 +171,7 @@ path /location_public { read() { true}
 
 path /location  { read() { isStaff() }}
 path /location/default_school_questions {write(){canEditLocationInfo()}}
-
+path /location/staff_groups  { write() { isStaff() }}
 
 path /finance_accounts { read() { canEditAccounting() }
                         write() { canEditAccounting() }

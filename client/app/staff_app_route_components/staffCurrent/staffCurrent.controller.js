@@ -1,9 +1,8 @@
 class StaffCurrentController {
    /* @ngInject */
-  constructor(Site, $firebaseArray, $timeout,$filter,$mdMedia) {
+  constructor(Site, $firebaseArray, $timeout,$filter,$mdMedia, $scope) {
     var ctrl = this;
         ctrl.staff = []
-        ctrl.avatars = Site.avatars
 
     var Ref = firebase.database().ref('location').child('current_staff_index')
 
@@ -24,7 +23,6 @@ class StaffCurrentController {
                                                 data.id = user_id;
 
                                            var index =  ctrl.staff.push(data);
-                                         //  Site.getAvatar( user_id)
                                             $timeout()
                                            
                                            
@@ -35,16 +33,19 @@ class StaffCurrentController {
                                                      
                 },function(error){console.error(error)});
 
-
-        ctrl.photo_size = 20;
-        if($mdMedia('xs'))
-        ctrl.photo_size = 90;
+        // ctrl.photo_size = $mdMedia        
+        // if($mdMedia('xs'))
+        // ctrl.photo_size = '50%';
+        // if($mdMedia('sm'))        
+        // ctrl.photo_size = '25%';
+        // if($mdMedia('gt-md'))
+        // ctrl.photo_size = '15%';
 
 ctrl.print = print;
 
-function print(size){
+function print(print_class){
 
-      ctrl.photo_size = size;
+      ctrl.print_class= print_class
       $timeout(function(){  window.print();})
      
 

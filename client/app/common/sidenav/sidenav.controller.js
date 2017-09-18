@@ -29,7 +29,9 @@ class SidenavController {
     state: 'staff.current',
     fa_icon:'fa fa-tree',
     },
-    
+    {title: 'Groups',
+    state: 'staffGroups',
+    fa_icon:'fa fa-users'},     
 
     {title: 'Accounting',
               state: 'accounting.funds',
@@ -126,9 +128,7 @@ class SidenavController {
     fa_icon:'fa fa-flask',
 
     sub_nav: [  
-               {title: 'Groups',
-              state: 'staffGroups',
-              fa_icon:'fa fa-users'}, 
+              
              {title: 'Projects',
               state: 'projects',
               fa_icon:'fa fa-star-o'},

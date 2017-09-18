@@ -1,0 +1,27 @@
+<form ng-submit="$ctrl.save()">
+
+    <md-autocomplete   md-autofocus
+                       md-selected-item-change="$ctrl.selectedItemChange(item)"
+                       md-search-text="$ctrl.searchText" 
+                       md-items="item in $ctrl.getMatches($ctrl.searchText)" 
+                       md-item-text="item.name"
+                       placeholder="Add Staff Member"
+                       ng-if="!$ctrl.user_id">
+          <span md-highlight-text="searchText">{{item.name}}</span>
+      </md-autocomplete>
+  
+  <!--TODo: it might be nice to show the name of the person when editing an existing -->
+ <br>
+  <div layout="column">
+      <md-checkbox ng-model="$ctrl.is_leader">Group Leader</md-checkbox>
+      <!-- <md-checkbox ng-model="roles.staff">School Staff</md-checkbox>
+      <md-checkbox ng-model="roles.admin">School Admin</md-checkbox> -->
+  </div>
+  
+
+<div>
+     <md-button ng-if="key" ng-click="remove(key)" >Remove</md-button>
+      <span flex></span>
+      <md-button type="submit" class="md-primary">{{key?'Save':'Add'}} </md-button>
+ </div>
+</form>

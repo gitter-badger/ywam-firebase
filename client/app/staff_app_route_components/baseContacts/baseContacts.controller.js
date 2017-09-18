@@ -1,53 +1,62 @@
 class BaseContactsController {
    /* @ngInject */
-  constructor($timeout, $firebaseArray) {
+  constructor($timeout, $firebaseArray, Site, moment ) {
     var ctrl = this;
-        
-        ctrl.name = 'baseContacts';
+        ctrl.$onInit = onInit
         ctrl.filterList = filterList
         ctrl.toggleFilter = toggleFilter
         ctrl.active_filters = {};
+        ctrl.filters ={}
         ctrl.filter_active = false;
-        ctrl.school_years = ['2014','2015','2016','2017'];//todo .. get this from looking at range of school start dates ? 
-     
+        ctrl.addContactDialog = addContactDialog
+        ctrl.editContactDialog = editContactDialog
+        ctrl.now = new Date().getTime() *1000
 
         var Ref = firebase.database().ref('/crm/')
            ctrl.contacts =$firebaseArray(Ref)
 
-          //  Ref.once('value',function(snap){
-          //   //look over what school years we have in the data
-          //   snap.forEach(function(item){
-          //     var data = item.val()
 
-          //         if(data.alumni.school){
+        function onInit(){
+          //create list of filters
 
-          //           ctrl.school_years.push()
+          ctrl.filters['alumni_school_all' ] = {name:'All School Alumni', rules:{"var":["alumni.school"]}  }
 
-          //         }
-          //   })
 
-          //  })
-       
+          ctrl.filters['alumni_school_year_2014' ] = { name:'All School Year 2014', rules:{"var":["alumni.school.2014"]} }
+          ctrl.filters['alumni_school_year_2015' ] = { name:'All School Year 2015', rules:{"var":["alumni.school.2015"]} }
+          ctrl.filters['alumni_school_year_2016' ] = { name:'All School Year 2016', rules:{"var":["alumni.school.2016"]}  }
+          ctrl.filters['alumni_school_year_2017' ] = { name:'All School Year 2017', rules:{"var":["alumni.school.2017"]}  }
+          ctrl.filters['alumni_staff_all' ] = {name:'All Staff Alumni', rules:{"var":["alumni.staff"]}  }
+
+          ctrl.filters['support_ministry_last_30days' ] = {name:'Supported A Ministry Last 30 days', 
+                                                        rules:{">":[{"var":"last.ministry_support"}, {"-":[{"var":"ctrl.now"}, "2592000000" ]}] }  }
+          ctrl.filters['support_staff_last_30days' ] = {name:'Supported A Staff member Last 30 days', 
+                                                        rules:{"var":"last.staff_support"}}
+                                                        //rules:{">":[{"var":"last.staff_support"}, {"-":[{"var":"ctrl.now"}, "2.592e+6" ]}] }  }
+
+                                                          console.log(ctrl.now)
+        
+        }   
 
 
             function filterList(item){
               var show = false;
           
-            if(Object.keys(ctrl.active_filters).length<1)
-              show = true;
-            else{
-               for (var key in ctrl.active_filters) {
-                var filter = ctrl.active_filters[key]
-                 
-                if(filter.name == 'alumni_school_all' && item.alumni)
+            // if(Object.keys(ctrl.filters).length<1)
+            //   show = true;
+            // else{
+               for (var key in ctrl.filters) {
+                var filter = ctrl.filters[key]
+                if(filter.active){ 
+               
+                if(jsonLogic.apply(filter.rules, item))
                   show = true
 
-                if(filter.name == 'alumni_school_year' && item.alumni && item.alumni.school[filter.year])
-                  show = true 
+                
 
 
 
-               }
+               }//end if filter is active
               
             }  
 
@@ -71,6 +80,17 @@ class BaseContactsController {
            ctrl.active_filters[key] =obj          
         
         }  
+
+        function addContactDialog($event){
+          var template =`<contact-management-edit-form ></contact-management-edit-form>`;
+          Site.showDialog($event, template )
+
+        }
+        function editContactDialog($event, contact_id){
+          var template =`<contact-management-edit-form contact-id="${contact_id}"></contact-management-edit-form>`;
+          Site.showDialog($event, template )
+
+        }
 
   }
 }

@@ -2,49 +2,56 @@
 <div layout="row" layout-align="center">
 <md-card flex flex-gt-xs="75">
   <md-card-content>
-<div>
-  <h1>{{ $ctrl.name }} {{$ctrl.contacts.length}}</h1>
+<div layout="row">
+  <h1>Base  Contacts </h1><span flex></span>
+  <md-button ng-click="$ctrl.addContactDialog()">Add</md-button>
 </div>
-A big list of all contacts <br>
+<a ui-sref="baseContactsImport">Import CSV</a>
+A big list of all contacts {{$ctrl.contacts.length}} <br>
 TODOs:<br> 
 <ul>
   <li> tie into Mailchimp API to show what mailing lists contacts are on</li>
   <li> Add search functionality </li>
-  <li>Filter by: All Alumni, Student Alumni, Staff Alumni </li>
+  
 </ul>  
-
-<a ng-click="$ctrl.toggleFilter({name:'alumni_school_all' })">All School Alumni</a><br>
-<a ng-click="$ctrl.toggleFilter({name:'alumni_school_year',year:year})" ng-repeat="year in $ctrl.school_years">{{year}} School Alumni<br></a>
-
-    <br>   <br>
-    Active Filters:
-    <span ng-repeat="item in $ctrl.active_filters">{{item.name}}</span>
-    
-     <!--<md-chips ng-model="$ctrl.active_filters" name="fruitName" readonly="true"
-                md-removable="ctrl.removable" md-max-chips="5" placeholder="Enter a fruit...">
-        <md-chip-template>
-          <strong>{{$chip}}</strong>
-        </md-chip-template>
-      </md-chips>-->
-   <br>
+<div  ng-repeat="item in $ctrl.filters" >
+<a ng-click="item.active = !item.active" >{{item.name}} ({{item.active?'active':''}}) </a>
+</div>
 
 
-<div ng-repeat="item in $ctrl.contacts | filter: $ctrl.filterList">
+
+
+
+<div>
+  <md-input-container>
+    <input placeholder="Search" ng-model="$ctrl.filterText">
+  </md-input-container>
+</div>
+
+<div layout="row">
+<div flex>name</div>
+<div flex>Relation </div>
+<div flex> Last</div>
+</div>
+
+<div ng-repeat="item in $ctrl.contacts | filter: $ctrl.filterList | filter: $ctrl.filterText">
   <div layout="row">
     <div flex ><a ui-sref="profile({user_id:item.$id})">{{item.name.first_name}} {{item.name.last_name}}
- </a>
+     </a>
     </div>
     <div flex>
       
       <span ng-if="item.alumni.school" class="alumni-school"> 
         <span ng-repeat="(year,school) in item.alumni.school">
         Student Alumni {{year}} </span> </span>
-      
-      <span ng-if="item.last_payment">Last Payment: {{item.last_payment|date}} </span> 
-      <span ng-if="item.last_ministry_support">Last Ministry Donation: {{item.last_ministry_support|date}} </span> 
-      <span ng-if="item.last_staff_support">Last Staff Donation: {{item.last_staff_support|date}} </span> 
+    </div>
+    <div flex>
+      <span ng-if="item.last.payment">Last Payment: {{item.last.payment|date}} </span> 
+      <span ng-if="item.last.ministry_support">Last Ministry Donation: {{item.last.ministry_support|date}} </span> 
+      <span ng-if="item.last.staff_support">Last Staff Donation: {{item.last.staff_support|date}} </span> 
 
     </div>
+    <a ng-click="$ctrl.editContactDialog($event, item.$id)">edit</a>
   </div>
   <md-divider></md-divider></div> 
 

@@ -68,17 +68,18 @@ exports.ipn = functions.https.onRequest((req, res) => {
                             paypal_id:data.payer_id,
                             residence_country : data.residence_country
                          }  }
-
+            if(data.period3) {           
             if(data.period3.indexOf("D")>-1)
               subscr.interval = 'day'
-           if(data.period3.indexOf("W")>-1)
+            if(data.period3.indexOf("W")>-1)
               subscr.interval = 'week'
-           if(data.period3.indexOf("M")>-1)
+            if(data.period3.indexOf("M")>-1)
               subscr.interval = 'month'
-           if(data.period3.indexOf("Y")>-1)
+            if(data.period3.indexOf("Y")>-1)
               subscr.interval = 'year'   
 
               subscr.interval_count = data.period3.match(/\d+/)[0]  
+            }//end if period3
 
             if(data.txn_type =='subscr_signup'){
               subscr.created = new Date(data.subscr_date).getTime()

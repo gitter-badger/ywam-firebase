@@ -15,6 +15,28 @@
 display:inline-block;
 /*margin:5px;*/
 }
+
+@media only screen and (max-width: 599px) {
+  .photo_card {
+      width:50%;
+  }
+}
+@media only screen and (min-width: 600px) and (max-width: 1279px) {
+  .photo_card {
+      width:25%;
+  }
+}
+@media only screen and (min-width: 1280px)  {
+  .photo_card {
+      width:20%;
+  }
+}
+@media only print  {
+  .photo_card {
+      width:20%;
+  }
+}
+
 </style>
 
 
@@ -28,12 +50,12 @@ display:inline-block;
 <input ng-model="$ctrl.search" placeholder="filter">
 </md-input-container>
 
-<div  hide-xs style="width:200px; margin-top: 4px;">    
+<!-- <div  hide-xs style="width:200px; margin-top: 4px;">    
 
 <md-slider   flex min="10" max="100" ng-model="$ctrl.photo_size" aria-label="photo size" >
 
 </div>
-{{$ctrl.photo_size}}
+{{$ctrl.photo_size}} -->
 <!--<a ng-click="$ctrl.photo_size = 110 " >print size</a>-->
 <div flex></div>
 
@@ -44,8 +66,8 @@ display:inline-block;
       </md-button>
       <md-menu-content width="4">
         <md-menu-item>
-          <md-button ng-click="$ctrl.print('25')" >
-          Row of 4 photos
+          <md-button ng-click="$ctrl.print('print_leter')" >
+          Letter
           </md-button>
         </md-menu-item>
          <md-menu-item>
@@ -67,7 +89,7 @@ display:inline-block;
 
 
 <div ng-repeat="staff in $ctrl.staff | filter:$ctrl.search"  ui-sref="profile({user_id:staff.id})" 
- style="cursor: pointer; width:{{$ctrl.photo_size}}%;  display:inline-block;  break-before: always;">
+ style="cursor: pointer; display:inline-block; page-break-inside: avoid;" class="photo_card"  >
 
 <md-card    >  
 

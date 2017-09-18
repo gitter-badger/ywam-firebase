@@ -44,6 +44,8 @@ window.firebase = firebase //angularfire expects firebase as a global varible fo
 // import 'firebase-util'; // this will be useful once it supports the 3.0 SDK
 import 'angularfire';
 
+import jsonLogic from 'json-logic-js';
+window.jsonLogic = jsonLogic
 
 
 angular.module('app', [

@@ -22,7 +22,20 @@
       <div flex="50"><md-checkbox style="margin-bottom:2px" ng-click="$ctrl.fulfillCommitment(date, key)" 
                                                             aria-label="checkbox"
                                                             ng-disabled="!$ctrl.site.user_roles.can_edit_accounting" ></md-checkbox>
-        {{bill.name}}</div>
+      <md-menu>
+      <a ng-click="$mdMenu.open()">
+        {{bill.name}}
+      </a>
+      <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+        <md-menu-item ng-repeat="item in [1, 2, 3]">
+          <md-button>
+            Option {{item}}
+          </md-button>
+        </md-menu-item>
+    </md-menu> 
+       
+      
+      </div>
       <div flex>{{date | date:'MMMM d'}}</div>
       <div flex="15">{{bill.fund_id}}</div>
       <div flex="15" style="text-align:right ;">{{bill.fixed_amount | number:0}} <span ng-if="!bill.fixed_amount">{{bill.low_amount |number:0}} ~ {{bill.high_amount |number:0}}</span> </div>

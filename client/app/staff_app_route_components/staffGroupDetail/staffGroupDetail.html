@@ -1,0 +1,18 @@
+
+<div hide-gt-xs ui-sref="staffGroups">All Groups  </div>  
+
+<h1 class="md-title">{{$ctrl.staffGroup.name}} </h1>
+
+  
+    <div ng-repeat="member in $ctrl.staffGroup.members">
+     <div layout="row">
+       <div flex> {{member.name.first_name}} {{member.name.last_name}}</div> 
+       <div ng-if="member.is_leader"> ( team leader )</div>
+       </div> 
+   
+      <md-divider></md-divider>
+    </div>
+
+    <md-button ng-click="$ctrl.newMemberDialog($event)" >Add Member</md-button>
+    
+    </div>  
