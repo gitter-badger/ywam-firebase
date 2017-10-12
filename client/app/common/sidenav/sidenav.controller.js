@@ -132,16 +132,14 @@ class SidenavController {
              {title: 'Projects',
               state: 'projects',
               fa_icon:'fa fa-star-o'},
-               {title: 'Server Tasks',
-              state: 'settings',
-              fa_icon:'fa fa-server'},
+               {title: 'baseHousing',
+              state: 'baseHousing',
+              fa_icon:'fa fa-home'},
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
               
-              {title: 'BrainTree',
-              state: 'accountingBrainTree',
-              fa_icon:'fa fa-tree'},
+            
               ]
             }, 
 

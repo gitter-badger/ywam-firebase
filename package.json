@@ -12,6 +12,7 @@
     "angular-csv-import": "0.0.27",
     "angular-dynamic-locale": "^0.1.32",
     "angular-load": "^0.5.0",
+    "angular-local-storage": "^0.7.1",
     "angular-material": "1.1.5",
     "angular-material-data-table": "^0.10.9",
     "angular-moment": "^1.0.0-beta.6",

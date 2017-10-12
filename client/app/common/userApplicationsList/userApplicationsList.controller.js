@@ -16,6 +16,9 @@ class UserApplicationsListController {
               ctrl.applicationList=[];
               snap.forEach(function(appsnap){
               var app=appsnap.val();
+
+                // console.log(app.for)
+              if(app.status < 30){
                   app.id=appsnap.key;
                 
                  if(app.for.school_id )
@@ -32,6 +35,7 @@ class UserApplicationsListController {
                      ctrl.applicationList.push(app);
                 }
 
+              }//end if status less than 30
 
               })
 

@@ -15,7 +15,8 @@ let schoolsPageModule = angular.module('schoolsPage', [
     .state('schools', {
       url: '/schools',
       component: 'schoolsPage',
-      data: {authRequired:true},
+      data: {authRequired:true,
+            title:"Schools"},
     });
 })
 

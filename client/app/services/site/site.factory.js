@@ -1,6 +1,6 @@
 
 /* @ngInject */
-let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, $state,moment) {
+let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, $state,moment,localStorageService) {
 
   const site = { location_id: null,
                  location : {} ,
@@ -11,7 +11,8 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
                  hideSideNav : true,
                  isStaff :false,
                  hideDialog: hideDialog, 
-                 user_roles : {}
+                 user_roles : {},
+                 client_id:null,  //Client Tracking
 
                
 

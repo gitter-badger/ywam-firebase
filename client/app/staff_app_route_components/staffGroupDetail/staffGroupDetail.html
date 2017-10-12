@@ -1,15 +1,32 @@
 
 <div hide-gt-xs ui-sref="staffGroups">All Groups  </div>  
-
+<div layout="row" layout-align="start center">
 <h1 class="md-title">{{$ctrl.staffGroup.name}} </h1>
+<span flex></span>
+<a ng-click="$ctrl.editGroup($event)">Edit</a>
+</div>
+<div style="margin-bottom:15px"  ng-if="$ctrl.staffGroup.emails"> 
+  Email:<br>
+  <a ng-repeat="email in $ctrl.staffGroup.emails" href="mailto:{{email}}">{{email}}<br></a>
 
-  
-    <div ng-repeat="member in $ctrl.staffGroup.members">
-     <div layout="row">
+</div>
+
+<md-divider></md-divider>
+
+<div ng-repeat="(member_id,member) in $ctrl.staffGroup.members" ng-click="member.showRemove=!member.showRemove" >
+      <div layout="row" layout-align="start center"  style="padding:2px;height:46px; overflow:hidden; cursor:pointer ">
+       <div style="height:40px; width:50px;  overflow:hidden">
+        <img  firebase-src="{{member.avatar}}" style="height:100%; border-radius:50% " >
+      </div>
        <div flex> {{member.name.first_name}} {{member.name.last_name}}</div> 
-       <div ng-if="member.is_leader"> ( team leader )</div>
+       
+       <div ng-if="member.is_leader && !member.showRemove"> ( team leader )</div>
+      <div flex 
+           ng-if="member.showRemove" 
+           style="background:red;color:white; height:100%;vertical-align:middle;text-align:center"
+           ng-click="$ctrl.removeMember(member_id)">Remove</div>
+     
        </div> 
-   
       <md-divider></md-divider>
     </div>
 

@@ -4,7 +4,7 @@ import './groupEditDialog.styl';
 
 let groupEditDialogComponent = {
   restrict: 'E',
-  bindings: {},
+  bindings: {groupId:'@'},
   template,
   controller
 };

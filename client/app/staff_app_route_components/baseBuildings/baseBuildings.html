@@ -1,0 +1,54 @@
+<div layout="row" layout-align="center">
+  <div flex flex-gt-sm="75">
+
+    <md-card>
+      <md-card-content>
+
+        <div layout="row">
+          <h1 class="md-header">Buildings</h1>
+          <span flex></span>
+          <md-button ng-click="$ctrl.editBuilding($event)">Add</md-button>
+
+        </div>
+       
+
+        <div layout="row">
+          <div flex> Building</div>
+
+          <div flex> Rooms</div>
+          <div></div>
+        </div>
+        <md-divider></md-divider>
+
+        <div ng-repeat="(building_id,building) in $ctrl.buildings">
+          <div layout="row">
+            <div flex>{{building.name}}<br>
+                      {{building.address}}</div> 
+          
+            <div flex>
+              <div ng-repeat="room in building.rooms">
+                <div layout="row">
+                <div flex>{{room.name}}</div>
+                <div flex>
+                  Beds:
+                  <div ng-repeat="(key,bed) in room.beds"> {{key}}
+                    <md-divider></md-divider>
+                  </div>
+                </div>
+              </div>
+                <md-divider></md-divider>
+              </div>
+             
+            </div>
+            <div><a ng-click="$ctrl.editBuilding($event,building_id)">Edit</a></div>
+
+          </div>
+          <md-divider></md-divider>
+        </div>
+
+      </md-card-content>
+    </md-card>
+
+
+  </div>
+</div>

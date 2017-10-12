@@ -1,16 +1,16 @@
-import AccountingBrainTreeModule from './accountingBrainTree'
-import AccountingBrainTreeController from './accountingBrainTree.controller';
-import AccountingBrainTreeComponent from './accountingBrainTree.component';
-import AccountingBrainTreeTemplate from './accountingBrainTree.html';
+import BaseFundsHealthModule from './baseFundsHealth'
+import BaseFundsHealthController from './baseFundsHealth.controller';
+import BaseFundsHealthComponent from './baseFundsHealth.component';
+import BaseFundsHealthTemplate from './baseFundsHealth.html';
 
-describe('AccountingBrainTree', () => {
+describe('BaseFundsHealth', () => {
   let $rootScope, makeController;
 
-  beforeEach(window.module(AccountingBrainTreeModule));
+  beforeEach(window.module(BaseFundsHealthModule));
   beforeEach(inject((_$rootScope_) => {
     $rootScope = _$rootScope_;
     makeController = () => {
-      return new AccountingBrainTreeController();
+      return new BaseFundsHealthController();
     };
   }));
 
@@ -30,20 +30,20 @@ describe('AccountingBrainTree', () => {
     // template specs
     // tip: use regex to ensure correct bindings are used e.g., {{  }}
     it('has name in template [REMOVE]', () => {
-      expect(AccountingBrainTreeTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
+      expect(BaseFundsHealthTemplate).to.match(/{{\s?\$ctrl\.name\s?}}/g);
     });
   });
 
   describe('Component', () => {
       // component/directive specs
-      let component = AccountingBrainTreeComponent;
+      let component = BaseFundsHealthComponent;
 
       it('includes the intended template',() => {
-        expect(component.template).to.equal(AccountingBrainTreeTemplate);
+        expect(component.template).to.equal(BaseFundsHealthTemplate);
       });
 
       it('invokes the right controller', () => {
-        expect(component.controller).to.equal(AccountingBrainTreeController);
+        expect(component.controller).to.equal(BaseFundsHealthController);
       });
   });
 });

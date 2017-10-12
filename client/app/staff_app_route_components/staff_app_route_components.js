@@ -19,7 +19,6 @@ import accountingPaypalPage from './accountingPaypalPage/accountingPaypalPage';
 import accountingPaypalEvents from './accountingPaypalEvents/accountingPaypalEvents';
 import accountingStripeTransactions from './accountingStripeTransactions/accountingStripeTransactions';
 import accountingStripeEvents from './accountingStripeEvents/accountingStripeEvents';
-import accountingBrainTree from './accountingBrainTree/accountingBrainTree';
 import accountingFunds from './accountingFunds/accountingFunds';
 import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
 import accountingFundExpenses from './accountingFundExpenses/accountingFundExpenses';
@@ -44,12 +43,15 @@ import siteStats from './siteStats/siteStats';
 
 import base from './base/base';
 import baseInfo from './baseInfo/baseInfo';
+import baseFundsHealth from './baseFundsHealth/baseFundsHealth';
 import baseSetup from './baseSetup/baseSetup';
 import baseNotices from './baseNotices/baseNotices';
 import basePermissions from './basePermissions/basePermissions';
 import baseVisaRequirements from './baseVisaRequirements/baseVisaRequirements';
 import baseApplicationQuestions from './baseApplicationQuestions/baseApplicationQuestions';
 import baseProjects from './baseProjects/baseProjects';
+import baseBuildings from './baseBuildings/baseBuildings';
+import baseHousing from './baseHousing/baseHousing';
 import baseContacts from './baseContacts/baseContacts';
 import baseContactsImport from './baseContactsImport/baseContactsImport';
 import baseEmailTemplates from './baseEmailTemplates/baseEmailTemplates';
@@ -90,7 +92,7 @@ let componentModule = angular.module('app.components', [
   accountingPaypalEvents,
   accountingStripeTransactions,
   accountingStripeEvents,
-  accountingBrainTree,
+
   accountingFunds,
   accountingFundInfo,
   accountingAccounts,
@@ -114,10 +116,13 @@ let componentModule = angular.module('app.components', [
 
   base,
   baseInfo,
+  baseFundsHealth,
   baseSetup,
   baseNotices,
   basePermissions,
   baseProjects,
+  baseBuildings,
+  baseHousing,
   baseVisaRequirements,
   baseApplicationQuestions,
   baseContacts,

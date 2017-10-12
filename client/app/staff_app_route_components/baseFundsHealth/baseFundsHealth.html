@@ -1,0 +1,31 @@
+
+<md-card><md-card-content>
+  <div  style="position: relative; height: 200px">
+<canvas id="line2" class="chart chart-line" chart-data="$ctrl.health"
+chart-labels="$ctrl.labels"   chart-options="$ctrl.options2"
+ >
+</canvas>
+</div>
+
+
+
+</md-card-content>
+</md-card>
+<md-card><md-card-content>
+
+Funds:
+<div  style="position: relative; height: 550px">
+<canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
+chart-labels="$ctrl.labels" chart-series="$ctrl.series"
+ chart-options="$ctrl.options"
+
+ chart-click="$ctrl.onClick">
+</canvas>
+</div>
+
+
+
+
+
+</md-card-content>
+</md-card>

@@ -1,0 +1,23 @@
+<form ng-submit="$ctrl.save()">
+<div layout="column"> 
+  <h1>{{ $ctrl.building.name }}</h1>
+
+
+<md-input-container>
+  <label>Name</label>
+  <input ng-model="$ctrl.building.name">
+</md-input-container>
+
+<md-input-container>
+    <label>Address</label>
+    <input ng-model="$ctrl.building.address">
+  </md-input-container>
+
+</div>
+
+<div layout="row">
+
+  <div flex></div>
+  <md-button type="submit">{{$ctrl.buildingId ? 'Save':'Add'}}</md-button>
+</div>
+</form>

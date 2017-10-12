@@ -1,6 +1,25 @@
-<div>
+<div layout="row" layout-align="center">
+    <md-card flex-gt-sm="70">
+        <md-card-content>
  Stats
-<div ng-repeat="item in $ctrl.siteStats"> {{item.time | date:'short'}} {{item.language}} {{item.user_id}} {{item.referrer}} </div>
-
-
+ <div layout="row">
+    <div flex>Time</div>
+    <div flex>Site Language</div>
+    <div flex>User ID</div>
+    <div flex>Refering</div>
+ </div>
+<div ng-repeat="item in $ctrl.siteStats" >  
+    
+    <div ng-repeat="log in item.log" layout="row">
+    <div flex> {{log.time | date:'short'}}</div>
+   <div flex>{{log.site_language}} </div> 
+   <div flex>
+        {{log.name.first_name}} {{log.name.last_name}} </div>
+    <div flex>{{log.current_state}}</div> 
+   <div flex>{{log.referrer}}</div> 
+    </div>
+<md-divider></md-divider>
+</div>
+</md-card-content>
+</md-card>
 </div>

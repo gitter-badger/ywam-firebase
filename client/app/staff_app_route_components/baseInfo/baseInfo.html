@@ -1,8 +1,33 @@
-<div layout="row" layout-align="center">
+<div layout="row" layout-align="center" >
 <md-card flex-gt-sm="75">
 <md-card-content>
   <h2>Base Info</h2>
  
+<div layout="row">
+    <div flex>Group:</div>
+    <div flex>Email:</div>
+</div>
+
+<div  ng-repeat="group in $ctrl.staff_groups" ng-if="group.emails" class="row-hover">
+<div layout="row">
+<div flex>
+  {{group.name}}
+</div>
+<div flex>
+<a ng-repeat="email in group.emails" href="mailto:{{email}}">{{email}}<br></a>
+</div>
+
+</div>
+<md-divider></md-divider>
+</div>
+
+
+
+
+
+
+
+
  <!--<b>Staff Fee: {{$ctrl.location_public.currencySym}}<span contenteditable ng-model="$ctrl.location_public.staff_fee"></span> <br>
  Mission Builder Fee: {{$ctrl.location_public.currencySym}}{{$ctrl.location_public.mission_builder_fee}}</b> (if longer than 4 weeks)<br>
  <b>Short Term Staff Fee: {{$ctrl.location_public.currencySym}}{{$ctrl.location_public.short_term_staff_fee}}</b> (less than 3 months )
@@ -10,10 +35,10 @@
 <br>
 lease-->
 
-<pre>
+<!-- <pre>
 {{$ctrl.meta | json}}
-</pre>
-
+</pre> -->
+<!-- 
 Slack Channels:
 <div ng-repeat="item in $ctrl.slack.bot_groups" >
 
@@ -24,8 +49,20 @@ Slack Channels:
 <div ng-repeat="item in $ctrl.slack.channels" ng-if="!item.is_archived &&  item.is_member">
 
   {{item.id}} {{item.name}} 
-</div>
+</div> -->
 
 </md-card-content>
 </md-card>
+
+<!-- 
+<md-card>
+  <md-card-content>
+   
+    
+    <b></b>
+
+  </md-card-content>
+</md-card> -->
+
+
 </div>

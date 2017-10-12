@@ -1,8 +1,80 @@
 
-<div layout="row" layout-align="center">
+<div layout="row" layout-align="center" >
+<div  flex flex-gt-sm="90">
+
+<md-card >
+    <md-card-content>
+        <div flex class="md-title">General Fund Health:
+
+            <!-- {{$ctrl.generalFundHealth}} -->
+            {{ +$ctrl.generalFundHealth < 0 ? 0 : $ctrl.generalFundHealth }}%
+          
+          <span style="color:red">  {{ $ctrl.generalFundHealth < 25 ? 'Critical':''}}</span>
+        </div>
+        <p style="color:red" ng-if="$ctrl.generalFundHealth <= 0">  
+            The total of funds in the negative is higher than the General Fund. No money is free to be spent from the General Fund, and other funds (which are shown as in the plus) are actually completely or partially unavailable (temporarily). All department fund managers should be advised.
+        </p>
+        <p style="color:red" ng-if="$ctrl.generalFundHealth < 25 && $ctrl.generalFundHealth > 0">  
+            The total of funds in the negative is almost higher than the General Fund.  Money should be spent carefully from the General Fund. Money in other department’s funds is still available but should hold off on large purchases.        
+          </p>
+          <p style="color:red" ng-if="$ctrl.generalFundHealth < 50 && $ctrl.generalFundHealth > 25">  
+              Less than half of the General Fund is available to spend, consider holding off large purchases.             
+            </p>  
+            <p style="color:red" ng-if="$ctrl.generalFundHealth < 75 && $ctrl.generalFundHealth > 50">  
+                More than a quarter of the General Fund is covering the debts of other funds.
+              </p>  
+              <p style="color:red" ng-if="$ctrl.generalFundHealth < 100 && $ctrl.generalFundHealth > 75">  
+                  Some of the General Fund is covering the debts of other funds.
+                </p>    
+
+    <div layout="row" layout-wrap>
+        <div  flex="100" flex-gt-xs="40">
+            Funds with negitive balance:  
+            <md-divider></md-divider>
+            
+      <div ng-repeat="(key,item) in $ctrl.funds" ng-if="item.balance.current < 0" layout="row">
+        
+        <div flex> {{key}}</div>
+          <div style="color:red" > ${{item.balance.current}} </div>
+        
+      </div>
+     
+      <md-divider></md-divider>
+      <div layout="row">
+       <div flex>Debts of funds frozen in General fund :</div>
+       <div >  ( {{  $ctrl.totalNegitiveFundsAbs * 100 /+$ctrl.funds['general'].balance.current | number :0  }}%) 
+            <span style="color:red"> ${{$ctrl.totalNegitiveFundsAbs | number:2}} </span></div>
+      </div>
+      
+      <div layout="row">
+          <div flex>General</div> 
+          <div>{{$ctrl.funds['general'].balance.current}}</div>
+        </div>  
+    
+      <div layout="row">
+          <div flex>  Avalible in General </div><div >{{ +$ctrl.funds['general'].balance.current + +$ctrl.totalNegitiveFunds | number:2}}
+            </div>
+          </div>
+  </div>
+  <div flex="100" flex-gt-xs="60">
+    Last {{$ctrl.lastDays}} Days:
+    <div  style="position: relative; height: 300px">
+      <canvas id="line" class="chart chart-line" chart-data="$ctrl.data"
+      chart-labels="$ctrl.labels" chart-series="$ctrl.series"
+       chart-options="$ctrl.options" 
+       >
+  </canvas>
+</div>
+  <a ui-sref="baseFundsHealth" class="no-print">More</a>
+   
+  </div>
+</div>
+    </md-card-content>
+</md-card>
 
 
-<md-card flex-gt-xs="75">
+
+<md-card >
   <md-card-content>
     <div layout="row">
       <span flex class="md-title">Funds:
@@ -24,9 +96,9 @@
   <div flex="15"> {{item.meta.type}}</div>
    <div flex ><a ui-sref="accounting.fund({code:key})"> {{item.meta.name}}</a> </div>
    <div flex> 
-     <span ng-if="item.balance.current">
-     {{item.balance.current}} ( as of {{item.balance.last_update |date: 'short'}} )
-     </span>
+     <div ng-if="item.balance.current" layout="row" >
+    <a ng-click="$ctrl.editFundBalanceDialog($event,key)"> {{item.balance.current}}</a> <span flex></span>  <span am-time-ago="item.balance.last_update"> </span> 
+     </div>
      <!--<a href="{{$ctrl.base_url}}/support/{{key}}"  target="_blank" ng-if="item.meta.public">{{$ctrl.base_url}}/support/{{key}}</a>
               <span ng-if="!item.meta.public"> Disabled</span>-->
               
@@ -36,5 +108,6 @@
 </div>
   </md-card-content>
 </md-card>
+</div>
 
 </div>

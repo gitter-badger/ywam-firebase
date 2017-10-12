@@ -1,8 +1,9 @@
 import angular from 'angular';
 import ngSanitize from 'angular-sanitize';
 import uiRouter from 'angular-ui-router';
-import angularLoad from 'angular-load';
 
+import angularLoad from 'angular-load';
+import 'angular-local-storage'
 
 import Common from './common/common';
 import services from './services/services';
@@ -52,6 +53,7 @@ angular.module('app', [
     ngSanitize, //used by ng-bind-html but is not included in angular core. 
     uiRouter,
     angularLoad, //Dynamically load scripts and CSS stylesheets in your Angular.JS app.
+    'LocalStorageModule',
     'ngMaterial',
     DataTable,
     'pascalprecht.translate',//ngTranslate
@@ -59,6 +61,7 @@ angular.module('app', [
      'angularMoment',
     'firebase',
      'chart.js',
+   
     Common,
     services,
     staffComponents,
@@ -180,7 +183,15 @@ angular.module('app', [
 
 
 })
+//Analitics config
+// .config(['AnalyticsProvider', function (AnalyticsProvider) {
+//     // Add configuration code as desired
+//     AnalyticsProvider.setAccount('UA-82214101-1');  //UU-XXXXXXX-X should be your tracking code
+//     // Change the default page event name.
+//   // Helpful when using ui-router, which fires $stateChangeSuccess instead of $routeChangeSuccess.
+//   AnalyticsProvider.setPageEvent('$stateChangeSuccess');
 
+//  }]).run(['Analytics', function(Analytics) { }])
 
 
   .run(($rootScope,$translate,tmhDynamicLocale, Site, moment
@@ -195,20 +206,19 @@ angular.module('app', [
         
         Site.language = $translate.proposedLanguage();
         moment.locale(Site.language);
-        var data = {language:Site.language,
-                   referrer: document.referrer,
-                    time: firebase.database.ServerValue.TIMESTAMP}
-        if(Site.user.id)
-        data.user_id = Site.user.id
-        firebase.database().ref('app_log').push(data)
+       
 
     });
 
 
   })
 
-.run(["$transitions", "Auth" ,"$rootScope","$state","$location" , function($transitions, Auth, $rootScope,$state,$location) {
-//Catch pages that need login
+.run(["$transitions", "Auth" ,"$rootScope","$state","$location","Site" , function($transitions, Auth, $rootScope,$state,$location,Site) {
+
+    
+
+
+    //Catch pages that need login
 $transitions.onStart({
     to: function (state) {
 
@@ -217,16 +227,29 @@ $transitions.onStart({
 
 
         if( state.data != null ){
-          
+            if(state.data.title){
+                Site.title = state.data.title
+            }else{
+                Site.title = null
+            }
 
-          
-         if(state.data.authRequired === true && !Auth.$getAuth()){
-            $rootScope.$broadcast('showLoginDialog');
-            // $timeout(function(){})
-            console.log("Not LOGGED in")
-         }
+            if(state.data.authRequired === true && !Auth.$getAuth()){
+                $rootScope.$broadcast('showLoginDialog');
+                // $timeout(function(){})
+                console.log("Not LOGGED in")
+            }
           
         }
+
+        var data = { site_language:Site.language,
+                     referrer: document.referrer,
+                     current_state: state.name,
+                     time: firebase.database.ServerValue.TIMESTAMP}
+        if(Site.user.id)
+        data.user_id = Site.user.id
+       
+        if(Site.client_id)
+        firebase.database().ref('clients/'+Site.client_id+'/log').push(data)
   
     },
     from:function(state){
@@ -235,8 +258,24 @@ $transitions.onStart({
         // console.log( $location.path())
         $state.previous = $location.path()
      
-       console.log( $state.previous)
+    //    console.log( $state.previous)
     }
 })
 }])
+
+.run(["localStorageService","Site" , function(localStorageService,Site) {
+
+    // console.log(Site.client_id)
+    Site.client_id = localStorageService.get('client_id');
+    // console.log(Site.client_id)
+    if(!Site.client_id){
+        firebase.database().ref('clients').push(true).then((snap)=>{
+            Site.client_id = snap.key;
+            localStorageService.set("client_id",Site.client_id);
+            // console.log(Site.client_id)
+        })
+    }
+
+}])    
+
   .component('app', AppComponent);

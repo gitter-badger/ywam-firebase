@@ -3,19 +3,20 @@ class StudentPhotosController {
   constructor(School,$stateParams, $mdMedia, Site,$firebaseObject, $timeout ) {
       var ctrl = this;
       var school_id = $stateParams.school_id;
+      
           ctrl.apps =  School.getApps(school_id, true)
        
           ctrl.print = print
 
-          ctrl.add = function(n){
-              var i = 0
-          for(i = 0; ctrl.apps.length < 29; i++){
-              var data = {}
-              ctrl.apps.push(data)
-              console.log(ctrl.apps.length)
-          }
+        //   ctrl.add = function(n){
+        //       var i = 0
+        //   for(i = 0; ctrl.apps.length < 29; i++){
+        //       var data = {}
+        //       ctrl.apps.push(data)
+        //       console.log(ctrl.apps.length)
+        //   }
           
-          }
+        //   }
 
 
       var school_ref = firebase.database().ref('/schools/'+school_id + '/public')

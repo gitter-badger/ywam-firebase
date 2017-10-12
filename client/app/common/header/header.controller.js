@@ -17,7 +17,6 @@ class HeaderController {
           
      
       ctrl.presence = Site.presence
-    //  ctrl.avatars = Site.avatars
       
       ctrl.changeLanguage = function (langKey) {
           $translate.use(langKey);

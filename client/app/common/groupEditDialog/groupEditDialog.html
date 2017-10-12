@@ -1,12 +1,27 @@
-<form ng-submit="$ctrl.save()">
-<div>
+<form ng-submit="$ctrl.save()" style="min-width:400px">
+<div layout="column">
  <md-input-container>
    <label>Group Name</label>
    <input ng-model="$ctrl.group.name">
  </md-input-container>
+
+ <div ng-if="$ctrl.groupId">
+ Emails:
+<div layout="row" ng-repeat="(key,email) in $ctrl.group.emails">{{email}}<span flex></span><a ng-click="$ctrl.removeEmail(key)"> remove</a> </div>
+<div layout="row">
+<md-input-container flex>
+    <label>Add Email</label>
+    <input ng-model="$ctrl.new_email">
+  </md-input-container>
+  <span flex></span>
+  <md-button ng-click="$ctrl.addEmail()">Add</md-button>
+</div>
+</div>
+
 </div>
 
 <div layout="row">
+    <md-button ng-click="$ctrl.delete()" class="md-warn" ng-if="$ctrl.site.user_roles.staff_group_management">Delete</md-button>  
     <span flex></span>
     <md-button type="submit" class="md-primary" > {{$ctrl.groupId? 'Save':'Add'}}</md-button> 
   </div> 

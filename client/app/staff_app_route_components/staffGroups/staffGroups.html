@@ -1,6 +1,6 @@
 <div layout="row" layout-align="center" >
 
-  <md-card flex="100" flex-gt-sm="70">
+  <md-card flex="100" flex-gt-sm="80" flex-gt-md="70">
     <md-card-content layout-gt-xs="row">
       
       <div flex ng-hide="$ctrl.stateParams.group_id && $ctrl.isMobile"> 
@@ -10,8 +10,11 @@
           <div ng-repeat="(key,group) in $ctrl.groups" 
                ng-class="{active: $ctrl.stateParams.group_id == key}"
                style="cursor:pointer">
-          <div layout="row" layout-align="start center" ui-sref="staffGroups.detail({group_id:key})">  
-              <div flex>{{group.name}}</div> <b> > </b>
+          <div layout="row" 
+               layout-align="start center" 
+               ui-sref="staffGroups.detail({group_id:key})"
+               style="padding:13px">  
+              <div flex>{{group.name}}</div> <div>{{group.members.length}}</div> <b> > </b>
             </div>  
           
         
@@ -23,11 +26,36 @@
 
       </div>
       <div style="border-right:1px gray solid; width:20px; margin-right:20px" 
-           hide-xs>
+           hide-xs ng-hide="!$ctrl.stateParams.group_id ">
 
       </div>
 
-      <ui-view flex ng-hide="!$ctrl.stateParams.group_id && $ctrl.isMobile"> </ui-view>
+      <ui-view flex ng-hide="!$ctrl.stateParams.group_id && $ctrl.isMobile">
+          <h1 class="md-title">Members </h1>
+          <md-list >
+              <div ng-repeat="(key,group) in $ctrl.groups" 
+                 
+                   style="cursor:pointer; ">
+              <div layout="row" 
+                   layout-align="start center" 
+                   ui-sref="staffGroups.detail({group_id:key})"
+                   style="padding:2px;height:46px; overflow:hidden">  
+                  <div ng-repeat="member in group.members"  style="height:40px; overflow:hidden; margin-right:4px ">
+                      <img  firebase-src="{{member.avatar}}" style="height:100%; border-radius:50% " >
+
+                  </div>
+                </div>  
+              
+            
+              <md-divider ></md-divider>
+            </div>
+    
+            </md-list>
+      
+      
+      
+      
+      </ui-view>
       
       
 

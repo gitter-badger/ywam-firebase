@@ -16,6 +16,7 @@ import contactInfo from './contactInfo/contactInfo';
 import passportInfo from './passportInfo/passportInfo';
 import userPhotoUpload from './userPhotoUpload/userPhotoUpload';
 import userApplicationsList from './userApplicationsList/userApplicationsList';
+import profileApplicationsList from './profileApplicationsList/profileApplicationsList';
 
 
 //application form stuff
@@ -40,6 +41,7 @@ import siteTaskList from './siteTaskList/siteTaskList';
 import roleCallsList from './roleCallsList/roleCallsList';
 import roleCallMemberList from './roleCallMemberList/roleCallMemberList';
 import baseProjectTaskEdit from './baseProjectTaskEdit/baseProjectTaskEdit';
+import buildingEditDialog from './buildingEditDialog/buildingEditDialog';
 import fundEdit from './fundEdit/fundEdit';
 import fundCommitmentEdit from './fundCommitmentEdit/fundCommitmentEdit';
 import fundEditBalanceDialog from './fundEditBalanceDialog/fundEditBalanceDialog';
@@ -68,6 +70,7 @@ let commonModule = angular.module('app.common', [
     passportInfo,
     userPhotoUpload,
     userApplicationsList,
+    profileApplicationsList,
 
     healthForm,
     languagesForm,
@@ -86,6 +89,7 @@ let commonModule = angular.module('app.common', [
     roleCallsList,
     roleCallMemberList,
     baseProjectTaskEdit,
+    buildingEditDialog,
     fundEdit,
     fundCommitmentEdit,
     fundEditBalanceDialog,
