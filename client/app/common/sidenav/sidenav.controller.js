@@ -132,12 +132,16 @@ class SidenavController {
              {title: 'Projects',
               state: 'projects',
               fa_icon:'fa fa-star-o'},
+              {title: 'Fund Requests',
+              state: 'accounting.fundRequests',
+              fa_icon:'fa fa-star-o'},
                {title: 'baseHousing',
               state: 'baseHousing',
               fa_icon:'fa fa-home'},
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
+              
               
             
               ]

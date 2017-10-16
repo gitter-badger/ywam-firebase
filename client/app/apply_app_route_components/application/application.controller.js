@@ -10,6 +10,8 @@ class ApplicationController {
         ctrl.maxDate = new Date( new Date().setFullYear( now.getFullYear() - 15) )
         ctrl.minDate = new Date( new Date().setFullYear( now.getFullYear() - 100) )
         ctrl.submit = submit;
+        ctrl.finishLater = finishLater
+
 //      ctrl.showAlert = showAlert;
       ctrl.showAlertPrerenderedDialog = showAlertPrerenderedDialog;
 //        ctrl.changeDOB = changeDOB
@@ -87,28 +89,10 @@ class ApplicationController {
         }
     }
 
-
-//     function changeDOB(){
-//        $scope.profile_contact.dob = moment(ctrl.dob).format("YYYY-MM-DD");
-//         console.log('changeDOB ' +  $scope.profile_contact.dob)
-//     }
-//
-
-//function showAlert(forms_invalid) {
-//    // Appending dialog to document.body to cover sidenav in docs app
-//    // Modal dialogs should fully cover application
-//    // to prevent interaction outside of dialog
-//    $mdDialog.show(
-//      $mdDialog.alert()
-//        .parent(angular.element(document.querySelector('#popupContainer')))
-//        .clickOutsideToClose(true)
-//        .title('Not all required fields are valid!')
-//        .textContent('Please fill all required fields and upload a Photo of you before you submit your application! Your data is autosaved. You can also come back later to submit your application.')
-//        .ariaLabel('Alert Dialog Demo')
-//        .ok('Got it!')
-//    );
-//  };
-//      
+    function finishLater(){
+        $state.go('apply.dashboard')
+    }
+   
     function showAlertPrerenderedDialog() {
     $mdDialog.show({
       contentElement: '#myDialog',
@@ -118,9 +102,9 @@ class ApplicationController {
   };
 
 
- var app_admin_notes_ref =   firebase.database().ref('/applications/' +ctrl.app_id + '/admin_notes');
-     app_admin_notes_ref.once('value').then(()=>{console.warn('applicant can access admin_notes node')},
-                                          ()=>{ })
+//  var app_admin_notes_ref =   firebase.database().ref('/applications/' +ctrl.app_id + '/admin_notes');
+//      app_admin_notes_ref.once('value').then(()=>{console.warn('applicant can access admin_notes node')},
+//                                           ()=>{ })
 
 
 

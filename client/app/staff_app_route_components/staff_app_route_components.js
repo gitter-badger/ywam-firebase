@@ -22,6 +22,7 @@ import accountingStripeEvents from './accountingStripeEvents/accountingStripeEve
 import accountingFunds from './accountingFunds/accountingFunds';
 import accountingFundInfo from './accountingFundInfo/accountingFundInfo';
 import accountingFundExpenses from './accountingFundExpenses/accountingFundExpenses';
+import accountingFundRequests from './accountingFundRequests/accountingFundRequests';
 import accountingAccounts from './accountingAccounts/accountingAccounts';
 import accountingAccountsView from './accountingAccountsView/accountingAccountsView';
 import accountingAccountsIncomeTransactions from './accountingAccountsIncomeTransactions/accountingAccountsIncomeTransactions';
@@ -97,6 +98,7 @@ let componentModule = angular.module('app.components', [
   accountingFundInfo,
   accountingAccounts,
   accountingFundExpenses,
+  accountingFundRequests,
   accountingAccountsView,
   accountingAccountsIncomeTransactions,
   accountingAccountsExpenseTransactions,

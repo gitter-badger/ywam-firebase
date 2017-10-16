@@ -4,14 +4,20 @@ class ContactInfoFormController {
     var ctrl = this;
         
         var ctrl = this;
+            ctrl.changeDOB = changeDOB
+            ctrl.$onInit = onInit
     var now = new Date();
-         if(!ctrl.userId)
-        ctrl.userId = Auth.$getAuth().uid 
+     
+    function onInit(){
+    console.log(ctrl.userId)
+    if(!ctrl.userId)
+         ctrl.userId = Auth.$getAuth().uid 
+
         ctrl.app_id = $stateParams.appId;
         ctrl.maxDate = new Date( new Date().setFullYear( now.getFullYear() - 15) )
         ctrl.minDate = new Date( new Date().setFullYear( now.getFullYear() - 100) )
        
-        ctrl.changeDOB = changeDOB
+        
 
       ctrl.update = (refs)=>{
         console.log('update now' + refs)
@@ -41,6 +47,13 @@ class ContactInfoFormController {
          })
     
       
+        }
+
+
+
+
+
+
        function changeDOB(){
         $scope.profile_contact.dob = moment(ctrl.dob).format("YYYY-MM-DD");
          console.log('changeDOB ' +  $scope.profile_contact.dob)

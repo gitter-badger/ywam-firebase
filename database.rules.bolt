@@ -216,6 +216,12 @@ path /donors { read() { canEditAccounting() || contactManagment() }
  path /fund_scheduled_bills {read(){ isStaff()}
                              write() { canEditAccounting()}
                             }                                                                                    
+ path /fund_requests { read() { isStaff() }
+                       write() { canEditAccounting() }
+                                          }  
+                                          
+ path /fund_requests/{id}/user {  write() { isStaff() }
+                                          }                                            
 
 path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }

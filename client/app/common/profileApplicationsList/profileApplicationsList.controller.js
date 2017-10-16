@@ -17,7 +17,7 @@ class ProfileApplicationsListController {
               snap.forEach(function(appsnap){
               var app=appsnap.val();
                   app.id=appsnap.key;
-                
+                  
                 if(app.for.school_id )
                 {
                         firebase.database().ref("schools/"+app.for.school_id+"/public").once("value",function(snap)

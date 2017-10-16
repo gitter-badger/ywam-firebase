@@ -18,6 +18,22 @@
 </div>
 </div>
 
+<div ng-if="$ctrl.groupId">
+    Funds:
+   <div layout="row" ng-repeat="(key,fund) in $ctrl.group.funds">{{fund}}<span flex></span><a ng-click="$ctrl.removeFund(key)"> remove</a> </div>
+   <div layout="row">
+   <md-input-container flex>
+       <label>Add Fund</label>
+       <md-select ng-model="$ctrl.new_fund">
+         <md-option ng-value="code" ng-repeat="(code,fund) in $ctrl.funds"> {{fund.meta.name}}</md-option>
+       </md-select>
+     </md-input-container>
+     <span flex></span>
+     <md-button ng-click="$ctrl.addFund()">Add</md-button>
+   </div>
+   </div>
+
+
 </div>
 
 <div layout="row">

@@ -11,34 +11,11 @@
 <i class="fa fa-info fa-3x" aria-hidden="true"></i> Location specific notices..<br>
  Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_notices"</a>
 <br>last update: <span am-time-ago="$ctrl.notices.lastSave" ></span> by: {{$ctrl.lastSaveUser.first_name}} {{$ctrl.lastSaveUser.last_name | limitTo:1}}.
-
-  </md-card-content>
-</md-card>
-<md-card>
   <md-card-content>
-<b layout="row">
-    <div flex>English </div>
-    <div flex>German</div>
-</b>
+   <a ng-click="notice.edit = !notice.edit"> Edit Text</a><br>
 
+"{{ $ctrl.notices[notice.show][key]}}"
 
-<br>
-Shown on overview card of Staff Application:
-<div layout="row">
-    <md-input-container flex>
-      <label>
-   staff_application_description (EN)
-      </label>
-    <textarea ng-model="$ctrl.notices.EN.staff_application_description" ng-change="$ctrl.save()"></textarea>
-    </md-input-container>
-    <md-input-container flex>
-      <label>
-   staff_application_description (DE)
-      </label>
-    <textarea ng-model="$ctrl.notices.DE.staff_application_description" ng-change="$ctrl.save()"></textarea>
-    </md-input-container>
-    
-    </div>
 
 </md-card-content>
 </md-card>
@@ -68,49 +45,7 @@ Need Invitation Letter (DE)
 
 </div>
 
-<div layout="row">
-<md-input-container flex>
-  <label>
-Need Entry Visa (EN)
-  </label>
-<textarea ng-model="$ctrl.notices.EN.need_entry_visa" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-<md-input-container flex>
-  <label>
-Need Entry Visa (DE)
-  </label>
-<textarea ng-model="$ctrl.notices.DE.need_entry_visa" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-</div>
 
-<div layout="row">
-<md-input-container flex>
-  <label>
-Need Visa Extention (EN)
-  </label>
-<textarea ng-model="$ctrl.notices.EN.need_visa_extention" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-<md-input-container flex>
-  <label>
-Need Visa Extention (DE)
-  </label>
-<textarea ng-model="$ctrl.notices.DE.need_visa_extention" ng-change="$ctrl.save()" ></textarea>
-</md-input-container>
-</div>
-<div layout="row">
-<md-input-container flex>
-  <label>
-Can Not Process Visa (EN)
-  </label>
-<textarea ng-model="$ctrl.notices.EN.can_not_process_visa" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-<md-input-container flex>
-  <label>
-Can Not Process Visa (DE)
-  </label>
-<textarea ng-model="$ctrl.notices.DE.can_not_process_visa" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-</div>
 
   </md-card-content>
 </md-card>

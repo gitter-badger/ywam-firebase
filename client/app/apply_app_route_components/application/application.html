@@ -195,23 +195,14 @@
         </md-card>
 
         <md-card>
-            <md-card-content>
-              <md-button ng-click="$ctrl.submit()" class="md-raised" translate="105">Submit Applcation</md-button>
+            <md-card-content layout="row">
+             <md-button ng-click="$ctrl.finishLater()"  > Finish Later</md-button>
+                    <span flex></span>
+              <md-button ng-click="$ctrl.submit()" class="md-raised md-primary" translate="105">Submit Applcation</md-button>
             </md-card-content>
         </md-card>
         
-        <!--
-        <md-card>
-          stuff is going here
-
-        School/public
-        <pre>{{ $ctrl.school | json }}</pre>
-
        
-
-         Profile/
-         <pre>{{profile | json}}</pre>
-        </md-card>-->
     </div>
 
     <div style="visibility: hidden">
@@ -220,7 +211,7 @@
                 <h2 md-colors="{color:'warn', 'border-color':'warn'}"><span translate="192">Not all required fields are valid!</span></h2>
                 <p>
                     <span translate="193">Please fill all required fields and upload a Photo of you before you submit your application! </span><br>
-                    <span translate="194">Your data is autosaved. You can also come back later to submit your application.</span>
+                    <!-- <span translate="194">Your data is autosaved. You can also come back later to submit your application.</span> -->
                 </p>
             </md-dialog>
         </div>

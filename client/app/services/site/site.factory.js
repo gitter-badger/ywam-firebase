@@ -25,43 +25,43 @@ let SiteFactory = function (Auth, $timeout, $firebaseObject,$mdDialog,$mdMedia, 
            if(firebaseUser){
 
             site.firebaseUser = firebaseUser;
-             var Ref=  firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
-
+            site.user.id = firebaseUser.uid;
+            
+            firebase.database().ref('profiles/'+firebaseUser.uid+'/contact' )
               .once('value').then(function(snap){
                if(snap.val()){
                site.user.contact= snap.val()
-              
-
-               
-               site.user.id = firebaseUser.uid;
                console.log('Current user is: '+firebaseUser.uid )
-
-               firebase.database().ref('location/current_staff_index').child(site.user.id)
-               .once('value',function(snap){//if the logged in user is a current staff take them home!
-                console.log('current user is a staff? '+ snap.val())
-                
-                 if(snap.val()){
-                    site.hideSideNav = false
-                    site.isStaff = true
-                 }
-               })
-             
-             firebase.database().ref('site_roles/')
-               .once('value',function(snap){//if the logged in user is a current staff take them home!
-                
-                snap.forEach(function(role){
-                  role.forEach(function(item){
-                    if(item.key == site.user.id)
-                    site.user_roles[role.key] = true
-                  })
-                })
-               // console.log('user has some site roles ',site.user_roles)
-                
-               })
-
               }//if data
               })
 
+              firebase.database().ref('profiles/'+firebaseUser.uid+'/app_index' )
+              .once('value').then(function(snap){
+               if(snap.val() && $state.current.name=='apply.schoolList' ){
+                 console.log($state.current.name)
+              console.log('already has applications started, taking them to dashboard')
+                $state.go('apply.dashboard')
+              }//if data
+              })
+
+              firebase.database().ref('location/current_staff_index').child(site.user.id)
+              .once('value',function(snap){
+               console.log('current user is a staff? '+ snap.val())
+                if(snap.val()){
+                   site.hideSideNav = false
+                   site.isStaff = true
+                }
+              })
+
+              firebase.database().ref('site_roles/')
+              .once('value',function(snap){
+               snap.forEach(function(role){
+                 role.forEach(function(item){
+                   if(item.key == site.user.id)
+                   site.user_roles[role.key] = true
+                 })
+               })
+              })  
 
                 }   
                 });         

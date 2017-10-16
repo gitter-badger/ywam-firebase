@@ -33,7 +33,7 @@
       <th md-column md-order-by="user.first_name">First Name</th>
       <th md-column md-order-by="user.last_name">Last</th>
       <th md-column md-order-by="user.nationality">Nationality</th>
-      <!-- the variable myOrder will not be changed when this cell is clicked -->
+      <!-- the variable mdOrder will not be changed when this cell is clicked -->
       <th md-column md-order-by="meta.status">Status</th>
        </tr>
     </thead>
@@ -45,7 +45,8 @@
         <td md-cell>{{app.user.first_name}}   </td> 
         <td md-cell>{{app.user.last_name}}</td> 
       <td md-cell>{{app.user.nationality}}</td> 
-        <td md-cell> <app-status app-id="app.id" ></app-status></td>
+        <td md-cell> <app-status app-id="app.id" date="true" ></app-status>  </td>
+
  
       </tr>
     </tbody>

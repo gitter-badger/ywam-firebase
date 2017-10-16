@@ -4,7 +4,7 @@ import './contactInfoForm.styl';
 
 let contactInfoFormComponent = {
   restrict: 'E',
-  bindings: {isValid :'=?',
+  bindings: { isValid :'=?',
                 userId:"@"},
   template,
   controller

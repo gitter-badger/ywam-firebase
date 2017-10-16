@@ -17,9 +17,10 @@ class ContactInfoController
         }//end on init
 
         function editContactInfoDialog($event) 
-        {
-            var template= '<contact-info-form user-id="'+ctrl.userId+'"></contact-info-form>'           
-            Site.showDialog($event, template, 'save_changes' )
+        {   console.log(ctrl.userId)
+            var template= `<contact-info-form user-id="${ctrl.userId}"></contact-info-form>`    
+            console.log(template)       
+            Site.showDialog($event, template )
         } 
 
         function editEmergencyDialog($event) 

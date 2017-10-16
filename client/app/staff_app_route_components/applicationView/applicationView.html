@@ -23,7 +23,7 @@
         <md-card>
             <md-card-content layout="row">
                 <div flex>
-                    <h1 class="md-display-1">{{$ctrl.user.contact.first_name}} {{$ctrl.user.contact.last_name}}<br>
+                    <h1 class="md-display-1" ui-sref="profile({user_id:$ctrl.user_id})">{{$ctrl.user.contact.first_name}} {{$ctrl.user.contact.last_name}}<br>
                     <small class="md-subhead">
                         {{$ctrl.user.passport.first_name | uppercase}} {{$ctrl.user.passport.middle_name | uppercase}} {{$ctrl.user.passport.last_name | uppercase}}
                     </small>

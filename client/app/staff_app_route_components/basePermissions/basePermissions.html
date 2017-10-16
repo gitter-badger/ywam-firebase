@@ -6,7 +6,8 @@
 <div ng-repeat="(key,item) in $ctrl.perms">
   <b>{{key}} :</b>  <a ng-if="$ctrl.site.user_roles.site_admin" ng-click="$ctrl.addDialog($event,key)"> Add User</a>
   
-  <div layout="row" ng-repeat="(user_id, user) in item"><div flex>{{user.first_name}}  {{user.last_name}}</div>   <a ng-if="$ctrl.site.user_roles.site_admin" flex ng-click="$ctrl.remove(key, user_id)"> remove</a></div>
+  <div layout="row" ng-repeat="(user_id, user) in item" class="row-hover">
+    <div flex>{{user.first_name}}  {{user.last_name}}</div>   <a ng-if="$ctrl.site.user_roles.site_admin" flex ng-click="$ctrl.remove(key, user_id)"> remove</a></div>
 
 </div>
 </md-card-content>
