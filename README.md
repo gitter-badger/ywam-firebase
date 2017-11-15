@@ -1,4 +1,6 @@
+The goal of this project is a real-time, mobile first, web/app solution for common information challenges at YWAM bases. This project is built to be deployed on Google's Firebase services, an inexpensive easy way for any base to get up and running with their own information system.
 
+This collection of features aims to cover the most common logistics at a most YWAM bases, while also utalizing existing services that are already excellent and reasonably priced for all sized bases, ex. Slack, Stripe, etc.
 
 ![Screenshot](docs/images/ScreenShot1.png)
 
