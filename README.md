@@ -61,6 +61,12 @@ __
 https://angular-md-color.com/#/
 
 
+Are you a developer?
+Feel free to help us out! 
+See our [developers wiki](https://github.com/timtimmytime/ywam-firebase/wiki)
+
+While this webapp as been writen with angular v1 we will be switching to Vue.js in the future
+
 
 
 
