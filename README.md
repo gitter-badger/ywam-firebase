@@ -3,30 +3,6 @@
 ![Screenshot](docs/images/ScreenShot1.png)
 
 
-
-# Table of Contents
-* [Getting Started](#getting-started)
-    * [Dependencies](#dependencies)
-    * [Installing](#installing)
-    * [Running the App](#running-the-app)
-        * [Gulp Tasks](#gulp-tasks)
-        * [Testing](#testing)
-		* [Generating Components](#generating-components)
-* [Angular Material Color Theming](#angular-material-color-theming)
-* [Walkthrough](#walkthrough)
-    * [Build System](#build-system)
-    * [File Structure](#file-structure)
-    * [Testing Setup](#testing-setup)
-* [Getting Started](#getting-started)
-    * [Dependencies](#dependencies)
-    * [Installing](#installing)
-    * [Running the App](#running-the-app)
-        * [Gulp Tasks](#gulp-tasks)
-        * [Testing](#testing)
-		* [Generating Components](#generating-components)		
-* [Starter Kit Support and Questions](#starter-kit-support-and-questions)
-
-
 # Getting Started
 ## Dependencies
 Tools needed to run this app:
@@ -43,7 +19,19 @@ Once you have these, install the following as globals:
 we use Gulp to build and launch the development environment. Running `gulp serve` will launch a development server, and watch all file changes. The port will be displayed in the terminal.
 
 
+
 ## Bundle for production
+
+Add brand primary and secondaring colors 
+
+Add logos
+- /assets/logos/logo_black_square.png
+- /assets/logos/logo_white_square.png
+- /assets/logos/logo_black_horizonal.png
+- /assets/logos/logo_white_horizonal.png
+
+
+
 runing `gulp webpack` will bundle the app and save the results in the `/dist` directory  
 Change the config in index.html to use your own firebase connection. 
  
