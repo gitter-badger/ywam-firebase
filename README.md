@@ -4,6 +4,11 @@ This collection of features aims to cover the most common logistics at a most YW
 
 ![Screenshot](docs/images/ScreenShot1.png)
 
+| Features | |
+| --- | --- |
+| Base Setup | In Development #106 |
+| WebChat | Planned |
+
 
 # Getting Started
 
