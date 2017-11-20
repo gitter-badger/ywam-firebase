@@ -21,6 +21,15 @@ Once you have these, install the following as globals:
 * `cd` to the root of the repository 
 * `npm install` to install dependencies
 
+### Create Firebase Account 
+https://console.firebase.google.com
+Add New Project 
+In the "Develop" section click on "Authentication"
+Set up Sign in Methods 
+- Email and Password
+
+Click on "Web Setup"
+Copy the config opject to [project_root]/src/..... TODO: specify config file
 
 ### preview the App locally
 we use Gulp to build and launch the development environment. Running `gulp serve` will launch a development server, and watch all file changes. The port will be displayed in the terminal.
