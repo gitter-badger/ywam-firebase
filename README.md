@@ -31,8 +31,11 @@ Set up Sign in Methods
 Click on "Web Setup"
 Copy the config opject to [project_root]/src/..... TODO: specify config file
 
+
 ### preview the App locally
 we use Gulp to build and launch the development environment. Running `gulp serve` will launch a development server, and watch all file changes. The port will be displayed in the terminal.
+
+
 
 ### brand App for your base
 Add brand primary and secondaring colors 
@@ -45,8 +48,7 @@ Add logos
 
 
 
-## Bundle for production
-
+## Bundle for firebase
 
 runing `gulp webpack` will bundle the app and save the results in the `/dist` directory  
 Change the config in index.html to use your own firebase connection. 
@@ -66,6 +68,9 @@ cd into `functions/` directory and run `npm install`
 Finally run `firebase deploy` to push up all files in the /dist folder to firebase hosting, set the firebase database rules, and deploy all cloud functions. 
 
 
+### Setup 
+create a user account and go to setup page currently... #!/base/setup
+follow instructions to add site_admin permissions for yourself via firebase console. 
 
 _
 
