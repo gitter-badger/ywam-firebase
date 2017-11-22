@@ -73,7 +73,7 @@ class AccountingFundsController {
 
 
           ctrl.totalNegitiveFundsAbs = Math.abs(ctrl.totalNegitiveFunds)
-          ctrl.generalFundHealth = +((+funds['general'].balance.current + +ctrl.totalNegitiveFunds) * 100 / + funds['general'].balance.current); 
+          ctrl.generalFundHealth = +((+funds['general'].balance.current + +ctrl.totalNegitiveFunds) * 100 / + Math.abs(funds['general'].balance.current)); 
         //  console.log((+funds['general'].balance.current + +ctrl.totalNegitiveFunds))
           // console.log(ctrl.generalFundHealth)
           $timeout()

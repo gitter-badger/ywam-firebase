@@ -117,17 +117,3 @@ exports.app_index_trigger = functions.database.ref('/schools/{schoolId}/app_inde
            
     })
 
-
-    exports.updateAppsOnline = functions.database.ref('/schools/{schoolId}/public/online')
-    .onWrite(event => {
-      // Grab the current value of what was written to the Realtime Database.
-        const online = event.data.val();
-        const school_id = event.params.schoolId
-        var p = []
-        if(online)
-        return admin.database().ref('/location_public/online_schools/'+school_id).set(true)
-        else
-        return admin.database().ref('/location_public/online_schools/'+school_id).remove()    
-
-
-    })

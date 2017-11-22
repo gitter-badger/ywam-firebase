@@ -74,12 +74,14 @@
 
 
 <div flex="5" align="right"> 
-<md-checkbox ng-model="item.booked" style="margin-bottom:0" ng-change="$ctrl.markBooked(item)" aria-label="in quickbooks" >
+<md-checkbox ng-if="!item.booked" ng-model="item.booked" style="margin-bottom:0" ng-change="$ctrl.markBooked(item)" aria-label="in quickbooks" ></md-checkbox>
 {{item.booked_by_name}}
 </div>
 <div  align="right" style="border-right:1px solid lightgray; width:70px"> 
-<md-checkbox ng-if="item.donation" ng-model="item.in_donation"  style="margin-bottom:0" ng-change="$ctrl.markDonationProcessed(item)" aria-label="in donations" >
-
+<md-checkbox ng-if="item.donation && !item.in_donation_booked_initials " 
+            ng-model="item.in_donation"  style="margin-bottom:0" 
+            ng-change="$ctrl.markDonationProcessed(item)" aria-label="in donations" ></md-checkbox>
+  {{item.in_donation_booked_initials }}
 </div>
 
 <div flex="10" align="right">

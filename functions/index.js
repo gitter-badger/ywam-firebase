@@ -20,7 +20,8 @@ exports.plaid = require('./plaid/index.js')
 exports.finance_accounts = require('./finance_accounts/index.js')
 exports.donors = require('./donors/index.js')
 exports.crm = require('./crm/index.js')
-exports.sensors = require('./sensors/index.js')
+
+
 
 var school_banner = require('./schools/banner.js')
 var profile_avatar = require('./profiles/avatar.js')

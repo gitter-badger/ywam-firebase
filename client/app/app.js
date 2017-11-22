@@ -41,6 +41,9 @@ import English from './en.json'; //include english translations by default so th
 
 //Firebase libraries
 import  firebase from 'firebase';
+// const firebase = require("firebase");
+// require("firebase/firestore");
+
 window.firebase = firebase //angularfire expects firebase as a global varible for some reason?
 // import 'firebase-util'; // this will be useful once it supports the 3.0 SDK
 import 'angularfire';
@@ -77,6 +80,7 @@ angular.module('app', [
 
     $urlRouterProvider.otherwise('/schoolApplyList');
 
+    //Initiallze Firebase with config
     firebase.initializeApp(window.firebaseConfig);
 
 

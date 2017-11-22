@@ -40,11 +40,15 @@ we use Gulp to build and launch the development environment. Running `gulp serve
 ### brand App for your base
 Add brand primary and secondaring colors 
 
-Add logos
-- /assets/logos/logo_black_square.png
-- /assets/logos/logo_white_square.png
-- /assets/logos/logo_black_horizonal.png
-- /assets/logos/logo_white_horizonal.png
+Add logos (these will be used both for the web app and for email templates)
+- /src/statics/logo_black_square.png
+- /src/statics/logo_white_square.png
+- /src/statics/logo_black_horizonal.png
+- /src/statics/logo_white_horizonal.png
+
+Add icons to 
+- /src/statics/icons
+and list in manifest.json
 
 
 

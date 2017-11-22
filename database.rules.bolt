@@ -142,6 +142,7 @@ type Profile {
     emergency_contact: Object | Null
     basic: Object | Null
     avatars: Object | Null
+    channels: Object | Null
 
 }
 path /profiles/{id}/contact is ProfileContact { read() {isStaff() }}
@@ -219,7 +220,7 @@ path /donors { read() { canEditAccounting() || contactManagment() }
  path /fund_requests { read() { isStaff() }
                        write() { canEditAccounting() }
                                           }  
-                                          
+
  path /fund_requests/{id}/user {  write() { isStaff() }
                                           }                                            
 

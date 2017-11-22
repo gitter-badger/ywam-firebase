@@ -75,6 +75,8 @@ class AccountingAccountsIncomeTransactionsController {
               ctrl.transactions[index].booked_by_name = snap.val().first_name.charAt(0)  +'.'+ snap.val().last_name.charAt(0)+'.'
           }) }}  
 
+           
+
           function highLightStuff(index){
           var fund_id = ctrl.transactions[index].fund_id
           var memo = ctrl.transactions[index].memo
@@ -122,12 +124,17 @@ class AccountingAccountsIncomeTransactionsController {
         }
 
         function markDonationProcessed(item){
-          Transactions.child(item.id).child('in_donation').set(item.in_donation)
-          // Transactions.child(item.txn_id).child('donation_user').set(Auth.$getAuth().uid)
+          
+            var data ={ in_donation: item.in_donation,
+                        in_donation_booked_by_id:  Site.user.id,
+                        in_donation_booked_initials: Site.user.contact.first_name.charAt(0)  +'.'+ Site.user.contact.last_name.charAt(0)+'.' }
+          
          if(item.in_donation){
          sound.play()
-        //  Transactions.child(item.txn_id).child('donation_time').set(firebase.database.ServerValue.TIMESTAMP)
+         data.in_donation_time = firebase.database.ServerValue.TIMESTAMP
         }
+        // console.log(item)
+        Transactions.child(item.id).update(data)
        }
 
         function linkContact($event,item){

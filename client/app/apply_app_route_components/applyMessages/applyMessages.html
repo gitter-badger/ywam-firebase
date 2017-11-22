@@ -1,0 +1,29 @@
+<div>
+  <h1>{{ $ctrl.name }}</h1>
+</div>
+
+<md-card>
+  <md-card-content>
+    Here we will show the user any messages that they have sent and what we have responded to them with. <br>
+    1 if user is not logged in then we <a ng-click="$ctrl.signInAnonymously()"> create an ananomous account.</a> <br>
+    
+    <br>
+  <div> 
+    <input ng-model="$ctrl.email">
+    <md-button ng-click="$ctrl.updateEmail()"> Update Email</md-button>
+  </div>
+    
+
+  <md-content>
+    <div ng-repeat="message in $ctrl.channels[$ctrl.channel].messages"> {{message}}</div>
+
+
+
+  </md-content>
+
+   <md-input-container>
+     <input ng-model="$ctrl.new_message">
+   </md-input-container>
+   <md-button ng-click="$ctrl.postMessage()">Send</md-button>
+  </md-card-content>
+</md-card>

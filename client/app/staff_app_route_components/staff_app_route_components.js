@@ -29,6 +29,8 @@ import accountingAccountsIncomeTransactions from './accountingAccountsIncomeTran
 import accountingAccountsExpenseTransactions from './accountingAccountsExpenseTransactions/accountingAccountsExpenseTransactions';
 import accountingAccountsSettings from './accountingAccountsSettings/accountingAccountsSettings';
 
+import adminMessages from './adminMessages/adminMessages';
+
 import donors from './donors/donors';
 
 import staff from './staff/staff'
@@ -40,6 +42,7 @@ import staffGroupDetail from './staffGroupDetail/staffGroupDetail';
 
 import siteSettings from './siteSettings/siteSettings';
 import siteStats from './siteStats/siteStats';
+import siteSecurity from './siteSecurity/siteSecurity';
 
 
 import base from './base/base';
@@ -104,6 +107,8 @@ let componentModule = angular.module('app.components', [
   accountingAccountsExpenseTransactions,
   accountingAccountsSettings,
 
+  adminMessages,
+
   donors,
 
   staff,
@@ -115,6 +120,7 @@ let componentModule = angular.module('app.components', [
 
   siteSettings,
   siteStats,
+  siteSecurity,
 
   base,
   baseInfo,

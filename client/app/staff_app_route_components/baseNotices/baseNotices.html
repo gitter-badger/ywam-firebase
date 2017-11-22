@@ -10,39 +10,43 @@
   <md-card-content>
 <i class="fa fa-info fa-3x" aria-hidden="true"></i> Location specific notices..<br>
  Permission needed to change things here: <a ui-sref="base.permissions">"can_edit_location_notices"</a>
-<br>last update: <span am-time-ago="$ctrl.notices.lastSave" ></span> by: {{$ctrl.lastSaveUser.first_name}} {{$ctrl.lastSaveUser.last_name | limitTo:1}}.
+<br>
+<md-divider></md-divider>
+
+<div ng-repeat="(key,notice) in $ctrl.notices_list">
+<b>{{key}}</b> ({{notice.desc}})  <br>
+<a ng-click="notice.show ='EN' ">English:</a>  
+ <span class="no-notice" ng-if="!$ctrl.notices.EN[key]"> NOT SET</span>  
+ <span class="yes-notice" ng-if="$ctrl.notices.EN[key]">SET <span am-time-ago="$ctrl.notices.meta[key].time"></span> By {{$ctrl.notices.meta[key].name.first_name}}   </span>
+
+ <a ng-click="notice.show ='DE' ">German</a>:  
+ <span class="no-notice" ng-if="!$ctrl.notices.DE[key]"> NOT SET</span>
+ <span class="yes-notice" ng-if="$ctrl.notices.DE[key]">SET <span am-time-ago="$ctrl.notices.meta[key].time"></span>  By {{$ctrl.notices.meta[key].name.first_name}}   </span>
+ 
+<md-card ng-if="notice.show">
   <md-card-content>
+  <div  ng-hide="notice.edit">  
    <a ng-click="notice.edit = !notice.edit"> Edit Text</a><br>
 
 "{{ $ctrl.notices[notice.show][key]}}"
 
+</div>
+<div layout="row" ng-if="notice.edit ">
+   
+<md-input-container flex>
+<textarea ng-model="$ctrl.notices[notice.show][key]"
+        
+         placeholder="{{notice.show}} notice text"
+         ></textarea>
+         
+ </md-input-container>
+ <md-button  ng-click="$ctrl.save( notice.show, key)">Save</md-button>
+</div>
 
 </md-card-content>
 </md-card>
-<md-card>
-  <md-card-content>
-
-<b layout="row">
-    <div flex>English </div>
-    <div flex>German</div>
-</b>
-
-        <br>
-Notices Displayed on application when nationality is selected:
-<div layout="row">
-<md-input-container flex>
-  <label>
-Need Invitation Letter (EN)
-  </label>
-<textarea ng-model="$ctrl.notices.EN.need_invitation" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-<md-input-container flex>
-  <label>
-Need Invitation Letter (DE)
-  </label>
-<textarea ng-model="$ctrl.notices.DE.need_invitation" ng-change="$ctrl.save()"></textarea>
-</md-input-container>
-
+<br>
+<md-divider></md-divider>
 </div>
 
 

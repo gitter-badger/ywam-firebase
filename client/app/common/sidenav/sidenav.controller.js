@@ -141,6 +141,18 @@ class SidenavController {
               {title: 'Site Stats',
               state: 'siteStats',
               fa_icon:'fa fa-server'},
+             
+              {title: 'Site Security',
+              state: 'siteSecurity',
+              fa_icon:'fa fa-server'},
+
+              {title: 'Applicant Messages',
+              state: 'apply.messages',
+              fa_icon:'fa fa-comments'},
+              {title: 'Admin Messages',
+              state: 'adminMessages',
+              fa_icon:'fa fa-comments'},
+
               
               
             

@@ -1,0 +1,21 @@
+const functions = require('firebase-functions');
+const admin = require('firebase-admin');
+try {admin.initializeApp(functions.config().firebase);} catch(e) {} // You do that because the admin SDK can only be initialized once.
+
+
+// This is here to update /location/school_index
+// figured that "name" is a required field and not changed too often 
+
+export let schoolPublicName =  functions.database.ref('/schools/{schoolId}/public/name')
+    .onWrite(event => {
+      // Grab the current value of what was written to the Realtime Database.
+        const name = event.data.val();
+        const school_id = event.params.schoolId
+        var p = []
+        if(name)
+        return admin.database().ref('/location/schools_index/'+school_id).set(true)
+        else
+        return admin.database().ref('/location/schools_index/'+school_id).remove()    
+
+
+    })

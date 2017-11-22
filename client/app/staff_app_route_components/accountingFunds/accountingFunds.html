@@ -90,7 +90,7 @@
 </div>
 <md-divider></md-divider>
 
-<div ng-repeat="(key,item) in $ctrl.funds">
+<div ng-repeat="(key,item) in $ctrl.funds" ng-if="item.meta.type =='ministry'">
  <div layout="row">
   <div flex="10"> {{key}}</div>
   <div flex="15"> {{item.meta.type}}</div>
