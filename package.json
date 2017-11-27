@@ -1,5 +1,5 @@
 {
-  "name": "ng6-starter",
+  "name": "ywam-firebase",
   "version": "0.0.1",
   "description": "Starter for Angular + ES6 + (Webpack or JSPM)",
   "main": "index.js",
@@ -91,7 +91,9 @@
     "yargs": "^3.9.0"
   },
   "scripts": {
-    "test": "karma start"
+    "test": "karma start",
+      "go":"npm install && cd functions/ && npm install && cd .. && gulp webpack"
+   
   },
   "keywords": [
     "angular",

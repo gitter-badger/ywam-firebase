@@ -64,7 +64,9 @@ if you did not previously install firebase tools do so now.
 cd into your project directory and run the command:
 `firebase login` then
 
-open `.firebaserc` and change the "default": value to be that of your firebase project name
+firebase use --add
+
+Setup the CLI to use your Firebase project using `firebase use --add` and select your Firebase project
 
 Ready cloud functions for deploy 
 cd into `functions/` directory and run `npm install`
