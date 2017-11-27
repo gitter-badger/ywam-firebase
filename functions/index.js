@@ -16,12 +16,7 @@ exports.slack = require('./slack/index.js')
 exports.paypal = require('./paypal/index.js')
 exports.stripe = require('./stripe/index.js')
 exports.plaid = require('./plaid/index.js')
-<<<<<<< Updated upstream
-exports.finance_accounts = require('./finance_accounts/index.js')
-exports.donors = require('./donors/index.js')
-exports.crm = require('./crm/index.js')
-=======
-// exports.finance_accounts = require('./finance_accounts/index.js')
+
 
 /** EXPORT ALL FUNCTIONS
  *
@@ -44,7 +39,6 @@ for (let f = 0, fl = files.length; f < fl; f++) {
   }
 }
 
->>>>>>> Stashed changes
 
 
 
