@@ -7,3 +7,4 @@ node_modules/
 dist/
 .vscode/settings.json
 functions/service-account-private-key.json
+functions/node_modules/
