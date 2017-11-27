@@ -1,0 +1,21 @@
+service firebase.storage {
+  match /b/{bucket}/o {
+   
+    match /schools_public/{school_id} {
+      match /{allPaths=**} {
+          allow read;
+      }
+        
+    }
+     
+    match /location_public {
+                match 	/{allPaths=**}  {allow read;}
+                }
+
+    match /{allPaths=**} {
+      allow read, write: if request.auth != null;
+    }
+    
+  }
+}
+

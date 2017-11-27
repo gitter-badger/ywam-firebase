@@ -118,6 +118,7 @@ type Application {}
 path /reference_tokens/{hash} {read(){ true}}
 path /reference_tokens/{hash}/token_requested {write(){ true}}
 
+path /public_read {read() {true}}
 
 // Profiles Node
 path /profiles {read() {isStaff() }
