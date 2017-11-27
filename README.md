@@ -92,4 +92,11 @@ While this webapp as been writen with angular v1 we will be switching to Vue.js 
 
 
 
+### Update to latest from repository 
+$ git pull
+ ...
+file  not up to date, cannot merge.
+$ git stash
+$ git pull
+$ git stash pop
 
