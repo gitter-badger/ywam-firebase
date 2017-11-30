@@ -6,5 +6,6 @@ node_modules/
 *.log
 dist/
 .vscode/settings.json
-functions/service-account-private-key.json
-functions/node_modules/
+firebase/functions/service-account-private-key.json
+firebase/functions/node_modules/
+

@@ -92,8 +92,7 @@
   },
   "scripts": {
     "test": "karma start",
-      "go":"npm install && cd functions/ && npm install && cd .. && gulp webpack"
-   
+    "go": "npm install && cd functions/ && npm install && cd .. && gulp webpack"
   },
   "keywords": [
     "angular",
