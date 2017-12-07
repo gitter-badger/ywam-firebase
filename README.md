@@ -12,6 +12,8 @@ This collection of features aims to cover the most common logistics at a most YW
 
 # Getting Started
 
+[![Join the chat at https://gitter.im/ywam-firebase/Lobby](https://badges.gitter.im/ywam-firebase/Lobby.svg)](https://gitter.im/ywam-firebase/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 Tools needed to run this app:
 * `node` and `npm` https://nodejs.org/
 Once you have these, install the following as globals:  
