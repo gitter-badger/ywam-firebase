@@ -27,7 +27,7 @@ module.exports = {
     // It also adds hash to all injected assets so we don't have problems
     // with cache purging during deployment.
     new HtmlWebpackPlugin({
-      template: 'client/index.html',
+      template: 'angular_client/index.html',
       inject: 'body',
       // hash: true
     }),
@@ -37,7 +37,7 @@ module.exports = {
     new webpack.optimize.CommonsChunkPlugin({
       name: 'vendor',
       minChunks: function (module, count) {
-        return module.resource && module.resource.indexOf(path.resolve(__dirname, 'client')) === -1;
+        return module.resource && module.resource.indexOf(path.resolve(__dirname, 'angular_client')) === -1;
       }
     }),
 
@@ -51,12 +51,12 @@ module.exports = {
     }),
     
     new CopyWebpackPlugin([
-            { from: 'client/favicon', to:'' },
-             { from: 'client/sounds', to:'sounds' },
-              { from: 'client/logos', to:'logos' },
-               { from: 'client/.nojekyll', to:'' },
-                 { from: 'client/img', to:'img' },
-            // { from: 'client/square_space_scripts', to:'square_space_scripts' },
+            { from: 'angular_client/favicon', to:'' },
+             { from: 'angular_client/sounds', to:'sounds' },
+              { from: 'angular_client/logos', to:'logos' },
+               { from: 'angular_client/.nojekyll', to:'' },
+                 { from: 'angular_client/img', to:'img' },
+            // { from: 'angular_client/square_space_scripts', to:'square_space_scripts' },
             // { from: 'node_modules/angular-material/angular-material.min.css', to:'css' },
             // { from: 'node_modules/font-awesome/css/font-awesome.min.css', to:'css' }
         ]),

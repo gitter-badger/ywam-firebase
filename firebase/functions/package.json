@@ -18,7 +18,12 @@
     "request-promise": "^4.2.1",
     "secure-compare": "^3.0.1",
     "xero-node": "^2.10.0",
-    "camelcase": "^4.1.0"
+    "camelcase": "^4.1.0",
+    "busboy": "^0.2.14",
+    "node-mailjet": "^3.2.1",
+    "sparkpost": "^2.1.2",
+    "handlebars": "^4.0.11",
+    "mjml": "^3.3.5"
   },
   "private": true
 }

@@ -1,6 +1,6 @@
 class ApplicationQuestionsFormController {
    /* @ngInject */
-  constructor($firebaseObject,$translate,$scope, Site ) {
+  constructor($firebaseObject,$translate,$scope, Site, $firebaseArray ) {
     var ctrl = this;
         ctrl.$onInit=onInit;
        function onInit(){
@@ -15,11 +15,11 @@ class ApplicationQuestionsFormController {
       if(ctrl.schoolId){   
           
       var schoolRef= firebase.database().ref('schools/'+ctrl.schoolId+'/public/questions_index')
-          ctrl.questions_index= $firebaseObject(schoolRef)
+          ctrl.questions_index= $firebaseArray(schoolRef)
       }
       if(ctrl.appType !='school'){   
       var qRef= firebase.database().ref('location_public/application_types/'+ctrl.appType +'/questions')
-          ctrl.questions_index= $firebaseObject(qRef)
+          ctrl.questions_index= $firebaseArray(qRef)
       }
 
            

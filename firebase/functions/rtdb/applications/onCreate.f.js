@@ -1,93 +1,74 @@
 var functions = require('firebase-functions');
 const admin = require('firebase-admin');
-try {admin.initializeApp(functions.config().firebase);} catch(e) {} // You do that because the admin SDK can only be initialized once.
+try { admin.initializeApp(functions.config().firebase); } catch (e) { } // You do that because the admin SDK can only be initialized once.
 
 const notification = require('../../notification').notification;
 
-exports = module.exports = functions.database.ref('/applications/{appId}/for/user_id')
-    .onCreate(event => {
-      // Grab the current value of what was written to the Realtime Database.
-    const original = event.data.val();
-   
-      // Exit when the data is deleted.
-      if (!event.data.exists()) {
-          console.log('data is being deleted.. removing from indexes')
-          var user_id = event.data.previous.val()
-          var app_id = event.params.appId
-          var p = []
-          //This is not the best way, as cleaning up of a school application of a current staff will remove that userid from staff indexes
-          // p[p.length] = admin.database().ref('location' ).child('alumni_staff_index').child(user_id).remove()
-          // p[p.length] = admin.database().ref('location' ).child('current_staff_index').child(user_id).remove()
-          // p[p.length] = admin.database().ref('location' ).child('staff_app_index').child(user_id).remove()
-           p[p.length] = admin.database().ref('/profiles/'+user_id+'/app_index/'+app_id).remove()
+//applications should really only be created with the /for/user_id
 
-        return Promise.all(p)
-      }
+exports = module.exports = functions.database.ref('/applications/{appId}').onCreate(event => {
+    const app = event.data.val();
+    var p1 = []
+    var p2 = [] //secondary array of promises 
+    var contact = {}
+    var school_public ={}
+    var url = ''
 
-       // Only edit data when it is first created.
-      if (event.data.previous.exists()) {
-          console.log('nothing new')
-        return;
-      }
+    console.log('adding start time', event.params.appId);
+            // add created timestamp & status of 1
+    var metadata = {
+        status: 1,
+        statuses: { 1: { time: new Date().getTime() } }
+    }
 
-     return   admin.database().ref('/applications/'+event.params.appId+'/meta').on('value',function(snap){
-                        if(snap.val() ){
-                            console.log('// already has meta start values')
-                            return // already has meta start values
-                        }
-                        
-                        else {
-                                console.log('adding start time', event.params.appId, original);
-                            // add created timestamp & status of 1
-                            var data ={ status: 1,
-                                        statuses:{ 1: {time:  new Date().getTime()} }}
+    var appRef = event.data.adminRef
 
-                            var appRef =  admin.database().ref('/applications/'+event.params.appId)
+    //Save meta data
+    p1[p1.length] = appRef.child('meta').set(metadata)
 
-                                return  appRef.child('meta').set(data).then(function(){
-                                        return appRef.child('/for').once('value').then(function(snap){
-                                                  
-                                            var appfor = snap.val()
+    // get users name 
+    p2[p2.length] = admin.database().ref('/profiles/' + app.for.user_id + '/contact/').once('value').then(function (snap) {
+        contact = snap.val()
+    })
 
-                                            return admin.database().ref('/profiles/'+appfor.user_id+'/contact/').once('value').then(function(snap){
-                                                 var contact = snap.val()
-                                                
-                                                 return admin.database().ref('/location_public/meta/').once('value').then(function(snap){
-                                                    var url = snap.val().apply_url
-                                                
-                                                var text = ''
-                                                
-                                                 switch(appfor.type) {
-                                                        case 'school':
-                                                            text += 'School'
-                                                            url += '/school/'+appfor.school_id
-                                                            break;
-                                                        case 'staff':
-                                                            text += 'Staff'
-                                                            url += '/staff'
-                                                            break;
-                                                        
-                                                    }
-                                                    url += '/application/'+event.params.appId +'/'
-                                               
-                                                  var message = '<'+ url +'|'+text+' Application Started! > '
+    //get url for link
+    p2[p2.length] = admin.database().ref('/location_public/meta/').once('value').then(function (snap) {
+        url = snap.val().apply_url
+    })
+    
+    //if school get school name
+    if(app.for.school_id){
+        p2[p2.length] = admin.database().ref('/schools/'+app.for.school_id+'/public').once('value').then(function (snap) {
+            school_public = snap.val()
+        })
+    }
 
-                                                 if(contact)
-                                                  message += 'by:'+  contact.first_name+' '+contact.last_name;
+    //once all secondary promises are done
+    p1[p1.length] = Promise.all(p2).then( () => {
 
-                                                 return notification(message, appfor.type+'_application_started')
-                                            })
+        var text = ''
 
-                                             })
-                                            
-                                        })
-                                       
-                                    }) ;
-                        }
+        switch (app.for.type) {
+            case 'school':
+                text += school_public.name
+                url += '/school/' + app.for.school_id
+                break;
+            case 'staff':
+                text += 'Staff'
+                url += '/staff'
+                break;
+        }
 
-                    })
-           
-});
+        url += '/application/' + event.params.appId + '/'
 
+        var message = '<' + url + '|' + text + ' Application Started! > '
 
+        if (contact)
+            message += 'by: ' + contact.first_name + ' ' + contact.last_name;
 
+        return notification(message, app.for.type + '_application_started')
+    })
+
+    //Finally when all primary promises are done    
+    return Promise.all(p1)    
+})

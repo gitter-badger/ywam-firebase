@@ -30,6 +30,16 @@ firebase.database().ref('location_public').once('value', (snap) => { console.log
 new Vue({
   el: '#app',
   router,
+  created () {
+    // firebase.initializeApp(config);
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.push('/success')
+      } else {
+        this.$router.push('/auth')
+      }
+    })
+  },
   template: '<App/>',
   components: { App }
 })

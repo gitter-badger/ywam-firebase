@@ -1,0 +1,21 @@
+<h1 class="md-title" translate="101">Questions   </h1>
+
+
+<form name="QuestionsForm">
+
+<div ng-repeat="item in $ctrl.questions_index | orderBy: item.$id : true" ng-if="item.$value" >
+
+<label for="item.$id" >
+{{$ctrl.questions[item.$id].label[$ctrl.site.language] ? $ctrl.questions[item.$id].label[$ctrl.site.language] : $ctrl.questions[item.$id].label['en']  }}* 
+</label>
+
+<md-input-container style="width:100%" >
+
+    <textarea id="item.$id" required ng-model="answers[item.$id]"></textarea>
+
+</md-input-container>
+
+</div>  
+
+
+</form>

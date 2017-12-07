@@ -21,7 +21,7 @@ import historyApiFallback   from 'connect-history-api-fallback';
 
 
 
-let root = 'client';
+let root = 'angular_client';
 
 // helper method for resolving paths
 let resolveToApp = (glob = '') => {

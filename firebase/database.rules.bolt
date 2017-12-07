@@ -1,129 +1,192 @@
-path / {read(){ false}
-        write(){false}
-        }
 
-path /location_private { read(){ isSiteAdmin() }
-                         write(){isSiteAdmin()}
-                         }        
-
-path /email_user_index {
-                        index(){"email"}
+// ====    Root    ====
+path / {
+    read(){ false}
+    write(){false}
 }
 
-path /crm { read() { contactManagment() }   
-            write() { contactManagment() }
-            index() {["paypal_id"]}  }
-
-path /crm/{id}/name { read() { isStaff() } }
-
-path /phrases { read() { true }  write() { canEditPhrases() } }
-
-path /app_log {write() {true}
-               read() { isStaff() } }
-
-path /clients/{client_id} {write() {true}}
-path /clients { read() { isStaff() } }
-
-//list of languages at this path
-path /languages { read() { auth != null }   }
-
-path /questions_for_applications { read(){auth != null}
-                                   write(){canEditLocationInfo()}
-                                 }
- 
-
-//Schools
-path /schools/{id} { read() { isStaff() } }
-path /schools/{id}/roles { write() { isSchoolAdmin(id) } }
-
-
-//schools public data
-path /schools/{id}/public { read() { true } write() {isSchoolAdmin(id) } }
-
-path /prayers { read() { isStaff() }
-                write() { isStaff() }  }
-
-path /search { read() { isStaff() }
-               write() { isStaff()} }
-
-path /role_calls { read() { isStaff() }
-                }
-
-//Applications
+// ====    Applications    ====
 path /applications { index() { ["for/school_id"] } }
 
-path /applications/{id} is Application {  read() {    checkAppAccess(id)  }
-                                           write() {    checkAppAccess(id)  }  
-                                          }
+path /applications/{id} is Application {  
+    read() {    checkAppAccess(id)  }
+    write() {   checkAppAccess(id)  }  
+}
 
-path /applications/{id}/for  { read() { auth.uid == data.child('user_id').val()  || isStaff() }  
-                                write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
-                               }
+type Application {
+    // for: Object
+    // admin_notes: Object | Null
+    // log: Object | Null
+    // meta: Object | Null
+    // answers_to_questions: String | Null
+    // private: Number | Null
+    // requests: Object | Null
+    // reference1: Object | Null
+    // reference2: Object | Null
+    // user_set_status: Object | Null
+}
+
+path /applications/{id}/for  { 
+    read() { auth.uid == data.child('user_id').val()  || isStaff() }  
+    write() {auth.uid == newData.child('user_id').val() ||  checkAppAccess(id) }
+}
                                 
 path /applications/{id}/requests  {  
-                                  write() {auth.uid == data.parent().child('for').child('user_id').val()}
-                                 }   
+    write() {auth.uid == data.parent().child('for').child('user_id').val()}
+}  
+
 path /applications/{id}/answers_to_questions  {  
-                                  write() {auth.uid == root.applications[id].for.user_id.val() }
-                                  read() {auth.uid == root.applications[id].for.user_id.val()}
-                                }                                   
+    write() {auth.uid == root.applications[id].for.user_id.val() }
+    read() {auth.uid == root.applications[id].for.user_id.val()}
+}                                   
+
 path /applications/{id}/{ref_key}/user_set  {  
-                                  write() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key) }
-                                  read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
-                                }  
+    write() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key) }
+    read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
+}  
+
 path /applications/{id}/{ref_key}/status  {  
-                                  read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
-                                }                                 
+    read() {auth.uid == root.applications[id].for.user_id.val() && checkRef(ref_key)}
+}                                 
+
 path /applications/{id}/{ref_key}/meta {  
-                                  read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
-                                    }   
+    read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
+}   
+
 path /applications/{id}/{ref_key}/form {  
-                                  read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
-                                  write()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
-                                    }                                     
+    read()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
+    write()  { root.applications[id][ref_key].hash == auth.uid && checkRef(ref_key)} 
+}                                     
 
 checkRef(ref_key){
     ref_key == 'reference1' || ref_key=='reference2'
 }
 
+path /applications/{id}/meta  { 
+    read() {  isStaff() ||  auth.uid == data.parent().child('for').child('user_id').val() }  
+    write() {  checkAppAccess(id) }
+}
 
-path /applications/{id}/meta  { read() {  isStaff() ||  auth.uid == data.parent().child('for').child('user_id').val() }  
-                                write() {  checkAppAccess(id) }
-                                }                                
-path /applications/{id}/private {read() { auth.uid == data.parent().child('for').child('user_id').val() }  
-                                 write() {auth.uid == data.parent().child('for').child('user_id').val()} }
+path /applications/{id}/private {
+    read() { auth.uid == data.parent().child('for').child('user_id').val() }  
+    write() {auth.uid == data.parent().child('for').child('user_id').val() } 
+}
 
-path /applications/{id}/admin_notes 
-{
+path /applications/{id}/admin_notes {
     read()  {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
     write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } 
 }
 
-path /applications/{id}/log { read() {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
-                              write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } }
+path /applications/{id}/log { 
+    read() {  isSchoolAdmin(data.parent().child('for').child('school_id').val())  }  
+    write() {  isSchoolAdmin(data.parent().child('for').child('school_id').val()) } 
+}
 
 
 
-type Application {}
+// ====    End Applications    ====
 
+// ====    Location Private    ====
+path /location_private { 
+    read(){ isSiteAdmin() }
+    write(){isSiteAdmin()}
+}        
+
+path /email_user_index {
+    index(){"email"}
+}
+
+// ====    CRM    ====
+path /crm { 
+    read() { contactManagment() }   
+    write() { contactManagment() }
+    index() {["paypal_id"]}
+}
+
+path /crm/{id}/name { 
+    read() { isStaff() } 
+}
+// ====    End CRM    ====
+
+// ====    Phrases    ====
+path /phrases { 
+    read() { true }  
+    write() { canEditPhrases() } 
+}
+
+path /app_log {
+    write() {true}
+    read() { isStaff() } 
+}
+
+// ====    Clients    ====
+path /clients { 
+    read() { isStaff() } 
+}
+path /clients/{client_id} {
+    write() {true}
+}
+// ====    End Clients    ====
+
+//list of languages at this path
+path /languages { 
+    read() { auth != null }   
+}
+
+// ====    Questions for Applications     ====
+path /questions_for_applications { 
+    read(){auth != null}
+    write(){canEditLocationInfo()}
+}
+ 
+// ====    Schools    ====
+path /schools/{id} { 
+    read() { isStaff() } 
+}
+path /schools/{id}/roles { 
+    write() { isSchoolAdmin(id) } 
+}
+
+// schools public data
+path /schools/{id}/public { 
+    read() { true } 
+    write() {isSchoolAdmin(id) } 
+}
+// ====    End Schols    ====
+
+
+path /prayers { 
+    read() { isStaff() }
+    write() { isStaff() }  
+}
+
+// ====    Search    ====
+path /search { 
+    read() { isStaff() }
+    write() { isStaff()} 
+}
+
+path /role_calls { 
+    read() { isStaff() }
+}
+
+// ====    References  Tokens   ====
 // Reference tokens can be read directly 
 path /reference_tokens/{hash} {read(){ true}}
 path /reference_tokens/{hash}/token_requested {write(){ true}}
 
 path /public_read {read() {true}}
 
-// Profiles Node
-path /profiles {read() {isStaff() }
-                index() { ["contact/email"] } }
-path /profiles/{id}/contact {read() {isStaff() }}
-path /profiles/{id}/postal {read() {isStaff() }}
-path /profiles/{id}/emergency_contact {read() {isStaff() }}
-path /profiles/{id}/passport {read() {isStaff() }}
+// ====    Profiles    ====
+path /profiles {
+    read() {isStaff() }
+    index() { ["contact/email"] } 
+}
 
-
-
-path /profiles/{id} is Profile { read() { auth.uid == id }  
-                                 write() {auth.uid == id }}                                 
+path /profiles/{id} is Profile { 
+    read() { auth.uid == id }  
+    write() {auth.uid == id }
+}                                 
 
 type Profile {
     contact: Object
@@ -138,7 +201,10 @@ type Profile {
     channels: Object | Null
 
 }
-path /profiles/{id}/contact is ProfileContact { read() {isStaff() }}
+
+path /profiles/{id}/contact is ProfileContact { 
+    read() {isStaff() }
+}
 
 type ProfileContact {
     avatar_1080: String | Null
@@ -158,22 +224,49 @@ type ProfileContact {
     mobile_phone: String | Null
     occupations: String | Null
     skype: String | Null
-    ywam_experience: String | Null}
+    ywam_experience: String | Null
+}
+
+path /profiles/{id}/postal {
+    read() {isStaff() }
+}
+path /profiles/{id}/emergency_contact {
+    read() {isStaff() }
+}
+path /profiles/{id}/passport {
+    read() {isStaff() }
+}
+// ====    End Profiles    ====
+
+// ====    location_public    ====
+path /location_public { 
+    read() { true}
+    write() {canEditLocationInfo()} 
+}
+
+// ====    location    ====
+path /location  { 
+    read() { isStaff() }
+}
+path /location/default_school_questions {
+    write(){canEditLocationInfo()}
+}
+path /location/buildings {
+    write(){canEditLocationInfo()}
+}
+path /location/staff_groups {
+     write() { isStaff() }
+}
+// ====    End location    ====
+
+// ====    finance_accounts    ====
+path /finance_accounts { 
+    read() { canEditAccounting() }
+    write() { canEditAccounting() }
+}
 
 
-path /location_public { read() { true}
-                        write() {canEditLocationInfo()} }
 
-
-
-path /location  { read() { isStaff() }}
-path /location/default_school_questions {write(){canEditLocationInfo()}}
-path /location/buildings {write(){canEditLocationInfo()}}
-path /location/staff_groups  { write() { isStaff() }}
-
-path /finance_accounts { read() { canEditAccounting() }
-                        write() { canEditAccounting() }
-                                          }
 
 path /paypal_payments { read() { canEditAccounting() }
                         write() { canEditAccounting() }
@@ -220,14 +313,19 @@ path /donors { read() { canEditAccounting() || contactManagment() }
 path /role_calls/{id} { read() { isStaff() }
                          write() { isStaff() } }
 
-path /site_roles { read() { auth != null}
-                   write() { root.site_roles.site_admin[auth.uid] != null } }
+
+// ====     Site Roles     ====
+path /site_roles { 
+    read() { auth != null}
+    write() { root.site_roles.site_admin[auth.uid] != null } 
+}
 
 
 path /slack { read() {isStaff()}
             }
 // Access Controll Function 
 
+// ====     Shared Functions     ====
 
 //is this uid of the current logged in user?
 isCurrentUser(uid) { auth != null && auth.uid == uid } 
